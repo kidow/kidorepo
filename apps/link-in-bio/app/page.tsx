@@ -3,8 +3,7 @@ import { Button, Header } from 'ui'
 export default function Page() {
   return (
     <>
-      <Header text="Docs" />
-      <Button />
+      <div className="container mx-auto">asd</div>
     </>
   )
 }

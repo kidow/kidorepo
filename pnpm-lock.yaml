@@ -74,9 +74,18 @@ importers:
       '@types/react-dom':
         specifier: ^18.0.7
         version: 18.2.3
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.14(postcss@8.4.24)
       eslint-config-custom:
         specifier: workspace:*
         version: link:../../packages/eslint-config-custom
+      postcss:
+        specifier: ^8.4.24
+        version: 8.4.24
+      tailwindcss:
+        specifier: ^3.3.2
+        version: 3.3.2(ts-node@10.9.1)
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/tsconfig
