@@ -3,8 +3,6 @@ const baseConfig = require('../../tailwind.config.js')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   ...baseConfig,
-  corePlugins: {
-    preflight: false
-  },
-  content: ['src/**/*.{ts,tsx}']
+  content: ['src/**/*.{ts,tsx}'],
+  plugins: [...baseConfig.plugins, require('@tailwindcss/typography')]
 }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Checklist from '@editorjs/checklist'
 import Code from '@editorjs/code'
 import EditorJS, { type OutputData } from '@editorjs/editorjs'
@@ -8,9 +8,11 @@ import List from '@editorjs/list'
 import Marker from '@editorjs/marker'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
-import { Github } from 'lucide-react'
+import { Eraser, Github } from 'lucide-react'
 
 function App() {
+  const ref = useRef<EditorJS>()
+
   useEffect(() => {
     const editor = new EditorJS({
       holder: 'editorjs',
@@ -36,22 +38,38 @@ function App() {
       },
       onReady: () => {
         console.log('Editor.js is ready to work!')
+        ref.current = editor
       }
     })
+    return () => {
+      ref.current?.destroy()
+      ref.current = undefined
+    }
   }, [])
   return (
     <>
-      <div id="editorjs" />
+      <div className="mx-auto max-w-2xl">
+        <div id="editorjs" className="prose min-h-[500px]" />
+      </div>
       <div className="hidden md:block">
         <div className="fixed right-2 top-2 z-10">
           <div className="flex gap-2">
+            <button
+              onClick={() => {
+                ref.current?.clear()
+                ref.current?.focus()
+              }}
+              className="buttons"
+            >
+              <Eraser size={16} />
+            </button>
             <button
               onClick={() =>
                 window.open(
                   'https://github.com/kidow/kidorepo/tree/main/apps/memo'
                 )
               }
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border-none bg-transparent duration-150 hover:bg-neutral-200"
+              className="buttons"
             >
               <Github size={16} />
             </button>
