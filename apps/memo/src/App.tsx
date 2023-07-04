@@ -8,6 +8,7 @@ import List from '@editorjs/list'
 import Marker from '@editorjs/marker'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
+import { Github } from 'lucide-react'
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,22 @@ function App() {
   return (
     <>
       <div id="editorjs" />
+      <div className="hidden md:block">
+        <div className="fixed right-2 top-2 z-10">
+          <div className="flex gap-2">
+            <button
+              onClick={() =>
+                window.open(
+                  'https://github.com/kidow/kidorepo/tree/main/apps/memo'
+                )
+              }
+              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border-none bg-transparent duration-150 hover:bg-neutral-200"
+            >
+              <Github size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

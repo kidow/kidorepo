@@ -19,6 +19,7 @@
     "@editorjs/marker": "^1.3.0",
     "@editorjs/simple-image": "^1.5.1",
     "@editorjs/table": "^2.2.2",
+    "lucide-react": "^0.258.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
