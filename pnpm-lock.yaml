@@ -50,7 +50,7 @@ importers:
         specifier: ^1.9.7
         version: 1.9.7
 
-  apps/docs:
+  apps/link-in-bio:
     dependencies:
       next:
         specifier: ^13.4.1
@@ -2650,13 +2650,6 @@ packages:
       }
     engines: { node: '>=6' }
     dev: true
-
-  /caniuse-lite@1.0.30001482:
-    resolution:
-      {
-        integrity: sha512-F1ZInsg53cegyjroxLNW9DmrEQ1SuGRTO1QlpA0o2/6OpQ0gFeDRoq1yFmnr8Sakn9qwwt9DmbxHB6w167OSuQ==
-      }
-    dev: false
 
   /caniuse-lite@1.0.30001511:
     resolution:
@@ -5706,7 +5699,7 @@ packages:
       '@next/env': 13.4.1
       '@swc/helpers': 0.5.1
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001482
+      caniuse-lite: 1.0.30001511
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
