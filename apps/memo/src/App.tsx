@@ -16,6 +16,7 @@ function App() {
   const ref = useRef<EditorJS>()
 
   useEffect(() => {
+    const content = window.localStorage.getItem('content')
     const editor = new EditorJS({
       holder: 'editorjs',
       placeholder: '아무 내용이나 입력하세요...',
@@ -24,10 +25,7 @@ function App() {
         const content = await editor.save()
         window.localStorage.setItem('content', JSON.stringify(content))
       },
-      data:
-        (JSON.parse(
-          window.localStorage.getItem('content') as string
-        ) as OutputData) || undefined,
+      data: content ? (JSON.parse(content) as OutputData) : undefined,
       tools: {
         header: Header,
         image: SimpleImage,
