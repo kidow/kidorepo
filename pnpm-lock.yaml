@@ -86,6 +86,9 @@ importers:
 
   apps/memo:
     dependencies:
+      '@editorjs/editorjs':
+        specifier: ^2.27.2
+        version: 2.27.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -722,6 +725,13 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+
+  /@editorjs/editorjs@2.27.2:
+    resolution:
+      {
+        integrity: sha512-k4LavGJijAP0F1wATQ0fTo10xtBSny9z6yWaP3ANqqtyKr+pBMind5NQzckqYI0yPp31GObpcS/HsFGsFOGcug==
+      }
+    dev: false
 
   /@esbuild/android-arm64@0.17.19:
     resolution:
