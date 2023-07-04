@@ -14,3 +14,4 @@ Website Link: [https://memo.kidow.me](https://memo.kidow.me)
 - Vite
 - Editorjs
 - Lucide Icons
+- react-textarea-autosize
