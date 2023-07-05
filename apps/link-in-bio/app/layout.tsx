@@ -48,6 +48,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ReactProps) {
   return (
     <html lang="ko" className={inter.className}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="node_modules/react-github-contribution-calendar/default.css"
+          type="text/css"
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

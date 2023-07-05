@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button, Header } from 'ui'
+
+import Github from '@/components/Github'
+import * as Icon from '@/components/icons'
 
 export default function Page() {
   return (
@@ -20,7 +22,6 @@ export default function Page() {
                   }}
                 >
                   <div
-                    data-avatar="true"
                     className="h-[120px] w-[120px] xl:h-[184px] xl:w-[184px]"
                     style={{
                       transform: 'rotateZ(0deg)',
@@ -50,9 +51,33 @@ export default function Page() {
               </div>
             </div>
             <div className="flex h-full w-full max-w-[428px] flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16">
-              <div className="mb-10 flex flex-col px-4 xl:mb-0 xl:mr-20 xl:flex-1 xl:px-0"></div>
+              <div className="mb-10 flex flex-col px-4 xl:mb-0 xl:mr-20 xl:flex-1 xl:px-0" />
               <div className="relative flex-1 xl:w-[820px] xl:flex-none">
-                <ul className="grid xl:grid-cols-4">grid</ul>
+                <ul className="grid gap-10 xl:grid-cols-4">
+                  <li className="col-span-4">
+                    <Link
+                      href="https://github.com/kidow"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={0}
+                      draggable={false}
+                      className="flex h-[175px] rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 hover:bg-neutral-50 xl:p-6"
+                    >
+                      <div className="flex flex-col items-start">
+                        <Icon.Github />
+                        <div className="mt-3 flex-1">
+                          <div className="text-sm">Github</div>
+                        </div>
+                        <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
+                          Follow
+                        </button>
+                      </div>
+                      <div className="ml-6 flex-1">
+                        <Github />
+                      </div>
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -61,7 +86,7 @@ export default function Page() {
           <p>
             This project inspired by{' '}
             <Link
-              href="https://bento.me"
+              href="https://bento.me/?ref=kidow.me"
               target="_blank"
               className="hover:underline"
             >
