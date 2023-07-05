@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
-import { WidgetLink, WidgetMap } from '@/components/Widget'
+import { WidgetLink, WidgetMap, WidgetSpotify } from '@/components/Widget'
 
 export default function Page() {
   return (
@@ -16,8 +16,6 @@ export default function Page() {
                 <div
                   className="relative xl:sticky xl:top-16"
                   style={{
-                    opacity: 1,
-                    transform: 'translate(0px, 0px)',
                     transition:
                       'opacity 1s cubic-bezier(0.42, 0, 0.25, 1) 0s, transform 1s cubic-bezier(0.2, 1.18, 0.47, 1) 0s'
                   }}
@@ -72,9 +70,86 @@ export default function Page() {
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://resume.kidow.me"
+                    icon={<Icon.Link />}
+                    title="Resume"
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="mailto:wcgo2ling@gmail.com"
+                    icon={<Icon.Email />}
+                    title="Gmail"
+                    description="wcgo2ling@gmail.com"
+                  />
+                  <WidgetMap />
+                  <li className="row-span-2 h-[390px] w-full overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:col-span-2 xl:w-[390px]">
+                    <iframe
+                      src="https://giphy.com/embed/umYMU8G2ixG5mJBDo5"
+                      frameBorder="0"
+                      className="giphy-embed h-full w-full"
+                      allowFullScreen
+                    ></iframe>
+                    <p>
+                      <a href="https://giphy.com/gifs/BoschGlobal-coding-home-office-remote-working-umYMU8G2ixG5mJBDo5">
+                        via GIPHY
+                      </a>
+                    </p>
+                  </li>
+                  <WidgetLink
+                    className="col-span-2 xl:hover:rotate-1"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[380px]"
+                    href="https://blog.kidow.me"
+                    icon={<Icon.Link />}
+                    title="Blog"
+                    description="blog.kidow.me"
+                  ></WidgetLink>
+                  <WidgetLink
+                    className="xl:hover:rotate-1"
+                    size="h-[178px] bg-blue-50 w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://twitter.com/__kidow__"
+                    icon={<Icon.Twitter />}
+                    title="Twitter"
+                    description="@__kidow__"
+                    button={
+                      <button className="flex items-center justify-center gap-1 rounded-full bg-[#55acee] px-4 py-[7px] text-xs hover:bg-[#4698d7]">
+                        <span className="font-bold text-white">Follow</span>
+                        <span className="text-blue-50">999</span>
+                      </button>
+                    }
+                  />
+                  <WidgetSpotify />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://kidow.gumroad.com"
+                    icon={<Icon.Gumroad />}
+                    title="Gumroad"
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://www.linkedin.com/in/kidow/"
+                    icon={<Icon.LinkedIn />}
+                    title="LinkedIn"
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://www.buymeacoffee.com/kidow"
+                    icon={<Icon.Buymeacoffee />}
+                    title="Buy me a coffee"
+                  />
+                  <li className="hidden w-full overflow-hidden rounded-3xl border border-neutral-200 p-5 xl:col-span-3 xl:row-span-3 xl:block xl:h-[605px] xl:p-6">
+                    일정 예약
+                  </li>
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
                     href="https://www.producthunt.com/@kidow"
                     icon={<Icon.ProductHunt />}
                     title="ProductHunt"
+                    description="@kidow"
                     button={
                       <button className="rounded-lg border border-[#ED6B5C] bg-[#ED6B5C] px-[21px] py-[7px] text-xs font-bold text-neutral-50">
                         Follow
@@ -84,19 +159,59 @@ export default function Page() {
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
-                    href="mailto:wcgo2ling@gmail.com"
-                    icon={<Icon.Link />}
-                    title="Gmail"
-                    description="wcgo2ling@gmail.com"
+                    href="https://wcgo2ling.tistory.com"
+                    icon={
+                      <Image
+                        src="/tistory.png"
+                        alt="tistory"
+                        height={40}
+                        width={40}
+                        className="rounded-[10px] border"
+                      />
+                    }
+                    title="Tistory"
+                    description="wcgo2ling"
                   />
-                  <WidgetMap />
-                  <li className="col-span-2 row-span-2 h-[380px] w-[380px] overflow-hidden rounded-3xl border border-neutral-200 shadow-sm"></li>
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://disquiet.io/@kidow"
+                    icon={
+                      <Image
+                        src="/disquiet.png"
+                        alt="disquiet"
+                        height={40}
+                        width={40}
+                        className="rounded-[10px] border"
+                      />
+                    }
+                    title="Disquiet"
+                    description="@kidow"
+                  />
                   <li className="col-span-2 p-4 xl:col-span-4">
                     <h3 className="px-2 font-semibold">FAVORITE SKILLS</h3>
+                  </li>
+                  <li className="col-span-2 gap-6 xl:col-span-4 xl:gap-10">
+                    react
                   </li>
                   <li className="col-span-2 p-4 xl:col-span-4">
                     <h3 className="px-2 font-semibold">SIDE PROJECTS 👨🏻‍💻</h3>
                   </li>
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://daily-producthunt.kidow.me"
+                    icon={
+                      <Image
+                        src="/daily-producthunt.png"
+                        alt="daily-producthunt"
+                        height={40}
+                        width={40}
+                        className="rounded-[10px]"
+                      />
+                    }
+                    title="일간 ProductHunt"
+                  />
                 </ul>
               </div>
             </div>

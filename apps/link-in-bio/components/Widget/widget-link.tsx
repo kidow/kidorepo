@@ -18,12 +18,11 @@ function WidgetLink({
   size
 }: Props) {
   return (
-    <li className={classnames('duration-150', className)}>
+    <li className={classnames('overflow-hidden duration-150', className)}>
       <Link
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        tabIndex={0}
         draggable={false}
         className={classnames(
           'flex rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 hover:bg-neutral-50 xl:p-6',
@@ -33,9 +32,9 @@ function WidgetLink({
         <div className="flex flex-col items-start">
           {icon}
           <div className="mt-3 flex-1">
-            <div className="text-sm">{title}</div>
+            <div className="text-sm uppercase">{title}</div>
             {!!description && (
-              <p className="mt-1 line-clamp-1 text-xs text-neutral-400">
+              <p className="mt-1 line-clamp-1 text-xs text-neutral-400 xl:mt-0">
                 {description}
               </p>
             )}

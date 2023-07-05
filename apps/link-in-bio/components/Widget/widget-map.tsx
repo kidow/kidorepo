@@ -2,7 +2,7 @@
 
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 
-function WidgetMap({}) {
+function WidgetMap() {
   return (
     <li className="relative col-span-2 row-span-2 h-[178px] w-full overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:h-[390px] xl:w-[390px]">
       <Map
