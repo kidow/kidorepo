@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Button, Header } from 'ui'
 
@@ -28,9 +29,11 @@ export default function Page() {
                     }}
                   >
                     <div className="relative aspect-square h-full w-full overflow-hidden rounded-full">
-                      <img
-                        src="https://i.pravatar.cc"
-                        alt=""
+                      <Image
+                        src="/avatar.png"
+                        alt="avatar"
+                        width={184}
+                        height={184}
                         className="absolute left-0 top-0 h-full w-full object-cover"
                       />
                     </div>
@@ -40,7 +43,7 @@ export default function Page() {
                       Kidow
                     </div>
                     <div className="mt-3 text-[#565656] xl:mt-3 xl:text-xl">
-                      더 게으르기 위해 더 열심히 공부하는 개발자입니다.
+                      비즈니스에 관심이 많은 웹 개발자 ✨
                     </div>
                   </div>
                 </div>
