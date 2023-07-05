@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
+import { WidgetLink, WidgetMap } from '@/components/Widget'
 
 export default function Page() {
   return (
@@ -53,29 +54,48 @@ export default function Page() {
             <div className="flex h-full w-full max-w-[428px] flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16">
               <div className="mb-10 flex flex-col px-4 xl:mb-0 xl:mr-20 xl:flex-1 xl:px-0" />
               <div className="relative flex-1 xl:w-[820px] xl:flex-none">
-                <ul className="grid gap-10 xl:grid-cols-4">
-                  <li className="col-span-4">
-                    <Link
-                      href="https://github.com/kidow"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      tabIndex={0}
-                      draggable={false}
-                      className="flex h-[175px] rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 hover:bg-neutral-50 xl:p-6"
-                    >
-                      <div className="flex flex-col items-start">
-                        <Icon.Github />
-                        <div className="mt-3 flex-1">
-                          <div className="text-sm">Github</div>
-                        </div>
-                        <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
-                          Follow
-                        </button>
-                      </div>
-                      <div className="ml-6 flex-1">
-                        <Github />
-                      </div>
-                    </Link>
+                <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
+                  <WidgetLink
+                    className="col-span-2 xl:col-span-4 xl:hover:rotate-1"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[820px]"
+                    href="https://github.com/kidow"
+                    icon={<Icon.Github />}
+                    title="Github"
+                    button={
+                      <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
+                        Follow
+                      </button>
+                    }
+                  >
+                    <Github />
+                  </WidgetLink>
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://www.producthunt.com/@kidow"
+                    icon={<Icon.ProductHunt />}
+                    title="ProductHunt"
+                    button={
+                      <button className="rounded-lg border border-[#ED6B5C] bg-[#ED6B5C] px-[21px] py-[7px] text-xs font-bold text-neutral-50">
+                        Follow
+                      </button>
+                    }
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="mailto:wcgo2ling@gmail.com"
+                    icon={<Icon.Link />}
+                    title="Gmail"
+                    description="wcgo2ling@gmail.com"
+                  />
+                  <WidgetMap />
+                  <li className="col-span-2 row-span-2 h-[380px] w-[380px] overflow-hidden rounded-3xl border border-neutral-200 shadow-sm"></li>
+                  <li className="col-span-2 p-4 xl:col-span-4">
+                    <h3 className="px-2 font-semibold">FAVORITE SKILLS</h3>
+                  </li>
+                  <li className="col-span-2 p-4 xl:col-span-4">
+                    <h3 className="px-2 font-semibold">SIDE PROJECTS 👨🏻‍💻</h3>
                   </li>
                 </ul>
               </div>

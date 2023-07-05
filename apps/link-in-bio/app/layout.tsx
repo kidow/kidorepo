@@ -49,6 +49,10 @@ export default function RootLayout({ children }: ReactProps) {
   return (
     <html lang="ko" className={inter.className}>
       <head>
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0986f45ad519044d2574ac8091cb572&libraries=services,clusterer&autoload=false"
+        />
         <link
           rel="stylesheet"
           href="node_modules/react-github-contribution-calendar/default.css"
