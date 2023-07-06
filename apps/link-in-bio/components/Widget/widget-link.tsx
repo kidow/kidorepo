@@ -25,7 +25,7 @@ function WidgetLink({
         rel="noopener noreferrer"
         draggable={false}
         className={classnames(
-          'flex rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 hover:bg-neutral-50 xl:p-6',
+          'flex rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 xl:p-6',
           size
         )}
       >

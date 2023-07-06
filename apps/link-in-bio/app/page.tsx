@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
+import Skills from '@/components/Skills'
 import { WidgetLink, WidgetMap, WidgetSpotify } from '@/components/Widget'
 
 export default function Page() {
@@ -71,8 +72,9 @@ export default function Page() {
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://resume.kidow.me"
-                    icon={<Icon.Link />}
+                    icon={<Icon.Resume />}
                     title="Resume"
+                    description="resume.kidow.me"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
@@ -99,10 +101,25 @@ export default function Page() {
                     className="col-span-2 xl:hover:rotate-1"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
                     href="https://blog.kidow.me"
-                    icon={<Icon.Link />}
+                    icon={
+                      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
+                        <Image
+                          src="/blog.png"
+                          alt="blog"
+                          height={20}
+                          width={20}
+                        />
+                      </span>
+                    }
                     title="Blog"
                     description="blog.kidow.me"
-                  ></WidgetLink>
+                  >
+                    <img
+                      src="https://daily-producthunt.kidow.me/opengraph-image.png?c7b23718c68e315c"
+                      alt=""
+                      className="h-full w-full rounded-[10px] border"
+                    />
+                  </WidgetLink>
                   <WidgetLink
                     className="xl:hover:rotate-1"
                     size="h-[178px] bg-[#F5FAFE] w-full xl:h-[175px] xl:w-[175px] hover:bg-[#F0F7FD]"
@@ -188,15 +205,17 @@ export default function Page() {
                     description="@kidow"
                   />
                   <li className="col-span-2 p-4 xl:col-span-4">
-                    <h3 className="px-2 font-semibold">FAVORITE SKILLS</h3>
+                    <h3 className="px-2 font-semibold uppercase">
+                      Favorite Skills 🚀
+                    </h3>
                   </li>
                   <li className="col-span-2 xl:col-span-4">
-                    <ul className="flex flex-wrap gap-6 xl:gap-10">
-                      <li></li>
-                    </ul>
+                    <Skills />
                   </li>
                   <li className="col-span-2 p-4 xl:col-span-4">
-                    <h3 className="px-2 font-semibold">SIDE PROJECTS 👨🏻‍💻</h3>
+                    <h3 className="px-2 font-semibold uppercase">
+                      Side Projects 👨🏻‍💻
+                    </h3>
                   </li>
                   <WidgetLink
                     className="xl:hover:rotate-2"
