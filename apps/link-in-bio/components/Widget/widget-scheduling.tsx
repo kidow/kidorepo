@@ -267,10 +267,11 @@ export default function WidgetScheduling() {
               </div>
             </>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-10">
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-10">
               <Input
                 placeholder="이름"
                 required
+                autoFocus
                 register={register('name', { required: true })}
               />
               <Input
@@ -279,7 +280,7 @@ export default function WidgetScheduling() {
                 required
                 register={register('email', { required: true })}
               />
-              <Textarea placeholder="남기는 메모" register={register('memo')} />
+              <Textarea placeholder="남길 메모" register={register('memo')} />
               <button className="flex h-11 w-52 items-center justify-center rounded-[10px] bg-neutral-900 text-neutral-50">
                 요청하기
               </button>

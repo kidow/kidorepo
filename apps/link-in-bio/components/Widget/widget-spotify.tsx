@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import classnames from 'classnames'
 
@@ -175,9 +176,11 @@ export default function WidgetSpotify({ token }: Props) {
                       {isPlayed ? <Icon.Pause /> : <Icon.Play />}
                     </div>
                     <div className="relative rounded-[6px]">
-                      <img
+                      <Image
                         src={item.track.album.images.at(-1).url}
                         loading="lazy"
+                        height={40}
+                        width={40}
                         className={classnames(
                           'pointer-events-auto z-10 h-full w-full rounded-[inherit] border-black/[0.08] object-cover transition-all ease-in group-hover:hidden',
                           {

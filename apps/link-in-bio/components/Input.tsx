@@ -9,28 +9,31 @@ interface Props {
   placeholder: string
   required?: boolean
   type?: HTMLInputTypeAttribute
+  autoFocus?: boolean
 }
 
 export default function Input({
   register,
   required,
   type,
-  placeholder
+  placeholder,
+  autoFocus
 }: Props) {
   const id = useId()
   return (
-    <div className="relative rounded-[10px] border px-3 py-2 ring-neutral-900/50 duration-150 focus-within:ring">
+    <div className="relative rounded-[10px] border px-3 py-2 ring-neutral-800 duration-150 focus-within:ring">
       <input
         {...register}
         className="peer w-full bg-transparent placeholder-transparent focus:outline-none"
         id={id}
         type={type}
+        autoFocus={autoFocus}
         required={required}
         placeholder={placeholder}
       />
       <label
         className={classnames(
-          'absolute -top-6 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-sm text-neutral-600 transition-all peer-placeholder-shown:left-3 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-400 peer-focus:-top-6 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-sm peer-focus:text-neutral-600',
+          'absolute -top-7 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-sm text-neutral-600 transition-all peer-placeholder-shown:left-3 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-400 peer-focus:-top-7 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-sm peer-focus:text-neutral-600',
           {
             'after:text-red-500 after:content-["*"] peer-placeholder-shown:after:text-neutral-400 peer-focus:after:text-red-500':
               required
