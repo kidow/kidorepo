@@ -51,7 +51,7 @@ export default function RootLayout({ children }: ReactProps) {
       <head>
         <script
           type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0986f45ad519044d2574ac8091cb572&libraries=services,clusterer&autoload=false"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0986f45ad519044d2574ac8091cb572&libraries=services&autoload=false"
         />
         <link
           rel="stylesheet"

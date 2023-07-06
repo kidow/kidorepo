@@ -55,7 +55,7 @@ export default function Page() {
                 <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
                   <WidgetLink
                     className="col-span-2 xl:col-span-4 xl:hover:rotate-1"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[820px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[820px] hover:bg-neutral-50"
                     href="https://github.com/kidow"
                     icon={<Icon.Github />}
                     title="Github"
@@ -69,14 +69,14 @@ export default function Page() {
                   </WidgetLink>
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://resume.kidow.me"
                     icon={<Icon.Link />}
                     title="Resume"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="mailto:wcgo2ling@gmail.com"
                     icon={<Icon.Email />}
                     title="Gmail"
@@ -86,7 +86,6 @@ export default function Page() {
                   <li className="row-span-2 h-[390px] w-full overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:col-span-2 xl:w-[390px]">
                     <iframe
                       src="https://giphy.com/embed/umYMU8G2ixG5mJBDo5"
-                      frameBorder="0"
                       className="giphy-embed h-full w-full"
                       allowFullScreen
                     ></iframe>
@@ -98,7 +97,7 @@ export default function Page() {
                   </li>
                   <WidgetLink
                     className="col-span-2 xl:hover:rotate-1"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[380px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
                     href="https://blog.kidow.me"
                     icon={<Icon.Link />}
                     title="Blog"
@@ -106,7 +105,7 @@ export default function Page() {
                   ></WidgetLink>
                   <WidgetLink
                     className="xl:hover:rotate-1"
-                    size="h-[178px] bg-blue-50 w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] bg-[#F5FAFE] w-full xl:h-[175px] xl:w-[175px] hover:bg-[#F0F7FD]"
                     href="https://twitter.com/__kidow__"
                     icon={<Icon.Twitter />}
                     title="Twitter"
@@ -114,28 +113,28 @@ export default function Page() {
                     button={
                       <button className="flex items-center justify-center gap-1 rounded-full bg-[#55acee] px-4 py-[7px] text-xs hover:bg-[#4698d7]">
                         <span className="font-bold text-white">Follow</span>
-                        <span className="text-blue-50">999</span>
+                        <span className="text-blue-50"></span>
                       </button>
                     }
                   />
                   <WidgetSpotify />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://kidow.gumroad.com"
                     icon={<Icon.Gumroad />}
                     title="Gumroad"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] bg-[#F0F6F9] xl:w-[175px] hover:bg-[#E9F4FA]"
                     href="https://www.linkedin.com/in/kidow/"
                     icon={<Icon.LinkedIn />}
                     title="LinkedIn"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] bg-[#FFFEF5] hover:bg-[#F6F4E2]"
                     href="https://www.buymeacoffee.com/kidow"
                     icon={<Icon.Buymeacoffee />}
                     title="Buy me a coffee"
@@ -145,7 +144,7 @@ export default function Page() {
                   </li>
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://www.producthunt.com/@kidow"
                     icon={<Icon.ProductHunt />}
                     title="ProductHunt"
@@ -158,7 +157,7 @@ export default function Page() {
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://wcgo2ling.tistory.com"
                     icon={
                       <Image
@@ -174,7 +173,7 @@ export default function Page() {
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://disquiet.io/@kidow"
                     icon={
                       <Image
@@ -191,8 +190,10 @@ export default function Page() {
                   <li className="col-span-2 p-4 xl:col-span-4">
                     <h3 className="px-2 font-semibold">FAVORITE SKILLS</h3>
                   </li>
-                  <li className="col-span-2 gap-6 xl:col-span-4 xl:gap-10">
-                    react
+                  <li className="col-span-2 xl:col-span-4">
+                    <ul className="flex flex-wrap gap-6 xl:gap-10">
+                      <li></li>
+                    </ul>
                   </li>
                   <li className="col-span-2 p-4 xl:col-span-4">
                     <h3 className="px-2 font-semibold">SIDE PROJECTS 👨🏻‍💻</h3>
