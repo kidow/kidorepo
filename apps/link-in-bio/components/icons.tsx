@@ -373,7 +373,7 @@ export function Note({ className }: { className: string }) {
       viewBox="0 0 12 12"
       className={className}
     >
-      <g clip-path="url(#clip0_6138_16346)">
+      <g clipPath="url(#clip0_6138_16346)">
         <path
           fill="#1ed760"
           fillRule="evenodd"

@@ -1,10 +1,6 @@
 'use client'
 
-import dayjs from 'dayjs'
-
-import 'dayjs/locale/ko'
-
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import classnames from 'classnames'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -20,14 +16,125 @@ interface State {
 }
 
 export default function WidgetScheduling() {
-  const [date, setDate] = useState<string>('')
-  const [time, setTime] = useState<string>('')
+  const [date, setDate] = useState<Date>(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const [selectedTime, setSelectedTime] = useState<string>('')
   const [step, setStep] = useState<number>(1)
+  const [currentTime, setCurrentTime] = useState('')
   const { register, handleSubmit } = useForm<State>()
 
   const onSubmit = async (data: State) => {
     if (!window.confirm('요청하시겠습니까?')) return
   }
+
+  const changeMonth = (amount: number) => {
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth()
+    const newDate = new Date(date.getFullYear(), date.getMonth() + amount, 1)
+
+    if (
+      newDate.getFullYear() > currentYear ||
+      (newDate.getFullYear() === currentYear &&
+        newDate.getMonth() >= currentMonth)
+    ) {
+      setDate(newDate)
+    }
+  }
+
+  const isPastDate = (day: number) => {
+    const today = new Date()
+    return (
+      day < today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    )
+  }
+
+  const isPreviousMonthDisabled = () => {
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth()
+
+    if (
+      date.getFullYear() === currentYear &&
+      date.getMonth() === currentMonth
+    ) {
+      return true
+    }
+
+    return false
+  }
+
+  const render = () => {
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const daysInMonth = new Date(year, month + 1, 0).getDate()
+    const firstDay = new Date(year, month, 1).getDay()
+
+    const rows = []
+    let days = []
+
+    for (let i = 0; i < firstDay; i++) {
+      days.push(
+        <td key={`empty-${i}`}>
+          <div className="h-10 w-10"></div>
+        </td>
+      )
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isPast = isPastDate(day)
+      const isSelected = selectedDate
+        ? day === selectedDate.getDate() &&
+          month === selectedDate.getMonth() &&
+          year === selectedDate.getFullYear()
+        : false
+      days.push(
+        <td key={`day-${day}`}>
+          <button
+            className={classnames(
+              'flex h-10 w-10 select-none items-center justify-center rounded-full duration-150',
+              isPast
+                ? 'cursor-text text-neutral-200'
+                : isSelected
+                ? 'bg-neutral-900 text-neutral-50'
+                : 'bg-neutral-100 hover:bg-neutral-200'
+            )}
+            onClick={() => setSelectedDate(new Date(year, month, day))}
+          >
+            {day}
+          </button>
+        </td>
+      )
+
+      if ((firstDay + day) % 7 === 0 || day === daysInMonth) {
+        rows.push(<tr key={`row-${day}`}>{days}</tr>)
+        days = []
+      }
+    }
+
+    return rows
+  }
+
+  const padZero = (value: number) => {
+    return value.toString().padStart(2, '0')
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date()
+      const hours = now.getHours()
+      const minutes = now.getMinutes()
+
+      const timeString = `${padZero(hours)}:${padZero(minutes)}`
+      setCurrentTime(timeString)
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
   return (
     <li className="col-span-3 row-span-3 hidden h-[605px] w-full space-x-8 divide-x overflow-auto overscroll-contain rounded-3xl border border-neutral-200 p-6 xl:flex">
       <div className="flex w-full flex-col items-start">
@@ -59,12 +166,29 @@ export default function WidgetScheduling() {
           {step === 1 ? (
             <>
               <div className="flex items-center justify-between">
-                <span className="select-none text-xl">2023년 7월</span>
-                <div className="flex">
-                  <button className="flex h-10 w-10 items-center justify-center rounded-full duration-150 hover:bg-neutral-50">
+                <span className="select-none text-xl">
+                  {date.toLocaleString('default', {
+                    month: 'long',
+                    year: 'numeric'
+                  })}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => changeMonth(-1)}
+                    className={classnames(
+                      'flex h-10 w-10 items-center justify-center rounded-full',
+                      isPreviousMonthDisabled()
+                        ? 'text-neutral-200'
+                        : 'duration-150 hover:bg-neutral-50'
+                    )}
+                    disabled={isPreviousMonthDisabled()}
+                  >
                     <ChevronLeft />
                   </button>
-                  <button className="flex h-10 w-10 items-center justify-center rounded-full duration-150 hover:bg-neutral-50">
+                  <button
+                    onClick={() => changeMonth(1)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full duration-150 hover:bg-neutral-50"
+                  >
                     <ChevronRight />
                   </button>
                 </div>
@@ -81,189 +205,14 @@ export default function WidgetScheduling() {
                     ))}
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        1
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        2
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        3
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        4
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        5
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        6
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        7
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        8
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        9
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        10
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        11
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        12
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        13
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        14
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        15
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        16
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        17
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        18
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        19
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        20
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        21
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        22
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        23
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        24
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        25
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        26
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        27
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        28
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        29
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        30
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex h-10 w-10 select-none items-center justify-center">
-                        31
-                      </div>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
+                <tbody>{render()}</tbody>
               </table>
               <div className="mt-4">
-                <button>대한민국/서울 (13:35)</button>
+                {!!currentTime && (
+                  <button className="font-bold text-neutral-800">
+                    대한민국/서울 ({currentTime})
+                  </button>
+                )}
               </div>
             </>
           ) : (
@@ -291,7 +240,11 @@ export default function WidgetScheduling() {
       {step === 1 && (
         <div className="flex w-full select-none flex-col pl-8">
           <div className="text-2xl font-bold">시간 선택</div>
-          <div className="mt-1">7월 6일 목요일</div>
+          <div className="mt-1">
+            {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일{' '}
+            {['일', '월', '화', '수', '목', '금', '토'][selectedDate.getDay()]}
+            요일
+          </div>
           <ul className="mt-6 flex-1 space-y-3 overflow-auto overscroll-contain">
             {[
               '09:30',
@@ -319,12 +272,12 @@ export default function WidgetScheduling() {
             ].map((item, key) => (
               <li
                 key={key}
-                onClick={() => setTime(item)}
+                onClick={() => setSelectedTime(item)}
                 className={classnames(
-                  'flex h-[58px] cursor-pointer items-center justify-between rounded border py-2 pl-6 pr-4 hover:border-neutral-500',
-                  item === time
-                    ? 'border-neutral-500 bg-neutral-900 text-neutral-50'
-                    : ''
+                  'flex h-[58px] cursor-pointer items-center justify-between rounded border py-2 pl-6 pr-4',
+                  item === selectedTime
+                    ? 'border-neutral-900 bg-neutral-900 text-neutral-50'
+                    : 'hover:border-neutral-500'
                 )}
               >
                 <span>{item}</span>
@@ -332,7 +285,7 @@ export default function WidgetScheduling() {
                   onClick={() => setStep(2)}
                   className={classnames(
                     'h-10 rounded-md px-4',
-                    item === time
+                    item === selectedTime
                       ? 'inline-block bg-neutral-50 font-semibold text-neutral-900'
                       : 'hidden'
                   )}
