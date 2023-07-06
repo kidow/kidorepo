@@ -16,7 +16,7 @@ export default function WidgetQuote() {
           “
         </div>
         <div className="text-xl font-normal italic text-neutral-600">
-          더 게으르기 위해 더 열심히 공부하는 것을 모토로 삼고 있습니다.
+          더 게으르기 위해, 더 열심히 공부하는 것을 모토로 삼고 있습니다.
         </div>
       </div>
     </li>
