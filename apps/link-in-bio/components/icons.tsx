@@ -274,9 +274,9 @@ export function Email() {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         className="lucide lucide-mail h-5 w-5"
       >
         <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -306,6 +306,28 @@ export function Resume() {
         <line x1="16" x2="8" y1="13" y2="13" />
         <line x1="16" x2="8" y1="17" y2="17" />
         <line x1="10" x2="8" y1="9" y2="9" />
+      </svg>
+    </span>
+  )
+}
+
+export function Clock() {
+  return (
+    <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="lucide lucide-clock-3 h-5 w-5"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16.5 12" />
       </svg>
     </span>
   )

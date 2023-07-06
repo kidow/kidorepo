@@ -7,7 +7,7 @@ interface Props extends WidgetProps {
   href: string
 }
 
-function WidgetLink({
+export default function WidgetLink({
   href,
   icon,
   title,
@@ -46,5 +46,3 @@ function WidgetLink({
     </li>
   )
 }
-
-export default WidgetLink

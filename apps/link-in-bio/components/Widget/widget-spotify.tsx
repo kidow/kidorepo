@@ -4,14 +4,14 @@ import Link from 'next/link'
 
 import * as Icon from '@/components/icons'
 
-function WidgetSpotify() {
+export default function WidgetSpotify() {
   const onPlay = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
   }
   return (
     <li className="col-span-2 row-span-2 overflow-hidden">
       <Link
-        href="https://open.spotify.com"
+        href="https://open.spotify.com/playlist/5agjirffT0c86uuBbgLNDe"
         target="_blank"
         rel="noopener noreferrer"
         draggable={false}
@@ -95,5 +95,3 @@ function WidgetSpotify() {
     </li>
   )
 }
-
-export default WidgetSpotify

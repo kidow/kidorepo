@@ -10,6 +10,9 @@ export default function Skills() {
       'nextjs',
       'typescript',
       'tailwindcss',
+      'recoil',
+      'nodejs',
+      'postgresql',
       'supabase',
       'vercel'
     ],
@@ -28,6 +31,7 @@ export default function Skills() {
             draggable={false}
             height={40}
             width={40}
+            className="select-none"
           />
         </li>
       ))}

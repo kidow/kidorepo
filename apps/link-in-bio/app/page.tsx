@@ -1,10 +1,17 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
+import Footer from '@/components/Footer'
 import Github from '@/components/Github'
+import Header from '@/components/Header'
 import * as Icon from '@/components/icons'
 import Skills from '@/components/Skills'
-import { WidgetLink, WidgetMap, WidgetSpotify } from '@/components/Widget'
+import {
+  WidgetLink,
+  WidgetMap,
+  WidgetQuote,
+  WidgetScheduling,
+  WidgetSpotify
+} from '@/components/Widget'
 
 export default function Page() {
   return (
@@ -12,44 +19,7 @@ export default function Page() {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <div className="flex min-h-screen w-full max-w-[1728px] flex-col">
           <div className="relative flex min-h-screen w-full flex-1 flex-col items-center">
-            <div className="flex h-full w-full max-w-[428px] items-center justify-center p-6 pb-0 pt-12 xl:absolute xl:top-0 xl:max-w-[min(100vw,1728px)] xl:items-stretch xl:justify-start xl:p-16">
-              <div className="flex w-full flex-col px-4 xl:mr-20 xl:flex-1 xl:px-0">
-                <div
-                  className="relative xl:sticky xl:top-16"
-                  style={{
-                    transition:
-                      'opacity 1s cubic-bezier(0.42, 0, 0.25, 1) 0s, transform 1s cubic-bezier(0.2, 1.18, 0.47, 1) 0s'
-                  }}
-                >
-                  <div
-                    className="h-[120px] w-[120px] xl:h-[184px] xl:w-[184px]"
-                    style={{
-                      transform: 'rotateZ(0deg)',
-                      transition:
-                        'transform 1s cubic-bezier(0.2, 1.18, 0.47, 1) 0s'
-                    }}
-                  >
-                    <div className="relative aspect-square h-full w-full overflow-hidden rounded-full">
-                      <Image
-                        src="/avatar.png"
-                        alt="avatar"
-                        width={184}
-                        height={184}
-                        className="absolute left-0 top-0 h-full w-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-2 mt-8 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] xl:max-w-[min(500px,calc(100vw_-_1000px))]">
-                    <div className="text-[32px] font-bold leading-[120%] tracking-[-1px] xl:text-[44px] xl:tracking-[-2px]">
-                      Kidow
-                    </div>
-                    <div className="mt-3 text-[#565656] xl:mt-3 xl:text-xl">
-                      비즈니스에 관심이 많은 웹 개발자 ✨
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Header />
             <div className="flex h-full w-full max-w-[428px] flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16">
               <div className="mb-10 flex flex-col px-4 xl:mb-0 xl:mr-20 xl:flex-1 xl:px-0" />
               <div className="relative flex-1 xl:w-[820px] xl:flex-none">
@@ -85,7 +55,7 @@ export default function Page() {
                     description="wcgo2ling@gmail.com"
                   />
                   <WidgetMap />
-                  <li className="row-span-2 h-[390px] w-full overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:col-span-2 xl:w-[390px]">
+                  <li className="row-span-2 h-[178px] w-[178px] overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:col-span-2 xl:h-[390px] xl:w-[390px]">
                     <iframe
                       src="https://giphy.com/embed/umYMU8G2ixG5mJBDo5"
                       className="giphy-embed h-full w-full"
@@ -98,8 +68,8 @@ export default function Page() {
                     </p>
                   </li>
                   <WidgetLink
-                    className="col-span-2 xl:hover:rotate-1"
-                    size="h-[178px] w-full xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
+                    className="xl:col-span-2 xl:hover:rotate-1"
+                    size="w-full h-[178px] xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
                     href="https://blog.kidow.me"
                     icon={
                       <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
@@ -117,7 +87,7 @@ export default function Page() {
                     <img
                       src="https://daily-producthunt.kidow.me/opengraph-image.png?c7b23718c68e315c"
                       alt=""
-                      className="h-full w-full rounded-[10px] border"
+                      className="hidden h-full w-full rounded-[10px] border xl:block"
                     />
                   </WidgetLink>
                   <WidgetLink
@@ -156,9 +126,8 @@ export default function Page() {
                     icon={<Icon.Buymeacoffee />}
                     title="Buy me a coffee"
                   />
-                  <li className="hidden w-full overflow-hidden rounded-3xl border border-neutral-200 p-5 xl:col-span-3 xl:row-span-3 xl:block xl:h-[605px] xl:p-6">
-                    일정 예약
-                  </li>
+                  <WidgetQuote />
+                  <WidgetScheduling />
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
@@ -237,19 +206,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="duration-400 fixed bottom-[52px] left-16 hidden select-none rounded-[12px] bg-white p-2 text-sm text-neutral-400 transition-colors delay-500 xl:block">
-          <p>
-            This project inspired by{' '}
-            <Link
-              href="https://bento.me/?ref=kidow.me"
-              target="_blank"
-              className="hover:underline"
-            >
-              Bento.me
-            </Link>
-            .
-          </p>
-        </div>
+        <Footer />
       </main>
     </>
   )
