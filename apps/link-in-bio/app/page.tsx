@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { Tooltip } from 'ui'
 
 import Footer from '@/components/Footer'
 import Github from '@/components/Github'
@@ -14,7 +13,24 @@ import {
   WidgetSpotify
 } from '@/components/Widget'
 
-export default function Page() {
+async function getSpotifyToken() {
+  const data = new URLSearchParams()
+  data.append('grant_type', 'client_credentials')
+  const res = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: `Basic ${new Buffer(
+        process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
+      ).toString('base64')}`
+    }),
+    body: data
+  })
+  const result = await res.json()
+  return result
+}
+
+export default async function Page() {
+  const spotify = await getSpotifyToken()
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center">
@@ -105,7 +121,7 @@ export default function Page() {
                       </button>
                     }
                   />
-                  <WidgetSpotify />
+                  <WidgetSpotify token={spotify?.access_token} />
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
@@ -202,11 +218,6 @@ export default function Page() {
                     }
                     title="일간 ProductHunt"
                   />
-                  <li>
-                    <Tooltip content="Test">
-                      <span>test</span>
-                    </Tooltip>
-                  </li>
                 </ul>
               </div>
             </div>

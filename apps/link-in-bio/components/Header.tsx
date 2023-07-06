@@ -23,6 +23,7 @@ function Header() {
               <Image
                 src="/avatar.png"
                 alt="avatar"
+                priority
                 width={184}
                 height={184}
                 className="absolute left-0 top-0 h-full w-full object-cover"

@@ -81,7 +81,7 @@ export function Spotify() {
     <svg
       width="16"
       height="16"
-      className="h-10 w-10 rounded-[10px]"
+      className="relative z-20 aspect-square h-10 w-10 overflow-hidden rounded-[10px]"
       viewBox="0 0 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -308,5 +308,84 @@ export function Resume() {
         <line x1="10" x2="8" y1="9" y2="9" />
       </svg>
     </span>
+  )
+}
+
+export function Play() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      className="text-white"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3 13.1231V2.87688C3 1.42024 4.55203 0.520516 5.77196 1.26995L14.1114 6.39307C15.2962 7.12093 15.2962 8.87907 14.1114 9.60693L5.77196 14.73C4.55203 15.4795 3 14.5798 3 13.1231Z"
+        fill="white"
+      ></path>
+    </svg>
+  )
+}
+
+export function Pause() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      xmlns="http://www.w3.org/2000/svg"
+      className="inline text-white"
+      fill="none"
+      viewBox="0 0 13 13"
+    >
+      <g fill="currentColor" clipPath="url(#clip0_6138_16321)">
+        <rect width="3" height="12" x="1.5" y="0.5" rx="1"></rect>
+        <rect
+          width="3"
+          height="12"
+          x="8.5"
+          y="0.5"
+          rx="1"
+          className="pointer-events-auto"
+        ></rect>
+      </g>
+      <defs>
+        <clipPath id="clip0_6138_16321">
+          <path
+            fill="currentColor"
+            d="M0 0H12V12H0z"
+            transform="translate(.5 .5)"
+          ></path>
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export function Note({ className }: { className: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      fill="#1ed760"
+      viewBox="0 0 12 12"
+      className={className}
+    >
+      <g clip-path="url(#clip0_6138_16346)">
+        <path
+          fill="#1ed760"
+          fillRule="evenodd"
+          d="M11 1A1 1 0 009.757.03l-6 1.5A1 1 0 003 2.5V8a2 2 0 102 2V3.282l4-1v4.22a2 2 0 102 2V1z"
+          clipRule="evenodd"
+        ></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_6138_16346">
+          <path fill="#fff" d="M0 0H12V12H0z"></path>
+        </clipPath>
+      </defs>
+    </svg>
   )
 }

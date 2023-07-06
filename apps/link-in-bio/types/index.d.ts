@@ -10,3 +10,17 @@ interface WidgetProps extends ReactProps {
   button?: ReactNode
   className?: Argument
 }
+
+interface Track {
+  track: {
+    album: {
+      images: Array<{ url: string }>
+    }
+    artists: Array<{
+      name: string
+    }>
+    name: string
+    preview_url: string
+    duration_ms: number
+  }
+}
