@@ -18,6 +18,7 @@
     "react-github-contribution-calendar": "^2.2.0",
     "react-hook-form": "^7.45.1",
     "react-kakao-maps-sdk": "^1.1.9",
+    "react-textarea-autosize": "^8.5.2",
     "ui": "workspace:*"
   },
   "devDependencies": {
