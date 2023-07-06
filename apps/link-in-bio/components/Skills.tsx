@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import Image from 'next/image'
+import { Tooltip } from 'ui'
 
 export default function Skills() {
   const list: string[] = useMemo(
@@ -25,14 +26,16 @@ export default function Skills() {
           key={key}
           className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1"
         >
-          <Image
-            src={`/skills/${item}.png`}
-            alt={item}
-            draggable={false}
-            height={40}
-            width={40}
-            className="select-none"
-          />
+          <Tooltip content={item} className="capitalize">
+            <Image
+              src={`/skills/${item}.png`}
+              alt={item}
+              draggable={false}
+              height={40}
+              width={40}
+              className="select-none"
+            />
+          </Tooltip>
         </li>
       ))}
     </ul>

@@ -49,7 +49,7 @@ function App() {
   }, [])
   return (
     <>
-      <div className="mx-auto mt-10 max-w-2xl">
+      <div className="mx-auto mt-10 max-w-2xl pb-40">
         <TextareaAutosize
           value={title}
           placeholder="타이틀"

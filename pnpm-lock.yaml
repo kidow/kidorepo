@@ -261,6 +261,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.2.3
+      classnames:
+        specifier: ^2.3.2
+        version: 2.3.2
       eslint:
         specifier: ^7.32.0
         version: 7.32.0
@@ -2775,7 +2778,6 @@ packages:
       {
         integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
       }
-    dev: false
 
   /clean-stack@2.2.0:
     resolution:

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Tooltip } from 'ui'
 
 import Footer from '@/components/Footer'
 import Github from '@/components/Github'
@@ -201,6 +202,11 @@ export default function Page() {
                     }
                     title="일간 ProductHunt"
                   />
+                  <li>
+                    <Tooltip content="Test">
+                      <span>test</span>
+                    </Tooltip>
+                  </li>
                 </ul>
               </div>
             </div>
