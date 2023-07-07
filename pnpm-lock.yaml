@@ -77,6 +77,33 @@ importers:
 
   apps/link-in-bio:
     dependencies:
+      '@editorjs/checklist':
+        specifier: ^1.5.0
+        version: 1.5.0
+      '@editorjs/code':
+        specifier: ^2.8.0
+        version: 2.8.0
+      '@editorjs/editorjs':
+        specifier: ^2.27.2
+        version: 2.27.2
+      '@editorjs/header':
+        specifier: ^2.7.0
+        version: 2.7.0
+      '@editorjs/inline-code':
+        specifier: ^1.4.0
+        version: 1.4.0
+      '@editorjs/list':
+        specifier: ^1.8.0
+        version: 1.8.0
+      '@editorjs/marker':
+        specifier: ^1.3.0
+        version: 1.3.0
+      '@editorjs/simple-image':
+        specifier: ^1.5.1
+        version: 1.5.1
+      '@editorjs/table':
+        specifier: ^2.2.2
+        version: 2.2.2
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -111,6 +138,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
+      '@tailwindcss/typography':
+        specifier: ^0.5.9
+        version: 0.5.9(tailwindcss@3.3.2)
+      '@types/editorjs__header':
+        specifier: ^2.6.0
+        version: 2.6.0
       '@types/node':
         specifier: ^17.0.12
         version: 17.0.45

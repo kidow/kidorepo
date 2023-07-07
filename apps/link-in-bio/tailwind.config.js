@@ -77,5 +77,6 @@ module.exports = {
         'note-3': 'note-3 2.35s infinite'
       }
     }
-  }
+  },
+  plugins: [...baseConfig.plugins, require('@tailwindcss/typography')]
 }
