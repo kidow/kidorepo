@@ -9,3 +9,6 @@ Website Link: [https://kidow.me](https://kidow.me)
 - Next.js (App Router)
 - Typescript
 - TailwindCSS
+- Lucide (icons)
+- React Hook Form
+- sonner

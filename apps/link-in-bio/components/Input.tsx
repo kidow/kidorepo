@@ -32,6 +32,7 @@ export default function Input({
         placeholder={placeholder}
       />
       <label
+        htmlFor={id}
         className={classnames(
           'absolute -top-7 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-sm text-neutral-600 transition-all peer-placeholder-shown:left-3 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-400 peer-focus:-top-7 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-sm peer-focus:text-neutral-600',
           {
