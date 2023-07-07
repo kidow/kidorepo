@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Archive, StickyNote } from 'lucide-react'
+import { Archive, FileText, Mail, StickyNote } from 'lucide-react'
 
 import Footer from '@/components/Footer'
 import Github from '@/components/Github'
@@ -61,7 +61,11 @@ export default async function Page() {
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="/resume"
-                    icon={<Icon.Resume />}
+                    icon={
+                      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+                        <FileText className="h-5 w-5" />
+                      </span>
+                    }
                     title="Resume"
                     description="/resume"
                   />
@@ -69,7 +73,11 @@ export default async function Page() {
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="mailto:wcgo2ling@gmail.com"
-                    icon={<Icon.Email />}
+                    icon={
+                      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+                        <Mail className="h-5 w-5" />
+                      </span>
+                    }
                     title="Gmail"
                     description="wcgo2ling@gmail.com"
                   />
