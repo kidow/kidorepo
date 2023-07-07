@@ -5,6 +5,7 @@ module.exports = {
   ...baseConfig,
   theme: {
     extend: {
+      ...baseConfig.theme.extend,
       keyframes: {
         playing: {
           '0%': {
