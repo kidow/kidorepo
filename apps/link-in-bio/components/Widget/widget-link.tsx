@@ -1,10 +1,12 @@
 'use client'
 
+import { type HTMLAttributeAnchorTarget } from 'react'
 import Link from 'next/link'
 import classnames from 'classnames'
 
 interface Props extends WidgetProps {
   href: string
+  target?: HTMLAttributeAnchorTarget
 }
 
 export default function WidgetLink({
@@ -15,17 +17,23 @@ export default function WidgetLink({
   children,
   className,
   description,
-  size
+  size,
+  target
 }: Props) {
   return (
-    <li className={classnames('overflow-hidden duration-150', className)}>
+    <li
+      className={classnames(
+        'overflow-hidden transition-all duration-150',
+        className
+      )}
+    >
       <Link
         href={href}
-        target="_blank"
+        target={target}
         rel="noopener noreferrer"
         draggable={false}
         className={classnames(
-          'flex rounded-3xl border border-neutral-200 p-5 shadow-sm duration-150 xl:p-6',
+          'flex rounded-3xl border border-neutral-200 p-5 shadow-sm transition-all duration-150 xl:p-6',
           size
         )}
       >

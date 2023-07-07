@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Archive, StickyNote } from 'lucide-react'
 
 import Footer from '@/components/Footer'
 import Github from '@/components/Github'
@@ -47,6 +48,7 @@ export default async function Page() {
                     href="https://github.com/kidow"
                     icon={<Icon.Github />}
                     title="Github"
+                    target="_blank"
                     button={
                       <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
                         Follow
@@ -58,10 +60,10 @@ export default async function Page() {
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
-                    href="https://resume.kidow.me"
+                    href="/resume"
                     icon={<Icon.Resume />}
                     title="Resume"
-                    description="resume.kidow.me"
+                    description="/resume"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
@@ -87,7 +89,7 @@ export default async function Page() {
                   <WidgetLink
                     className="xl:col-span-2 xl:hover:rotate-1"
                     size="w-full h-[178px] xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
-                    href="https://blog.kidow.me"
+                    href="/blog"
                     icon={
                       <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
                         <Image
@@ -99,7 +101,7 @@ export default async function Page() {
                       </span>
                     }
                     title="Blog"
-                    description="blog.kidow.me"
+                    description="/blog"
                   ></WidgetLink>
                   <WidgetLink
                     className="xl:hover:rotate-1"
@@ -107,6 +109,7 @@ export default async function Page() {
                     href="https://twitter.com/__kidow__"
                     icon={<Icon.Twitter />}
                     title="Twitter"
+                    target="_blank"
                     description="@__kidow__"
                     button={
                       <button className="flex items-center justify-center gap-1 rounded-full bg-[#55acee] px-4 py-[7px] text-xs hover:bg-[#4698d7]">
@@ -121,21 +124,27 @@ export default async function Page() {
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://kidow.gumroad.com"
                     icon={<Icon.Gumroad />}
+                    target="_blank"
                     title="Gumroad"
+                    description="kidow.gumroad.com"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] bg-[#F0F6F9] xl:w-[175px] hover:bg-[#E9F4FA]"
                     href="https://www.linkedin.com/in/kidow/"
                     icon={<Icon.LinkedIn />}
+                    target="_blank"
                     title="LinkedIn"
+                    description="/in/kidow"
                   />
                   <WidgetLink
                     className="xl:hover:rotate-2"
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] bg-[#FFFEF5] hover:bg-[#F6F4E2]"
                     href="https://www.buymeacoffee.com/kidow"
                     icon={<Icon.Buymeacoffee />}
+                    target="_blank"
                     title="Buy me a coffee"
+                    description="/kidow"
                   />
                   <WidgetQuote />
                   <WidgetScheduling />
@@ -144,6 +153,7 @@ export default async function Page() {
                     size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
                     href="https://www.producthunt.com/@kidow"
                     icon={<Icon.ProductHunt />}
+                    target="_blank"
                     title="ProductHunt"
                     description="@kidow"
                     button={
@@ -165,6 +175,7 @@ export default async function Page() {
                         className="rounded-[10px] border"
                       />
                     }
+                    target="_blank"
                     title="Tistory"
                     description="wcgo2ling"
                   />
@@ -181,6 +192,7 @@ export default async function Page() {
                         className="rounded-[10px] border"
                       />
                     }
+                    target="_blank"
                     title="Disquiet"
                     description="@kidow"
                   />
@@ -210,7 +222,33 @@ export default async function Page() {
                         className="rounded-[10px]"
                       />
                     }
+                    target="_blank"
                     title="일간 ProductHunt"
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="/memo"
+                    icon={
+                      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+                        <StickyNote className="h-5 w-5" />
+                      </span>
+                    }
+                    title="MEMO"
+                    description="내용이 사라지지 않는 메모"
+                  />
+                  <WidgetLink
+                    className="xl:hover:rotate-2"
+                    size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+                    href="https://archive.kidow.me"
+                    target="_blank"
+                    icon={
+                      <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+                        <Archive className="h-5 w-5" />
+                      </span>
+                    }
+                    title="ARCHIVE"
+                    description="개발자 노하우 저장소"
                   />
                 </ul>
               </div>

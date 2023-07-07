@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function Header() {
   return (
@@ -20,14 +21,16 @@ function Header() {
             }}
           >
             <div className="relative aspect-square h-full w-full overflow-hidden rounded-full">
-              <Image
-                src="/avatar.png"
-                alt="avatar"
-                priority
-                width={184}
-                height={184}
-                className="absolute left-0 top-0 h-full w-full object-cover"
-              />
+              <Link href="/">
+                <Image
+                  src="/avatar.png"
+                  alt="avatar"
+                  priority
+                  width={184}
+                  height={184}
+                  className="absolute left-0 top-0 h-full w-full object-cover"
+                />
+              </Link>
             </div>
           </div>
           <div className="ml-2 mt-8 w-[calc(100%-8px)] max-w-[min(500px,100%-8px)] xl:max-w-[min(500px,calc(100vw_-_1000px))]">
