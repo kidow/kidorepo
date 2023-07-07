@@ -41,7 +41,7 @@ export default function WidgetSpotify({ token }: Props) {
     console.log('data', data)
     setTracks(data?.tracks?.items?.slice(0, 4) || [])
     setTotal(data?.tracks?.total || 0)
-  }, [])
+  }, [token])
 
   const onPlay = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
@@ -100,7 +100,7 @@ export default function WidgetSpotify({ token }: Props) {
 
   useEffect(() => {
     get()
-  }, [])
+  }, [get])
   return (
     <li className="col-span-2 row-span-2 overflow-hidden">
       <Link

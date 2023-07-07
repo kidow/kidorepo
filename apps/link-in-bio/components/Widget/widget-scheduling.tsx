@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import classnames from 'classnames'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
-import { createPortal } from 'react-dom'
 import { useForm } from 'react-hook-form'
-import { toast, Toaster } from 'sonner'
 import { Spinner } from 'ui'
 
 import Input from '@/components/Input'
@@ -31,7 +29,7 @@ export default function WidgetScheduling() {
     if (!window.confirm('요청하시겠습니까?')) return
     if (!data.name || !data.email || !data.memo) return
 
-    toast('아직 준비 중입니다.')
+    alert('아직 준비 중입니다.')
     return
 
     setIsRequesting(true)
@@ -48,9 +46,8 @@ export default function WidgetScheduling() {
       })
     })
     const result = await res.json()
-    if (result.success) toast.success('요청되었습니다. 곧 회신하겠습니다. 🤗')
-    else
-      toast.error('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
+    if (result.success) alert('요청되었습니다. 곧 회신하겠습니다. 🤗')
+    else alert('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
     setIsRequesting(false)
   }
 
@@ -380,7 +377,6 @@ export default function WidgetScheduling() {
           </div>
         )}
       </li>
-      {createPortal(<Toaster position="top-center" />, document.body)}
     </>
   )
 }

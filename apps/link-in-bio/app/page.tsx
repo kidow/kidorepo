@@ -16,12 +16,12 @@ import {
 async function getSpotifyToken() {
   const data = new URLSearchParams()
   data.append('grant_type', 'client_credentials')
+  data.append('client_id', process.env.SPOTIFY_CLIENT_ID)
+  data.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET)
   const res = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: new Headers({
-      Authorization: `Basic ${new Buffer(
-        process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
-      ).toString('base64')}`
+      'Content-Type': 'application/x-www-form-urlencoded'
     }),
     body: data
   })
@@ -100,13 +100,7 @@ export default async function Page() {
                     }
                     title="Blog"
                     description="blog.kidow.me"
-                  >
-                    <img
-                      src="https://daily-producthunt.kidow.me/opengraph-image.png?c7b23718c68e315c"
-                      alt=""
-                      className="hidden h-full w-full rounded-[10px] border xl:block"
-                    />
-                  </WidgetLink>
+                  ></WidgetLink>
                   <WidgetLink
                     className="xl:hover:rotate-1"
                     size="h-[178px] bg-[#F5FAFE] w-full xl:h-[175px] xl:w-[175px] hover:bg-[#F0F7FD]"
