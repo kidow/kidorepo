@@ -6,5 +6,6 @@ declare namespace NodeJS {
     NODE_ENV: string
     SPOTIFY_CLIENT_ID: string
     SPOTIFY_CLIENT_SECRET: string
+    BLOB_READ_WRITE_TOKEN: string
   }
 }

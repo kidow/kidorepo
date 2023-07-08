@@ -1,4 +1,8 @@
-import type { Metadata } from 'next'
+import { type Metadata } from 'next'
+
+import './index.css'
+
+interface Props extends ReactProps {}
 
 const TITLE = 'MEMO | Kidow'
 const DESCRIPTION =
@@ -8,7 +12,7 @@ const BASE_URL = 'https://kidow.me/memo'
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  keywords: ['memo', 'editorjs'],
+  keywords: ['memo', 'tiptap', 'novel'],
   alternates: {
     canonical: BASE_URL
   },
@@ -24,6 +28,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL)
 }
 
-export default function Layout({ children }: ReactProps) {
+export default function Layout({ children }: Props) {
   return <>{children}</>
 }

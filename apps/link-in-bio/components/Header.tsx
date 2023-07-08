@@ -20,7 +20,7 @@ function Header() {
               transition: 'transform 1s cubic-bezier(0.2, 1.18, 0.47, 1) 0s'
             }}
           >
-            <div className="relative aspect-square h-full w-full overflow-hidden rounded-full">
+            <div className="ring-primary relative aspect-square h-full w-full overflow-hidden rounded-full ring-offset-2 duration-300 hover:ring">
               <Link href="/">
                 <Image
                   src="/avatar.png"

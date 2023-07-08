@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     title: TITLE,
     description: DESCRIPTION,
-    creator: '__kidow__',
+    creator: '@__kidow__',
     card: 'summary_large_image'
   },
   verification: {

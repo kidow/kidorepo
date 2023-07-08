@@ -6,6 +6,10 @@ module.exports = {
   theme: {
     extend: {
       ...baseConfig.theme.extend,
+      fontFamily: {
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        default: ['var(--font-default)', 'system-ui', 'sans-serif']
+      },
       keyframes: {
         playing: {
           '0%': {
