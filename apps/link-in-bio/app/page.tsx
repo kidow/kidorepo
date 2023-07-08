@@ -5,6 +5,7 @@ import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
 import Skills from '@/components/Skills'
 import {
+  WidgetAnalytics,
   WidgetLink,
   WidgetMap,
   WidgetQuote,
@@ -189,6 +190,7 @@ export default async function Page() {
         title="Disquiet"
         description="@kidow"
       />
+      <WidgetAnalytics />
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>

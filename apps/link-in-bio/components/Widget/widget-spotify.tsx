@@ -158,7 +158,7 @@ export default function WidgetSpotify({ token }: Props) {
         </div>
         <ul className="w-full">
           {tracks.map((item, key) => (
-            <li className="group last:block xl:last:hidden" key={key}>
+            <li className="group last:hidden xl:last:block" key={key}>
               <button
                 onClick={(e) => onPlayTrack(e, key)}
                 className="group flex w-full flex-row items-center justify-between py-2 transition-transform duration-150 active:scale-[0.995] group-last:pb-0"
