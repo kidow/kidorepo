@@ -15,7 +15,8 @@ export default function Skills() {
       'nodejs',
       'postgresql',
       'supabase',
-      'vercel'
+      'vercel',
+      'chrome extension'
     ],
     []
   )

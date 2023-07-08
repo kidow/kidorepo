@@ -56,7 +56,7 @@ export default async function Page() {
             <FileText className="h-5 w-5" />
           </span>
         }
-        title="Resume"
+        title="Résumé"
         description="/resume"
       />
       <WidgetLink
