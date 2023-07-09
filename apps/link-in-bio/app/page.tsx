@@ -191,6 +191,7 @@ export default async function Page() {
         description="@kidow"
       />
       <WidgetAnalytics />
+      <WidgetAnalytics />
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>

@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       ...baseConfig.theme.extend,
       colors: {
+        ...baseConfig.theme.extend.colors,
         tremor: {
           brand: {
             faint: '#eff6ff', // blue-50
