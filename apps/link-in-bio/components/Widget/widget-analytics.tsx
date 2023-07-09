@@ -2,7 +2,7 @@
 
 import { AreaChart, BadgeDelta, Card, Flex, Metric, Text } from '@tremor/react'
 
-export default function WidgetAnalytics({}) {
+export default function WidgetAnalytics() {
   return (
     <li className="col-span-2">
       <Card className="shadow-none ring-neutral-200">

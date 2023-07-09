@@ -5,6 +5,8 @@ module.exports = {
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
     'app/**/*.{ts,tsx}',
     'components/**/*.{ts,tsx}',
+    'containers/**/*.{ts,tsx}',
+    'templates/**/*.{ts,tsx}',
     'src/**/*.{ts,tsx}',
     'content/**/*.{md,mdx}'
   ],
