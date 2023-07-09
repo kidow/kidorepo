@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer utilities {
-  .buttons {
-    @apply flex h-8 w-8 items-center justify-center rounded-md duration-150 hover:bg-neutral-100;
-  }
-}

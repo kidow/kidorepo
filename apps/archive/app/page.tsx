@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Page() {
   return (
     <>
-      <div>admin</div>
+      <div>archive</div>
       <Link href="/">Link</Link>
     </>
   )
