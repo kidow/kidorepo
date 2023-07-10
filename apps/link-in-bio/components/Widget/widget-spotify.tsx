@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import classnames from 'classnames'
@@ -17,43 +17,27 @@ function getRunningTime(milliseconds: number) {
 }
 
 interface Props {
-  token?: string
+  tracks: {
+    items: Track[]
+    total: number
+  }
 }
 
-export default function WidgetSpotify({ token }: Props) {
-  const [tracks, setTracks] = useState<Track[]>([])
-  const [total, setTotal] = useState<number>(0)
+export default function WidgetSpotify({ tracks }: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement>()
   const [isPlayed, setIsPlayed] = useState(false)
 
-  const get = useCallback(async () => {
-    if (!token) return
-
-    const res = await fetch(
-      'https://api.spotify.com/v1/playlists/5agjirffT0c86uuBbgLNDe',
-      {
-        headers: new Headers({
-          Authorization: `Bearer ${token}`
-        })
-      }
-    )
-    const data = await res.json()
-    console.log('data', data)
-    setTracks(data?.tracks?.items?.slice(0, 4) || [])
-    setTotal(data?.tracks?.total || 0)
-  }, [token])
-
   const onPlay = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    if (!tracks.length) return
+    if (!tracks?.items?.length) return
 
     if (!audio) {
       let index = 0
-      const newAudio = new Audio(tracks[index].track.preview_url)
+      const newAudio = new Audio(tracks.items[index].track.preview_url)
       newAudio.play()
       newAudio.onended = () => {
         index = index === 3 ? 0 : index + 1
-        const nextAudio = new Audio(tracks[index].track.preview_url)
+        const nextAudio = new Audio(tracks.items[index].track.preview_url)
         nextAudio.play()
         setAudio(nextAudio)
       }
@@ -71,7 +55,7 @@ export default function WidgetSpotify({ token }: Props) {
     index: number
   ) => {
     e.preventDefault()
-    const item = tracks[index]
+    const item = tracks.items[index]
     const url = item.track.preview_url
     if (!url) return
 
@@ -90,17 +74,13 @@ export default function WidgetSpotify({ token }: Props) {
     newAudio.play()
     newAudio.onended = () => {
       const nextAudio = new Audio(
-        tracks[index === 3 ? 0 : index + 1].track.preview_url
+        tracks.items[index === 3 ? 0 : index + 1].track.preview_url
       )
       nextAudio.play()
       setAudio(nextAudio)
     }
     setIsPlayed(true)
   }
-
-  useEffect(() => {
-    get()
-  }, [get])
   return (
     <li className="col-span-2 row-span-2 overflow-hidden">
       <Link
@@ -153,11 +133,13 @@ export default function WidgetSpotify({ token }: Props) {
           </div>
           <div className="mt-3 flex-1">
             <div className="text-sm uppercase">Spotify</div>
-            <p className="mt-1 text-xs text-neutral-400">{total} songs</p>
+            <p className="mt-1 text-xs text-neutral-400">
+              {tracks?.total || 0} songs
+            </p>
           </div>
         </div>
         <ul className="w-full">
-          {tracks.map((item, key) => (
+          {tracks?.items?.slice(0, 4).map((item, key) => (
             <li className="group last:hidden xl:last:block" key={key}>
               <button
                 onClick={(e) => onPlayTrack(e, key)}

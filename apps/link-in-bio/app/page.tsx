@@ -13,27 +13,38 @@ import {
   WidgetSpotify
 } from '@/components/Widget'
 
-async function getSpotifyToken() {
-  if (process.env.NODE_ENV === 'development') {
-    return { access_token: '' }
-  }
+async function getData() {
+  // if (process.env.NODE_ENV === 'development') {
+  //   return { tracks: { items: [], total: 0 } }
+  // }
   const data = new URLSearchParams()
   data.append('grant_type', 'client_credentials')
   data.append('client_id', process.env.SPOTIFY_CLIENT_ID)
   data.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET)
-  const res = await fetch('https://accounts.spotify.com/api/token', {
+  const token = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
     }),
     body: data
   })
-  const result = await res.json()
+  if (!token.ok) {
+    return { tracks: { items: [], total: 0 } }
+  }
+  const { access_token } = await token.json()
+  const info = await fetch(
+    'https://api.spotify.com/v1/playlists/5agjirffT0c86uuBbgLNDe',
+    { headers: new Headers({ Authorization: `Bearer ${access_token}` }) }
+  )
+  if (!info.ok) {
+    return { tracks: { items: [], total: 0 } }
+  }
+  const result = await info.json()
   return result
 }
 
 export default async function Page() {
-  const spotify = await getSpotifyToken()
+  const { tracks } = await getData()
   return (
     <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
       <WidgetLink
@@ -115,7 +126,7 @@ export default async function Page() {
           </button>
         }
       />
-      <WidgetSpotify token={spotify?.access_token} />
+      <WidgetSpotify tracks={tracks} />
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
