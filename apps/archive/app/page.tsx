@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { allContents, Content } from 'contentlayer/generated'
+import { allContents, type Content } from 'contentlayer/generated'
 import { compareDesc, format, parseISO } from 'date-fns'
 
 function PostCard(doc: Content) {
