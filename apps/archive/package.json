@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "contentlayer": "^0.3.4",
     "date-fns": "^2.30.0",
+    "mdast-util-toc": "^7.0.0",
     "next": "^13.4.1",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "remark": "^14.0.3",
+    "ui": "workspace:*",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
