@@ -28,7 +28,7 @@ export default function Error({
         onClick={reset}
         className="rounded-[10px] border px-3 py-2 text-neutral-700"
       >
-        Try Again
+        다시 시도
       </button>
     </div>
   )

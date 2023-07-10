@@ -254,7 +254,7 @@ export default async function Page() {
           </span>
         }
         title="ARCHIVE"
-        description="개발자 노하우 저장소"
+        description="개발 노하우 저장소"
       />
     </ul>
   )

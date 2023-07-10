@@ -1,4 +1,12 @@
-import { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react'
+'use client'
+
+import {
+  useEffect,
+  useRef,
+  type Dispatch,
+  type FC,
+  type SetStateAction
+} from 'react'
 import { Editor } from '@tiptap/core'
 import classnames from 'classnames'
 import { Check, Trash } from 'lucide-react'
