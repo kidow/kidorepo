@@ -165,6 +165,18 @@ module.exports = {
             opacity: 0,
             transform: 'translate(-55px, -15px) rotate(0deg)'
           }
+        },
+        'to-left': {
+          to: {
+            opacity: 0,
+            transform: 'translateX(-30px)'
+          }
+        },
+        'from-right': {
+          from: {
+            opacity: 0,
+            transform: 'translateX(30px)'
+          }
         }
       },
       animation: {

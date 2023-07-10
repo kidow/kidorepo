@@ -1,5 +1,29 @@
+import { type Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
+const TITLE = 'BLOG | Kidow'
+const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
+const BASE_URL = 'https://kidow.me/blog'
+
+export const metadata: Metadata = {
+  title: 'BLOG | Kidow',
+  description: DESCRIPTION,
+  keywords: ['blog', 'nextjs'],
+  alternates: {
+    canonical: BASE_URL
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: BASE_URL
+  },
+  twitter: {
+    title: TITLE,
+    description: DESCRIPTION
+  },
+  metadataBase: new URL(BASE_URL)
+}
 
 export default function Page() {
   return (
@@ -17,7 +41,7 @@ export default function Page() {
                   width={390}
                   height={260}
                   priority
-                  className="h-[260px] duration-200 group-hover:scale-125"
+                  className="blog h-[260px] w-[390px] duration-200 group-hover:scale-125"
                 />
               </div>
               <div className="space-y-2 p-5 xl:p-6">

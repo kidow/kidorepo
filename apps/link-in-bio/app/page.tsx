@@ -14,6 +14,9 @@ import {
 } from '@/components/Widget'
 
 async function getSpotifyToken() {
+  if (process.env.NODE_ENV === 'development') {
+    return { access_token: '' }
+  }
   const data = new URLSearchParams()
   data.append('grant_type', 'client_credentials')
   data.append('client_id', process.env.SPOTIFY_CLIENT_ID)

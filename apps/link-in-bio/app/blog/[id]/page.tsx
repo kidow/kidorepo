@@ -1,6 +1,15 @@
+import { type Metadata } from 'next'
 import Image from 'next/image'
 
 import BackButton from '@/components/BackButton'
+
+export const metadata: Metadata = {
+  openGraph: {
+    type: 'article',
+    publishedTime: '2023-01-01T00:00:00.000Z',
+    authors: ['kidow']
+  }
+}
 
 export default function Page() {
   return (
@@ -20,7 +29,7 @@ export default function Page() {
           alt="avatar"
           height={40}
           width={40}
-          className="rounded-full border"
+          className="blog aspect-auto rounded-full border"
         />
         <div className="leading-tight">
           <div className="font-medium text-slate-900">kidow</div>

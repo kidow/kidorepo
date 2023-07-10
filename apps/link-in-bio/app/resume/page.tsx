@@ -1,8 +1,29 @@
+import type { Metadata } from 'next'
+
 import { ResumeDetail, ResumeHeading, ResumeItem } from '@/components/Resume'
+
+const TITLE = 'RESUME | Kidow'
+const BASE_URL = 'https://kidow.me/resume'
+
+export const metadata: Metadata = {
+  title: TITLE,
+  keywords: ['resume'],
+  alternates: {
+    canonical: BASE_URL
+  },
+  openGraph: {
+    title: TITLE,
+    url: BASE_URL
+  },
+  twitter: {
+    title: TITLE
+  },
+  metadataBase: new URL(BASE_URL)
+}
 
 export default function Page() {
   return (
-    <>
+    <div className="prose-sm xl:prose prose-neutral">
       <p className="text-sm italic text-neutral-400">
         2023년 7월 8일 업데이트됨.
       </p>
@@ -386,6 +407,6 @@ export default function Page() {
           </ResumeItem>
         </div>
       </section>
-    </>
+    </div>
   )
 }

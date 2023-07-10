@@ -2,6 +2,7 @@
 
 import { type HTMLAttributeAnchorTarget } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import classnames from 'classnames'
 
 interface Props extends WidgetProps {
@@ -20,6 +21,7 @@ export default function WidgetLink({
   size,
   target
 }: Props) {
+  const { push } = useRouter()
   return (
     <li
       className={classnames(
@@ -30,6 +32,15 @@ export default function WidgetLink({
       <Link
         href={href}
         target={target}
+        onClick={(e) => {
+          if (target === '_blank') return
+          e.preventDefault()
+          if ((document as any)?.startViewTransition) {
+            ;(document as any).startViewTransition(async () => {
+              await push(href)
+            })
+          }
+        }}
         rel="noopener noreferrer"
         draggable={false}
         className={classnames(

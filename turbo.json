@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "env": ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET"],
+      "env": ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET", "NODE_ENV"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {},

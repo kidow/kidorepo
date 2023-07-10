@@ -1,9 +1,5 @@
 import { type Metadata } from 'next'
 
-import './index.css'
-
-interface Props extends ReactProps {}
-
 const TITLE = 'MEMO | Kidow'
 const DESCRIPTION =
   '새로고침해도 내용이 사라지지 않는 메모장입니다. LocalStorage를 사용합니다.'
@@ -28,6 +24,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL)
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: ReactProps) {
   return <>{children}</>
 }
