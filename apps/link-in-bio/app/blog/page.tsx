@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">Blog</h1>
+      <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">블로그</h1>
       <hr className="my-8" />
       <ul className="grid gap-6 xl:grid-cols-2 xl:gap-10">
         {Array.from({ length: 6 }).map((_, key) => (
