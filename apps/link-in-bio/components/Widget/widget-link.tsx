@@ -33,6 +33,8 @@ export default function WidgetLink({
         href={href}
         target={target}
         onClick={(e) => {
+          if (title === 'Gmail' && process.env.NODE_ENV === 'development')
+            return
           if (target === '_blank') return
           e.preventDefault()
           if ((document as any)?.startViewTransition) {

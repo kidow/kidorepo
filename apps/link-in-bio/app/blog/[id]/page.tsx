@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     publishedTime: '2023-01-01T00:00:00.000Z',
-    authors: ['kidow']
+    authors: 'kidow'
   }
 }
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   return (
     <div className="fixed left-1/2 top-0 mx-auto w-full max-w-prose -translate-x-1/2 bg-white px-6 pt-5 xl:static xl:max-w-none xl:translate-x-0 xl:px-0 xl:pt-0">
       <div className="py-6">
@@ -29,7 +29,7 @@ export default function Page() {
           alt="avatar"
           height={40}
           width={40}
-          className="blog aspect-auto rounded-full border"
+          className="aspect-auto rounded-full border"
         />
         <div className="leading-tight">
           <div className="font-medium text-slate-900">kidow</div>
@@ -42,6 +42,7 @@ export default function Page() {
         width={820}
         height={450}
         className="mt-8 h-[280px] rounded-md border xl:h-[450px]"
+        style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
     </div>
   )

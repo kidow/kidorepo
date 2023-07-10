@@ -41,7 +41,8 @@ export default function Page() {
                   width={390}
                   height={260}
                   priority
-                  className="blog h-[260px] w-[390px] duration-200 group-hover:scale-125"
+                  className="h-[260px] w-[390px] duration-200 group-hover:scale-125"
+                  style={{ viewTransitionName: `blog-cover-${key + 1}` }}
                 />
               </div>
               <div className="space-y-2 p-5 xl:p-6">
@@ -53,7 +54,7 @@ export default function Page() {
                 </p>
                 <p className="text-sm text-slate-400">2023년 7월 7일</p>
               </div>
-              <Link href="/blog/1" className="absolute inset-0">
+              <Link href={`/blog/${key + 1}`} className="absolute inset-0">
                 <span className="sr-only">View Article</span>
               </Link>
             </article>
