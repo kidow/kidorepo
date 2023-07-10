@@ -4,6 +4,7 @@ import { allContents } from 'contentlayer/generated'
 import { format, parseISO } from 'date-fns'
 import { getToc } from 'services'
 
+import MDXComponent from './mdx-component'
 import Toc from './toc'
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
   }
 }
 
-async function getDocFromParams({ params }: Props) {
+function getDocFromParams({ params }: Props) {
   const slug = params.slug?.join('/') || ''
   const doc = allContents.find((doc) => doc.slugAsParams === slug)
 
@@ -29,7 +30,7 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
   }))
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const doc = await getDocFromParams({ params })
+  const doc = getDocFromParams({ params })
 
   if (!doc) {
     return {}
@@ -54,11 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const doc = await getDocFromParams({ params })
+  const doc = getDocFromParams({ params })
 
-  if (!doc) {
-    notFound()
-  }
+  if (!doc) notFound()
 
   const toc = await getToc(doc.body.raw)
   return (
@@ -70,10 +69,7 @@ export default async function Page({ params }: Props) {
           </time>
           <h1 className="text-3xl font-bold">{doc.title}</h1>
         </div>
-        <div
-          className="[&>*:last-child]:mb-0 [&>*]:mb-3"
-          dangerouslySetInnerHTML={{ __html: doc.body.html }}
-        />
+        <MDXComponent code={doc.body.code} />
       </article>
       {doc.toc && (
         <div className="hidden text-sm xl:block">
