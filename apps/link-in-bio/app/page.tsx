@@ -87,7 +87,7 @@ export default async function Page() {
           </span>
         }
         title="Blog"
-        description="/blog"
+        description="이전 작업 중입니다."
       ></WidgetLink>
       <WidgetLink
         className="xl:hover:rotate-1"
@@ -183,7 +183,6 @@ export default async function Page() {
         description="@kidow"
       />
       <WidgetAnalytics />
-      <WidgetAnalytics />
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>
@@ -221,10 +220,10 @@ export default async function Page() {
         title="MEMO"
         description="내용이 사라지지 않는"
       />
-      <WidgetLink
+      {/* <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
-        href="https://archive.kidow.me"
+        href="/archive"
         target="_blank"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
@@ -233,7 +232,7 @@ export default async function Page() {
         }
         title="ARCHIVE"
         description="개발 노하우 저장소"
-      />
+      /> */}
     </ul>
   )
 }

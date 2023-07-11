@@ -9,7 +9,11 @@
         "SPOTIFY_CLIENT_SECRET",
         "NODE_ENV",
         "NEXT_PUBLIC_SUPABASE_URL",
-        "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "GOOGLE_ANALYTICS_PRIVATE_KEY",
+        "GOOGLE_ANAYLTICS_PROJECT_ID",
+        "GOOGLE_ANALYTICS_CLIENT_EMAIL",
+        "GOOGLE_ANALYTICS_PROPERTY_ID"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

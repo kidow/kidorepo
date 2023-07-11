@@ -1,8 +1,26 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { AreaChart, BadgeDelta, Card, Flex, Metric, Text } from '@tremor/react'
 
 export default function WidgetAnalytics() {
+  const [list, setList] = useState<
+    Array<{ date: string; '방문자 수': number }>
+  >([])
+  const [percent, setPercent] = useState<number>(0)
+  const [total, setTotal] = useState<number>(0)
+
+  const get = async () => {
+    const res = await fetch('/api/analytics')
+    const data = await res.json()
+    setList(data?.latestPageViews || [])
+    setPercent(data?.percent || 0)
+    setTotal(data?.total || 0)
+  }
+
+  useEffect(() => {
+    get()
+  }, [])
   return (
     <li className="col-span-2">
       <Card className="shadow-none ring-neutral-200">
@@ -12,26 +30,21 @@ export default function WidgetAnalytics() {
           justifyContent="start"
           alignItems="baseline"
         >
-          <Metric className="font-cal">170,418</Metric>
-          <BadgeDelta deltaType="moderateIncrease">34.3%</BadgeDelta>
+          <Metric>{total.toLocaleString()}</Metric>
+          <BadgeDelta
+            deltaType={percent > 0 ? 'moderateIncrease' : 'moderateDecrease'}
+          >
+            {percent}%
+          </BadgeDelta>
         </Flex>
         <AreaChart
           className="mt-6 h-28"
-          data={[
-            ...['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month) => ({
-              Month: `${month} 23`,
-              '총 방문자 수': 170418
-            })),
-            {
-              Month: 'Jul 23',
-              '총 방문자 수': 170418
-            }
-          ]}
-          index="Month"
+          data={list}
+          index="date"
           valueFormatter={(number: number) =>
-            `${Intl.NumberFormat('us').format(number).toString()}`
+            Intl.NumberFormat('us').format(number).toString()
           }
-          categories={['총 방문자 수']}
+          categories={['방문자 수']}
           colors={['blue']}
           showXAxis={true}
           showGridLines={false}
