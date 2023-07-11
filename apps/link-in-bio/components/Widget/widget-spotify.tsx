@@ -17,27 +17,31 @@ function getRunningTime(milliseconds: number) {
 }
 
 interface Props {
-  tracks: {
-    items: Track[]
-    total: number
-  }
+  tracks: Array<{
+    title: string
+    artists: string[]
+    duration: number
+    thumbnail: string
+    audioSnippet: string
+  }>
+  totalSongs: number
 }
 
-export default function WidgetSpotify({ tracks }: Props) {
+export default function WidgetSpotify({ tracks, totalSongs }: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement>()
   const [isPlayed, setIsPlayed] = useState(false)
 
   const onPlay = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    if (!tracks?.items?.length) return
+    if (!tracks?.length) return
 
     if (!audio) {
       let index = 0
-      const newAudio = new Audio(tracks.items[index].track.preview_url)
+      const newAudio = new Audio(tracks[index].audioSnippet)
       newAudio.play()
       newAudio.onended = () => {
         index = index === 3 ? 0 : index + 1
-        const nextAudio = new Audio(tracks.items[index].track.preview_url)
+        const nextAudio = new Audio(tracks[index].audioSnippet)
         nextAudio.play()
         setAudio(nextAudio)
       }
@@ -55,11 +59,10 @@ export default function WidgetSpotify({ tracks }: Props) {
     index: number
   ) => {
     e.preventDefault()
-    const item = tracks.items[index]
-    const url = item.track.preview_url
-    if (!url) return
+    const { audioSnippet } = tracks[index]
+    if (!audioSnippet) return
 
-    if (audio?.src === url) {
+    if (audio?.src === audioSnippet) {
       if (isPlayed) audio.pause()
       else audio.play()
       setIsPlayed(!isPlayed)
@@ -68,13 +71,13 @@ export default function WidgetSpotify({ tracks }: Props) {
     if (isPlayed) {
       audio.pause()
     }
-    const newAudio = new Audio(url)
-    newAudio.src = url
+    const newAudio = new Audio(audioSnippet)
+    newAudio.src = audioSnippet
     setAudio(newAudio)
     newAudio.play()
     newAudio.onended = () => {
       const nextAudio = new Audio(
-        tracks.items[index === 3 ? 0 : index + 1].track.preview_url
+        tracks[index === 3 ? 0 : index + 1].audioSnippet
       )
       nextAudio.play()
       setAudio(nextAudio)
@@ -134,12 +137,12 @@ export default function WidgetSpotify({ tracks }: Props) {
           <div className="mt-3 flex-1">
             <div className="text-sm uppercase">Spotify</div>
             <p className="mt-1 text-xs text-neutral-400">
-              {tracks?.total || 0} songs
+              {totalSongs || 0} songs
             </p>
           </div>
         </div>
         <ul className="w-full">
-          {tracks?.items?.slice(0, 4).map((item, key) => (
+          {tracks?.map((item, key) => (
             <li className="group last:hidden xl:last:block" key={key}>
               <button
                 onClick={(e) => onPlayTrack(e, key)}
@@ -150,7 +153,7 @@ export default function WidgetSpotify({ tracks }: Props) {
                     <div
                       className={classnames(
                         'absolute inset-0 z-20 h-full w-full items-center justify-center rounded-full bg-[#1ED760] transition-all duration-150 ease-in active:bg-[#07BB47]',
-                        isPlayed && audio?.src === item.track.preview_url
+                        isPlayed && audio?.src === item.audioSnippet
                           ? 'flex opacity-100'
                           : 'hidden appearance-none hover:bg-[#12CE55] group-hover:flex group-hover:opacity-100'
                       )}
@@ -159,32 +162,29 @@ export default function WidgetSpotify({ tracks }: Props) {
                     </div>
                     <div className="relative rounded-[6px]">
                       <Image
-                        src={item.track.album.images.at(-1).url}
+                        src={item.thumbnail}
                         loading="lazy"
                         height={40}
                         width={40}
                         className={classnames(
                           'pointer-events-auto z-10 h-full w-full rounded-[inherit] border-black/[0.08] object-cover transition-all ease-in group-hover:hidden',
                           {
-                            hidden:
-                              isPlayed && audio?.src === item.track.preview_url
+                            hidden: isPlayed && audio?.src === item.audioSnippet
                           }
                         )}
-                        alt={item.track.name}
+                        alt={item.title}
                       />
                     </div>
                   </div>
                   <div className="mx-3 flex flex-col text-left">
-                    <div className="line-clamp-1 text-sm">
-                      {item.track.name}
-                    </div>
+                    <div className="line-clamp-1 text-sm">{item.title}</div>
                     <div className="pointer-events-auto line-clamp-1 text-xs text-neutral-400">
-                      {item.track.artists.map((v) => v.name).join(', ')}
+                      {item.artists.join(', ')}
                     </div>
                   </div>
                 </div>
                 <div className="w-fit flex-none text-sm tabular-nums text-black/40">
-                  {getRunningTime(item.track.duration_ms)}
+                  {getRunningTime(item.duration)}
                 </div>
               </button>
             </li>
