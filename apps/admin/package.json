@@ -21,8 +21,10 @@
     "@tiptap/extension-task-list": "^2.0.3",
     "@tiptap/extension-text-style": "^2.0.3",
     "@tiptap/extension-underline": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
+    "@tiptap/suggestion": "^2.0.3",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
     "lucide-react": "^0.258.0",
@@ -32,6 +34,7 @@
     "react-hook-form": "^7.45.1",
     "react-textarea-autosize": "^8.5.2",
     "sonner": "^0.6.1",
+    "tippy.js": "^6.3.7",
     "tiptap-markdown": "^0.8.1",
     "ui": "workspace:*",
     "view": "link:@tiptap/pm/view"

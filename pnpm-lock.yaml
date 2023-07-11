@@ -88,12 +88,18 @@ importers:
       '@tiptap/extension-underline':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
       '@tiptap/react':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
       '@tiptap/starter-kit':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/suggestion':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -121,6 +127,9 @@ importers:
       sonner:
         specifier: ^0.6.1
         version: 0.6.1(react-dom@18.2.0)(react@18.2.0)
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
       tiptap-markdown:
         specifier: ^0.8.1
         version: 0.8.1(@tiptap/core@2.0.3)
