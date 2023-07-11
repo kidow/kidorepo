@@ -23,9 +23,10 @@ const inter = Inter({
 interface Props {
   value: JSONContent
   onChange: (value: JSONContent) => void
+  readOnly?: boolean
 }
 
-export default function Editor({ value, onChange }: Props) {
+export default function Editor({ value, onChange, readOnly }: Props) {
   const editor = useEditor({
     extensions: TiptapExtensions,
     editorProps: TiptapEditorProps,
@@ -38,6 +39,10 @@ export default function Editor({ value, onChange }: Props) {
   useEffect(() => {
     if (editor) editor.commands.setContent(value)
   }, [editor])
+
+  useEffect(() => {
+    if (readOnly && editor) editor.setEditable(false)
+  }, [readOnly, editor])
   return (
     <div
       className={classnames(
@@ -46,8 +51,8 @@ export default function Editor({ value, onChange }: Props) {
         inter.variable
       )}
     >
-      {editor && <EditorBubbleMenu editor={editor} />}
-      <EditorContent editor={editor} />
+      {editor && !readOnly && <EditorBubbleMenu editor={editor} />}
+      <EditorContent tabIndex={4} editor={editor} />
     </div>
   )
 }

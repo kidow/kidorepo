@@ -97,6 +97,9 @@ importers:
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
+      dayjs:
+        specifier: ^1.11.9
+        version: 1.11.9
       lucide-react:
         specifier: ^0.258.0
         version: 0.258.0(react@18.2.0)

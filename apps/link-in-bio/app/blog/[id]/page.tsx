@@ -3,11 +3,13 @@ import Image from 'next/image'
 
 import BackButton from '@/components/BackButton'
 
-export const metadata: Metadata = {
-  openGraph: {
-    type: 'article',
-    publishedTime: '2023-01-01T00:00:00.000Z',
-    authors: 'kidow'
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    openGraph: {
+      type: 'article',
+      publishedTime: '2023-01-01T00:00:00.000Z',
+      authors: 'kidow'
+    }
   }
 }
 
@@ -20,7 +22,7 @@ export default function Page({ params }: { params: { id: string } }) {
       <time dateTime="2023-07-07" className="text-sm text-slate-400">
         2023년 7월 7일
       </time>
-      <h1 className="leading-tighter mt-2 text-4xl font-bold text-slate-900 xl:text-5xl">
+      <h1 className="mt-2 text-4xl font-bold text-slate-900 xl:text-5xl">
         7번째 블로그를 만들게 된 이유
       </h1>
       <div className="mt-4 flex items-center space-x-4 text-sm xl:hidden">

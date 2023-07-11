@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 
 function BackButton() {
-  const { back } = useRouter()
+  const { back, push } = useRouter()
   return (
     <button
-      onClick={back}
+      onClick={() => (document.referrer ? push('/blog') : back())}
       className="flex h-10 w-10 items-center justify-center rounded-[10px] border"
     >
       <ArrowLeft className="h-5 w-5" />

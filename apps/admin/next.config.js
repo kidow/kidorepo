@@ -4,8 +4,5 @@ module.exports = {
   transpilePackages: ['ui'],
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'illustrations.popsy.co' }]
-  },
-  experimental: {
-    serverActions: true
   }
 }
