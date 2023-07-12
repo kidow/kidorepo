@@ -1,3 +1,5 @@
+'use client'
+
 import React, {
   ReactNode,
   useCallback,
@@ -18,8 +20,10 @@ import {
   Image as ImageIcon,
   List,
   ListOrdered,
+  TableIcon,
   Text,
-  TextQuote
+  TextQuote,
+  WrapTextIcon
 } from 'lucide-react'
 import tippy from 'tippy.js'
 
@@ -211,6 +215,21 @@ const getSuggestionItems = ({ query }: { query: string }) => {
         }
         input.click()
       }
+    },
+    {
+      title: 'Table',
+      description: 'Create a simple table.',
+      searchTerms: ['table'],
+      icon: <TableIcon size={18} />,
+      command: ({ editor, range }: CommandProps) =>
+        editor.chain().focus().deleteRange(range).insertTable().run()
+    },
+    {
+      title: 'Hard Break',
+      description: 'Forcibly moves out and to the next line.',
+      searchTerms: ['hard break'],
+      icon: <WrapTextIcon size={18} />,
+      command: ({ editor }: CommandProps) => editor.commands.setHardBreak()
     }
   ].filter((item) => {
     if (typeof query === 'string' && query.length > 0) {

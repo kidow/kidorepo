@@ -1,3 +1,5 @@
+'use client'
+
 import { Dispatch, FC, SetStateAction } from 'react'
 import { Editor } from '@tiptap/core'
 import { Check, ChevronDown } from 'lucide-react'
@@ -14,81 +16,27 @@ interface ColorSelectorProps {
 }
 
 const TEXT_COLORS: BubbleColorMenuItem[] = [
-  {
-    name: 'Default',
-    color: 'var(--novel-black)'
-  },
-  {
-    name: 'Purple',
-    color: '#9333EA'
-  },
-  {
-    name: 'Red',
-    color: '#E00000'
-  },
-  {
-    name: 'Yellow',
-    color: '#EAB308'
-  },
-  {
-    name: 'Blue',
-    color: '#2563EB'
-  },
-  {
-    name: 'Green',
-    color: '#008A00'
-  },
-  {
-    name: 'Orange',
-    color: '#FFA500'
-  },
-  {
-    name: 'Pink',
-    color: '#BA4081'
-  },
-  {
-    name: 'Gray',
-    color: '#A8A29E'
-  }
+  { name: 'Default', color: '#000000' },
+  { name: 'Purple', color: '#9333EA' },
+  { name: 'Red', color: '#E00000' },
+  { name: 'Yellow', color: '#EAB308' },
+  { name: 'Blue', color: '#2563EB' },
+  { name: 'Green', color: '#008A00' },
+  { name: 'Orange', color: '#FFA500' },
+  { name: 'Pink', color: '#BA4081' },
+  { name: 'Gray', color: '#A8A29E' }
 ]
 
 const HIGHLIGHT_COLORS: BubbleColorMenuItem[] = [
-  {
-    name: 'Default',
-    color: 'var(--novel-highlight-default)'
-  },
-  {
-    name: 'Purple',
-    color: 'var(--novel-highlight-purple)'
-  },
-  {
-    name: 'Red',
-    color: 'var(--novel-highlight-red)'
-  },
-  {
-    name: 'Yellow',
-    color: 'var(--novel-highlight-yellow)'
-  },
-  {
-    name: 'Blue',
-    color: 'var(--novel-highlight-blue)'
-  },
-  {
-    name: 'Green',
-    color: 'var(--novel-highlight-green)'
-  },
-  {
-    name: 'Orange',
-    color: 'var(--novel-highlight-orange)'
-  },
-  {
-    name: 'Pink',
-    color: 'var(--novel-highlight-pink)'
-  },
-  {
-    name: 'Gray',
-    color: 'var(--novel-highlight-gray)'
-  }
+  { name: 'Default', color: '#ffffff' },
+  { name: 'Purple', color: '#f6f3f8' },
+  { name: 'Red', color: '#fdebeb' },
+  { name: 'Yellow', color: '#fbf4a2' },
+  { name: 'Blue', color: '#c1ecf9' },
+  { name: 'Green', color: '#acf79f' },
+  { name: 'Orange', color: '#faebdd' },
+  { name: 'Pink', color: '#faf1f5' },
+  { name: 'Gray', color: '#f1f1ef' }
 ]
 
 export const ColorSelector: FC<ColorSelectorProps> = ({

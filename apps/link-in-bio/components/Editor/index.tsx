@@ -27,15 +27,15 @@ export default function Editor() {
     type: 'doc',
     content: [{ type: 'paragraph' }]
   })
-  const [saveStatus, setSaveStatus] = useState('Saved')
+  const [saveStatus, setSaveStatus] = useState('저장됨')
   const [hydrated, setHydrated] = useState(false)
 
   const debouncedUpdates = useDebouncedCallback(async ({ editor }) => {
     const json = editor.getJSON()
-    setSaveStatus('Saving...')
+    setSaveStatus('저장 중...')
     setContent(json)
     setTimeout(() => {
-      setSaveStatus('Saved')
+      setSaveStatus('저장됨')
     }, 500)
   }, 750)
 
@@ -43,7 +43,7 @@ export default function Editor() {
     extensions: TiptapExtensions,
     editorProps: TiptapEditorProps,
     onUpdate: (e) => {
-      setSaveStatus('Unsaved')
+      setSaveStatus('작성 중...')
       debouncedUpdates(e)
     },
     autofocus: 'end'
@@ -63,8 +63,16 @@ export default function Editor() {
         inter.variable
       )}
     >
-      <div className="absolute -top-12 left-0 rounded-lg bg-stone-100 px-2 py-1 text-sm text-stone-400">
-        {saveStatus}
+      <div className="absolute -top-12 left-0 flex items-center gap-2 text-sm">
+        <span className="rounded-lg bg-stone-100 px-2 py-1 text-stone-400">
+          {saveStatus}
+        </span>
+        <button
+          onClick={() => editor.commands.clearContent()}
+          className="rounded-lg border px-2 py-1 text-stone-500"
+        >
+          비우기
+        </button>
       </div>
       {editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />

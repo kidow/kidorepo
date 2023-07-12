@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { useState, type FC } from 'react'
 import { BubbleMenu, BubbleMenuProps } from '@tiptap/react'
 import classnames from 'classnames'
 import {

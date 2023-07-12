@@ -318,6 +318,7 @@ export default function WidgetScheduling() {
                   placeholder="이름"
                   required
                   autoFocus
+                  autoComplete="off"
                   register={register('name', { required: true })}
                 />
                 <div>
@@ -325,6 +326,7 @@ export default function WidgetScheduling() {
                     placeholder="이메일"
                     type="email"
                     required
+                    autoComplete="off"
                     register={register('email', { required: true })}
                   />
                   {!isAdditionalOpen && (

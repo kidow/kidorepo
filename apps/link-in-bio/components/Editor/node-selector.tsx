@@ -1,3 +1,5 @@
+'use client'
+
 import { Dispatch, FC, SetStateAction } from 'react'
 import { Editor } from '@tiptap/core'
 import {

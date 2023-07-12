@@ -10,6 +10,7 @@ interface Props {
   required?: boolean
   type?: HTMLInputTypeAttribute
   autoFocus?: boolean
+  autoComplete?: string
 }
 
 export default function Input({
@@ -17,7 +18,8 @@ export default function Input({
   required,
   type,
   placeholder,
-  autoFocus
+  autoFocus,
+  autoComplete
 }: Props) {
   const id = useId()
   return (
@@ -29,6 +31,7 @@ export default function Input({
         type={type}
         autoFocus={autoFocus}
         required={required}
+        autoComplete={autoComplete}
         placeholder={placeholder}
       />
       <label
