@@ -7,6 +7,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 
+import ToastProvider from './toaster'
+
 const inter = Inter({
   subsets: ['latin']
 })
@@ -97,6 +99,7 @@ export default function RootLayout({ children }: ReactProps) {
           </div>
           <Footer />
         </main>
+        <ToastProvider />
       </body>
     </html>
   )

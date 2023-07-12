@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { Spinner } from 'ui'
 
 import Input from '@/components/Input'
@@ -49,7 +50,9 @@ export default function WidgetScheduling() {
     }
 
     if (dayjs(datetime).startOf('hour').isBefore(new Date())) {
-      alert('이전 시간은 예약할 수 없습니다. 시간 여유를 두고 예약해주세요.')
+      toast.error(
+        '이전 시간은 예약할 수 없습니다. 시간 여유를 두고 예약해주세요.'
+      )
       return
     }
 
@@ -59,7 +62,7 @@ export default function WidgetScheduling() {
           .split(', ')
           .every((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       ) {
-        alert('유효하지 않은 이메일이 있습니다.')
+        toast.error('유효하지 않은 이메일이 있습니다.')
         return
       }
       payload.additionalEmail = data.additionalEmail
@@ -72,16 +75,19 @@ export default function WidgetScheduling() {
       body: JSON.stringify(payload)
     })
     const result = await res.json()
-    console.log('result', result)
+    if (process.env.NODE_ENV === 'development') console.log('result', result)
     if (result.success) {
-      alert('요청되었습니다. 곧 회신하겠습니다. 🤗')
+      toast.success('요청되었습니다. 곧 회신하겠습니다. 🤗', {
+        duration: 999999
+      })
       setSelectedDate(new Date())
       setSelectedTime('')
       setStep(1)
       setDate(new Date())
       setIsAdditionalOpen(false)
       reset()
-    } else alert('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
+    } else
+      toast.error('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
     setIsRequesting(false)
   }
 
