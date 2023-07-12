@@ -1,11 +1,11 @@
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 
 import './globals.css'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-
-import Footer from '@/components/Footer'
+import Script from 'next/script'
 
 const inter = Inter({
   subsets: ['latin']
@@ -20,7 +20,30 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   applicationName: 'Link in bio',
   generator: 'Next.js',
-  keywords: ['kidow', 'link-in-bio', 'next.js', 'bento.me'],
+  keywords: [
+    'kidow',
+    'link-in-bio',
+    'next.js',
+    'bento.me',
+    'resume',
+    'blog',
+    'google-analytics',
+    'spotify',
+    'google-calendar',
+    'google-meet',
+    'giphy',
+    'github',
+    'gmail',
+    'kakao-map',
+    'twitter',
+    'linkedin',
+    'gumroad',
+    'buymeacoffee',
+    'producthunt',
+    'tistory',
+    'disquiet',
+    'memo'
+  ],
   themeColor: '#dffc03',
   creator: 'kidow',
   publisher: 'Vercel',
@@ -53,14 +76,10 @@ export default function RootLayout({ children }: ReactProps) {
   return (
     <html lang="ko" className={inter.className}>
       <head>
-        <script
+        <Script
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0986f45ad519044d2574ac8091cb572&libraries=services&autoload=false"
-        />
-        <link
-          rel="stylesheet"
-          href="node_modules/react-github-contribution-calendar/default.css"
-          type="text/css"
+          async
         />
       </head>
       <body>

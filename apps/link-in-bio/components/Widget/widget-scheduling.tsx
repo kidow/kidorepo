@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import classnames from 'classnames'
+import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { Spinner } from 'ui'
@@ -14,6 +15,7 @@ interface State {
   name: string
   email: string
   memo: string
+  additionalEmail: string
 }
 
 export default function WidgetScheduling() {
@@ -23,29 +25,54 @@ export default function WidgetScheduling() {
   const [step, setStep] = useState<number>(1)
   const [currentTime, setCurrentTime] = useState('')
   const [isRequesting, setIsRequesting] = useState<boolean>(false)
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState<boolean>(false)
   const { register, handleSubmit } = useForm<State>()
 
   const onSubmit = async (data: State) => {
-    if (!window.confirm('요청하시겠습니까?')) return
-    if (!data.name || !data.email || !data.memo) return
+    if (!window.confirm('요청하시겠습니까? 조금 시간이 걸립니다.')) return
+    if (!data.name || !data.email || !data.memo || !selectedTime) return
 
-    alert('아직 준비 중입니다.')
-    return
+    const datetime = dayjs()
+      .locale('ko')
+      .set('year', selectedDate.getFullYear())
+      .set('month', selectedDate.getMonth())
+      .set('date', selectedDate.getDate())
+      .set('hour', Number(selectedTime.slice(0, 2)))
+      .set('minute', Number(selectedTime.slice(-2)))
+      .toISOString()
+
+    let payload: any = {
+      name: data.name,
+      email: data.email,
+      memo: data.memo,
+      datetime
+    }
+
+    if (dayjs(datetime).startOf('hour').isBefore(new Date())) {
+      alert('이전 시간은 예약할 수 없습니다. 시간 여유를 두고 예약해주세요.')
+      return
+    }
+
+    if (isAdditionalOpen && data.additionalEmail) {
+      if (
+        !data.additionalEmail
+          .split(', ')
+          .every((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      ) {
+        alert('유효하지 않은 이메일이 있습니다.')
+        return
+      }
+      payload.additionalEmail = data.additionalEmail
+    }
 
     setIsRequesting(true)
     const res = await fetch('/api/meeting', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        memo: data.memo,
-        datetime: `${selectedDate.getFullYear()}-${
-          selectedDate.getMonth() + 1
-        }-${selectedDate.getDate()}T${selectedTime}:00`
-      })
+      body: JSON.stringify(payload)
     })
     const result = await res.json()
+    console.log('result', result)
     if (result.success) alert('요청되었습니다. 곧 회신하겠습니다. 🤗')
     else alert('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
     setIsRequesting(false)
@@ -110,7 +137,7 @@ export default function WidgetScheduling() {
     return convertedTimeString
   }
 
-  const render = () => {
+  const renderCalendar = () => {
     const year = date.getFullYear()
     const month = date.getMonth()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
@@ -259,7 +286,7 @@ export default function WidgetScheduling() {
                       )}
                     </tr>
                   </thead>
-                  <tbody>{render()}</tbody>
+                  <tbody>{renderCalendar()}</tbody>
                 </table>
                 <div className="mt-4">
                   {!!currentTime && (
@@ -280,12 +307,39 @@ export default function WidgetScheduling() {
                   autoFocus
                   register={register('name', { required: true })}
                 />
-                <Input
-                  placeholder="이메일"
-                  type="email"
-                  required
-                  register={register('email', { required: true })}
-                />
+                <div>
+                  <Input
+                    placeholder="이메일"
+                    type="email"
+                    required
+                    register={register('email', { required: true })}
+                  />
+                  {!isAdditionalOpen && (
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      onClick={() => setIsAdditionalOpen(true)}
+                      className="ml-2 mt-2 text-sm text-neutral-400 hover:text-neutral-600"
+                    >
+                      예약자 추가하기
+                    </button>
+                  )}
+                </div>
+                {isAdditionalOpen && (
+                  <div>
+                    <Textarea
+                      placeholder="추가 예약자 이메일 (, )로 구분"
+                      register={register('additionalEmail')}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setIsAdditionalOpen(false)}
+                      className="ml-2 mt-2 text-sm text-neutral-400 hover:text-neutral-600"
+                    >
+                      {isAdditionalOpen ? '닫기' : '예약자 추가하기'}
+                    </button>
+                  </div>
+                )}
                 <Textarea
                   placeholder="남길 메모"
                   required

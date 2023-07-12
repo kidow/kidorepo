@@ -5,6 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "env": [
+        "BASE_URL",
         "SPOTIFY_CLIENT_ID",
         "SPOTIFY_CLIENT_SECRET",
         "NODE_ENV",
@@ -13,7 +14,10 @@
         "GOOGLE_ANALYTICS_PRIVATE_KEY",
         "GOOGLE_ANAYLTICS_PROJECT_ID",
         "GOOGLE_ANALYTICS_CLIENT_EMAIL",
-        "GOOGLE_ANALYTICS_PROPERTY_ID"
+        "GOOGLE_ANALYTICS_PROPERTY_ID",
+        "GOOGLE_CALENDAR_CLIENT_ID",
+        "GOOGLE_CALENDAR_CLIENT_SECRET",
+        "GOOGLE_CALENDAR_REFRESH_TOKEN"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

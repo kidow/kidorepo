@@ -9,9 +9,15 @@ interface Props {
   register: UseFormRegisterReturn
   placeholder: string
   required?: boolean
+  minRows?: number
 }
 
-export default function Textarea({ register, placeholder, required }: Props) {
+export default function Textarea({
+  register,
+  placeholder,
+  required,
+  minRows = 2
+}: Props) {
   const id = useId()
   return (
     <div className="relative rounded-[10px] border px-3 py-2 ring-neutral-800 duration-150 focus-within:ring">
@@ -19,7 +25,7 @@ export default function Textarea({ register, placeholder, required }: Props) {
         {...register}
         className="peer w-full resize-none bg-transparent placeholder-transparent focus:outline-none"
         id={id}
-        minRows={4}
+        minRows={minRows}
         placeholder={placeholder}
         required={required}
       />

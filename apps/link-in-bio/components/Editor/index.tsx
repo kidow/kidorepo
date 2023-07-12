@@ -58,7 +58,7 @@ export default function Editor() {
   return (
     <div
       className={classnames(
-        'relative min-h-[500px]',
+        'relative min-h-[500px] pb-80',
         cal.variable,
         inter.variable
       )}
