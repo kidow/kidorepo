@@ -17,7 +17,8 @@
         "GOOGLE_ANALYTICS_PROPERTY_ID",
         "GOOGLE_CALENDAR_CLIENT_ID",
         "GOOGLE_CALENDAR_CLIENT_SECRET",
-        "GOOGLE_CALENDAR_REFRESH_TOKEN"
+        "GOOGLE_CALENDAR_REFRESH_TOKEN",
+        "SLACK_WEBHOOK_URL"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

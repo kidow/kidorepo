@@ -26,7 +26,7 @@ export default function WidgetScheduling() {
   const [currentTime, setCurrentTime] = useState('')
   const [isRequesting, setIsRequesting] = useState<boolean>(false)
   const [isAdditionalOpen, setIsAdditionalOpen] = useState<boolean>(false)
-  const { register, handleSubmit } = useForm<State>()
+  const { register, handleSubmit, reset } = useForm<State>()
 
   const onSubmit = async (data: State) => {
     if (!window.confirm('요청하시겠습니까? 조금 시간이 걸립니다.')) return
@@ -73,8 +73,15 @@ export default function WidgetScheduling() {
     })
     const result = await res.json()
     console.log('result', result)
-    if (result.success) alert('요청되었습니다. 곧 회신하겠습니다. 🤗')
-    else alert('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
+    if (result.success) {
+      alert('요청되었습니다. 곧 회신하겠습니다. 🤗')
+      setSelectedDate(new Date())
+      setSelectedTime('')
+      setStep(1)
+      setDate(new Date())
+      setIsAdditionalOpen(false)
+      reset()
+    } else alert('죄송합니다. 요청이 실패했습니다. 나중에 다시 시도해주세요.')
     setIsRequesting(false)
   }
 
