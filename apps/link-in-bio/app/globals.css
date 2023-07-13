@@ -47,3 +47,17 @@
     scroll-behavior: auto !important;
   }
 }
+
+details > summary {
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+@layer utilities {
+  .notion-code {
+    @apply rounded-[3px] bg-gray-100 px-[5.44px] py-[2.72px] text-[85%] text-red-500;
+  }
+}

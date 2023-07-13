@@ -18,7 +18,10 @@ const DESCRIPTION = '비즈니스에 관심이 많은 웹 개발자'
 const BASE_URL = 'https://kidow.me'
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: {
+    template: `%s | ${TITLE}`,
+    default: TITLE
+  },
   description: DESCRIPTION,
   applicationName: 'Link in bio',
   generator: 'Next.js',
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
   ],
   themeColor: '#dffc03',
   creator: 'kidow',
-  publisher: 'Vercel',
+  publisher: 'Dongwook Kim',
   robots: 'index, follow',
   alternates: {
     canonical: BASE_URL

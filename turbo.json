@@ -18,7 +18,9 @@
         "GOOGLE_CALENDAR_CLIENT_ID",
         "GOOGLE_CALENDAR_CLIENT_SECRET",
         "GOOGLE_CALENDAR_REFRESH_TOKEN",
-        "SLACK_WEBHOOK_URL"
+        "SLACK_WEBHOOK_URL",
+        "NOTION_SECRET_KEY",
+        "NOTION_DATABASE_ID"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

@@ -246,6 +246,9 @@ importers:
       '@google-analytics/data':
         specifier: ^3.2.2
         version: 3.2.2(encoding@0.1.13)
+      '@notionhq/client':
+        specifier: ^2.2.7
+        version: 2.2.7(encoding@0.1.13)
       '@tiptap/core':
         specifier: ^2.0.3
         version: 2.0.3(@tiptap/pm@2.0.3)
@@ -2042,6 +2045,19 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  /@notionhq/client@2.2.7(encoding@0.1.13):
+    resolution:
+      {
+        integrity: sha512-ackhUZiCTxsDacHPfnuwfJmo7fmi6Il6BK+YByCZM5NEXVIohyEBWm/r18OQkuJzJjeC6Q+Jhh+0yhxjvWq/cA==
+      }
+    engines: { node: '>=12' }
+    dependencies:
+      '@types/node-fetch': 2.6.4
+      node-fetch: 2.6.12(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /@opentelemetry/api-logs@0.39.1:
     resolution:
       {
@@ -3336,6 +3352,16 @@ packages:
       {
         integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
       }
+    dev: false
+
+  /@types/node-fetch@2.6.4:
+    resolution:
+      {
+        integrity: sha512-1ZX9fcN4Rvkvgv4E6PAY5WXUFWFcRWxZa3EW83UjycOB9ljJCedb2CupIP4RZMEwF/M3eTcCihbBRgwtGbg5Rg==
+      }
+    dependencies:
+      '@types/node': 17.0.45
+      form-data: 3.0.1
     dev: false
 
   /@types/node@17.0.45:
@@ -6332,6 +6358,18 @@ packages:
         integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==
       }
     engines: { node: '>= 0.12' }
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
+
+  /form-data@3.0.1:
+    resolution:
+      {
+        integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
+      }
+    engines: { node: '>= 6' }
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8

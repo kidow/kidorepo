@@ -19,5 +19,8 @@ declare namespace NodeJS {
     GOOGLE_CALENDAR_CLIENT_SECRET: string
 
     SLACK_WEBHOOK_URL: string
+
+    NOTION_SECRET_KEY: string
+    NOTION_DATABASE_ID: string
   }
 }
