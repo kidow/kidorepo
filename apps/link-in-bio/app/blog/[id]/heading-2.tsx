@@ -1,15 +1,15 @@
-import { type FC } from 'react'
+import type { FC } from 'react'
 import Link from 'next/link'
-import { type ParagraphBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Heading2BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
 
-export interface Props extends ParagraphBlockObjectResponse {}
+export interface Props extends Heading2BlockObjectResponse {}
 
-const Paragraph: FC<Props> = (block) => {
+const Heading2: FC<Props> = (block) => {
   return (
-    <p className="whitespace-pre-wrap break-words">
-      {block.paragraph.rich_text.map((item, key) => {
-        const className = {
+    <h2>
+      {block.heading_2.rich_text.map((item, key) => {
+        const className = classnames({
           'font-semibold': item.annotations.bold,
           italic: item.annotations.italic,
           'line-through': item.annotations.strikethrough,
@@ -34,27 +34,27 @@ const Paragraph: FC<Props> = (block) => {
           'bg-pink-100': item.annotations.color === 'pink_background',
           'bg-gray-100': item.annotations.color === 'gray_background',
           'bg-amber-100': item.annotations.color === 'brown_background'
-        }
+        })
         if (item.href)
           return (
             <Link
               key={key}
+              className={className}
               href={item.href}
               target="_blank"
-              rel="noopenner referrer"
-              className={classnames(className, 'underline')}
+              rel="noopenner noreferrer"
             >
               {item.plain_text}
             </Link>
           )
         return (
-          <span key={key} className={classnames(className)}>
+          <span className={className} key={key}>
             {item.plain_text}
           </span>
         )
       })}
-    </p>
+    </h2>
   )
 }
 
-export default Paragraph
+export default Heading2

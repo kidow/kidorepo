@@ -1,5 +1,5 @@
 import { type Metadata } from 'next'
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { Client } from '@notionhq/client'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
@@ -12,8 +12,21 @@ import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoin
 
 import BackButton from '@/components/BackButton'
 
+import Bookmark from './bookmark'
+import BulletedListItem from './bulleted-list-item'
+import Callout from './callout'
+import Code from './code'
+import Heading1 from './heading-1'
+import Heading2 from './heading-2'
+import Heading3 from './heading-3'
+import Image from './Image'
+import NumberedListItem from './numbered-list-item'
 import Paragraph from './paragraph'
+import Quote from './quote'
+import Table from './table'
 import Todo from './todo'
+import Toggle from './toggle'
+import Video from './video'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
@@ -121,7 +134,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         {data.properties?.제목?.title[0]?.plain_text}
       </h1>
       <div className="mt-4 flex items-center space-x-4 text-sm xl:hidden">
-        <Image
+        <NextImage
           src="/avatar.png"
           alt="avatar"
           height={40}
@@ -133,23 +146,39 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="text-xs text-slate-400">@kidow</div>
         </div>
       </div>
-      <Image
+      <NextImage
         src={data?.cover?.external?.url}
         alt={data?.properties?.제목?.title[0]?.plain_text}
         width={820}
         height={450}
+        priority
         className="mt-8 h-[280px] rounded-md border xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
-      <article className="prose my-6">
-        {list.map((block) => {
-          if (block.type === 'to_do') {
-            console.log(block.to_do)
-          }
+      <article className="prose my-6 pb-40">
+        {list.map(async (block) => {
           return (
             <Fragment key={block.id}>
               {block.type === 'paragraph' && <Paragraph {...block} />}
               {block.type === 'to_do' && <Todo {...block} />}
+              {block.type === 'heading_1' && <Heading1 {...block} />}
+              {block.type === 'heading_2' && <Heading2 {...block} />}
+              {block.type === 'heading_3' && <Heading3 {...block} />}
+              {block.type === 'table' && <Table {...block} />}
+              {block.type === 'bulleted_list_item' && (
+                <BulletedListItem {...block} />
+              )}
+              {block.type === 'numbered_list_item' && (
+                <NumberedListItem {...block} />
+              )}
+              {block.type === 'toggle' && <Toggle {...block} />}
+              {block.type === 'quote' && <Quote {...block} />}
+              {block.type === 'divider' && <hr />}
+              {block.type === 'callout' && <Callout {...block} />}
+              {block.type === 'image' && <Image {...block} />}
+              {block.type === 'bookmark' && <Bookmark {...block} />}
+              {block.type === 'video' && <Video {...block} />}
+              {block.type === 'code' && <Code {...block} />}
             </Fragment>
           )
         })}

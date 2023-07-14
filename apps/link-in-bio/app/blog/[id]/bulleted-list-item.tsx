@@ -1,15 +1,15 @@
 import { type FC } from 'react'
 import Link from 'next/link'
-import { type ParagraphBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { type BulletedListItemBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
 
-export interface Props extends ParagraphBlockObjectResponse {}
+export interface Props extends BulletedListItemBlockObjectResponse {}
 
-const Paragraph: FC<Props> = (block) => {
+const BulletedListItem: FC<Props> = (block) => {
   return (
-    <p className="whitespace-pre-wrap break-words">
-      {block.paragraph.rich_text.map((item, key) => {
-        const className = {
+    <ul>
+      {block.bulleted_list_item.rich_text.map((item, key) => {
+        const className = classnames({
           'font-semibold': item.annotations.bold,
           italic: item.annotations.italic,
           'line-through': item.annotations.strikethrough,
@@ -34,27 +34,28 @@ const Paragraph: FC<Props> = (block) => {
           'bg-pink-100': item.annotations.color === 'pink_background',
           'bg-gray-100': item.annotations.color === 'gray_background',
           'bg-amber-100': item.annotations.color === 'brown_background'
-        }
-        if (item.href)
-          return (
-            <Link
-              key={key}
-              href={item.href}
-              target="_blank"
-              rel="noopenner referrer"
-              className={classnames(className, 'underline')}
-            >
-              {item.plain_text}
-            </Link>
-          )
+        })
         return (
-          <span key={key} className={classnames(className)}>
-            {item.plain_text}
-          </span>
+          <li key={key}>
+            {item.href ? (
+              <Link
+                className={className}
+                href={item.href}
+                target="_blank"
+                rel="noopenner noreferrer"
+              >
+                {item.plain_text}
+              </Link>
+            ) : (
+              <span className={className} key={key}>
+                {item.plain_text}
+              </span>
+            )}
+          </li>
         )
       })}
-    </p>
+    </ul>
   )
 }
 
-export default Paragraph
+export default BulletedListItem

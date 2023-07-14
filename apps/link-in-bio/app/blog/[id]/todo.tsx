@@ -1,4 +1,4 @@
-import { memo, type FC } from 'react'
+import { type FC } from 'react'
 import Link from 'next/link'
 import { type ToDoBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
@@ -31,7 +31,7 @@ const Todo: FC<Props> = (block) => {
         type="checkbox"
         checked={block.to_do.checked}
         readOnly
-        className="relative h-4 w-4 appearance-none rounded border border-slate-500 bg-white checked:border-blue-500 checked:bg-blue-500 checked:before:absolute checked:before:left-1 checked:before:top-px checked:before:h-2.5 checked:before:w-1.5 checked:before:rotate-45 checked:before:border-b-2 checked:before:border-r-2 checked:before:border-white"
+        className="relative h-5 w-5 appearance-none rounded border border-slate-500 bg-white checked:border-blue-500 checked:bg-blue-500 checked:before:absolute checked:before:left-1.5 checked:before:top-[3px] checked:before:h-2.5 checked:before:w-1.5 checked:before:rotate-45 checked:before:border-b-2 checked:before:border-r-2 checked:before:border-white"
       />
       {block.to_do.rich_text.map((item, key) => {
         const className = {
@@ -44,10 +44,11 @@ const Todo: FC<Props> = (block) => {
         if (item.href)
           return (
             <Link
+              key={key}
               href={item.href}
               target="_blank"
               rel="noopenner referrer"
-              className={classnames(className, 'hover:underline')}
+              className={classnames(className, 'underline')}
             >
               {item.plain_text}
             </Link>
@@ -62,4 +63,4 @@ const Todo: FC<Props> = (block) => {
   )
 }
 
-export default memo(Todo)
+export default Todo
