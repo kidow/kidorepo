@@ -4,7 +4,7 @@ import './index.css'
 
 import Editor from '@/components/Editor'
 
-const TITLE = '메모'
+const TITLE = '메모 | Kidow'
 const DESCRIPTION =
   '새로고침해도 내용이 사라지지 않는 메모장입니다. LocalStorage를 사용합니다.'
 const BASE_URL = 'https://kidow.me/memo'

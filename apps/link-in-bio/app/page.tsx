@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import Image from 'next/image'
 import { Archive, FileText, Mail, StickyNote } from 'lucide-react'
 
@@ -12,6 +13,67 @@ import {
   WidgetScheduling,
   WidgetSpotify
 } from '@/components/Widget'
+
+const TITLE = 'Kidow'
+const DESCRIPTION = '비즈니스에 관심이 많은 웹 개발자'
+const BASE_URL = 'https://kidow.me'
+
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: 'Link in bio',
+  generator: 'Next.js',
+  keywords: [
+    'kidow',
+    'link-in-bio',
+    'next.js',
+    'bento.me',
+    'resume',
+    'blog',
+    'google-analytics',
+    'spotify',
+    'google-calendar',
+    'google-meet',
+    'giphy',
+    'github',
+    'gmail',
+    'kakao-map',
+    'twitter',
+    'linkedin',
+    'gumroad',
+    'buymeacoffee',
+    'producthunt',
+    'tistory',
+    'disquiet',
+    'memo'
+  ],
+  themeColor: '#dffc03',
+  creator: 'kidow',
+  publisher: 'Dongwook Kim',
+  robots: 'index, follow',
+  alternates: {
+    canonical: BASE_URL
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: BASE_URL
+  },
+  twitter: {
+    title: TITLE,
+    description: DESCRIPTION,
+    creator: '@__kidow__',
+    card: 'summary_large_image'
+  },
+  verification: {
+    google: 'dpMF3-oHfMYFVkjgJpIJSGM_W_aL_gSFFnmWHM90NHU',
+    other: {
+      'naver-site-verification': '6aad57e80bc0cb85f4d497fde9a243497dfa5a3d'
+    }
+  },
+  category: 'Link-in-Bio',
+  metadataBase: new URL(BASE_URL)
+}
 
 async function getData() {
   const res = await fetch(

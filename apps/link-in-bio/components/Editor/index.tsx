@@ -58,12 +58,15 @@ export default function Editor() {
   return (
     <div
       className={classnames(
-        'relative min-h-[500px] pb-80',
+        'prose relative min-h-[500px] pb-80',
         cal.variable,
         inter.variable
       )}
     >
-      <div className="absolute -top-12 left-0 flex items-center gap-2 text-sm">
+      <h1>메모</h1>
+      {editor && <EditorBubbleMenu editor={editor} />}
+      <EditorContent editor={editor} />
+      <div className="mt-4 flex items-center gap-2 text-sm">
         <span className="rounded-lg bg-stone-100 px-2 py-1 text-stone-400">
           {saveStatus}
         </span>
@@ -74,8 +77,6 @@ export default function Editor() {
           비우기
         </button>
       </div>
-      {editor && <EditorBubbleMenu editor={editor} />}
-      <EditorContent editor={editor} />
     </div>
   )
 }

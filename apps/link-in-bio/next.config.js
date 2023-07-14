@@ -15,12 +15,6 @@ module.exports = {
         basePath: false,
         permanent: false
       }
-      // {
-      //   source: '/blog',
-      //   destination: 'https://legacy.kidow.me',
-      //   basePath: false,
-      //   permanent: false
-      // }
     ]
   }
 }

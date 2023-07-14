@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 
 import 'dayjs/locale/ko'
 
-const TITLE = '블로그'
+const TITLE = '블로그 | Kidow'
 const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
 const BASE_URL = 'https://kidow.me/blog'
 
@@ -34,8 +34,10 @@ async function getData(cursor?: string): Promise<NotionList> {
   const data = (await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     sorts: [{ property: '생성일', direction: 'ascending' }],
-    filter: { property: '배포', checkbox: { equals: true } },
-    page_size: 20
+    page_size: 20,
+    ...(process.env.NODE_ENV === 'production'
+      ? { filter: { property: '배포', checkbox: { equals: true } } }
+      : {})
   })) as unknown as NotionList
   return data
 }
@@ -51,7 +53,7 @@ export default async function Page() {
         <Link
           href="https://legacy.kidow.me"
           target="_blank"
-          className="text-lg font-semibold text-slate-500 hover:underline"
+          className="text-lg font-medium text-slate-500 hover:underline"
         >
           이전 블로그
         </Link>

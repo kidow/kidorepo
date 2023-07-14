@@ -10,8 +10,7 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
-import BackButton from '@/components/BackButton'
-
+import BackButton from './back-button'
 import Bookmark from './bookmark'
 import BulletedListItem from './bulleted-list-item'
 import Callout from './callout'
@@ -38,7 +37,7 @@ export async function generateMetadata({
   const data = (await notion.pages.retrieve({
     page_id: params.id
   })) as unknown as NotionItem
-  const TITLE = data.properties?.제목?.title[0]?.plain_text
+  const TITLE = `${data.properties?.제목?.title[0]?.plain_text} | Kidow`
   const DESCRIPTION = data.properties?.설명?.rich_text[0]?.plain_text
   const IMAGE = data.cover?.external?.url
   const KEYWORDS = data.properties?.태그?.multi_select
@@ -123,7 +122,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     getData(params.id)
   ])
   return (
-    <div className="fixed left-1/2 top-0 mx-auto w-full max-w-prose -translate-x-1/2 bg-white px-6 pt-5 xl:static xl:max-w-none xl:translate-x-0 xl:px-0 xl:pt-0">
+    <main className="mx-auto w-full">
       <div className="py-6">
         <BackButton />
       </div>
@@ -183,6 +182,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           )
         })}
       </article>
-    </div>
+    </main>
   )
 }

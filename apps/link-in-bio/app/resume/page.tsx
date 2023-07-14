@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { ResumeDetail, ResumeHeading, ResumeItem } from '@/components/Resume'
 
-const TITLE = '이력서'
+const TITLE = '이력서 | Kidow'
 const BASE_URL = 'https://kidow.me/resume'
 
 export const metadata: Metadata = {

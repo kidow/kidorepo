@@ -31,7 +31,29 @@ const Todo: FC<Props> = (block) => {
         type="checkbox"
         checked={block.to_do.checked}
         readOnly
-        className="relative h-5 w-5 appearance-none rounded border border-slate-500 bg-white checked:border-blue-500 checked:bg-blue-500 checked:before:absolute checked:before:left-1.5 checked:before:top-[3px] checked:before:h-2.5 checked:before:w-1.5 checked:before:rotate-45 checked:before:border-b-2 checked:before:border-r-2 checked:before:border-white"
+        className={classnames(
+          'relative h-5 w-5 appearance-none rounded border bg-white checked:before:absolute checked:before:left-1.5 checked:before:top-[3px] checked:before:h-2.5 checked:before:w-1.5 checked:before:rotate-45 checked:before:border-b-2 checked:before:border-r-2 checked:before:border-white',
+          {
+            'border-slate-500 checked:border-blue-500 checked:bg-blue-500':
+              block.to_do.color === 'default',
+            'border-red-500 checked:bg-red-500':
+              block.to_do.color.startsWith('red'),
+            'border-orange-500 checked:bg-orange-500':
+              block.to_do.color.startsWith('orange'),
+            'border-yellow-500 checked:bg-yellow-500':
+              block.to_do.color.startsWith('yellow'),
+            'border-green-500 checked:bg-green-500':
+              block.to_do.color.startsWith('green'),
+            'border-blue-500 checked:bg-blue-500':
+              block.to_do.color.startsWith('blue'),
+            'border-purple-500 checked:bg-purple-500':
+              block.to_do.color.startsWith('purple'),
+            'border-pink-500 checked:bg-pink-500':
+              block.to_do.color.startsWith('pink'),
+            'border-gray-500 checked:bg-gray-500':
+              block.to_do.color.startsWith('gray')
+          }
+        )}
       />
       {block.to_do.rich_text.map((item, key) => {
         const className = {
