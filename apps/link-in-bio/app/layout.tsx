@@ -19,7 +19,7 @@ const inter = Inter({
 export default function RootLayout({ children }: ReactProps) {
   const pathname = usePathname()
   return (
-    <html lang="ko" className={inter.className}>
+    <html lang="ko">
       <head>
         <Script
           type="text/javascript"
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: ReactProps) {
           async
         />
       </head>
-      <body>
+      <body className={inter.className}>
         <main className="flex min-h-screen flex-col items-center justify-center">
           <div className="flex min-h-screen w-full max-w-[1728px] flex-col">
             <div className="relative flex min-h-screen w-full flex-1 flex-col items-center">

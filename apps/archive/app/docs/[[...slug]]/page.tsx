@@ -71,15 +71,7 @@ export default async function Page({ params }: Props) {
         </div>
         <MDXComponent code={doc.body.code} />
       </article>
-      {doc.toc && (
-        <div className="hidden text-sm xl:block">
-          <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-6">
-            <div className="overflow-auto pb-10">
-              <Toc toc={toc} />
-            </div>
-          </div>
-        </div>
-      )}
+      {doc.toc && <Toc toc={toc} />}
     </main>
   )
 }

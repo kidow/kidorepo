@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply duration-150 dark:bg-[#111] dark:text-gray-100;
+  }
+}

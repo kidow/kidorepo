@@ -22,9 +22,13 @@ export default function Toc({ toc }: Props) {
   const activeHeading = useActiveItem(itemIds)
 
   return (
-    <div className="space-y-2">
-      <p className="font-medium">On This Page</p>
-      <Tree tree={toc} activeItem={activeHeading} />
+    <div className="hidden text-sm xl:block">
+      <div className="sticky top-20 -mt-10 max-h-[calc(100vh-4rem)] overflow-y-auto pt-10">
+        <div className="space-y-2">
+          <p className="font-medium">On This Page</p>
+          <Tree tree={toc} activeItem={activeHeading} />
+        </div>
+      </div>
     </div>
   )
 }
