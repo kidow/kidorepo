@@ -8,7 +8,10 @@ import 'dayjs/locale/ko'
 
 import { Fragment } from 'react'
 import Link from 'next/link'
-import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type {
+  BlockObjectResponse,
+  CommentObjectResponse
+} from '@notionhq/client/build/src/api-endpoints'
 
 import BackButton from './back-button'
 import Bookmark from './bookmark'
@@ -109,6 +112,25 @@ async function getData(id: string) {
     if (isFirst) isFirst = false
 
     data.push(...(results as BlockObjectResponse[]))
+  }
+
+  return data
+}
+
+async function getComments(id: string) {
+  let isFirst = true
+  let nextCursor: string
+  let data: CommentObjectResponse[] = []
+
+  while (isFirst || nextCursor) {
+    const { results, next_cursor } = await notion.comments.list({
+      block_id: id,
+      start_cursor: nextCursor
+    })
+    nextCursor = next_cursor
+    if (isFirst) isFirst = false
+
+    data.push(...results)
   }
 
   return data

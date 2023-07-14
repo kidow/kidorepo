@@ -11,7 +11,7 @@ export default function Sidebar() {
     <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r py-6 pr-2 md:sticky md:block lg:py-10">
       <ul className="w-full">
         {NAV_ITEMS.map(({ items, title }, key) => (
-          <li className="pb-4" key={title}>
+          <li className="pb-4" key={key}>
             <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
               {title}
             </h4>
