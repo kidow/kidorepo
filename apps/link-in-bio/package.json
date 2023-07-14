@@ -53,6 +53,7 @@
     "tippy.js": "^6.3.7",
     "tiptap-markdown": "^0.8.1",
     "ui": "workspace:*",
+    "url-metadata": "^3.0.2",
     "use-debounce": "^9.0.4",
     "zod": "^3.21.4"
   },

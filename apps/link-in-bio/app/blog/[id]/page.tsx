@@ -12,6 +12,7 @@ import type {
   BlockObjectResponse,
   CommentObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
+import urlMetadata from 'url-metadata'
 
 import BackButton from './back-button'
 import Bookmark from './bookmark'
@@ -178,6 +179,33 @@ export default async function Page({ params }: { params: { id: string } }) {
       />
       <article className="prose my-6 pb-40">
         {list.map(async (block) => {
+          if (block.type === 'bookmark') {
+            const metadata = (await urlMetadata(block.bookmark.url)) as Record<
+              string,
+              string
+            >
+            return (
+              <Bookmark
+                {...block}
+                key={block.id}
+                title={
+                  metadata.title ||
+                  metadata['og:title'] ||
+                  metadata['twitter:title']
+                }
+                description={
+                  metadata.description ||
+                  metadata['og:description'] ||
+                  metadata['twitter:description']
+                }
+                image={
+                  metadata.image ||
+                  metadata['og:image'] ||
+                  metadata['twitter:image']
+                }
+              />
+            )
+          }
           return (
             <Fragment key={block.id}>
               {block.type === 'paragraph' && <Paragraph {...block} />}
@@ -197,7 +225,6 @@ export default async function Page({ params }: { params: { id: string } }) {
               {block.type === 'divider' && <hr />}
               {block.type === 'callout' && <Callout {...block} />}
               {block.type === 'image' && <Image {...block} />}
-              {block.type === 'bookmark' && <Bookmark {...block} />}
               {block.type === 'video' && <Video {...block} />}
               {block.type === 'code' && <Code {...block} />}
             </Fragment>
