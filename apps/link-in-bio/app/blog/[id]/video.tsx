@@ -21,12 +21,30 @@ const Video: FC<Props> = (block) => {
     const youtubeId = getYouTubeVideoId(block.video.external.url)
     if (youtubeId) {
       return (
-        <iframe
-          src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
-          sandbox="allow-scripts allow-popups allow-top-navigation-by-user-activation allow-forms allow-same-origin"
-          allowFullScreen
-          className="pointer-events-auto h-full w-full"
-        />
+        <div className="flex">
+          <div className="relative flex-grow overflow-hidden">
+            <div className="relative cursor-pointer">
+              <div className="relative">
+                <div className="pointer-events-none block w-full">
+                  <div className="relative flex h-0 min-h-[100px] w-full justify-center pb-[56.25%]">
+                    <div className="absolute left-0 top-0 h-full w-full">
+                      <div className="h-full w-full">
+                        <div className="pointer-events-auto absolute left-0 top-0 h-full w-full">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
+                            sandbox="allow-scripts allow-popups allow-top-navigation-by-user-activation allow-forms allow-same-origin"
+                            allowFullScreen
+                            className="pointer-events-auto absolute left-0 top-0 h-full w-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )
     }
   }
