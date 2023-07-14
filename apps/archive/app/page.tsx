@@ -1,7 +1,12 @@
+import { type Metadata } from 'next'
 import Link from 'next/link'
 import { allContents, type Content } from 'contentlayer/generated'
 import { compareDesc, format, parseISO } from 'date-fns'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+
+export const metadata: Metadata = {
+  title: 'Archive | Kidow'
+}
 
 function PostCard(doc: Content) {
   const MDXContent = useMDXComponent(doc.body.code)

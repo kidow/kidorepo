@@ -50,7 +50,10 @@ export const metadata: Metadata = {
   themeColor: '#dffc03',
   creator: 'kidow',
   publisher: 'Dongwook Kim',
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true
+  },
   alternates: {
     canonical: BASE_URL
   },

@@ -1,20 +1,16 @@
-import { type Metadata } from 'next'
+'use client'
 
 import './globals.css'
 
-import { ThemeProvider } from 'components'
+import { ThemeProvider } from 'next-themes'
 
 import Sidebar from './sidebar'
-
-export const metadata: Metadata = {
-  title: 'Archive | kidow'
-}
 
 export default function RootLayout({ children }: ReactProps) {
   return (
     <html lang="ko">
       <body>
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
             <header className="sticky top-0 z-40 w-full border-b">
               <div className="container flex h-14 items-center">header</div>
