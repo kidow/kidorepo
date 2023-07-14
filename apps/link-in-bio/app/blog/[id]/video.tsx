@@ -23,7 +23,7 @@ const Video: FC<Props> = (block) => {
       return (
         <iframe
           src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
-          sandbox="allow-scripts allow-popups allow-top-navigation-by-user-activation allow-forms allow-same-origin allow-storage-access-by-user-activation"
+          sandbox="allow-scripts allow-popups allow-top-navigation-by-user-activation allow-forms allow-same-origin"
           allowFullScreen
           className="pointer-events-auto h-full w-full"
         />

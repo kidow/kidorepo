@@ -3,17 +3,28 @@
 import { useEffect, type FC } from 'react'
 import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import hljs from 'highlight.js'
+import mermaid from 'mermaid'
 
 import 'highlight.js/styles/github.css'
 
 export interface Props extends CodeBlockObjectResponse {}
 
 const Code: FC<Props> = (block) => {
-  console.log('block.code', block.code)
   useEffect(() => {
-    hljs.highlightAll()
+    if (block.code.language === 'mermaid') {
+      mermaid.initialize({})
+      mermaid.contentLoaded()
+    } else {
+      hljs.highlightAll()
+    }
   }, [])
-  if (block.code.language === 'mermaid') return <>mermaid</>
+
+  if (block.code.language === 'mermaid')
+    return (
+      <div className="mermaid [&>svg]:mx-auto">
+        {block.code.rich_text[0].plain_text}
+      </div>
+    )
   return (
     <pre>
       <code
