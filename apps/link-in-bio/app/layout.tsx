@@ -34,10 +34,7 @@ export default function RootLayout({ children }: ReactProps) {
               <Header />
               <div
                 className={classnames(
-                  'flex h-full w-full flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16',
-                  pathname.startsWith('/blog/')
-                    ? 'max-w-prose'
-                    : 'max-w-[428px]'
+                  'flex h-full w-full max-w-prose flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16'
                 )}
               >
                 <div className="mb-10 flex flex-col px-4 xl:mb-0 xl:mr-20 xl:flex-1 xl:px-0" />

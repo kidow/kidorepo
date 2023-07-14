@@ -14,7 +14,7 @@ const Bookmark: FC<Props> = ({ title, description, image, ...block }) => {
       href={block.bookmark.url}
       target="_blank"
       rel="noopenner noreferrer"
-      className="relative flex select-none flex-wrap-reverse items-stretch overflow-hidden rounded border text-left no-underline"
+      className="relative my-5 flex select-none flex-wrap-reverse items-stretch overflow-hidden rounded border text-left no-underline"
     >
       <div className="flex min-h-[106px] flex-[4_1_180px] flex-col gap-1 overflow-hidden px-4 py-3 text-left duration-150 hover:bg-neutral-100">
         <div className="text-sm text-stone-800">{title}</div>

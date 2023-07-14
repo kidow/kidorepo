@@ -37,13 +37,8 @@ const NumberedListItem: FC<Props> = (block) => {
         return (
           <li key={key}>
             {item.href ? (
-              <Link
-                className={className}
-                href={item.href}
-                target="_blank"
-                rel="noopenner noreferrer"
-              >
-                {item.plain_text}
+              <Link href={item.href} target="_blank" rel="noopenner noreferrer">
+                <span className={className}>{item.plain_text}</span>
               </Link>
             ) : (
               <span className={className} key={key}>

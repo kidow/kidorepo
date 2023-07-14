@@ -21,7 +21,7 @@ const Video: FC<Props> = (block) => {
     const youtubeId = getYouTubeVideoId(block.video.external.url)
     if (youtubeId) {
       return (
-        <div className="flex">
+        <div className="my-5 flex">
           <div className="relative flex-grow overflow-hidden">
             <div className="relative cursor-pointer">
               <div className="relative">

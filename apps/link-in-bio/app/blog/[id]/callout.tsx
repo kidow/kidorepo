@@ -57,12 +57,11 @@ const Callout: FC<Props> = (block) => {
             return (
               <Link
                 key={key}
-                className={className}
                 href={item.href}
                 target="_blank"
                 rel="noopenner noreferrer"
               >
-                {item.plain_text}
+                <span className={className}>{item.plain_text}</span>
               </Link>
             )
           return (

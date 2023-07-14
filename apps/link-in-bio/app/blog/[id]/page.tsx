@@ -19,6 +19,7 @@ import Bookmark from './bookmark'
 import BulletedListItem from './bulleted-list-item'
 import Callout from './callout'
 import Code from './code'
+import Comment from './comment'
 import Heading1 from './heading-1'
 import Heading2 from './heading-2'
 import Heading3 from './heading-3'
@@ -26,6 +27,7 @@ import Image from './Image'
 import NumberedListItem from './numbered-list-item'
 import Paragraph from './paragraph'
 import Quote from './quote'
+import Share from './share'
 import Table from './table'
 import Todo from './todo'
 import Toggle from './toggle'
@@ -140,18 +142,19 @@ async function getComments(id: string) {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const [data, list] = await Promise.all([
+  const [data, list, comments] = await Promise.all([
     notion.pages.retrieve({
       page_id: params.id
     }) as unknown as NotionItem,
-    getData(params.id)
+    getData(params.id),
+    getComments(params.id)
   ])
   return (
     <main className="mx-auto w-full">
       <div className="py-6">
         <BackButton />
       </div>
-      <time dateTime="2023-07-07" className="text-sm text-slate-400">
+      <time dateTime={data.created_time} className="text-sm text-slate-400">
         {dayjs(data.created_time).locale('ko').format('YYYY년 M월 D일')}
       </time>
       <h1 className="mt-2 text-4xl font-bold text-slate-900 xl:text-5xl">
@@ -179,7 +182,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         className="mt-8 h-[280px] rounded-md border xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
-      <article className="prose my-6 pb-40">
+      <article className="prose my-6 max-w-none pb-40">
         {list.map(async (block) => {
           if (block.type === 'bookmark') {
             const metadata = (await urlMetadata(block.bookmark.url)) as Record<
@@ -208,13 +211,6 @@ export default async function Page({ params }: { params: { id: string } }) {
               />
             )
           }
-          if (block.type === 'table') {
-            if (block.has_children) {
-              // const { results } = await notion.blocks.children.list({
-              //   block_id: block.id
-              // })
-            }
-          }
           return (
             <Fragment key={block.id}>
               {block.type === 'paragraph' && <Paragraph {...block} />}
@@ -239,9 +235,26 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Fragment>
           )
         })}
+        <ul className="not-prose flex list-none flex-wrap gap-2 pl-0">
+          {data?.properties?.태그?.multi_select?.map(({ name }, key) => (
+            <li className="mb-2 mr-2" key={key}>
+              <Link href={`/tags/${name}`}>
+                <span className="rounded-3xl border px-5 py-2.5 hover:bg-stone-100">
+                  {name}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {/* @ts-ignore */}
+        <Share url={data?.public_url} />
+        <hr />
+        <ul className="not-prose list-none space-y-4 pl-0">
+          {comments.map((comment) => (
+            <Comment key={comment.id} {...comment} />
+          ))}
+        </ul>
       </article>
     </main>
   )
 }
-
-async function getChildren() {}

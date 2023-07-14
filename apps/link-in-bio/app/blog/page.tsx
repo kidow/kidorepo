@@ -50,12 +50,10 @@ export default async function Page() {
         <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">
           블로그
         </h1>
-        <Link
-          href="https://legacy.kidow.me"
-          target="_blank"
-          className="text-lg font-medium text-slate-500 hover:underline"
-        >
-          이전 블로그
+        <Link href="https://legacy.kidow.me" target="_blank">
+          <span className="text-lg font-medium text-slate-500 hover:underline">
+            이전 블로그
+          </span>
         </Link>
       </div>
       <hr className="my-8" />

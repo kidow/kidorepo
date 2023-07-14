@@ -41,9 +41,10 @@ const Paragraph: FC<Props> = (block) => {
               href={item.href}
               target="_blank"
               rel="noopenner referrer"
-              className={classnames(className, 'underline')}
             >
-              {item.plain_text}
+              <span className={classnames(className, 'underline')}>
+                {item.plain_text}
+              </span>
             </Link>
           )
         return (
