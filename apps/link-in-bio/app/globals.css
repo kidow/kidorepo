@@ -58,6 +58,6 @@ details summary::-webkit-details-marker {
 
 @layer utilities {
   .notion-code {
-    @apply rounded-[3px] bg-gray-100 px-[5.44px] py-[2.72px] text-[85%] text-red-500;
+    @apply rounded-[3px] bg-gray-100 px-[5.44px] py-[2.72px] text-[85%] text-red-400;
   }
 }

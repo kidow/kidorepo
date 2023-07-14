@@ -14,8 +14,7 @@ const Heading2: FC<Props> = (block) => {
           italic: item.annotations.italic,
           'line-through': item.annotations.strikethrough,
           underline: item.annotations.underline,
-          'rounded-[3px] bg-gray-100 px-[5.44px] py-[2.72px] text-[85%] text-red-500':
-            item.annotations.code,
+          'notion-code': item.annotations.code,
           'text-red-500': item.annotations.color === 'red',
           'text-orange-500': item.annotations.color === 'orange',
           'text-yellow-500': item.annotations.color === 'yellow',

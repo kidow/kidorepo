@@ -33,6 +33,8 @@ import Video from './video'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
+export const revalidate = 60 * 60 * 24
+
 export async function generateMetadata({
   params
 }: {
@@ -206,6 +208,13 @@ export default async function Page({ params }: { params: { id: string } }) {
               />
             )
           }
+          if (block.type === 'table') {
+            if (block.has_children) {
+              // const { results } = await notion.blocks.children.list({
+              //   block_id: block.id
+              // })
+            }
+          }
           return (
             <Fragment key={block.id}>
               {block.type === 'paragraph' && <Paragraph {...block} />}
@@ -234,3 +243,5 @@ export default async function Page({ params }: { params: { id: string } }) {
     </main>
   )
 }
+
+async function getChildren() {}
