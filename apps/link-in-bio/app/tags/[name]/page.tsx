@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { Client } from '@notionhq/client'
 
+import Pagination from '@/components/Pagination'
 import Post from '@/components/Post'
 
 export const revalidate = 60 * 60 * 24 * 7
@@ -36,7 +37,7 @@ async function getData(name: string) {
 }
 
 export default async function Page({ params }: { params: { name: string } }) {
-  const { results } = await getData(params.name)
+  const { results, next_cursor } = await getData(params.name)
   if (!results.length) redirect('/blog')
   return (
     <>
@@ -48,6 +49,7 @@ export default async function Page({ params }: { params: { name: string } }) {
         {results.map((item) => (
           <Post {...item} key={item.id} />
         ))}
+        <Pagination nextCursor={next_cursor} tag={params.name} />
       </ul>
     </>
   )

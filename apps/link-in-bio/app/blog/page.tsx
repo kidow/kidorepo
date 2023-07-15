@@ -4,6 +4,7 @@ import { Client } from '@notionhq/client'
 
 import 'dayjs/locale/ko'
 
+import Pagination from '@/components/Pagination'
 import Post from '@/components/Post'
 
 const TITLE = '블로그 | Kidow'
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL)
 }
 
-async function getData(cursor?: string): Promise<NotionList> {
+async function getData(): Promise<NotionList> {
   const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
   const data = (await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
@@ -43,7 +44,7 @@ async function getData(cursor?: string): Promise<NotionList> {
 }
 
 export default async function Page() {
-  const { results } = await getData()
+  const { results, next_cursor } = await getData()
   return (
     <>
       <div className="flex items-center justify-between">
@@ -61,6 +62,7 @@ export default async function Page() {
         {results.map((item) => (
           <Post {...item} key={item.id} />
         ))}
+        <Pagination nextCursor={next_cursor} />
       </ul>
     </>
   )

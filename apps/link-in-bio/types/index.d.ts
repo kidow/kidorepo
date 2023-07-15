@@ -54,6 +54,7 @@ interface NotionItem {
 interface NotionList {
   object: 'list'
   results: NotionItem[]
+  next_cursor?: string
 }
 
 interface NotionContent {}
