@@ -1,81 +1,23 @@
-# Turborepo starter
+# Kidorepo
 
-This is an official starter Turborepo.
+[Turborepo](https://turbo.build/repo)로 구현한 개인 프로젝트입니다.
 
-## Using this example
+> Turborepo는 Vercel이 인수하여 개발 및 운영하고 있는 모노레포 설계를 위한 빌드 시스템으로, 단일 리포지토리에 여러 개의 서브 프로젝트를 묶어서 개발할 수 있습니다.
 
-Run the following command:
+### Introduction
 
-```sh
-npx create-turbo@latest
-```
+총 2개의 프로젝트가 있습니다. (Vercel 무료 버전은 3개, Pro 버전은 60개까지 지원합니다.)
 
-## What's inside?
+- [Link in bio](https://kidow.me): [프로젝트 소개](https://github.com/kidow/kidorepo/blob/main/apps/link-in-bio/README.md)
+- [Archive](https://archive.kidow.me)(작업 중): [프로젝트 소개](https://github.com/kidow/kidorepo/blob/main/apps/archive/README.md)
 
-This Turborepo includes the following packages/apps:
+### Project Stack
 
-### Apps and Packages
+이 워크스페이스에서 다음과 같은 코드 관리 도구들을 사용했습니다.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- Pnpm
+- Turbo
+- ESlint
+- Prettier
+- Husky
+- Commitlint
