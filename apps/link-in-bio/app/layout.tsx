@@ -1,5 +1,6 @@
 'use client'
 
+import { Analytics } from '@vercel/analytics/react'
 import classnames from 'classnames'
 import { Toaster } from 'sonner'
 
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: ReactProps) {
           <Footer />
         </main>
         <Toaster position="top-center" richColors closeButton />
+        <Analytics />
       </body>
     </html>
   )
