@@ -14,7 +14,7 @@ export default function NotFound() {
       />
       <h2 className="my-4 text-4xl font-bold">404 Not Found</h2>
       <Link href="/">
-        <button className="rounded-[10px] border px-3 py-2 text-neutral-700">
+        <button className="select-none rounded-[10px] border px-3 py-2 text-neutral-700">
           홈
         </button>
       </Link>

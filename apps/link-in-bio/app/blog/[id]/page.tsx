@@ -1,13 +1,13 @@
 import { type Metadata } from 'next'
 import NextImage from 'next/image'
 import { Client } from '@notionhq/client'
-import classnames from 'classnames'
 import dayjs from 'dayjs'
 
 import 'dayjs/locale/ko'
 
 import { Fragment } from 'react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import type {
   BlockObjectResponse,
   CommentObjectResponse
@@ -35,47 +35,58 @@ import Video from './video'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
-export const revalidate = 60 * 60 * 24
+export const revalidate = 60 * 60 * 24 * 7
 
 export async function generateMetadata({
   params
 }: {
   params: { id: string }
 }): Promise<Metadata> {
-  const data = (await notion.pages.retrieve({
-    page_id: params.id
-  })) as unknown as NotionItem
-  const TITLE = `${data.properties?.제목?.title[0]?.plain_text} | Kidow`
-  const DESCRIPTION = data.properties?.설명?.rich_text[0]?.plain_text
-  const IMAGE = data.cover?.external?.url
-  const KEYWORDS = data.properties?.태그?.multi_select
-    .map((item) => item.name)
-    .join(', ')
-  const URL = `https://kidow.me/blog/${data.id}`
-  return {
-    title: TITLE,
-    description: DESCRIPTION,
-    keywords: KEYWORDS,
-    alternates: {
-      canonical: URL
-    },
-    openGraph: {
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      params.id
+    )
+  ) {
+    notFound()
+  }
+  try {
+    const data = (await notion.pages.retrieve({
+      page_id: params.id
+    })) as unknown as NotionItem
+    const TITLE = `${data.properties?.제목?.title[0]?.plain_text} | Kidow`
+    const DESCRIPTION = data.properties?.설명?.rich_text[0]?.plain_text
+    const IMAGE = data.cover?.external?.url
+    const KEYWORDS = data.properties?.태그?.multi_select
+      .map((item) => item.name)
+      .join(', ')
+    const URL = `https://kidow.me/blog/${data.id}`
+    return {
       title: TITLE,
       description: DESCRIPTION,
-      type: 'article',
-      publishedTime: data.created_time,
-      authors: 'kidow',
-      url: URL,
-      images: IMAGE,
-      tags: KEYWORDS
-    },
-    twitter: {
-      title: TITLE,
-      description: DESCRIPTION,
-      images: IMAGE,
-      creator: '__kidow__',
-      card: 'summary_large_image'
+      keywords: KEYWORDS,
+      alternates: {
+        canonical: URL
+      },
+      openGraph: {
+        title: TITLE,
+        description: DESCRIPTION,
+        type: 'article',
+        publishedTime: data.created_time,
+        authors: 'kidow',
+        url: URL,
+        images: IMAGE,
+        tags: KEYWORDS
+      },
+      twitter: {
+        title: TITLE,
+        description: DESCRIPTION,
+        images: IMAGE,
+        creator: '__kidow__',
+        card: 'summary_large_image'
+      }
     }
+  } catch (err) {
+    notFound()
   }
 }
 
@@ -103,50 +114,83 @@ export async function generateStaticParams(): Promise<Array<{ id: string }>> {
   return results
 }
 
-async function getData(id: string) {
+async function getPost(id: string) {
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  ) {
+    notFound()
+  }
   let isFirst = true
   let nextCursor: string
   let data: BlockObjectResponse[] = []
 
   while (isFirst || nextCursor) {
-    const { results, next_cursor } = await notion.blocks.children.list({
-      block_id: id,
-      start_cursor: nextCursor
-    })
-    nextCursor = next_cursor
-    if (isFirst) isFirst = false
+    try {
+      const { results, next_cursor } = await notion.blocks.children.list({
+        block_id: id,
+        start_cursor: nextCursor
+      })
+      nextCursor = next_cursor
+      if (isFirst) isFirst = false
 
-    data.push(...(results as BlockObjectResponse[]))
+      data.push(...(results as BlockObjectResponse[]))
+    } catch (err) {
+      notFound()
+    }
   }
 
   return data
 }
 
 async function getComments(id: string) {
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  ) {
+    notFound()
+  }
   let isFirst = true
   let nextCursor: string
   let data: CommentObjectResponse[] = []
 
   while (isFirst || nextCursor) {
-    const { results, next_cursor } = await notion.comments.list({
-      block_id: id,
-      start_cursor: nextCursor
-    })
-    nextCursor = next_cursor
-    if (isFirst) isFirst = false
+    try {
+      const { results, next_cursor } = await notion.comments.list({
+        block_id: id,
+        start_cursor: nextCursor
+      })
+      nextCursor = next_cursor
+      if (isFirst) isFirst = false
 
-    data.push(...results)
+      data.push(...results)
+    } catch (err) {
+      notFound()
+    }
   }
 
   return data
 }
 
+async function getData(id: string): Promise<NotionItem> {
+  try {
+    return (await notion.pages.retrieve({
+      page_id: id
+    })) as unknown as NotionItem
+  } catch (err) {
+    notFound()
+  }
+}
+
 export default async function Page({ params }: { params: { id: string } }) {
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      params.id
+    )
+  ) {
+    notFound()
+  }
   const [data, list, comments] = await Promise.all([
-    notion.pages.retrieve({
-      page_id: params.id
-    }) as unknown as NotionItem,
     getData(params.id),
+    getPost(params.id),
     getComments(params.id)
   ])
   return (

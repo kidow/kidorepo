@@ -26,7 +26,7 @@ export default function Error({
       <h2 className="my-4 text-4xl font-bold">500 Server Error</h2>
       <button
         onClick={reset}
-        className="rounded-[10px] border px-3 py-2 text-neutral-700"
+        className="select-none rounded-[10px] border px-3 py-2 text-neutral-700"
       >
         다시 시도
       </button>
