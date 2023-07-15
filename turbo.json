@@ -20,7 +20,8 @@
         "GOOGLE_CALENDAR_REFRESH_TOKEN",
         "SLACK_WEBHOOK_URL",
         "NOTION_SECRET_KEY",
-        "NOTION_DATABASE_ID"
+        "NOTION_DATABASE_ID",
+        "NEXT_PUBLIC_GITHUB_TOKEN"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

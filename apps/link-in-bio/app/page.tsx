@@ -135,7 +135,7 @@ export default async function Page() {
           src="https://giphy.com/embed/umYMU8G2ixG5mJBDo5"
           className="giphy-embed h-full w-full"
           allowFullScreen
-        ></iframe>
+        />
         <p>
           <a href="https://giphy.com/gifs/BoschGlobal-coding-home-office-remote-working-umYMU8G2ixG5mJBDo5">
             via GIPHY

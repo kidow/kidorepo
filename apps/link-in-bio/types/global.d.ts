@@ -22,5 +22,7 @@ declare namespace NodeJS {
 
     NOTION_SECRET_KEY: string
     NOTION_DATABASE_ID: string
+
+    NEXT_PUBLIC_GITHUB_TOKEN: string
   }
 }
