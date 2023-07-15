@@ -10,24 +10,14 @@ import Header from '@/components/Header'
 import './globals.css'
 
 import { Inter } from 'next/font/google'
-import { usePathname } from 'next/navigation'
-import Script from 'next/script'
 
 const inter = Inter({
   subsets: ['latin']
 })
 
 export default function RootLayout({ children }: ReactProps) {
-  const pathname = usePathname()
   return (
     <html lang="ko">
-      <head>
-        <Script
-          type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0986f45ad519044d2574ac8091cb572&libraries=services&autoload=false"
-          async
-        />
-      </head>
       <body className={inter.className}>
         <main className="flex min-h-screen flex-col items-center justify-center">
           <div className="flex min-h-screen w-full max-w-[1728px] flex-col">
