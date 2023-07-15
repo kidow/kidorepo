@@ -4,7 +4,6 @@ import { type ToggleBlockObjectResponse } from '@notionhq/client/build/src/api-e
 import classnames from 'classnames'
 
 export interface Props extends ToggleBlockObjectResponse {}
-interface State {}
 
 const Toggle: FC<Props> = (block) => {
   return (

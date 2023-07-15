@@ -279,11 +279,11 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Fragment>
           )
         })}
-        <ul className="not-prose flex list-none flex-wrap gap-2 pl-0">
+        <ul className="not-prose mt-24 flex list-none flex-wrap gap-2 pl-0 text-sm xl:text-base">
           {data?.properties?.태그?.multi_select?.map(({ name }, key) => (
-            <li className="mb-2 mr-2" key={key}>
+            <li className="mb-4 mr-2" key={key}>
               <Link href={`/tags/${name}`}>
-                <span className="rounded-3xl border px-5 py-2.5 hover:bg-stone-100">
+                <span className="rounded-3xl border px-3 py-2 hover:bg-stone-100 xl:px-5 xl:py-2.5">
                   {name}
                 </span>
               </Link>

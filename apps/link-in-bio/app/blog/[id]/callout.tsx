@@ -4,7 +4,6 @@ import { type CalloutBlockObjectResponse } from '@notionhq/client/build/src/api-
 import classnames from 'classnames'
 
 export interface Props extends CalloutBlockObjectResponse {}
-interface State {}
 
 const Callout: FC<Props> = (block) => {
   return (
