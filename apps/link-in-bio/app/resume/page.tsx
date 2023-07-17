@@ -123,7 +123,7 @@ export default async function Page() {
                     async (subBlock) => {
                       if (
                         subBlock.type === 'image' &&
-                        subBlock.image.type === 'file'
+                        subBlock.image.type === 'external'
                       ) {
                         return (
                           <div
@@ -132,7 +132,7 @@ export default async function Page() {
                           >
                             <img
                               className="!my-0 h-[72px] w-[72px]"
-                              src={subBlock.image.file.url}
+                              src={subBlock.image.external.url}
                               alt={subBlock.image.caption[0].plain_text}
                             />
                             <span
