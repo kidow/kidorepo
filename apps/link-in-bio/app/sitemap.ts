@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://kidow.me', lastModified: new Date() },
     { url: 'https://kidow.me/memo', lastModified: new Date() },
     { url: 'https://kidow.me/resume', lastModified: new Date() },
+    { url: 'https://kidow.me/lunch', lastModified: new Date() },
     { url: 'https://kidow.me/blog', lastModified: new Date() },
     ...posts.map((item) => ({ url: `https://kidow.me/blog/${item.id}` }))
   ]

@@ -1,6 +1,12 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
-import { Archive, FileText, Mail, StickyNote } from 'lucide-react'
+import {
+  ArchiveIcon,
+  FileTextIcon,
+  MailIcon,
+  StickyNoteIcon,
+  UtensilsIcon
+} from 'lucide-react'
 
 import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
@@ -111,7 +117,7 @@ export default async function Page() {
         href="/resume"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
-            <FileText className="h-5 w-5" />
+            <FileTextIcon className="h-5 w-5" />
           </span>
         }
         title="Résumé"
@@ -123,7 +129,7 @@ export default async function Page() {
         href="mailto:wcgo2ling@gmail.com"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
-            <Mail className="h-5 w-5" />
+            <MailIcon className="h-5 w-5" />
           </span>
         }
         title="Gmail"
@@ -279,11 +285,23 @@ export default async function Page() {
         href="/memo"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
-            <StickyNote className="h-5 w-5" />
+            <StickyNoteIcon className="h-5 w-5" />
           </span>
         }
         title="MEMO"
         description="내용이 사라지지 않는"
+      />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+        href="/lunch"
+        icon={
+          <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+            <UtensilsIcon className="h-5 w-5" />
+          </span>
+        }
+        title="LUNCH"
+        description="점심 뭐 먹지?"
       />
       {/* <WidgetLink
         className="xl:hover:rotate-2"
