@@ -86,7 +86,8 @@ export const metadata: Metadata = {
 
 async function getData() {
   const res = await fetch(
-    'https://api.bento.me/v1/urlrichdata/https%3A%2F%2Fopen.spotify.com%2Fplaylist%2F5agjirffT0c86uuBbgLNDe'
+    'https://api.bento.me/v1/urlrichdata/https%3A%2F%2Fopen.spotify.com%2Fplaylist%2F5agjirffT0c86uuBbgLNDe',
+    { next: { revalidate: 0 } }
   )
   const { data } = await res.json()
   return data
