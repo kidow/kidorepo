@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   ArchiveIcon,
   FileTextIcon,
@@ -159,8 +160,21 @@ export default async function Page() {
           </span>
         }
         title="Blog"
-        description="이전 작업 중입니다."
-      ></WidgetLink>
+        description="/blog"
+      >
+        <Link
+          href="/blog/1741feb7-f924-4b08-8442-260a057c28f6"
+          className="hidden h-[120px] overflow-hidden rounded-[10px] border xl:inline-block"
+        >
+          <Image
+            src="https://illustrations.popsy.co/white/product-launch.svg"
+            alt="launch"
+            className="object-cover"
+            height={120}
+            width={220}
+          />
+        </Link>
+      </WidgetLink>
       <WidgetLink
         className="xl:hover:rotate-1"
         size="h-[178px] bg-[#F5FAFE] w-full xl:h-[175px] xl:w-[175px] hover:bg-[#F0F7FD]"

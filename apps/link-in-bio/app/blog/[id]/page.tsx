@@ -201,7 +201,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <time dateTime={data.created_time} className="text-sm text-slate-400">
         {dayjs(data.created_time).locale('ko').format('YYYY년 M월 D일')}
       </time>
-      <h1 className="mt-2 text-4xl font-bold text-slate-900 xl:text-5xl">
+      <h1 className="mt-2 text-4xl font-bold !leading-[1.2] text-slate-900 xl:text-5xl">
         {data.properties?.제목?.title[0]?.plain_text}
       </h1>
       <div className="mt-4 flex items-center space-x-4 text-sm xl:hidden">
