@@ -106,8 +106,8 @@ export default async function Page() {
             )
           } else if (subBlocks.length === 2) {
             return (
-              <section className="mb-10 flex gap-10" key={block.id}>
-                <section className="min-w-[140px] text-neutral-400">
+              <section className="mb-10 gap-10 xl:flex" key={block.id}>
+                <section className="mb-2 min-w-[140px] text-neutral-700 xl:text-neutral-400">
                   {(subBlocks[0].results as ParagraphBlockObjectResponse[]).map(
                     (subBlock) => (
                       <div key={subBlock.id}>
@@ -238,7 +238,7 @@ export default async function Page() {
                 </section>
               </section>
             )
-          }
+          } else return null
         }
         return (
           <Fragment key={block.id}>
