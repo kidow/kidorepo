@@ -33,7 +33,7 @@ async function getData(name: string) {
     database_id: process.env.NOTION_DATABASE_ID,
     sorts: [{ property: '생성일', direction: 'descending' }],
     filter: { property: '태그', multi_select: { contains: name } }
-  })) as unknown as NotionList
+  })) as unknown as BlogList
   return data
 }
 

@@ -82,13 +82,14 @@ export async function getChildBlocksWithChildrenRecursively(
 }
 
 export const getRichTextClassName = ({
-  annotations: { bold, italic, strikethrough, underline, code, color }
+  annotations: { bold, italic, strikethrough, underline, code, color },
+  href
 }: RichTextItemResponse) =>
   classnames({
     'font-semibold': bold,
     italic: italic,
     'line-through': strikethrough,
-    underline: underline,
+    underline: underline || href,
     'notion-code': code,
     'text-red-500': color === 'red',
     'text-orange-500': color === 'orange',
@@ -109,3 +110,16 @@ export const getRichTextClassName = ({
     'bg-gray-100': color === 'gray_background',
     'bg-amber-100': color === 'brown_background'
   })
+
+export function getYouTubeVideoId(url: string) {
+  const regExp =
+    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
+
+  const match = url.match(regExp)
+  if (match && match[7].length === 11) {
+    return match[7]
+  } else {
+    console.error('Invalid YouTube URL')
+    return null
+  }
+}

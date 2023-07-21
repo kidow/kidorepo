@@ -62,7 +62,6 @@ export default function WidgetLink({
           </div>
           {button}
         </div>
-        <div className="ml-6 flex-1">{children}</div>
       </Link>
     </li>
   )

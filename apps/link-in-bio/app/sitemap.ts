@@ -29,13 +29,17 @@ async function getPostIds() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts] = await Promise.all([getPostIds()])
+  const posts = await getPostIds()
   return [
     { url: 'https://kidow.me', lastModified: new Date() },
     { url: 'https://kidow.me/memo', lastModified: new Date() },
     { url: 'https://kidow.me/resume', lastModified: new Date() },
     { url: 'https://kidow.me/lunch', lastModified: new Date() },
     { url: 'https://kidow.me/blog', lastModified: new Date() },
-    ...posts.map((item) => ({ url: `https://kidow.me/blog/${item.id}` }))
+    { url: 'https://kidow.me/feed', lastModified: new Date() },
+    ...posts.map((item) => ({
+      url: `https://kidow.me/blog/${item.id}`,
+      lastModified: new Date()
+    }))
   ]
 }

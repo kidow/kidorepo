@@ -1,10 +1,9 @@
 import type { FC } from 'react'
 import Link from 'next/link'
+import { getRichTextClassName } from '@/utils'
 import type { CommentObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
-import { getRichTextClassName } from './utils'
 
 dayjs.extend(relativeTime)
 

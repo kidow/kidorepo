@@ -7,6 +7,10 @@ import 'dayjs/locale/ko'
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import {
+  getChildBlocksWithChildrenRecursively,
+  getRichTextClassName
+} from '@/utils'
 import type {
   BlockObjectResponse,
   CommentObjectResponse
@@ -14,29 +18,27 @@ import type {
 import classnames from 'classnames'
 import urlMetadata from 'url-metadata'
 
-import BackButton from './back-button'
-import Bookmark from './bookmark'
-import BulletedListItem from './bulleted-list-item'
-import Callout from './callout'
-import Code from './code'
-import Comment from './comment'
-import Heading1 from './heading-1'
-import Heading2 from './heading-2'
-import Heading3 from './heading-3'
-import Image from './Image'
-import NumberedListItem from './numbered-list-item'
-import Paragraph from './paragraph'
-import Quote from './quote'
-import Share from './share'
-import Table from './table'
-import Todo from './todo'
-import Toggle from './toggle'
 import {
-  getChildBlocks,
-  getChildBlocksWithChildrenRecursively,
-  getRichTextClassName
-} from './utils'
-import Video from './video'
+  Bookmark,
+  BulletedListItem,
+  Callout,
+  Code,
+  Heading1,
+  Heading2,
+  Heading3,
+  Image,
+  NumberedListItem,
+  Paragraph,
+  Quote,
+  Table,
+  Todo,
+  Toggle,
+  Video
+} from '@/components/Block'
+
+import BackButton from './back-button'
+import Comment from './comment'
+import Share from './share'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
@@ -57,7 +59,7 @@ export async function generateMetadata({
   try {
     const data = (await notion.pages.retrieve({
       page_id: params.id
-    })) as unknown as NotionItem
+    })) as unknown as BlogItem
     const TITLE = `${data.properties?.제목?.title[0]?.plain_text} | Kidow`
     const DESCRIPTION = data.properties?.설명?.rich_text[0]?.plain_text
     const IMAGE = data.cover?.external?.url
@@ -175,11 +177,11 @@ async function getComments(id: string) {
   return data
 }
 
-async function getData(id: string): Promise<NotionItem> {
+async function getData(id: string): Promise<BlogItem> {
   try {
     return (await notion.pages.retrieve({
       page_id: id
-    })) as unknown as NotionItem
+    })) as unknown as BlogItem
   } catch (err) {
     notFound()
   }
@@ -357,9 +359,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         className="mt-8 h-[280px] select-none rounded-md border xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
-      <article className="prose prose-slate my-6 max-w-none pb-40">
-        {await render()}
-        <ul className="not-prose mt-24 flex list-none flex-wrap gap-2 pl-0 text-sm xl:text-base">
+      <article className="my-6 pb-40">
+        <div className="prose prose-slate max-w-none">{await render()}</div>
+        <ul className="mb-5 mt-24 flex flex-wrap gap-2 text-sm xl:text-base">
           {data?.properties?.태그?.multi_select?.map(({ name }, key) => (
             <li className="mb-4 mr-2" key={key}>
               <Link href={`/tags/${name}`}>
@@ -372,8 +374,8 @@ export default async function Page({ params }: { params: { id: string } }) {
         </ul>
         {/* @ts-ignore */}
         <Share url={data?.public_url} />
-        <hr />
-        <ul className="not-prose list-none space-y-4 pl-0">
+        <hr className="my-12" />
+        <ul className="mt-5 space-y-4">
           {comments.map((comment) => (
             <Comment key={comment.id} {...comment} />
           ))}

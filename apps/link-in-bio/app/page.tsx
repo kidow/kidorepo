@@ -151,8 +151,8 @@ export default async function Page() {
         </p>
       </li>
       <WidgetLink
-        className="xl:col-span-2 xl:hover:rotate-1"
-        size="w-full h-[178px] xl:h-[175px] xl:w-[380px] hover:bg-neutral-50"
+        className="xl:hover:rotate-2"
+        size="w-full h-[178px] xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
         href="/blog"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
@@ -161,20 +161,19 @@ export default async function Page() {
         }
         title="Blog"
         description="/blog"
-      >
-        <Link
-          href="/blog/1741feb7-f924-4b08-8442-260a057c28f6"
-          className="hidden h-[120px] overflow-hidden rounded-[10px] border xl:inline-block"
-        >
-          <Image
-            src="https://illustrations.popsy.co/white/product-launch.svg"
-            alt="launch"
-            className="object-cover"
-            height={120}
-            width={220}
-          />
-        </Link>
-      </WidgetLink>
+      />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="w-full h-[178px] xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
+        href="/feed"
+        icon={
+          <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
+            <Image src="/blog.png" alt="blog" height={20} width={20} />
+          </span>
+        }
+        title="Feed"
+        description="/feed"
+      />
       <WidgetLink
         className="xl:hover:rotate-1"
         size="h-[178px] bg-[#F5FAFE] w-full xl:h-[175px] xl:w-[175px] hover:bg-[#F0F7FD]"

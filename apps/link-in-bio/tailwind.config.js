@@ -5,6 +5,7 @@ module.exports = {
   ...baseConfig,
   content: [
     ...baseConfig.content,
+    'utils/**/*.{ts,tsx}',
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {

@@ -1,8 +1,6 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Client } from '@notionhq/client'
-
-import 'dayjs/locale/ko'
 
 import Pagination from '@/components/Pagination'
 import Post from '@/components/Post'
@@ -30,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL)
 }
 
-async function getData(): Promise<NotionList> {
+async function getData(): Promise<BlogList> {
   const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
   const data = (await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
@@ -39,7 +37,7 @@ async function getData(): Promise<NotionList> {
     ...(process.env.NODE_ENV === 'production'
       ? { filter: { property: '배포', checkbox: { equals: true } } }
       : {})
-  })) as unknown as NotionList
+  })) as unknown as BlogList
   return data
 }
 
