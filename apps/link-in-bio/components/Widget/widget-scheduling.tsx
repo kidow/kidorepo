@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -228,7 +229,12 @@ export default function WidgetScheduling() {
   }, [])
   return (
     <>
-      <li className="col-span-3 row-span-3 hidden h-[605px] w-full space-x-8 divide-x overflow-auto overscroll-contain rounded-3xl border border-neutral-200 p-6 xl:flex">
+      <li
+        onClick={() =>
+          window.open('https://whattime.co.kr/wcgo2ling/30min', '_blank')
+        }
+        className="col-span-3 row-span-3 hidden h-[605px] w-full cursor-pointer space-x-8 divide-x overflow-auto overscroll-contain rounded-3xl border border-neutral-200 p-6 xl:flex"
+      >
         <div className="flex w-full flex-col items-start">
           <div className="flex w-full items-center justify-between">
             <span className="flex h-10 w-10 items-center justify-center rounded-md border">

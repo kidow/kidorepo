@@ -5,7 +5,7 @@ import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoint
 import hljs from 'highlight.js'
 import mermaid from 'mermaid'
 
-import 'highlight.js/styles/github.css'
+import 'highlight.js/styles/github-dark.css'
 
 export interface Props extends CodeBlockObjectResponse {}
 

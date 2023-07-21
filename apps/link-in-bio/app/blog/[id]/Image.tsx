@@ -12,7 +12,7 @@ const Image: FC<Props> = (block) => {
         <img src={block.image.external.url} alt="" />
       )}
       {block.image.type === 'file' && <img src={block.image.file.url} alt="" />}
-      <legend className="text-center text-sm text-stone-500">
+      <legend className="mt-2 text-center text-sm text-stone-500">
         {block.image.caption.map((item, key) => {
           const className = classnames({
             'font-semibold': item.annotations.bold,

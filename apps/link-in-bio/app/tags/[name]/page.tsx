@@ -14,10 +14,11 @@ export function generateMetadata({
 }: {
   params: { name: string }
 }): Metadata {
-  const TITLE = `태그 - ${params.name} | Kidow`
+  const name = decodeURI(params.name)
+  const TITLE = `태그 - ${name} | Kidow`
   return {
     title: TITLE,
-    keywords: [params.name, 'kidow'],
+    keywords: [name, 'kidow'],
     openGraph: {
       title: TITLE
     },
@@ -37,19 +38,20 @@ async function getData(name: string) {
 }
 
 export default async function Page({ params }: { params: { name: string } }) {
-  const { results, next_cursor } = await getData(params.name)
+  const name = decodeURI(params.name)
+  const { results, next_cursor } = await getData(name)
   if (!results.length) redirect('/blog')
   return (
     <>
       <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">
-        # {params.name}
+        # {name}
       </h1>
       <hr className="my-8" />
       <ul className="grid gap-6 xl:grid-cols-2 xl:gap-10">
         {results.map((item) => (
           <Post {...item} key={item.id} />
         ))}
-        <Pagination nextCursor={next_cursor} tag={params.name} />
+        <Pagination nextCursor={next_cursor} tag={name} />
       </ul>
     </>
   )

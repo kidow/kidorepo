@@ -223,10 +223,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         width={820}
         height={450}
         priority
-        className="mt-8 h-[280px] rounded-md border xl:h-[450px]"
+        draggable={false}
+        className="mt-8 h-[280px] select-none rounded-md border xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
-      <article className="prose my-6 max-w-none pb-40">
+      <article className="prose prose-slate my-6 max-w-none pb-40">
         {list.map(async (block) => {
           if (block.type === 'bookmark') {
             const metadata = (await urlMetadata(block.bookmark.url)) as Record<
@@ -254,6 +255,19 @@ export default async function Page({ params }: { params: { id: string } }) {
                 }
               />
             )
+          }
+          if (block.type === 'toggle') {
+            if (block.has_children) {
+              const { results } = await notion.blocks.children.list({
+                block_id: block.id
+              })
+              return (
+                <Toggle
+                  {...block}
+                  subBlocks={results as BlockObjectResponse[]}
+                />
+              )
+            }
           }
           return (
             <Fragment key={block.id}>
