@@ -3,11 +3,13 @@ import Link from 'next/link'
 import { type NumberedListItemBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
 
-export interface Props extends NumberedListItemBlockObjectResponse {}
+export interface Props
+  extends NumberedListItemBlockObjectResponse,
+    ReactProps {}
 
 const NumberedListItem: FC<Props> = (block) => {
   return (
-    <ol>
+    <li>
       {block.numbered_list_item.rich_text.map((item, key) => {
         const className = classnames({
           'font-semibold': item.annotations.bold,
@@ -35,20 +37,19 @@ const NumberedListItem: FC<Props> = (block) => {
           'bg-amber-100': item.annotations.color === 'brown_background'
         })
         return (
-          <li key={key}>
+          <span key={key} className={className}>
             {item.href ? (
               <Link href={item.href} target="_blank" rel="noopenner noreferrer">
-                <span className={className}>{item.plain_text}</span>
+                <span>{item.plain_text}</span>
               </Link>
             ) : (
-              <span className={className} key={key}>
-                {item.plain_text}
-              </span>
+              item.plain_text
             )}
-          </li>
+          </span>
         )
       })}
-    </ol>
+      {block.children}
+    </li>
   )
 }
 

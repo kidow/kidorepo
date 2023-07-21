@@ -1,7 +1,9 @@
-import { type FC } from 'react'
+import type { FC } from 'react'
 import Link from 'next/link'
-import { type ToDoBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { ToDoBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
+
+import { getRichTextClassName } from './utils'
 
 export interface Props extends ToDoBlockObjectResponse {}
 
@@ -56,13 +58,7 @@ const Todo: FC<Props> = (block) => {
         )}
       />
       {block.to_do.rich_text.map((item, key) => {
-        const className = {
-          'font-semibold': item.annotations.bold,
-          italic: item.annotations.italic,
-          'line-through': item.annotations.strikethrough,
-          underline: item.annotations.underline,
-          'notion-code': item.annotations.code
-        }
+        const className = getRichTextClassName(item)
         if (item.href)
           return (
             <Link
@@ -77,7 +73,7 @@ const Todo: FC<Props> = (block) => {
             </Link>
           )
         return (
-          <span key={key} className={classnames(className)}>
+          <span key={key} className={className}>
             {item.plain_text}
           </span>
         )

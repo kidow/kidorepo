@@ -1,14 +1,20 @@
 import type { FC } from 'react'
 import Link from 'next/link'
-import { type BookmarkBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { BookmarkBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 export interface Props extends BookmarkBlockObjectResponse {
-  title: string
-  description: string
-  image: string
+  metadata: Record<string, string>
 }
 
-const Bookmark: FC<Props> = ({ title, description, image, ...block }) => {
+const Bookmark: FC<Props> = ({ metadata, ...block }) => {
+  const title =
+    metadata.title || metadata['og:title'] || metadata['twitter:title']
+  const description =
+    metadata.description ||
+    metadata['og:description'] ||
+    metadata['twitter:description']
+  const image =
+    metadata.image || metadata['og:image'] || metadata['twitter:image']
   return (
     <Link
       href={block.bookmark.url}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, type FC } from 'react'
-import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import hljs from 'highlight.js'
 import mermaid from 'mermaid'
 

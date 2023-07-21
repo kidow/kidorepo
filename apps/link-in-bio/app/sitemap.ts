@@ -10,7 +10,8 @@ async function* getList() {
   while (isFirst || nextCursor) {
     const { results, next_cursor } = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID,
-      start_cursor: nextCursor
+      start_cursor: nextCursor,
+      filter: { property: '배포', checkbox: { equals: true } }
     })
     nextCursor = next_cursor
     if (isFirst) isFirst = false

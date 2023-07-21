@@ -5,13 +5,13 @@ import dayjs from 'dayjs'
 
 import 'dayjs/locale/ko'
 
-import { Fragment } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type {
   BlockObjectResponse,
   CommentObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
+import classnames from 'classnames'
 import urlMetadata from 'url-metadata'
 
 import BackButton from './back-button'
@@ -31,6 +31,11 @@ import Share from './share'
 import Table from './table'
 import Todo from './todo'
 import Toggle from './toggle'
+import {
+  getChildBlocks,
+  getChildBlocksWithChildrenRecursively,
+  getRichTextClassName
+} from './utils'
 import Video from './video'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
@@ -193,6 +198,131 @@ export default async function Page({ params }: { params: { id: string } }) {
     getPost(params.id),
     getComments(params.id)
   ])
+
+  const render = async () => {
+    let items = []
+    let orderedList = []
+    let underedList = []
+    for (const block of list) {
+      if (block.type === 'numbered_list_item') {
+        if (block.has_children) {
+          const children = await getChildBlocksWithChildrenRecursively(block.id)
+          orderedList.push(
+            <NumberedListItem key={block.id} {...block}>
+              <ol>
+                {children.map((item, key) => (
+                  <li key={key}>
+                    {item?.numbered_list_item?.rich_text?.map((child, i) => (
+                      <span key={i}>{child.plain_text}</span>
+                    ))}
+                  </li>
+                ))}
+              </ol>
+            </NumberedListItem>
+          )
+        } else {
+          orderedList.push(<NumberedListItem {...block} />)
+        }
+      } else if (orderedList.length) {
+        items.push(<ol key={'ol' + block.id}>{orderedList}</ol>)
+        orderedList = []
+      }
+      if (block.type === 'bulleted_list_item') {
+        if (block.has_children) {
+          const children = await getChildBlocksWithChildrenRecursively(block.id)
+          underedList.push(
+            <BulletedListItem key={block.id} {...block}>
+              <ul>
+                {children.map((item, key) => (
+                  <li key={key}>
+                    {item?.numbered_list_item?.rich_text?.map((child, i) => (
+                      <span key={i}>{child.plain_text}</span>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            </BulletedListItem>
+          )
+        } else {
+          underedList.push(<BulletedListItem {...block} />)
+        }
+      } else if (underedList.length) {
+        items.push(<ul key={'li' + block.id}>{underedList}</ul>)
+        underedList = []
+      }
+      if (block.type === 'bookmark') {
+        const metadata = (await urlMetadata(block.bookmark.url)) as Record<
+          string,
+          string
+        >
+        items.push(<Bookmark {...block} key={block.id} metadata={metadata} />)
+      }
+      if (block.type === 'toggle') {
+        if (block.has_children) {
+          const children = await getChildBlocksWithChildrenRecursively(block.id)
+          items.push(
+            <Toggle key={block.id} {...block}>
+              <section className="ml-6 hidden cursor-text select-text group-focus:block">
+                {children.map((child) => {
+                  if (child.type === 'paragraph') {
+                    return (
+                      <p key={child.id}>
+                        {child.paragraph.rich_text.map((item, key) => {
+                          const className = getRichTextClassName(item)
+                          if (item.href) {
+                            return (
+                              <Link
+                                href={item.href}
+                                target="_blank"
+                                rel="noopenner noreferrer"
+                                key={key}
+                              >
+                                <span className={classnames(className)}>
+                                  {item.plain_text}
+                                </span>
+                              </Link>
+                            )
+                          }
+                          return (
+                            <span className={classnames(className)} key={key}>
+                              {item.plain_text}
+                            </span>
+                          )
+                        })}
+                      </p>
+                    )
+                  }
+                  return null
+                })}
+              </section>
+            </Toggle>
+          )
+        } else items.push(<Toggle key={block.id} {...block} />)
+      }
+      if (block.type === 'paragraph')
+        items.push(<Paragraph key={block.id} {...block} />)
+      if (block.type === 'to_do') items.push(<Todo key={block.id} {...block} />)
+      if (block.type === 'heading_1')
+        items.push(<Heading1 key={block.id} {...block} />)
+      if (block.type === 'heading_2')
+        items.push(<Heading2 key={block.id} {...block} />)
+      if (block.type === 'heading_3')
+        items.push(<Heading3 key={block.id} {...block} />)
+      if (block.type === 'table')
+        items.push(<Table key={block.id} {...block} />)
+      if (block.type === 'quote')
+        items.push(<Quote key={block.id} {...block} />)
+      if (block.type === 'divider') items.push(<hr key={block.id} />)
+      if (block.type === 'callout')
+        items.push(<Callout key={block.id} {...block} />)
+      if (block.type === 'image')
+        items.push(<Image key={block.id} {...block} />)
+      if (block.type === 'video')
+        items.push(<Video key={block.id} {...block} />)
+      if (block.type === 'code') items.push(<Code key={block.id} {...block} />)
+    }
+    return <>{items}</>
+  }
   return (
     <main className="mx-auto w-full">
       <div className="py-6">
@@ -228,72 +358,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
       <article className="prose prose-slate my-6 max-w-none pb-40">
-        {list.map(async (block) => {
-          if (block.type === 'bookmark') {
-            const metadata = (await urlMetadata(block.bookmark.url)) as Record<
-              string,
-              string
-            >
-            return (
-              <Bookmark
-                {...block}
-                key={block.id}
-                title={
-                  metadata.title ||
-                  metadata['og:title'] ||
-                  metadata['twitter:title']
-                }
-                description={
-                  metadata.description ||
-                  metadata['og:description'] ||
-                  metadata['twitter:description']
-                }
-                image={
-                  metadata.image ||
-                  metadata['og:image'] ||
-                  metadata['twitter:image']
-                }
-              />
-            )
-          }
-          if (block.type === 'toggle') {
-            if (block.has_children) {
-              const { results } = await notion.blocks.children.list({
-                block_id: block.id
-              })
-              return (
-                <Toggle
-                  {...block}
-                  key={block.id}
-                  subBlocks={results as BlockObjectResponse[]}
-                />
-              )
-            }
-          }
-          return (
-            <Fragment key={block.id}>
-              {block.type === 'paragraph' && <Paragraph {...block} />}
-              {block.type === 'to_do' && <Todo {...block} />}
-              {block.type === 'heading_1' && <Heading1 {...block} />}
-              {block.type === 'heading_2' && <Heading2 {...block} />}
-              {block.type === 'heading_3' && <Heading3 {...block} />}
-              {block.type === 'table' && <Table {...block} />}
-              {block.type === 'bulleted_list_item' && (
-                <BulletedListItem {...block} />
-              )}
-              {block.type === 'numbered_list_item' && (
-                <NumberedListItem {...block} />
-              )}
-              {block.type === 'toggle' && <Toggle {...block} />}
-              {block.type === 'quote' && <Quote {...block} />}
-              {block.type === 'divider' && <hr />}
-              {block.type === 'callout' && <Callout {...block} />}
-              {block.type === 'image' && <Image {...block} />}
-              {block.type === 'video' && <Video {...block} />}
-              {block.type === 'code' && <Code {...block} />}
-            </Fragment>
-          )
-        })}
+        {await render()}
         <ul className="not-prose mt-24 flex list-none flex-wrap gap-2 pl-0 text-sm xl:text-base">
           {data?.properties?.태그?.multi_select?.map(({ name }, key) => (
             <li className="mb-4 mr-2" key={key}>
