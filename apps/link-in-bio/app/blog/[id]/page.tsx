@@ -1,4 +1,4 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import NextImage from 'next/image'
 import { Client } from '@notionhq/client'
 import dayjs from 'dayjs'

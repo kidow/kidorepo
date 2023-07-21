@@ -1,6 +1,7 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { Client } from '@notionhq/client'
+import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints'
 
 import Pagination from '@/components/Pagination'
 import Post from '@/components/Post'
@@ -29,6 +30,19 @@ export function generateMetadata({
 }
 
 async function getData(name: string) {
+  let filter: WithAuth<QueryDatabaseParameters>['filter'] = {
+    property: '태그',
+    multi_select: { contains: name }
+  }
+  if (process.env.NODE_ENV === 'production') {
+    filter = {
+      and: [
+        { property: '태그', multi_select: { contains: name } },
+        { property: '배포', checkbox: { equals: true } }
+      ]
+    }
+  }
+
   const data = (await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     sorts: [{ property: '생성일', direction: 'descending' }],

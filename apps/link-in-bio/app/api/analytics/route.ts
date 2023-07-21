@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { BetaAnalyticsDataClient } from '@google-analytics/data'
-import { type google } from '@google-analytics/data/build/protos/protos'
+import type { google } from '@google-analytics/data/build/protos/protos'
 import dayjs from 'dayjs'
 
 export async function GET(req: Request) {

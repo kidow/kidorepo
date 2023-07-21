@@ -8,8 +8,11 @@ export async function GET(req: Request) {
   const data = await notion.databases.query({
     database_id: '498cea7e5c4b44ba8b2b13c6a7f9e3d1',
     sorts: [{ property: '생성일', direction: 'descending' }],
-    page_size: 10,
-    start_cursor: cursor
+    page_size: 5,
+    start_cursor: cursor,
+    ...(process.env.NODE_ENV === 'production'
+      ? { filter: { property: '배포', checkbox: { equals: true } } }
+      : {})
   })
   return NextResponse.json(data)
 }

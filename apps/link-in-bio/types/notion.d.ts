@@ -22,3 +22,7 @@ interface PaginatedList<T> {
   next_cursor: string | null
   has_more: boolean
 }
+
+type WithAuth<P> = P & {
+  auth?: string
+}
