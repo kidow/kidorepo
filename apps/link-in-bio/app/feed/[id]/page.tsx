@@ -1,10 +1,4 @@
 import type { Metadata } from 'next'
-import NextImage from 'next/image'
-import { Client } from '@notionhq/client'
-import dayjs from 'dayjs'
-
-import 'dayjs/locale/ko'
-
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
@@ -12,10 +6,8 @@ import {
   getRichTextClassName,
   isUUID
 } from '@/utils'
-import type {
-  BlockObjectResponse,
-  CommentObjectResponse
-} from '@notionhq/client/build/src/api-endpoints'
+import { Client } from '@notionhq/client'
+import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import classnames from 'classnames'
 import urlMetadata from 'url-metadata'
 
@@ -38,9 +30,6 @@ import {
   Video
 } from '@/components/Block'
 
-import Comment from './comment'
-import Share from './share'
-
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
 export const revalidate = 60 * 60 * 24 * 7
@@ -54,35 +43,28 @@ export async function generateMetadata({
   try {
     const data = (await notion.pages.retrieve({
       page_id: params.id
-    })) as unknown as BlogItem
+    })) as unknown as FeedItem
     const TITLE = `${data.properties?.제목?.title[0]?.plain_text} | Kidow`
-    const DESCRIPTION = data.properties?.설명?.rich_text[0]?.plain_text
-    const IMAGE = data.cover?.external?.url
     const KEYWORDS = data.properties?.태그?.multi_select
       .map((item) => item.name)
       .join(', ')
-    const URL = `https://kidow.me/blog/${data.id}`
+    const URL = `https://kidow.me/feed/${data.id}`
     return {
       title: TITLE,
-      description: DESCRIPTION,
       keywords: KEYWORDS,
       alternates: {
         canonical: URL
       },
       openGraph: {
         title: TITLE,
-        description: DESCRIPTION,
         type: 'article',
         publishedTime: data.created_time,
         authors: 'kidow',
         url: URL,
-        images: IMAGE,
         tags: KEYWORDS
       },
       twitter: {
         title: TITLE,
-        description: DESCRIPTION,
-        images: IMAGE,
         creator: '__kidow__',
         card: 'summary_large_image'
       }
@@ -98,7 +80,7 @@ async function* getList() {
 
   while (isFirst || nextCursor) {
     const { results, next_cursor } = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID,
+      database_id: '498cea7e5c4b44ba8b2b13c6a7f9e3d1',
       start_cursor: nextCursor
     })
     nextCursor = next_cursor
@@ -140,30 +122,6 @@ async function getPost(id: string) {
   return data
 }
 
-async function getComments(id: string) {
-  if (!isUUID(id)) notFound()
-  let isFirst = true
-  let nextCursor: string
-  let data: CommentObjectResponse[] = []
-
-  while (isFirst || nextCursor) {
-    try {
-      const { results, next_cursor } = await notion.comments.list({
-        block_id: id,
-        start_cursor: nextCursor
-      })
-      nextCursor = next_cursor
-      if (isFirst) isFirst = false
-
-      data.push(...results)
-    } catch (err) {
-      notFound()
-    }
-  }
-
-  return data
-}
-
 async function getData(id: string): Promise<BlogItem> {
   try {
     return (await notion.pages.retrieve({
@@ -176,10 +134,9 @@ async function getData(id: string): Promise<BlogItem> {
 
 export default async function Page({ params }: { params: { id: string } }) {
   if (!isUUID(params.id)) notFound()
-  const [data, list, comments] = await Promise.all([
+  const [data, list] = await Promise.all([
     getData(params.id),
-    getPost(params.id),
-    getComments(params.id)
+    getPost(params.id)
   ])
 
   const render = async () => {
@@ -306,62 +263,16 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
     return <>{items}</>
   }
+
   return (
-    <main className="mx-auto w-full">
+    <>
       <div className="py-6">
-        <BackButton pathname="/blog" />
+        <BackButton pathname="/feed" />
       </div>
-      <time dateTime={data.created_time} className="text-sm text-slate-400">
-        {dayjs(data.created_time).locale('ko').format('YYYY년 M월 D일')}
-      </time>
-      <h1 className="mt-2 text-4xl font-bold !leading-[1.2] text-slate-900 xl:text-5xl">
-        {data.properties?.제목?.title[0]?.plain_text}
-      </h1>
-      <div className="mt-4 flex items-center space-x-4 text-sm xl:hidden">
-        <NextImage
-          src="/avatar.png"
-          alt="avatar"
-          height={40}
-          width={40}
-          className="aspect-auto rounded-full border"
-        />
-        <div className="leading-tight">
-          <div className="font-medium text-slate-900">kidow</div>
-          <div className="text-xs text-slate-400">@kidow</div>
-        </div>
-      </div>
-      <NextImage
-        src={data?.cover?.external?.url}
-        alt={data?.properties?.제목?.title[0]?.plain_text}
-        width={820}
-        height={450}
-        priority
-        draggable={false}
-        className="mt-8 h-[280px] select-none rounded-md border xl:h-[450px]"
-        style={{ viewTransitionName: `blog-cover-${params.id}` }}
-      />
-      <article className="my-6 pb-40">
-        <div className="prose prose-slate max-w-none">{await render()}</div>
-        <ul className="mb-5 mt-24 flex flex-wrap gap-2 text-sm xl:text-base">
-          {data?.properties?.태그?.multi_select?.map(({ name }, key) => (
-            <li className="mb-4 mr-2" key={key}>
-              <Link href={`/tags/${name}`}>
-                <span className="rounded-3xl border px-3 py-2 hover:bg-stone-100 xl:px-5 xl:py-2.5">
-                  {name}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        {/* @ts-ignore */}
-        <Share url={data?.public_url} />
-        <hr className="my-12" />
-        <ul className="mt-5 space-y-4">
-          {comments.map((comment) => (
-            <Comment key={comment.id} {...comment} />
-          ))}
-        </ul>
+      <article className="prose prose-slate pb-40">
+        <h2>{data.properties?.제목?.title[0]?.plain_text}</h2>
+        {await render()}
       </article>
-    </main>
+    </>
   )
 }

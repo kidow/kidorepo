@@ -9,11 +9,11 @@ import {
   UtensilsIcon
 } from 'lucide-react'
 
-import Github from '@/components/Github'
 import * as Icon from '@/components/icons'
 import Skills from '@/components/Skills'
 import {
   WidgetAnalytics,
+  WidgetGithub,
   WidgetLink,
   WidgetMap,
   WidgetQuote,
@@ -98,21 +98,7 @@ export default async function Page() {
   const data = await getData()
   return (
     <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
-      <WidgetLink
-        className="col-span-2 xl:col-span-4 xl:hover:rotate-1"
-        size="h-[178px] w-full xl:h-[175px] xl:w-[820px] hover:bg-neutral-50"
-        href="https://github.com/kidow"
-        icon={<Icon.Github />}
-        title="Github"
-        target="_blank"
-        button={
-          <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
-            Follow
-          </button>
-        }
-      >
-        <Github />
-      </WidgetLink>
+      <WidgetGithub />
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"

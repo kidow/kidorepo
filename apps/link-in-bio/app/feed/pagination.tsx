@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   getChildBlocksWithChildrenRecursively,
@@ -179,10 +179,11 @@ export default function Pagination(props: Props) {
   }, [isIntersecting, nextCursor])
   return (
     <>
-      {list.map(async (item) => (
-        <Post {...item} key={item.id}>
-          {await render(item.id)}
-        </Post>
+      {list.map(async (item, key) => (
+        <Fragment key={item.id}>
+          <Post {...item}>{await render(item.id)}</Post>
+          {key !== list.length - 1 && <hr />}
+        </Fragment>
       ))}
       <div ref={ref} />
     </>

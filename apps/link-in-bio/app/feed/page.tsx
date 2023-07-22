@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
@@ -93,8 +94,8 @@ export default async function Page() {
     <>
       <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">피드</h1>
       <hr className="my-8" />
-      <ul className="grid gap-6 xl:gap-10">
-        {results.map(async (page) => {
+      <div className="flex flex-col gap-12 sm:gap-6 xl:gap-10">
+        {results.map(async (page, index) => {
           const render = async () => {
             let items = []
             let orderedList = []
@@ -237,13 +238,14 @@ export default async function Page() {
             return <>{items}</>
           }
           return (
-            <Post {...page} key={page.id}>
-              {await render()}
-            </Post>
+            <Fragment key={page.id}>
+              <Post {...page}>{await render()}</Post>
+              {index !== results.length - 1 && <hr />}
+            </Fragment>
           )
         })}
         <Pagination nextCursor={next_cursor} />
-      </ul>
+      </div>
     </>
   )
 }
