@@ -137,8 +137,8 @@ export default async function Page() {
         </p>
       </li>
       <WidgetLink
-        className="xl:hover:rotate-2"
-        size="w-full h-[178px] xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
+        className="xl:col-span-2 xl:hover:rotate-1"
+        size="w-full h-[178px] xl:h-[175px] xl:w-[390px] hover:bg-neutral-50"
         href="/blog"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
@@ -147,18 +147,6 @@ export default async function Page() {
         }
         title="Blog"
         description="/blog"
-      />
-      <WidgetLink
-        className="xl:hover:rotate-2"
-        size="w-full h-[178px] xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
-        href="/feed"
-        icon={
-          <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
-            <Image src="/blog.png" alt="blog" height={20} width={20} />
-          </span>
-        }
-        title="Feed"
-        description="/feed"
       />
       <WidgetLink
         className="xl:hover:rotate-1"

@@ -76,7 +76,6 @@ export default function WidgetScheduling() {
       body: JSON.stringify(payload)
     })
     const result = await res.json()
-    if (process.env.NODE_ENV === 'development') console.log('result', result)
     if (result.success) {
       toast.success('요청되었습니다. 곧 회신하겠습니다. 🤗', {
         duration: 999999
