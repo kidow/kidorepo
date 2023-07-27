@@ -4,7 +4,7 @@ export const NAV_ITEMS: NavItem[] = [
     items: [
       {
         title: 'Introduction',
-        href: '/docs',
+        href: '/',
         items: []
       }
     ]
@@ -14,7 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
     items: [
       {
         title: 'Accordion',
-        href: '/docs/components/accordion',
+        href: '/components/accordion',
         items: []
       }
     ]
@@ -24,7 +24,7 @@ export const NAV_ITEMS: NavItem[] = [
     items: [
       {
         title: 'useObjectState',
-        href: '/docs/hooks/use-object-state',
+        href: '/hooks/use-object-state',
         items: []
       }
     ]

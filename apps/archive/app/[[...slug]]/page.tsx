@@ -15,11 +15,12 @@ interface Props {
 
 function getDocFromParams({ params }: Props) {
   const slug = params.slug?.join('/') || ''
-  const doc = allContents.find((doc) => doc.slugAsParams === slug)
+  const doc = allContents.find((doc) => {
+    if (!slug) return doc.slug === '/'
+    return doc.slug === `/${slug}`
+  })
 
-  if (!doc) {
-    null
-  }
+  if (!doc) notFound()
 
   return doc
 }
