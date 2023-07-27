@@ -16,9 +16,5 @@ const components: any = {
 
 export default function MDXComponent({ code }: Props) {
   const MDXContent = useMDXComponent(code)
-  return (
-    <div>
-      <MDXContent components={components} />
-    </div>
-  )
+  return <MDXContent components={components} />
 }

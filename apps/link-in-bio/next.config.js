@@ -8,15 +8,5 @@ module.exports = {
       { protocol: 'https', hostname: 'www.notion.so' },
       { protocol: 'https', hostname: 'images.unsplash.com' }
     ]
-  },
-  async redirects() {
-    return [
-      {
-        source: '/archive',
-        destination: 'https://legacy.kidow.me/archive/intro',
-        basePath: false,
-        permanent: false
-      }
-    ]
   }
 }

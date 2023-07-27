@@ -32,9 +32,7 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const doc = getDocFromParams({ params })
 
-  if (!doc) {
-    return {}
-  }
+  if (!doc) notFound()
 
   return {
     title: doc.title,
