@@ -1,7 +1,6 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { allContents } from 'contentlayer/generated'
-import { format, parseISO } from 'date-fns'
 import { getToc } from 'services'
 
 import MDXComponent from './mdx-component'
@@ -48,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: doc.title,
       description: doc.description,
-      creator: '@kidow'
+      creator: '__kidow__'
     }
   }
 }
@@ -62,12 +61,7 @@ export default async function Page({ params }: Props) {
   return (
     <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
       <article className="mx-auto w-full min-w-0">
-        <div className="mb-8 text-center">
-          <time dateTime={doc.date} className="mb-1 text-xs text-gray-600">
-            {format(parseISO(doc.date), 'LLLL d, yyyy')}
-          </time>
-          <h1 className="text-3xl font-bold">{doc.title}</h1>
-        </div>
+        <h1 className="text-3xl font-bold">{doc.title}</h1>
         <MDXComponent code={doc.body.code} />
       </article>
       {doc.toc && <Toc toc={toc} />}

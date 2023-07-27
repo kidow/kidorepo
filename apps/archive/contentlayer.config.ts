@@ -7,7 +7,6 @@ export const Content = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     description: { type: 'string', required: false },
-    date: { type: 'date', required: true },
     toc: { type: 'boolean', default: true, required: false }
   },
   computedFields: {

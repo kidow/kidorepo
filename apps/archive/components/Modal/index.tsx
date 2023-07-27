@@ -2,6 +2,8 @@
 
 import { createPortal } from 'react-dom'
 
+import SearchModal from './Search'
+
 interface Props extends ReactProps, ModalProps {}
 
 function Modal({ isOpen, onClose }: Props) {
@@ -9,4 +11,4 @@ function Modal({ isOpen, onClose }: Props) {
   return createPortal(<div></div>, document.body)
 }
 
-export default Modal
+export default Object.assign(Modal, { Search: SearchModal })

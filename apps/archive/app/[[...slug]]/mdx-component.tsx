@@ -8,10 +8,11 @@ interface Props {
 }
 
 const components: any = {
-  // Override the default <a> element to use the next/link component.
-  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
-  // Add a custom component.
-  MyComponent: () => <div>Hello World!</div>
+  a: ({ href, children }) => (
+    <Link href={href as string} target="_blank">
+      {children}
+    </Link>
+  )
 }
 
 export default function MDXComponent({ code }: Props) {

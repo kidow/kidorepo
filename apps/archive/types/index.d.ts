@@ -10,7 +10,7 @@ interface Item {
 
 interface NavItem {
   title: string
-  items: NavItem[]
+  items?: NavItem[]
   href?: string
   external?: boolean
 }
