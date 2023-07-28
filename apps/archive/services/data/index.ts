@@ -1,4 +1,4 @@
-export const JAVASCRIPT_LINKS: NavItem[] = [
+export const JAVASCRIPT_LINKS: SidebarItem[] = [
   {
     title: 'Components',
     items: [

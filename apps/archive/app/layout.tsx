@@ -1,22 +1,46 @@
-'use client'
-
 import './globals.css'
 
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
 
 import Header from './header'
 import Sidebar from './sidebar'
+import ThemeProvider from './theme-provider'
 
 const inter = Inter({
   subsets: ['latin']
 })
 
+const TITLE = '아카이브 | Kidow'
+const DESCRIPTION = '웹 프론트엔드 개발자의 노하우를 담은 코드 저장소입니다.'
+const BASE_URL = 'https://archive.kidow.me'
+
+export const metadata: Metadata = {
+  title: {
+    default: TITLE,
+    template: '%s | Kidow'
+  },
+  description: '웹 프론트엔드 개발자의 노하우를 담은 코드 저장소입니다.',
+  keywords: ['archive', 'front-end', 'code', 'algorithm', 'wiki'],
+  alternates: {
+    canonical: BASE_URL
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION
+  },
+  twitter: {
+    title: TITLE,
+    description: DESCRIPTION
+  },
+  metadataBase: new URL(BASE_URL)
+}
+
 export default function RootLayout({ children }: ReactProps) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <div className="flex-1">

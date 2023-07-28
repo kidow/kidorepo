@@ -30,6 +30,7 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
     slug: doc.slugAsParams.split('/')
   }))
 }
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const doc = getDocFromParams({ params })
 

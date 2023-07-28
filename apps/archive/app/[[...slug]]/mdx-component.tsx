@@ -1,15 +1,9 @@
 'use client'
 
-import {
-  useEffect,
-  useRef,
-  type HTMLAttributes,
-  type ImgHTMLAttributes
-} from 'react'
+import type { HTMLAttributes, ImgHTMLAttributes } from 'react'
 import classnames from 'classnames'
-import { CopyIcon, HashIcon } from 'lucide-react'
+import { CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { useTheme } from 'next-themes'
 
 interface Props {
   code: string
@@ -53,7 +47,7 @@ const components = {
     <a className="font-medium underline underline-offset-4" {...props} />
   ),
   p: (props: HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />
+    <p className="mt-6 leading-7" {...props} />
   ),
   ul: (props: HTMLAttributes<HTMLUListElement>) => (
     <ul className="my-6 ml-6 list-disc" {...props} />
@@ -95,7 +89,7 @@ const components = {
   ),
   pre: (props: HTMLAttributes<HTMLPreElement>) => {
     return (
-      <div className="relative">
+      <div className="group relative">
         <pre
           className="mb-4 overflow-x-auto rounded-b-lg border border-neutral-800 p-4 text-sm text-[#e2e8f0] dark:bg-[#1e293b]"
           {...props}
@@ -115,7 +109,9 @@ const components = {
               .then(() => alert('복사되었습니다.'))
               .catch(() => alert('실패했습니다.'))
           }}
-          className="absolute right-4 top-4 inline-flex h-6 w-6 items-center justify-center rounded-md"
+          className="absolute right-3 top-3 hidden h-[30px] w-[30px] items-center justify-center rounded-md border bg-neutral-800 transition-all duration-150 group-hover:inline-flex dark:border-neutral-600"
+          title="Copy code"
+          tabIndex={0}
         >
           <span className="sr-only">Copy code</span>
           <CopyIcon size={16} />

@@ -173,6 +173,9 @@ importers:
 
   apps/archive:
     dependencies:
+      '@notionhq/client':
+        specifier: ^2.2.7
+        version: 2.2.7(encoding@0.1.13)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2

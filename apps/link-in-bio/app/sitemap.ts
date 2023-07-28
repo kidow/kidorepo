@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 import { Client } from '@notionhq/client'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })

@@ -8,9 +8,9 @@ interface Item {
   items?: Item[]
 }
 
-interface NavItem {
+interface SidebarItem {
   title: string
-  items?: NavItem[]
+  items?: SidebarItem[]
   href?: string
   external?: boolean
 }

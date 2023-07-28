@@ -6,6 +6,15 @@ const nextConfig = {
   transpilePackages: ['ui'],
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'illustrations.popsy.co' }]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/components/accordion',
+        permanent: true
+      }
+    ]
   }
 }
 
