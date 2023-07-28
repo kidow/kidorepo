@@ -27,6 +27,21 @@ export default function RootLayout({ children }: ReactProps) {
                 </div>
               </div>
             </div>
+            <footer className="border-t dark:border-neutral-800">
+              <div className="container flex h-16 items-center md:h-24">
+                <p className="text-sm text-neutral-400">
+                  Built by{' '}
+                  <a
+                    href="https://github.com/kidow"
+                    target="_blank"
+                    className="underline"
+                  >
+                    Kidow
+                  </a>
+                  .
+                </p>
+              </div>
+            </footer>
           </div>
         </ThemeProvider>
       </body>

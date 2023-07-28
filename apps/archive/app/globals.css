@@ -5,6 +5,29 @@
 @layer base {
   html,
   body {
-    @apply duration-150 dark:bg-[#111] dark:text-gray-100;
+    @apply bg-neutral-50 text-neutral-950 duration-150 dark:bg-neutral-950 dark:text-neutral-100;
+  }
+}
+
+[data-rehype-pretty-code-title] {
+  @apply select-none px-4 py-2 font-mono text-xs dark:bg-slate-800 dark:text-slate-300;
+}
+
+[data-rehype-pretty-code-fragment] {
+  @apply mt-6 overflow-hidden rounded-lg;
+}
+
+.mdx > .steps:first-child > h3:first-child {
+  @apply mt-0;
+}
+
+@layer utilities {
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    @apply absolute ml-[-50px] mt-[-4px] inline-flex h-9 w-9 items-center justify-center rounded-full border-4 text-center -indent-px font-mono text-base font-medium dark:border-neutral-950 dark:bg-neutral-800;
+    content: counter(step);
   }
 }

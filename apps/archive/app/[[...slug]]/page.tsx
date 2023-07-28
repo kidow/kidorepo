@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Comment } from 'components'
 import { allContents } from 'contentlayer/generated'
 import { getToc } from 'services'
 
@@ -61,8 +62,10 @@ export default async function Page({ params }: Props) {
   return (
     <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
       <article className="mx-auto w-full min-w-0">
-        <h1 className="text-3xl font-bold">{doc.title}</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{doc.title}</h1>
+        {doc.description && <p className="text-lg">{doc.description}</p>}
         <MDXComponent code={doc.body.code} />
+        <Comment />
       </article>
       {doc.toc && <Toc toc={toc} />}
     </main>
