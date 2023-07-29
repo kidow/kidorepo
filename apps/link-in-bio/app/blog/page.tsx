@@ -9,6 +9,8 @@ const TITLE = '블로그 | Kidow'
 const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
 const BASE_URL = 'https://kidow.me/blog'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,

@@ -20,6 +20,7 @@ import classnames from 'classnames'
 import urlMetadata from 'url-metadata'
 
 import BackButton from '@/components/BackButton'
+import BackTop from '@/components/BackTop'
 import {
   Bookmark,
   BulletedListItem,
@@ -362,6 +363,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ))}
         </ul>
       </article>
+      <BackTop />
     </main>
   )
 }

@@ -12,7 +12,7 @@ function Header() {
     <header
       className={classnames(
         'flex h-full w-full max-w-[428px] items-center justify-center p-6 pb-0 pt-12 [view-transition-name:header] xl:absolute xl:top-0 xl:max-w-[min(100vw,1728px)] xl:items-stretch xl:justify-start xl:p-16',
-        { 'hidden xl:block': pathname.startsWith('/blog/') }
+        { 'hidden xl:block': pathname?.startsWith('/blog/') }
       )}
     >
       <div className="flex w-full flex-col px-4 xl:mr-20 xl:flex-1 xl:px-0">

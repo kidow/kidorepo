@@ -13,7 +13,7 @@ function BackButton({ pathname }: Props) {
   return (
     <button
       onClick={() => (document.referrer ? push(pathname) : back())}
-      className="flex h-10 w-10 items-center justify-center rounded-[10px] border"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-[10px] border"
     >
       <ArrowLeft className="h-5 w-5" />
     </button>
