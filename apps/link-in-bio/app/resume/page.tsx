@@ -74,7 +74,7 @@ export default async function Page() {
                     <h3>
                       {(
                         results[0] as Heading3BlockObjectResponse
-                      ).heading_3.rich_text.map((item, key) => (
+                      ).heading_3.rich_text?.map((item, key) => (
                         <span key={key}>{item.plain_text}</span>
                       ))}
                     </h3>
@@ -85,7 +85,7 @@ export default async function Page() {
                         ) as BulletedListItemBlockObjectResponse[]
                       ).map((subBlock) => (
                         <li key={subBlock.id}>
-                          {subBlock.bulleted_list_item.rich_text.map(
+                          {subBlock.bulleted_list_item.rich_text?.map(
                             (item, key) => (
                               <span
                                 className={classnames({
@@ -111,7 +111,7 @@ export default async function Page() {
                   {(subBlocks[0].results as ParagraphBlockObjectResponse[]).map(
                     (subBlock) => (
                       <div key={subBlock.id}>
-                        {subBlock.paragraph.rich_text.map((item, key) => (
+                        {subBlock.paragraph.rich_text?.map((item, key) => (
                           <span key={key}>{item.plain_text}</span>
                         ))}
                       </div>
@@ -152,7 +152,7 @@ export default async function Page() {
                       if (subBlock.type === 'paragraph') {
                         return (
                           <p key={subBlock.id}>
-                            {subBlock.paragraph.rich_text.map((item, key) => (
+                            {subBlock.paragraph.rich_text?.map((item, key) => (
                               <span key={key}>{item.plain_text}</span>
                             ))}
                           </p>
@@ -181,7 +181,7 @@ export default async function Page() {
                                   if (toggleBlock.type === 'bulleted_list_item')
                                     return (
                                       <li key={toggleBlock.id}>
-                                        {toggleBlock.bulleted_list_item.rich_text.map(
+                                        {toggleBlock.bulleted_list_item.rich_text?.map(
                                           (item, key) => (
                                             <span key={key}>
                                               {item.plain_text}
@@ -244,14 +244,14 @@ export default async function Page() {
           <Fragment key={block.id}>
             {block.type === 'paragraph' && (
               <p>
-                {block.paragraph.rich_text.map((item, key) => (
+                {block.paragraph.rich_text?.map((item, key) => (
                   <span key={key}>{item.plain_text}</span>
                 ))}
               </p>
             )}
             {block.type === 'heading_2' && (
               <h2>
-                {block.heading_2.rich_text.map((item, key) => (
+                {block.heading_2.rich_text?.map((item, key) => (
                   <span key={key}>{item.plain_text}</span>
                 ))}
               </h2>
