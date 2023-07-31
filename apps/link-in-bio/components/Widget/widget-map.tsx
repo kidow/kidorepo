@@ -22,7 +22,7 @@ export default function WidgetMap() {
           zoomable={false}
           level={9}
         >
-          <MapMarker position={{ lat, lng }}></MapMarker>
+          <MapMarker position={{ lat, lng }} />
         </Map>
         <div className="absolute bottom-4 left-4 z-10 rounded-lg border border-neutral-200 bg-white px-2 py-1.5 text-sm">
           Hanam-si, Gyeonggi-do, South Korea

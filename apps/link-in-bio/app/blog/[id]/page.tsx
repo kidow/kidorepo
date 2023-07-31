@@ -208,7 +208,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           orderedList.push(<NumberedListItem {...block} />)
         }
       } else if (orderedList.length) {
-        items.push(<ol key={'ol' + block.id}>{orderedList}</ol>)
+        items.push(
+          <ol key={Math.random().toString(36).slice(2)}>{orderedList}</ol>
+        )
         orderedList = []
       }
       if (block.type === 'bulleted_list_item') {
@@ -231,7 +233,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           underedList.push(<BulletedListItem {...block} />)
         }
       } else if (underedList.length) {
-        items.push(<ul key={'li' + block.id}>{underedList}</ul>)
+        items.push(
+          <ul key={Math.random().toString(36).slice(2)}>{underedList}</ul>
+        )
         underedList = []
       }
       if (block.type === 'bookmark') {
@@ -355,7 +359,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ))}
         </ul>
         {/* @ts-ignore */}
-        <Share url={data?.public_url} />
+        {/* <Share url={data?.public_url} /> */}
         <hr className="my-12" />
         <ul className="mt-5 space-y-4">
           {comments.map((comment) => (

@@ -6,7 +6,7 @@ import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-end
 import Pagination from '@/components/Pagination'
 import Post from '@/components/Post'
 
-export const revalidate = 60 * 60 * 24 * 7
+export const revalidate = 60 * 60 * 24
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
