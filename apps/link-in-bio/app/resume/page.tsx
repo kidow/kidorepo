@@ -34,6 +34,8 @@ export const metadata: Metadata = {
 }
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
+export const revalidate = 60 * 60 * 24
+
 async function getData(): Promise<[GetPageResponse, BlockObjectResponse[]]> {
   const [data, { results }] = await Promise.all([
     notion.pages.retrieve({
@@ -85,7 +87,7 @@ export default async function Page() {
                         ) as BulletedListItemBlockObjectResponse[]
                       ).map((subBlock) => (
                         <li key={subBlock.id}>
-                          {subBlock.bulleted_list_item.rich_text?.map(
+                          {subBlock?.bulleted_list_item?.rich_text?.map(
                             (item, key) => (
                               <span
                                 className={classnames({
