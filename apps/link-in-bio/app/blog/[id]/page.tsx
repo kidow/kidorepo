@@ -205,7 +205,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             </NumberedListItem>
           )
         } else {
-          orderedList.push(<NumberedListItem {...block} />)
+          orderedList.push(
+            <NumberedListItem {...block} key={'ol' + block.id} />
+          )
         }
       } else if (orderedList.length) {
         items.push(
@@ -230,7 +232,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             </BulletedListItem>
           )
         } else {
-          underedList.push(<BulletedListItem {...block} />)
+          underedList.push(
+            <BulletedListItem {...block} key={'ul' + block.id} />
+          )
         }
       } else if (underedList.length) {
         items.push(
@@ -359,7 +363,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ))}
         </ul>
         {/* @ts-ignore */}
-        {/* <Share url={data?.public_url} /> */}
+        <Share url={data?.public_url} />
         <hr className="my-12" />
         <ul className="mt-5 space-y-4">
           {comments.map((comment) => (
