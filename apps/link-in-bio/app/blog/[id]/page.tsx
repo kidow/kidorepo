@@ -44,7 +44,7 @@ import Share from './share'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
-export const revalidate = 60 * 60 * 24
+export const revalidate = 60 * 60
 
 export async function generateMetadata({
   params
@@ -243,11 +243,15 @@ export default async function Page({ params }: { params: { id: string } }) {
         underedList = []
       }
       if (block.type === 'bookmark') {
-        const metadata = (await urlMetadata(block.bookmark.url)) as Record<
-          string,
-          string
-        >
-        items.push(<Bookmark {...block} key={block.id} metadata={metadata} />)
+        try {
+          const metadata = (await urlMetadata(block.bookmark.url)) as Record<
+            string,
+            string
+          >
+          items.push(<Bookmark {...block} key={block.id} metadata={metadata} />)
+        } catch (err) {
+          console.log('url-metadata err: ', err)
+        }
       }
       if (block.type === 'toggle') {
         if (block.has_children) {
