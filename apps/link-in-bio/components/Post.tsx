@@ -17,7 +17,7 @@ export default function Post(page: Props) {
             width={390}
             height={260}
             priority
-            className="h-[260px] w-[390px] duration-200 group-hover:scale-125"
+            className="h-[260px] w-full object-cover duration-200 group-hover:scale-125 xl:w-[390px]"
             style={{ viewTransitionName: `blog-cover-${page.id}` }}
           />
         </div>

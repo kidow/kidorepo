@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Spinner } from 'ui'
+import { useState } from 'react'
+import { PlusIcon } from 'lucide-react'
 
-import useIntersectionObserver from '@/hooks/use-intersection-observer'
 import Post from '@/components/Post'
 
 interface Props {
@@ -12,7 +11,6 @@ interface Props {
 }
 
 export default function Pagination({ tag = '', ...props }: Props) {
-  const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>()
   const [list, setList] = useState<BlogItem[]>([])
   const [nextCursor, setNextCursor] = useState(props.nextCursor)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -26,20 +24,35 @@ export default function Pagination({ tag = '', ...props }: Props) {
     setList([...list, ...(data?.results || [])])
     setNextCursor(data?.next_cursor)
   }
-
-  useEffect(() => {
-    if (nextCursor && isIntersecting) get()
-  }, [isIntersecting, nextCursor, isLoading])
   return (
     <>
       {list.map((item) => (
         <Post {...item} key={item.id} />
       ))}
-      <div ref={ref} />
-      {isLoading && (
-        <div className="flex justify-center">
-          <Spinner className="h-5 w-5" />
-        </div>
+      {isLoading ? (
+        <li className="overflow-hidden rounded-[10px] border border-slate-200">
+          <div className="h-[260px] animate-pulse bg-slate-200" />
+          <div className="space-y-4 p-5 xl:p-6">
+            <div className="h-8 animate-pulse rounded-full bg-slate-200" />
+            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
+            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
+            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
+          </div>
+        </li>
+      ) : (
+        !!nextCursor && (
+          <li
+            onClick={get}
+            className="cursor-pointer overflow-hidden rounded-[10px] border border-slate-200 hover:border-slate-300"
+          >
+            <div className="flex items-center justify-center p-5 xl:p-6">
+              <div className="flex items-center gap-2 text-slate-400">
+                <PlusIcon />
+                <span>더 보기</span>
+              </div>
+            </div>
+          </li>
+        )
       )}
     </>
   )
