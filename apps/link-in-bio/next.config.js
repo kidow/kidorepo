@@ -9,5 +9,14 @@ module.exports = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'i.imgur.com' }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/archive',
+        destination: 'https://archive.kidow.me',
+        permanent: true
+      }
+    ]
   }
 }

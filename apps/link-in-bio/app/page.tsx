@@ -442,7 +442,7 @@ export default async function Page() {
         title="LUNCH"
         description="점심 뭐 먹지?"
       />
-      {/* <WidgetLink
+      <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
         href="/archive"
@@ -454,7 +454,7 @@ export default async function Page() {
         }
         title="ARCHIVE"
         description="(작업중)"
-      /> */}
+      />
     </ul>
   )
 }
