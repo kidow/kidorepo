@@ -167,18 +167,77 @@ async function getSpotify() {
     { next: { revalidate: 0 } }
   )
   if (!res.ok) {
-    throw new Error('Error occurred when fetching spotify')
+    throw new Error('Error occurred when fetching spotify.')
   }
   const { data } = await res.json()
   return data
 }
 
+async function getGithub() {
+  const res = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`
+    }),
+    body: JSON.stringify({
+      query: `
+        query($userName:String!) {
+          user(login: $userName){
+            contributionsCollection {
+              contributionCalendar {
+                totalContributions
+                weeks {
+                  contributionDays {
+                    contributionCount
+                    date
+                  }
+                }
+              }
+            }
+          }
+        }
+        `,
+      variables: { userName: 'kidow' }
+    })
+  })
+  if (!res.ok) {
+    throw new Error('error occured when fetching github.')
+  }
+  const json = await res.json()
+  let result = {}
+  for (const week of json?.data?.user?.contributionsCollection
+    ?.contributionCalendar?.weeks) {
+    for (const day of week.contributionDays) {
+      result[day.date] = day.contributionCount
+    }
+  }
+  return result
+}
+
 export default async function Page() {
   const spotifyPromise = getSpotify()
   const analyticsPromise = getAnalytics()
+  const githubPromise = getGithub()
   return (
     <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
-      <WidgetGithub />
+      <WidgetLink
+        className="col-span-2 xl:col-span-4 xl:hover:rotate-1"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[820px] hover:bg-neutral-50"
+        href="https://github.com/kidow"
+        icon={<Icon.Github />}
+        title="Github"
+        target="_blank"
+        button={
+          <button className="rounded-md border bg-slate-50 px-[21px] py-[7px] text-xs font-bold text-neutral-600">
+            Follow
+          </button>
+        }
+      >
+        <Suspense fallback={null}>
+          {/* @ts-expect-error Server Component */}
+          <WidgetGithub promise={githubPromise} />
+        </Suspense>
+      </WidgetLink>
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
@@ -390,11 +449,11 @@ export default async function Page() {
         target="_blank"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
-            <Archive className="h-5 w-5" />
+            <ArchiveIcon className="h-5 w-5" />
           </span>
         }
         title="ARCHIVE"
-        description="개발 노하우 저장소"
+        description="(작업중)"
       /> */}
     </ul>
   )
