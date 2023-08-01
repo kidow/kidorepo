@@ -27,7 +27,7 @@ interface Props {
   totalSongs: number
 }
 
-export default function WidgetSpotify({ tracks, totalSongs }: Props) {
+export default function SpotifyClient({ tracks, totalSongs }: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement>()
   const [isPlayed, setIsPlayed] = useState(false)
 

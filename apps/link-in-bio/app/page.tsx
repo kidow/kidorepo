@@ -174,7 +174,7 @@ async function getSpotify() {
 }
 
 export default async function Page() {
-  const data = await getSpotify()
+  const spotifyPromise = getSpotify()
   const analyticsPromise = getAnalytics()
   return (
     <ul className="duration-400 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-10">
@@ -250,7 +250,8 @@ export default async function Page() {
           </li>
         }
       >
-        <WidgetSpotify {...data} />
+        {/* @ts-expect-error Server Component */}
+        <WidgetSpotify promise={spotifyPromise} />
       </Suspense>
       <WidgetLink
         className="xl:hover:rotate-2"
