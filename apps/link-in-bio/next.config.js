@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  transpilePackages: ['ui'],
+  transpilePackages: ['ui', 'utils'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'i.scdn.co' },

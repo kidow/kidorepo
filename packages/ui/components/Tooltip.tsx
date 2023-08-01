@@ -2,6 +2,7 @@
 
 import { memo, type FC } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from 'utils'
 
 export interface Props extends ReactProps, VariantProps<typeof variants> {
   content: string
@@ -70,7 +71,7 @@ const Tooltip: FC<Props> = ({
 }) => {
   return (
     <div
-      className={variants({ position, arrow, className })}
+      className={cn(variants({ position, arrow, className }))}
       data-tip={content}
       role="tooltip"
     >

@@ -21,7 +21,7 @@
         "SLACK_WEBHOOK_URL",
         "NOTION_SECRET_KEY",
         "NOTION_DATABASE_ID",
-        "NEXT_PUBLIC_GITHUB_TOKEN"
+        "GITHUB_TOKEN"
       ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

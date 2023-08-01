@@ -91,7 +91,7 @@ export async function getGithub() {
   const res = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: new Headers({
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
     }),
     body: JSON.stringify({
       query: `
