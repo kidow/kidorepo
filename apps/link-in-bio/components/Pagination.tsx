@@ -5,6 +5,8 @@ import { PlusIcon } from 'lucide-react'
 
 import Post from '@/components/Post'
 
+import Loader from './Loader'
+
 interface Props {
   nextCursor?: string
   tag?: string
@@ -30,15 +32,7 @@ export default function Pagination({ tag = '', ...props }: Props) {
         <Post {...item} key={item.id} />
       ))}
       {isLoading ? (
-        <li className="overflow-hidden rounded-[10px] border border-slate-200">
-          <div className="h-[260px] animate-pulse bg-slate-200" />
-          <div className="space-y-4 p-5 xl:p-6">
-            <div className="h-8 animate-pulse rounded-full bg-slate-200" />
-            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
-            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
-            <div className="h-4 animate-pulse rounded-full bg-slate-200" />
-          </div>
-        </li>
+        <Loader />
       ) : (
         !!nextCursor && (
           <li

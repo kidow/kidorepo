@@ -1,9 +1,11 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Client } from '@notionhq/client'
 
-import Pagination from '@/components/Pagination'
-import Post from '@/components/Post'
+import Loader from '@/components/Loader'
+
+import List from './list'
 
 const TITLE = '블로그 | Kidow'
 const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
@@ -44,7 +46,7 @@ async function getData(): Promise<BlogList> {
 }
 
 export default async function Page() {
-  const { results, next_cursor } = await getData()
+  const promise = getData()
   return (
     <>
       <div className="flex items-center justify-between">
@@ -58,12 +60,18 @@ export default async function Page() {
         </Link>
       </div>
       <hr className="my-8" />
-      <ul className="grid gap-6 xl:grid-cols-2 xl:gap-10">
-        {results.map((item) => (
-          <Post {...item} key={item.id} />
-        ))}
-        <Pagination nextCursor={next_cursor} />
-      </ul>
+      <Suspense
+        fallback={
+          <ul className="grid gap-6 xl:grid-cols-2 xl:gap-10">
+            {Array.from({ length: 2 }).map((_, key) => (
+              <Loader key={key} />
+            ))}
+          </ul>
+        }
+      >
+        {/* @ts-expect-error Server Component */}
+        <List promise={promise} />
+      </Suspense>
     </>
   )
 }
