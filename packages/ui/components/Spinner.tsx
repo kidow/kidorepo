@@ -1,15 +1,16 @@
-import type { FC } from 'react'
-import classnames from 'classnames'
-import type { Argument } from 'classnames'
+import { memo, type FC } from 'react'
+import { cva } from 'class-variance-authority'
 
 export interface Props {
-  className?: Argument
+  className?: string
 }
+
+export const variants = cva('animate-spin')
 
 const Spinner: FC<Props> = ({ className }) => {
   return (
     <svg
-      className={classnames('animate-spin', className)}
+      className={variants({ className })}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -31,4 +32,4 @@ const Spinner: FC<Props> = ({ className }) => {
   )
 }
 
-export default Spinner
+export default memo(Spinner)
