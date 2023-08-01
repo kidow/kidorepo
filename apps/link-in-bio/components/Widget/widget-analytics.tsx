@@ -1,26 +1,14 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { AreaChart, BadgeDelta, Card, Flex, Metric, Text } from '@tremor/react'
 
-export default function WidgetAnalytics() {
-  const [list, setList] = useState<
-    Array<{ date: string; '방문자 수': number }>
-  >([])
-  const [percent, setPercent] = useState<number>(0)
-  const [total, setTotal] = useState<number>(0)
-
-  const get = async () => {
-    const res = await fetch('/api/analytics')
-    const data = await res.json()
-    setList(data?.latestPageViews || [])
-    setPercent(data?.percent || 0)
-    setTotal(data?.total || 0)
-  }
-
-  useEffect(() => {
-    get()
-  }, [])
+export default async function WidgetAnalytics(props: {
+  promise: Promise<{
+    list: Array<{ date: string; '방문자 수': string }>
+    percent: number
+    total: number
+  }>
+}) {
+  if (!props) return null
+  const { list, percent, total } = await props.promise
   return (
     <li className="col-span-2">
       <Card className="shadow-none ring-neutral-200">
