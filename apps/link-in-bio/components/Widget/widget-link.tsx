@@ -38,7 +38,8 @@ export default function WidgetLink({
           if (target === '_blank') return
           e.preventDefault()
           if ((document as any)?.startViewTransition) {
-            ;(document as any).startViewTransition(async () => {
+            // @ts-ignore
+            document?.startViewTransition(async () => {
               await push(href)
             })
           }

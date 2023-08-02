@@ -90,14 +90,14 @@ export default function Page() {
         if (!data.length) setResults([])
         if (page > 1) pagination.gotoPage(page)
         if (!data.length && !!results.length) {
-          for (let i in results) {
+          for (const i in results) {
             markers[i].setMap(null)
             polylines[i].setMap(null)
           }
         }
         if (status === kakao.maps.services.Status.OK) {
           const bounds = new kakao.maps.LatLngBounds()
-          let searchResult: kakao.maps.services.PlacesSearchResult = []
+          const searchResult: kakao.maps.services.PlacesSearchResult = []
           if (!infoWindow) {
             setInfoWindow(
               new kakao.maps.InfoWindow({ zIndex: 1, removable: true })
@@ -106,8 +106,8 @@ export default function Page() {
             infoWindow.close()
           }
 
-          if (!!results.length) {
-            for (let i in results) {
+          if (results.length) {
+            for (const i in results) {
               markers[i].setMap(null)
               polylines[i].setMap(null)
             }

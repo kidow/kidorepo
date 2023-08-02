@@ -43,7 +43,7 @@ export default function WidgetScheduling() {
       .set('minute', Number(selectedTime.slice(-2)))
       .toISOString()
 
-    let payload: any = {
+    const payload: any = {
       name: data.name,
       email: data.email,
       memo: data.memo,

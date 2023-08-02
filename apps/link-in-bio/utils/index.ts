@@ -18,17 +18,18 @@ async function* iteratePaginatedAPI<Args extends PaginatedArgs, Item>(
   listFn: (args: Args) => Promise<PaginatedList<Item>>,
   firstPageArgs: Args
 ): AsyncIterableIterator<Item> {
-  let next_cursor: string | null | undefined = firstPageArgs.start_cursor
-  let has_more = true
-  let results: Item[] = []
+  let nextCursor: string | null | undefined = firstPageArgs.start_cursor
+  let hasMore = true
   let total = 0
   let page = 0
 
-  while (has_more) {
-    ;({ results, next_cursor, has_more } = await listFn({
+  while (hasMore) {
+    const { results, next_cursor, has_more } = await listFn({
       ...firstPageArgs,
-      start_cursor: next_cursor
-    }))
+      start_cursor: nextCursor
+    })
+    hasMore = has_more
+    nextCursor = next_cursor
     page++
     total += results.length
     yield* results
@@ -113,7 +114,7 @@ export const getRichTextClassName = ({
 
 export function getYouTubeVideoId(url: string) {
   const regExp =
-    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
+    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
 
   const match = url.match(regExp)
   if (match && match[7].length === 11) {

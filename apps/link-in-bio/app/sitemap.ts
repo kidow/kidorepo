@@ -21,7 +21,7 @@ async function* getList() {
 }
 
 async function getPostIds() {
-  let results = []
+  const results = []
   for await (const arr of getList()) {
     results.push(...arr)
   }

@@ -118,7 +118,7 @@ export async function getGithub() {
     throw new Error('error occured when fetching github.')
   }
   const json = await res.json()
-  let result = {}
+  const result = {}
   for (const week of json?.data?.user?.contributionsCollection
     ?.contributionCalendar?.weeks) {
     for (const day of week.contributionDays) {

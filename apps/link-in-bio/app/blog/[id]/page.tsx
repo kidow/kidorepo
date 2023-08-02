@@ -110,7 +110,7 @@ async function* getList() {
 }
 
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
-  let results = []
+  const results = []
   for await (const arr of getList()) {
     results.push(...arr)
   }
@@ -121,7 +121,7 @@ async function getPost(id: string) {
   if (!isUUID(id)) notFound()
   let isFirst = true
   let nextCursor: string
-  let data: BlockObjectResponse[] = []
+  const data: BlockObjectResponse[] = []
 
   while (isFirst || nextCursor) {
     try {
@@ -145,7 +145,7 @@ async function getComments(id: string) {
   if (!isUUID(id)) notFound()
   let isFirst = true
   let nextCursor: string
-  let data: CommentObjectResponse[] = []
+  const data: CommentObjectResponse[] = []
 
   while (isFirst || nextCursor) {
     try {
@@ -184,7 +184,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   ])
 
   const render = async () => {
-    let items = []
+    const items = []
     let orderedList = []
     let underedList = []
     for (const block of list) {

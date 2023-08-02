@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState
 } from 'react'
-import { Editor, Extension, Range } from '@tiptap/core'
+import { Extension, type Editor, type Range } from '@tiptap/core'
 import { ReactRenderer } from '@tiptap/react'
 import Suggestion from '@tiptap/suggestion'
 import {

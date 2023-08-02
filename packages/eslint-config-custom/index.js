@@ -40,11 +40,20 @@ module.exports = {
   ],
   rules: {
     '@next/next/no-html-link-for-pages': 'off',
-    'tailwindcss/no-custom-classname': 'off',
+
     'react/react-in-jsx-scope': 'off',
+
     // cva reorder 이슈가 해결되면 error로 변경할 것
     'tailwindcss/classnames-order': 'off',
-    'import/no-unresolved': 'off'
+    'tailwindcss/no-custom-classname': 'off',
+
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
+    '@typescript-eslint/no-var-requires': 'warn',
+
+    'import/no-unresolved': 'off',
+    'no-undef': 'off'
   },
   ignorePatterns: ['dist', 'build', 'public']
 }
