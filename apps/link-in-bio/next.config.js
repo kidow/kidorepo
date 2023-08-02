@@ -16,6 +16,11 @@ module.exports = {
         source: '/archive',
         destination: 'https://archive.kidow.me',
         permanent: true
+      },
+      {
+        source: '/workshop',
+        destination: 'https://workshop.kidow.me',
+        permanent: true
       }
     ]
   }

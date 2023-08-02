@@ -5,6 +5,7 @@ import {
   ArchiveIcon,
   FileTextIcon,
   MailIcon,
+  PaletteIcon,
   StickyNoteIcon,
   UtensilsIcon
 } from 'lucide-react'
@@ -326,6 +327,19 @@ export default async function Page() {
           </span>
         }
         title="ARCHIVE"
+        description="(작업중)"
+      />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+        href="/workshop"
+        target="_blank"
+        icon={
+          <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
+            <PaletteIcon className="h-5 w-5" />
+          </span>
+        }
+        title="WORKSHOP"
         description="(작업중)"
       />
     </ul>
