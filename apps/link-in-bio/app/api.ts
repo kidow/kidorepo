@@ -119,8 +119,9 @@ export async function getGithub() {
   }
   const json = await res.json()
   const result = {}
-  for (const week of json?.data?.user?.contributionsCollection
-    ?.contributionCalendar?.weeks) {
+  const weeks =
+    json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? []
+  for (const week of weeks) {
     for (const day of week.contributionDays) {
       result[day.date] = day.contributionCount
     }

@@ -16,7 +16,6 @@ module.exports = {
     'plugin:tailwindcss/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:storybook/recommended',
     'plugin:import/recommended'
   ],
   plugins: ['react-refresh', 'tailwindcss'],
