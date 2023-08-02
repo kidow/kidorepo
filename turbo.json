@@ -23,7 +23,12 @@
         "NOTION_DATABASE_ID",
         "GITHUB_TOKEN"
       ],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "storybook-static/**"
+      ]
     },
     "lint": {},
     "dev": {
