@@ -1,11 +1,23 @@
 module.exports = {
-  extends: ['next', 'turbo', 'prettier'],
-  rules: {
-    '@next/next/no-html-link-for-pages': 'off'
-  },
-  parserOptions: {
-    babelOptions: {
-      presets: [require.resolve('next/babel')]
+  extends: [
+    'turbo',
+    'prettier',
+    'plugin:tailwindcss/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended'
+  ],
+  plugins: ['tailwindcss', 'react', 'react-refresh'],
+  settings: {
+    tailwindcss: {
+      callees: ['cn', 'cva'],
+      config: '../tailwindcss/tailwind.config.js'
     }
-  }
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser'
+    }
+  ]
 }

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --resolve-plugins-relative-to ."
   },
   "dependencies": {
     "@google-analytics/data": "^3.2.2",
