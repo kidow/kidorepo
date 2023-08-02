@@ -9,16 +9,17 @@ Website Link: [https://kidow.me](https://kidow.me)
 - Next.js (App Router)
 - Typescript
 - TailwindCSS
-- Lucide: 아이콘
+- Lucide icon
 - classnames
-- Tiptap Editor: [/memo](https://kidow.me/memo)에서 사용
+- Tiptap Editor: [/memo](https://kidow.me/memo)
 - React Hook Form
-- Sonner: Toast 컴포넌트
-- Tremor React: 방문자 수를 보여줄 차트 라이브러리
+- Sonner: Toast component
+- Tremor React: google analytics chart
 - Dayjs
 - React Github Contribution Calendar
 - React Kakao Maps SDK
 - Zod
+- Jest
 
 ### 사용한 API 라이브러리
 

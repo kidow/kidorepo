@@ -24,3 +24,5 @@
 - Commitlint
 - ContentLayer (archive)
 - Storybook (workshop)
+- Jest(archive, link-in-bio), Vitest(workshop)
+- class-variance-authority, clsx

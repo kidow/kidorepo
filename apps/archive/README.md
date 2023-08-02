@@ -11,3 +11,4 @@ Website Link: [https://archive.kidow.me](https://archive.kidow.me)
 - TypeScript
 - classnames
 - ContentLayer
+- Jest
