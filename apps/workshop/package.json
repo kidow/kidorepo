@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -23,15 +26,20 @@
     "@storybook/react": "^7.2.0",
     "@storybook/react-vite": "^7.2.0",
     "@storybook/testing-library": "^0.2.0",
+    "@storybook/testing-react": "^2.0.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
+    "@vitest/ui": "^0.34.1",
     "eslint-config-custom": "workspace:*",
     "eslint-plugin-storybook": "^0.6.13",
     "prop-types": "^15.8.1",
     "storybook": "^7.2.0",
     "tsconfig": "workspace:*",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^0.34.1"
   }
 }
