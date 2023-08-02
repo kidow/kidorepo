@@ -6,14 +6,15 @@
 
 ### Introduction
 
-총 2개의 프로젝트가 있습니다. (Vercel 무료 버전은 3개, Pro 버전은 60개까지 지원합니다.)
+총 3개의 프로젝트가 있습니다. (Vercel 무료 버전은 3개, Pro 버전은 60개까지 지원합니다.)
 
 - [Link in bio](https://kidow.me): [프로젝트 소개](https://github.com/kidow/kidorepo/blob/main/apps/link-in-bio/README.md)
 - [Archive](https://archive.kidow.me)(작업 중): [프로젝트 소개](https://github.com/kidow/kidorepo/blob/main/apps/archive/README.md)
+- [Workshop](https://workshop.kidow.me)(작업 중): [프로젝트 소개](https://github.com/kidow/kidorepo/blob/main/apps/workshop/README.md)
 
 ### Project Stack
 
-이 워크스페이스에서 다음과 같은 코드 관리 도구들을 사용했습니다.
+이 워크스페이스에서 다음과 같은 도구들을 사용했습니다.
 
 - Pnpm
 - Turbo
@@ -21,3 +22,5 @@
 - Prettier
 - Husky
 - Commitlint
+- ContentLayer (archive)
+- Storybook (workshop)
