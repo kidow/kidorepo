@@ -30,7 +30,10 @@
         "storybook-static/**"
       ]
     },
-    "lint": {},
+    "lint": {
+      "cache": false,
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
