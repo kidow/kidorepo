@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
+  darkMode: ['class', '[data-mode="dark"]'],
   content: [
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
     'app/**/*.{ts,tsx}',
@@ -14,6 +14,15 @@ module.exports = {
     extend: {
       colors: {
         primary: '#dffc03'
+      },
+      keyframes: {
+        ripple: {
+          from: { transform: 'scale(0)' },
+          to: { transform: 'scale(4)', opacity: 0 }
+        }
+      },
+      animation: {
+        ripple: 'ripple 0.6s linear'
       }
     }
   },

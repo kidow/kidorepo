@@ -1,11 +1,11 @@
 import { composeStories } from '@storybook/testing-react'
 import { render } from '@testing-library/react'
 
-import * as stories from './Button.stories'
+import * as stories from './Spinner.stories'
 
-const { Primary } = composeStories(stories)
+const { Default } = composeStories(stories)
 
 it('render button', () => {
-  render(<Primary />)
+  render(<Default />)
   expect(1 + 1).toBe(2)
 })

@@ -75,6 +75,7 @@ module.exports = {
         }
       },
       boxShadow: {
+        ...baseConfig.theme.extend.boxShadow,
         // light
         'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
         'tremor-card':
@@ -89,21 +90,25 @@ module.exports = {
           '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
       },
       borderRadius: {
+        ...baseConfig.theme.extend.borderRadius,
         'tremor-small': '0.375rem',
         'tremor-default': '0.5rem',
         'tremor-full': '9999px'
       },
       fontSize: {
+        ...baseConfig.theme.extend.fontSize,
         'tremor-label': ['0.75rem'],
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
         'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
         'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }]
       },
       fontFamily: {
+        ...baseConfig.theme.extend.fontFamily,
         display: ['var(--font-display)', 'system-ui', 'sans-serif'],
         default: ['var(--font-default)', 'system-ui', 'sans-serif']
       },
       keyframes: {
+        ...baseConfig.theme.extend.keyframes,
         playing: {
           '0%': {
             backgroundColor: 'rgba(30,215,96,.4)',
@@ -181,6 +186,7 @@ module.exports = {
         }
       },
       animation: {
+        ...baseConfig.theme.extend.animation,
         playing: 'playing 3.4s infinite',
         'note-1': 'note-1 2.35s infinite',
         'note-2': 'note-2 2.35s infinite',

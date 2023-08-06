@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, type FC } from 'react'
+import { memo } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from 'utils'
 
@@ -62,13 +62,13 @@ export const variants = cva(
   }
 )
 
-const Tooltip: FC<Props> = ({
+function Tooltip({
   children,
   content,
   position = 'top',
   arrow = true,
   className
-}) => {
+}: Props) {
   return (
     <div
       className={cn(variants({ position, arrow, className }))}

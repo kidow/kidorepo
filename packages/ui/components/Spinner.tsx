@@ -1,4 +1,4 @@
-import { memo, type FC } from 'react'
+import { memo } from 'react'
 import { cva } from 'class-variance-authority'
 
 export interface Props {
@@ -7,7 +7,7 @@ export interface Props {
 
 export const variants = cva('animate-spin')
 
-const Spinner: FC<Props> = ({ className }) => {
+function Spinner({ className }: Props) {
   return (
     <svg
       className={variants({ className })}
