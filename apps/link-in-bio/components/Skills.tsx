@@ -27,7 +27,7 @@ export default function Skills() {
           key={key}
           className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1"
         >
-          <Tooltip content={item} className="capitalize">
+          <Tooltip.v1 content={item} className="capitalize">
             <Image
               src={`/skills/${item}.png`}
               alt={item}
@@ -36,7 +36,7 @@ export default function Skills() {
               width={40}
               className="select-none"
             />
-          </Tooltip>
+          </Tooltip.v1>
         </li>
       ))}
     </ul>

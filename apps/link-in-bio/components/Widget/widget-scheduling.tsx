@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -370,7 +369,7 @@ export default function WidgetScheduling() {
                     disabled={isRequesting}
                     className="flex h-11 w-52 items-center justify-center gap-2 rounded-[10px] bg-neutral-900 text-neutral-50 duration-150 disabled:cursor-not-allowed disabled:bg-neutral-400"
                   >
-                    {isRequesting && <Spinner className="h-5 w-5" />}
+                    {isRequesting && <Spinner.v1 className="h-5 w-5" />}
                     <span>요청하기</span>
                   </button>
                   <div className="h-px flex-1 bg-neutral-200" />

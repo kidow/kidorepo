@@ -217,7 +217,7 @@ export default async function Page() {
                                   className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1"
                                   key={key}
                                 >
-                                  <Tooltip
+                                  <Tooltip.v1
                                     content={item.plain_text}
                                     className="capitalize"
                                   >
@@ -227,7 +227,7 @@ export default async function Page() {
                                       className="!my-0 select-none"
                                       draggable={false}
                                     />
-                                  </Tooltip>
+                                  </Tooltip.v1>
                                 </li>
                               ))
                             )}

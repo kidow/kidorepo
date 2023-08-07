@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Tooltip } from 'ui'
 
 export default {
-  title: 'components/Tooltip',
+  title: 'components/Tooltip/v1',
   component: Tooltip,
   tags: ['autodocs'],
   argTypes: {

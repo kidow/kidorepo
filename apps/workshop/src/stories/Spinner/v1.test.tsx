@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/testing-react'
 import { render } from '@testing-library/react'
 
-import * as stories from './Spinner.stories'
+import * as stories from './v1.stories'
 
 const { Default } = composeStories(stories)
 

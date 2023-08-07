@@ -1,2 +1,3 @@
-export { default as Tooltip } from './components/Tooltip'
-export { default as Spinner } from './components/Spinner'
+export * as Alert from './components/Alert'
+export * as Tooltip from './components/Tooltip'
+export * as Spinner from './components/Spinner'
