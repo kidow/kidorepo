@@ -362,5 +362,6 @@ export {
   Table,
   Todo,
   Toggle,
-  Video
+  Video,
+  RichText
 }

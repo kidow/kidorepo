@@ -52,7 +52,9 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'warn',
 
     'import/no-unresolved': 'off',
-    'no-undef': 'off'
+    'no-undef': 'off',
+
+    '@next/next/no-img-element': 'off'
   },
   ignorePatterns: ['dist', 'build', 'public']
 }

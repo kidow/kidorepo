@@ -23,11 +23,8 @@ export default function Skills() {
   return (
     <ul className="flex flex-wrap gap-4">
       {list.map((item, key) => (
-        <li
-          key={key}
-          className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1"
-        >
-          <Tooltip.v1 content={item} className="capitalize">
+        <Tooltip.v1 key={key} content={item} className="capitalize">
+          <li className="flex h-10 w-10 items-center justify-center rounded-[10px] border p-1">
             <Image
               src={`/skills/${item}.png`}
               alt={item}
@@ -36,8 +33,8 @@ export default function Skills() {
               width={40}
               className="select-none"
             />
-          </Tooltip.v1>
-        </li>
+          </li>
+        </Tooltip.v1>
       ))}
     </ul>
   )

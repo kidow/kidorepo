@@ -33,6 +33,7 @@ import {
   NumberedListItem,
   Paragraph,
   Quote,
+  RichText,
   Table,
   Todo,
   Toggle,
@@ -186,7 +187,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const render = async () => {
     const items = []
     let orderedList = []
-    let underedList = []
+    let unorderedList = []
     for (const block of list) {
       if (block.type === 'numbered_list_item') {
         if (block.has_children) {
@@ -197,7 +198,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 {children.map((item, key) => (
                   <li key={key}>
                     {item?.numbered_list_item?.rich_text?.map((child, i) => (
-                      <span key={i}>{child.plain_text}</span>
+                      <RichText key={i} {...child} />
                     ))}
                   </li>
                 ))}
@@ -218,13 +219,13 @@ export default async function Page({ params }: { params: { id: string } }) {
       if (block.type === 'bulleted_list_item') {
         if (block.has_children) {
           const children = await getChildBlocksWithChildrenRecursively(block.id)
-          underedList.push(
+          unorderedList.push(
             <BulletedListItem key={block.id} {...block}>
               <ul>
                 {children.map((item, key) => (
                   <li key={key}>
                     {item?.numbered_list_item?.rich_text?.map((child, i) => (
-                      <span key={i}>{child.plain_text}</span>
+                      <RichText key={i} {...child} />
                     ))}
                   </li>
                 ))}
@@ -232,15 +233,15 @@ export default async function Page({ params }: { params: { id: string } }) {
             </BulletedListItem>
           )
         } else {
-          underedList.push(
+          unorderedList.push(
             <BulletedListItem {...block} key={'ul' + block.id} />
           )
         }
-      } else if (underedList.length) {
+      } else if (unorderedList.length) {
         items.push(
-          <ul key={Math.random().toString(36).slice(2)}>{underedList}</ul>
+          <ul key={Math.random().toString(36).slice(2)}>{unorderedList}</ul>
         )
-        underedList = []
+        unorderedList = []
       }
       if (block.type === 'bookmark') {
         try {
@@ -273,14 +274,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 rel="noopenner noreferrer"
                                 key={key}
                               >
-                                <span className={classnames(className)}>
+                                <span className={className}>
                                   {item.plain_text}
                                 </span>
                               </Link>
                             )
                           }
                           return (
-                            <span className={classnames(className)} key={key}>
+                            <span className={className} key={key}>
                               {item.plain_text}
                             </span>
                           )
