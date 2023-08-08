@@ -1,3 +1,5 @@
+'use client'
+
 import { memo, useState } from 'react'
 import { ChevronUpIcon } from 'lucide-react'
 import { cn } from 'utils'

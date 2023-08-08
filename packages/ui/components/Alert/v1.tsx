@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { AlertCircleIcon, XIcon } from 'lucide-react'
 import { cn } from 'utils'

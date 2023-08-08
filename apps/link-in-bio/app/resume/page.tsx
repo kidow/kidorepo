@@ -213,7 +213,7 @@ export default async function Page() {
     return <>{items}</>
   }
   return (
-    <div className="prose-sm xl:prose prose-neutral">
+    <div className="prose-sm xl:prose prose-neutral !max-w-none">
       <p className="text-sm italic text-neutral-400">
         {dayjs((info as any).last_edited_time).format(
           'YYYY년 M월 D일 업데이트됨.'
