@@ -5,6 +5,7 @@ import { Spinner } from '../..'
 
 export interface Props {
   text: string
+  type?: 'submit' | 'reset' | 'button'
   onClick?: () => void
   theme?: 'primary'
   className?: string
@@ -12,9 +13,18 @@ export interface Props {
   disabled?: boolean
 }
 
-function Button({ text, onClick, theme, className, disabled, loading }: Props) {
+function Button({
+  text,
+  onClick,
+  theme,
+  className,
+  disabled,
+  loading,
+  type
+}: Props) {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={cn(
         'rounded-md border border-transparent px-3.5 py-2 font-medium duration-150 focus:outline-none active:border-neutral-500 active:ring disabled:cursor-not-allowed disabled:bg-neutral-600',

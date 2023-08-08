@@ -25,6 +25,12 @@ export default {
     disabled: {
       type: 'boolean',
       defaultValue: false
+    },
+    type: {
+      type: {
+        name: 'enum',
+        value: ['submit', 'reset', 'button']
+      }
     }
   }
 } satisfies Meta<typeof Button.v2>

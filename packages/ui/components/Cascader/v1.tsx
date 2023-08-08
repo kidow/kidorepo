@@ -1,5 +1,5 @@
 function Cascader() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Cascader

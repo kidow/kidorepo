@@ -1,5 +1,5 @@
 function Calendar() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Calendar

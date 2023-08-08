@@ -1,5 +1,5 @@
 function Carousel() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Carousel

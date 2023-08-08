@@ -1,5 +1,5 @@
 function Callout() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Callout
