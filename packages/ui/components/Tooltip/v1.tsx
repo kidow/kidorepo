@@ -9,7 +9,7 @@ export interface Props extends ReactProps, VariantProps<typeof variants> {
   className?: string
 }
 
-export const variants = cva(
+const variants = cva(
   'relative inline-block text-center before:pointer-events-none before:absolute before:z-[9999] before:w-max before:max-w-xs before:rounded before:bg-neutral-800 before:px-2 before:py-1 before:text-xs before:text-neutral-50 before:opacity-0 before:delay-100 before:duration-200 before:ease-in-out before:content-[attr(data-tip)] hover:before:opacity-100 hover:before:delay-75 dark:before:bg-neutral-700',
   {
     variants: {

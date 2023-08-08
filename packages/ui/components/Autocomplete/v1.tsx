@@ -1,5 +1,5 @@
 function Autocomplete() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Autocomplete
