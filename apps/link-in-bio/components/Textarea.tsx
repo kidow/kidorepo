@@ -23,7 +23,7 @@ export default function Textarea({
     <div className="relative rounded-[10px] border px-3 py-2 ring-neutral-800 duration-150 focus-within:ring">
       <TextareaAutosize
         {...register}
-        className="peer w-full resize-none bg-transparent placeholder-transparent focus:outline-none"
+        className="peer w-full resize-none bg-transparent placeholder:text-transparent focus:outline-none"
         id={id}
         minRows={minRows}
         placeholder={placeholder}

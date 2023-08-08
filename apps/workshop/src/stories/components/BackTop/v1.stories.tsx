@@ -10,4 +10,11 @@ export default {
 
 type Story = StoryObj<typeof BackTop.v1>
 
-export const Default: Story = {}
+export const Default: Story = {
+  render: () => (
+    <div className="min-h-[200vh]">
+      <div>Scroll down!!!</div>
+      <BackTop.v1 />
+    </div>
+  )
+}

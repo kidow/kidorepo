@@ -16,11 +16,10 @@ import type {
   BlockObjectResponse,
   CommentObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import classnames from 'classnames'
+import { BackTop } from 'ui'
 import urlMetadata from 'url-metadata'
 
 import BackButton from '@/components/BackButton'
-import BackTop from '@/components/BackTop'
 import {
   Bookmark,
   BulletedListItem,
@@ -376,7 +375,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           ))}
         </ul>
       </article>
-      <BackTop />
+      <BackTop.v1 />
     </main>
   )
 }
