@@ -17,13 +17,14 @@ const config = {
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-interactions'),
     {
-      name: '@storybook/addon-styling',
+      name: getAbsolutePath('@storybook/addon-styling'),
       options: {
         postCss: {
           implementation: require.resolve('postcss')
         }
       }
-    }
+    },
+    getAbsolutePath('storybook-dark-mode')
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
