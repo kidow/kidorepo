@@ -1,3 +1,5 @@
+'use client'
+
 import { useId, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import { useOnClickOutside } from 'hooks'

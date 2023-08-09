@@ -1,5 +1,5 @@
 function Navigation() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Navigation

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Pagination } from 'ui'
 
 export default {
-  title: 'components/Pagination/v1',
+  title: 'components/Pagination/v2',
   tags: ['autodocs'],
-  component: Pagination.v1,
+  component: Pagination.v2,
   argTypes: {
     page: {
       type: 'number',
@@ -21,9 +21,9 @@ export default {
       type: 'function'
     }
   }
-} satisfies Meta<typeof Pagination.v1>
+} satisfies Meta<typeof Pagination.v2>
 
-type Story = StoryObj<typeof Pagination.v1>
+type Story = StoryObj<typeof Pagination.v2>
 
 export const Default: Story = {
   args: {
