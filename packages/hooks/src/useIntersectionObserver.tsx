@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { RefObject } from 'react'
 
-export default function useIntersectionObserver<T extends HTMLElement>(
+function useIntersectionObserver<T extends HTMLElement>(
   options?: IntersectionObserverInit
 ): [RefObject<T>, boolean] {
   const ref = useRef<T>(null)
@@ -13,7 +14,9 @@ export default function useIntersectionObserver<T extends HTMLElement>(
     )
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [ref.current])
+  }, [ref, options])
 
   return [ref, entry?.isIntersecting || false]
 }
+
+export default useIntersectionObserver
