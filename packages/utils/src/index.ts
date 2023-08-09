@@ -34,3 +34,7 @@ export function rgbToHex(red: number, green: number, blue: number) {
     '#' + ((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)
   )
 }
+
+export function twoDigitsNumber(digit: number): string {
+  return digit < 10 ? `0${digit}` : String(digit)
+}
