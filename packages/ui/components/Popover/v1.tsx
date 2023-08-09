@@ -1,5 +1,7 @@
+'use client'
+
 function Popover() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Popover

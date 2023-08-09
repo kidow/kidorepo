@@ -1,3 +1,5 @@
+'use client'
+
 import { usePagination } from 'hooks'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { cn } from 'utils'

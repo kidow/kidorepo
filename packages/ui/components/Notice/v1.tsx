@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import {
   AlertTriangleIcon,
   BanIcon,
@@ -57,4 +58,4 @@ function Notice({ content, type }: Props) {
   )
 }
 
-export default Notice
+export default memo(Notice)

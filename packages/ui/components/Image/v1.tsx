@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from 'utils'
 
@@ -57,4 +57,4 @@ function Image({ className, src, alt }: Props) {
   )
 }
 
-export default Image
+export default memo(Image)

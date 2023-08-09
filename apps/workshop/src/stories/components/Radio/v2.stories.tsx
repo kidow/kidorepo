@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Radio } from 'ui'
 
 export default {
-  title: 'components/Radio/v1',
+  title: 'components/Radio/v2',
   tags: ['autodocs'],
-  component: Radio.v1,
+  component: Radio.v2,
   argTypes: {
     value: {
       type: 'string'
@@ -19,6 +19,9 @@ export default {
           name: 'object',
           value: {
             name: {
+              name: 'string'
+            },
+            description: {
               name: 'string'
             },
             value: {
@@ -38,18 +41,18 @@ export default {
       }
     }
   }
-} satisfies Meta<typeof Radio.v1>
+} satisfies Meta<typeof Radio.v2>
 
-type Story = StoryObj<typeof Radio.v1>
+type Story = StoryObj<typeof Radio.v2>
 
 export const Default: Story = {
   args: {
     value: 'apple',
     options: [
-      { name: 'Apple', value: 'apple' },
-      { name: 'Amazon', value: 'amazon' },
-      { name: 'Google', value: 'google' },
-      { name: 'Tesla', value: 'tesla', disabled: true }
+      { name: 'Apple', value: 'apple', description: 'iPhone' },
+      { name: 'Amazon', value: 'amazon', description: 'Twitch' },
+      { name: 'Google', value: 'google', description: 'Youtube' },
+      { name: 'Tesla', value: 'tesla', description: 'Twitter', disabled: true }
     ],
     direction: 'horizontal'
   }
