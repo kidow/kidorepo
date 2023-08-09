@@ -1,3 +1,5 @@
+'use client'
+
 import { useId, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'

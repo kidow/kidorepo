@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useOnClickOutside } from 'hooks'
 import { ChevronDownIcon } from 'lucide-react'

@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef } from 'react'
 import type { DetailedHTMLProps, DialogHTMLAttributes, ReactNode } from 'react'
 import { XIcon } from 'lucide-react'

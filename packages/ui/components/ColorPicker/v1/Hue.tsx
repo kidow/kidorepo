@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { useCombinedRefs } from 'hooks'
 
