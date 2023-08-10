@@ -1,5 +1,175 @@
-function Rating() {
-  return <></>
+'use client'
+
+import { useCallback, useEffect, useId, useMemo } from 'react'
+import { cn } from 'utils'
+
+export interface Props {
+  value: number
+  onChange: (value: number) => void
+  readOnly?: boolean
+  disabled?: boolean
+  count?: number
+  half?: boolean
+}
+
+function Rating({
+  value,
+  onChange,
+  readOnly,
+  disabled,
+  count = 5,
+  half
+}: Props) {
+  const id = useId()
+
+  const ACTIVE_COLOR: string = useMemo(() => '#fbbf24 ', [])
+  const INACTIVE_COLOR: string = useMemo(() => '#d1d5db', [])
+
+  const onMouseLeave = useCallback(() => {
+    for (let i = 0; i < value; i++) {
+      const second = document.getElementById(`${id}-rating-second-${i}`)
+      if (second) second.style.color = ACTIVE_COLOR
+    }
+    for (let i = Math.floor(value); i < count; i++) {
+      const second = document.getElementById(`${id}-rating-second-${i}`)
+      if (second) second.style.color = INACTIVE_COLOR
+    }
+
+    if (half) {
+      const first = document.getElementById(`${id}-rating-first-${value}`)
+      const second = document.getElementById(
+        `${id}-rating-second-${Math.floor(value)}`
+      )
+      if (first) first.style.color = ACTIVE_COLOR
+      if (second) second.style.color = INACTIVE_COLOR
+
+      for (let i = 0; i < value; i++) {
+        const first = document.getElementById(`${id}-rating-first-${i}`)
+        if (first) first.style.color = ACTIVE_COLOR
+      }
+      for (let i = Math.ceil(value); i < count; i++) {
+        const first = document.getElementById(`${id}-rating-first-${i}`)
+        if (first) first.style.color = INACTIVE_COLOR
+      }
+    }
+  }, [value, half, ACTIVE_COLOR, INACTIVE_COLOR, count, id])
+
+  const onMouseEnter = useCallback(
+    (index: number) => {
+      for (let i = 0; i <= index; i++) {
+        const second = document.getElementById(`${id}-rating-second-${i}`)
+        if (second) second.style.color = ACTIVE_COLOR
+
+        if (half) {
+          for (let j = 0; j <= index; j++) {
+            const first = document.getElementById(`${id}-rating-first-${j}`)
+            if (first) first.style.color = ACTIVE_COLOR
+          }
+        }
+      }
+      for (let i = index + 1; i < count; i++) {
+        const second = document.getElementById(`${id}-rating-second-${i}`)
+        if (second) second.style.color = INACTIVE_COLOR
+
+        if (half) {
+          for (let j = index + 1; j < count; j++) {
+            const first = document.getElementById(`${id}-rating-first-${j}`)
+            if (first) first.style.color = INACTIVE_COLOR
+          }
+        }
+      }
+    },
+    [ACTIVE_COLOR, INACTIVE_COLOR, count, half, id]
+  )
+
+  const onHalfMouseEnter = useCallback(
+    (index: number) => {
+      for (let i = 0; i < index; i++) {
+        const first = document.getElementById(`${id}-rating-first-${i}`)
+        const second = document.getElementById(`${id}-rating-second-${i}`)
+        if (first) first.style.color = ACTIVE_COLOR
+        if (second) second.style.color = ACTIVE_COLOR
+      }
+
+      const first = document.getElementById(`${id}-rating-first-${index}`)
+      if (first) first.style.color = ACTIVE_COLOR
+      const second = document.getElementById(`${id}-rating-second-${index}`)
+      if (second) second.style.color = INACTIVE_COLOR
+
+      for (let i = index + 1; i < count; i++) {
+        const first = document.getElementById(`${id}-rating-first-${i}`)
+        const second = document.getElementById(`${id}-rating-second-${i}`)
+        if (first) first.style.color = INACTIVE_COLOR
+        if (second) second.style.color = INACTIVE_COLOR
+      }
+    },
+    [ACTIVE_COLOR, INACTIVE_COLOR, count, id]
+  )
+
+  useEffect(() => {
+    if (!value) return
+
+    for (let i = 0; i < value; i++) {
+      const second = document.getElementById(`${id}-rating-second-${i}`)
+      if (second) second.style.color = ACTIVE_COLOR
+    }
+    if (half) {
+      for (let i = 0; i < Math.ceil(value); i++) {
+        const first = document.getElementById(`${id}-rating-first-${i}`)
+        if (first) first.style.color = ACTIVE_COLOR
+      }
+    }
+  }, [ACTIVE_COLOR, half, id, value])
+  return (
+    <ul
+      role="radiogroup"
+      className={cn('flex select-none', {
+        'cursor-not-allowed opacity-70': disabled
+      })}
+    >
+      {Array.from({ length: count }).map((_, key) => (
+        <li
+          key={key}
+          aria-checked={value > key ? 'true' : 'false'}
+          aria-posinset={key + 1}
+          aria-setsize={count}
+          tabIndex={disabled ? -1 : 0}
+          role="radio"
+          className={cn('text-xl text-neutral-300', {
+            'cursor-pointer duration-150 hover:scale-125':
+              !disabled && !readOnly,
+            relative: half
+          })}
+          onMouseLeave={disabled || readOnly ? undefined : onMouseLeave}
+        >
+          {half && (
+            <span
+              id={`${id}-rating-first-${key}`}
+              onMouseEnter={
+                disabled || readOnly ? undefined : () => onHalfMouseEnter(key)
+              }
+              onClick={
+                disabled || readOnly ? undefined : () => onChange(key + 0.5)
+              }
+              className="absolute left-0 top-0 h-full w-1/2 overflow-hidden duration-150"
+            >
+              ★
+            </span>
+          )}
+          <span
+            id={`${id}-rating-second-${key}`}
+            onMouseEnter={
+              disabled || readOnly ? undefined : () => onMouseEnter(key)
+            }
+            onClick={disabled || readOnly ? undefined : () => onChange(key + 1)}
+            className="duration-150"
+          >
+            ★
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 export default Rating

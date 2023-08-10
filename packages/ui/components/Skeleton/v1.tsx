@@ -1,5 +1,5 @@
 function Skeleton() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Skeleton
