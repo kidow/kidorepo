@@ -27,11 +27,44 @@ module.exports = {
           '100%': {
             backgroundPosition: '60px 0'
           }
+        },
+        'fade-up': {
+          from: {
+            opacity: 0,
+            transform: 'translate3d(0, -16px, 0)'
+          },
+          '60%': {
+            opacity: 1
+          },
+          to: {
+            transform: 'none'
+          }
+        },
+        'toast-open': {
+          from: {
+            opacity: 0,
+            transform: 'translateX(3000px)'
+          },
+          '60%': {
+            opacity: 1,
+            transform: 'translateX(-25px)'
+          },
+          '75%': {
+            transform: 'translateX(10px)'
+          },
+          '90%': {
+            transform: 'translateX(-5px)'
+          },
+          to: {
+            transform: 'none'
+          }
         }
       },
       animation: {
         ripple: 'ripple 0.6s linear',
-        progress: 'progress 2s linear infinite'
+        progress: 'progress 2s linear infinite',
+        'fade-up': 'fade-up 0.2s linear',
+        'toast-open': 'toast-open 0.6s linear'
       }
     }
   },

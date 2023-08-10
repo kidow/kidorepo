@@ -38,3 +38,23 @@ export function rgbToHex(red: number, green: number, blue: number) {
 export function twoDigitsNumber(digit: number): string {
   return digit < 10 ? `0${digit}` : String(digit)
 }
+
+class Toast {
+  private emit(message: string, type: NToast.Type) {
+    EventListener.emit<NToast.Emit>('toast', { message, type })
+  }
+  success(message: string) {
+    this.emit(message, 'success')
+  }
+  info(message: string) {
+    this.emit(message, 'info')
+  }
+  warn(message: string) {
+    this.emit(message, 'warn')
+  }
+  error(message: string) {
+    this.emit(message, 'error')
+  }
+}
+
+export const toast = new Toast()

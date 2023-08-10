@@ -3,13 +3,13 @@ import { Toast } from 'ui'
 import { toast } from 'utils'
 
 export default {
-  title: 'components/Toast/v1',
+  title: 'components/Toast/v2',
   tags: ['autodocs'],
-  component: Toast.v1,
+  component: Toast.v2,
   argTypes: {}
-} satisfies Meta<typeof Toast.v1>
+} satisfies Meta<typeof Toast.v2>
 
-type Story = StoryObj<typeof Toast.v1>
+type Story = StoryObj<typeof Toast.v2>
 
 export const Default: Story = {
   render: () => (
@@ -20,7 +20,7 @@ export const Default: Story = {
         <button onClick={() => toast.warn('warn')}>Warn</button>
         <button onClick={() => toast.error('error')}>Error</button>
       </div>
-      <Toast.v1 />
+      <Toast.v2 />
     </>
   )
 }

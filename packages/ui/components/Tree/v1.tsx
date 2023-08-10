@@ -1,5 +1,5 @@
 function Tree() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Tree

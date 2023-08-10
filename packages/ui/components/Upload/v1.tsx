@@ -1,5 +1,5 @@
 function Upload() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Upload
