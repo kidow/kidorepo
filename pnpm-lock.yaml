@@ -390,6 +390,9 @@ importers:
 
   apps/workshop:
     dependencies:
+      dayjs:
+        specifier: ^1.11.9
+        version: 1.11.9
       hooks:
         specifier: workspace:*
         version: link:../../packages/hooks
