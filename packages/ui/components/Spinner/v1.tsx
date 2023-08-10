@@ -1,16 +1,14 @@
 import { memo } from 'react'
-import { cva } from 'class-variance-authority'
+import { cn } from 'utils'
 
 export interface Props {
   className?: string
 }
 
-export const variants = cva('animate-spin')
-
 function Spinner({ className }: Props) {
   return (
     <svg
-      className={variants({ className })}
+      className={cn('animate-spin', { className })}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
