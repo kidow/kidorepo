@@ -1,5 +1,5 @@
 function Tag() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Tag
