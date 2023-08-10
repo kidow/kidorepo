@@ -1,5 +1,5 @@
 function Swiper() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Swiper

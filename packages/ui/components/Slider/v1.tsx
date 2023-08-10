@@ -1,5 +1,5 @@
 function Slider() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Slider

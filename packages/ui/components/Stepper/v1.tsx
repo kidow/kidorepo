@@ -1,5 +1,5 @@
 function Stepper() {
-  return <></>
+  return <>Coming soon...</>
 }
 
 export default Stepper
