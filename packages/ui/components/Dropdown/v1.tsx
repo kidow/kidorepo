@@ -1,3 +1,5 @@
+'use client'
+
 import { useId, useRef, useState } from 'react'
 import { useOnClickOutside } from 'hooks'
 import { createPortal } from 'react-dom'

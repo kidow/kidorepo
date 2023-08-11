@@ -6,9 +6,10 @@ import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { useOnClickOutside } from 'hooks'
 import { XCircleIcon } from 'lucide-react'
+import { createPortal } from 'react-dom'
 import { cn, twoDigitsNumber } from 'utils'
 
-import { Button, Portal } from '../..'
+import { Button } from '../..'
 
 dayjs.extend(isSameOrBefore)
 
@@ -107,114 +108,116 @@ function TimeRangePicker({ startTime, endTime, onChange, error }: Props) {
       </div>
       <div className="mt-1 text-xs text-red-500">{error}</div>
       {isOpen && (
-        <Portal>
-          <div
-            role="presentation"
-            style={{
-              left: ref.current?.getBoundingClientRect().left || 0,
-              top:
-                window.scrollY +
-                (ref.current?.getBoundingClientRect().top || 0) +
-                (ref.current?.clientHeight || 0)
-            }}
-            className="absolute z-[9999]"
-          >
+        <>
+          {createPortal(
             <div
-              ref={targetRef}
-              className="z-[9999] space-y-4 rounded bg-white p-4 drop-shadow-xl dark:bg-neutral-800"
+              role="presentation"
+              style={{
+                left: ref.current?.getBoundingClientRect().left || 0,
+                top:
+                  window.scrollY +
+                  (ref.current?.getBoundingClientRect().top || 0) +
+                  (ref.current?.clientHeight || 0)
+              }}
+              className="absolute z-[9999]"
             >
-              {/* Tab */}
-              <div className="flex rounded-lg bg-neutral-200 p-1 text-sm dark:bg-neutral-700">
-                <div
-                  className={cn(
-                    'flex w-36 items-center justify-between gap-8 rounded-lg px-3 py-2',
-                    tab === 'start'
-                      ? 'bg-white dark:bg-neutral-800'
-                      : 'cursor-pointer'
-                  )}
-                  onClick={() => {
-                    if (tab === 'end') setTab('start')
-                  }}
-                >
+              <div
+                ref={targetRef}
+                className="z-[9999] space-y-4 rounded bg-white p-4 drop-shadow-xl dark:bg-neutral-800"
+              >
+                {/* Tab */}
+                <div className="flex rounded-lg bg-neutral-200 p-1 text-sm dark:bg-neutral-700">
                   <div
-                    className={cn({
-                      'font-bold': tab === 'start'
-                    })}
-                  >
-                    <div>시작</div>
-                    <div
-                      className={cn({
-                        'text-blue-500': tab === 'start'
-                      })}
-                    >
-                      {startHour}:{startMinute}
-                    </div>
-                  </div>
-                  <button
+                    className={cn(
+                      'flex w-36 items-center justify-between gap-8 rounded-lg px-3 py-2',
+                      tab === 'start'
+                        ? 'bg-white dark:bg-neutral-800'
+                        : 'cursor-pointer'
+                    )}
                     onClick={() => {
-                      setStartHour('00')
-                      setStartMinute('00')
+                      if (tab === 'end') setTab('start')
                     }}
                   >
-                    <XCircleIcon
-                      className={cn(
-                        tab === 'start'
-                          ? 'h-6 w-6 cursor-pointer text-neutral-200 hover:text-neutral-400 dark:text-neutral-600'
-                          : 'invisible'
-                      )}
-                    />
-                  </button>
-                </div>
-                <div
-                  className={cn(
-                    'flex w-36 items-center justify-between gap-8 rounded-lg px-3 py-2',
-                    tab === 'end'
-                      ? 'bg-white dark:bg-neutral-800'
-                      : 'cursor-pointer'
-                  )}
-                  onClick={() => {
-                    if (tab === 'start') setTab('end')
-                  }}
-                >
-                  <div
-                    className={cn({
-                      'font-bold': tab === 'end'
-                    })}
-                  >
-                    <div>종료</div>
                     <div
                       className={cn({
-                        'text-blue-500': tab === 'end'
+                        'font-bold': tab === 'start'
                       })}
                     >
-                      {endHour}:{endMinute}
+                      <div>시작</div>
+                      <div
+                        className={cn({
+                          'text-blue-500': tab === 'start'
+                        })}
+                      >
+                        {startHour}:{startMinute}
+                      </div>
                     </div>
+                    <button
+                      onClick={() => {
+                        setStartHour('00')
+                        setStartMinute('00')
+                      }}
+                    >
+                      <XCircleIcon
+                        className={cn(
+                          tab === 'start'
+                            ? 'h-6 w-6 cursor-pointer text-neutral-200 hover:text-neutral-400 dark:text-neutral-600'
+                            : 'invisible'
+                        )}
+                      />
+                    </button>
                   </div>
-                  <button
+                  <div
+                    className={cn(
+                      'flex w-36 items-center justify-between gap-8 rounded-lg px-3 py-2',
+                      tab === 'end'
+                        ? 'bg-white dark:bg-neutral-800'
+                        : 'cursor-pointer'
+                    )}
                     onClick={() => {
-                      setEndHour('00')
-                      setEndMinute('00')
+                      if (tab === 'start') setTab('end')
                     }}
                   >
-                    <XCircleIcon
-                      className={cn(
-                        tab === 'end'
-                          ? 'h-6 w-6 cursor-pointer text-neutral-200 hover:text-neutral-400 dark:text-neutral-600'
-                          : 'invisible'
-                      )}
-                    />
-                  </button>
+                    <div
+                      className={cn({
+                        'font-bold': tab === 'end'
+                      })}
+                    >
+                      <div>종료</div>
+                      <div
+                        className={cn({
+                          'text-blue-500': tab === 'end'
+                        })}
+                      >
+                        {endHour}:{endMinute}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setEndHour('00')
+                        setEndMinute('00')
+                      }}
+                    >
+                      <XCircleIcon
+                        className={cn(
+                          tab === 'end'
+                            ? 'h-6 w-6 cursor-pointer text-neutral-200 hover:text-neutral-400 dark:text-neutral-600'
+                            : 'invisible'
+                        )}
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Picker */}
-              <div className="relative flex justify-center text-neutral-500">
-                <div
-                  ref={hourRef}
-                  className="scrollbar-hide z-10 h-[200px] overflow-auto overscroll-none py-20"
-                >
-                  {Array.from({ length: 24 }, (_, i) => twoDigitsNumber(i)).map(
-                    (hour) => (
+                {/* Picker */}
+                <div className="relative flex justify-center text-neutral-500">
+                  <div
+                    ref={hourRef}
+                    className="scrollbar-hide z-10 h-[200px] overflow-auto overscroll-none py-20"
+                  >
+                    {Array.from({ length: 24 }, (_, i) =>
+                      twoDigitsNumber(i)
+                    ).map((hour) => (
                       <div
                         key={hour}
                         onClick={() => {
@@ -241,60 +244,61 @@ function TimeRangePicker({ startTime, endTime, onChange, error }: Props) {
                       >
                         {hour}
                       </div>
-                    )
-                  )}
+                    ))}
+                  </div>
+                  <div
+                    ref={minuteRef}
+                    className="scrollbar-hide z-10 h-[200px] overflow-auto overscroll-none py-20"
+                  >
+                    {Array.from({ length: 6 }, (_, i) =>
+                      twoDigitsNumber(10 * i)
+                    ).map((minute, index) => (
+                      <div
+                        key={minute}
+                        onClick={() => {
+                          const currentHourTop = hourRef.current?.scrollTop || 0
+                          if (tab === 'start') {
+                            setStartMinute(minute)
+                          } else {
+                            setEndMinute(minute)
+                          }
+                          if (minuteRef.current)
+                            minuteRef.current.scrollTop = 40 * Number(index)
+                          if (hourRef.current)
+                            hourRef.current.scrollTop = currentHourTop
+                        }}
+                        className={cn(
+                          'flex h-10 w-10 cursor-pointer items-center justify-center',
+                          {
+                            'text-blue-500':
+                              (tab === 'start' && startMinute === minute) ||
+                              (tab === 'end' && endMinute === minute)
+                          }
+                        )}
+                      >
+                        {minute}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="absolute top-20 h-10 w-full rounded-lg bg-neutral-100 dark:bg-neutral-900" />
                 </div>
-                <div
-                  ref={minuteRef}
-                  className="scrollbar-hide z-10 h-[200px] overflow-auto overscroll-none py-20"
-                >
-                  {Array.from({ length: 6 }, (_, i) =>
-                    twoDigitsNumber(10 * i)
-                  ).map((minute, index) => (
-                    <div
-                      key={minute}
-                      onClick={() => {
-                        const currentHourTop = hourRef.current?.scrollTop || 0
-                        if (tab === 'start') {
-                          setStartMinute(minute)
-                        } else {
-                          setEndMinute(minute)
-                        }
-                        if (minuteRef.current)
-                          minuteRef.current.scrollTop = 40 * Number(index)
-                        if (hourRef.current)
-                          hourRef.current.scrollTop = currentHourTop
-                      }}
-                      className={cn(
-                        'flex h-10 w-10 cursor-pointer items-center justify-center',
-                        {
-                          'text-blue-500':
-                            (tab === 'start' && startMinute === minute) ||
-                            (tab === 'end' && endMinute === minute)
-                        }
-                      )}
-                    >
-                      {minute}
-                    </div>
-                  ))}
-                </div>
-                <div className="absolute top-20 h-10 w-full rounded-lg bg-neutral-100 dark:bg-neutral-900" />
-              </div>
 
-              {/* Button */}
-              <div className="flex justify-center">
-                <Button.v1
-                  shape="contained"
-                  theme="primary"
-                  size="sm"
-                  onClick={onApply}
-                >
-                  적용
-                </Button.v1>
+                {/* Button */}
+                <div className="flex justify-center">
+                  <Button.v1
+                    shape="contained"
+                    theme="primary"
+                    size="sm"
+                    onClick={onApply}
+                  >
+                    적용
+                  </Button.v1>
+                </div>
               </div>
-            </div>
-          </div>
-        </Portal>
+            </div>,
+            document.body
+          )}
+        </>
       )}
     </div>
   )
