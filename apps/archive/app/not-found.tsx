@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function NotFound() {
   return (
-    <div className="text-center">
+    <div className="py-20 text-center">
       <Image
         src="https://illustrations.popsy.co/white/question-mark.svg"
         alt="404"

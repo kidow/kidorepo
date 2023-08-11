@@ -2,7 +2,6 @@
 
 import { useState, type FC } from 'react'
 import { BubbleMenu, type BubbleMenuProps } from '@tiptap/react'
-import classnames from 'classnames'
 import {
   BoldIcon,
   CodeIcon,
@@ -10,6 +9,7 @@ import {
   StrikethroughIcon,
   UnderlineIcon
 } from 'lucide-react'
+import { cn } from 'utils'
 
 import { ColorSelector } from './color-selector'
 import { LinkSelector } from './link-selector'
@@ -112,7 +112,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
             className="p-2 text-stone-600 hover:bg-stone-100 active:bg-stone-200"
           >
             <item.icon
-              className={classnames('h-4 w-4', {
+              className={cn('h-4 w-4', {
                 'text-blue-500': item.isActive()
               })}
             />

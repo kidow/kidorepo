@@ -25,7 +25,7 @@ function Comment() {
         'data-reactions-enabled': '1',
         'date-emit-metadata': '0',
         'data-input-position': 'bottom',
-        'data-theme': 'preferred_color_scheme',
+        'data-theme': theme,
         'data-lang': 'ko',
         'data-loading': 'lazy',
         crossorigin: 'anonymous',

@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import classnames from 'classnames'
 import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { Spinner } from 'ui'
+import { cn } from 'utils'
 
 import Input from '@/components/Input'
 import Textarea from '@/components/Textarea'
@@ -176,7 +176,7 @@ export default function WidgetScheduling() {
       days.push(
         <td key={`day-${day}`}>
           <button
-            className={classnames(
+            className={cn(
               'flex h-10 w-10 select-none items-center justify-center rounded-full duration-150',
               isPast
                 ? 'cursor-text text-neutral-200'
@@ -271,7 +271,7 @@ export default function WidgetScheduling() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => changeMonth(-1)}
-                      className={classnames(
+                      className={cn(
                         'flex h-10 w-10 items-center justify-center rounded-full',
                         isPreviousMonthDisabled()
                           ? 'text-neutral-200'
@@ -423,7 +423,7 @@ export default function WidgetScheduling() {
                 <li
                   key={key}
                   onClick={() => setSelectedTime(item)}
-                  className={classnames(
+                  className={cn(
                     'flex h-[58px] cursor-pointer items-center justify-between rounded border py-2 pl-6 pr-4',
                     item === selectedTime
                       ? 'border-neutral-900 bg-neutral-900 text-neutral-50'
@@ -435,7 +435,7 @@ export default function WidgetScheduling() {
                     onClick={() => {
                       if (selectedTime) setStep(2)
                     }}
-                    className={classnames(
+                    className={cn(
                       'h-10 rounded-md px-4',
                       item === selectedTime
                         ? 'inline-block bg-neutral-50 font-semibold text-neutral-900'

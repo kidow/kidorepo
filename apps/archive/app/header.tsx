@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import classnames from 'classnames'
 import { GithubIcon, HomeIcon, MoonStarIcon } from 'lucide-react'
 import { HEADER_NAV } from 'services'
+import { cn } from 'utils'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -24,21 +24,23 @@ export default function Header() {
   }, [])
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-800 bg-neutral-950">
+      <header className="sticky top-0 z-40 w-full border-b bg-white dark:border-neutral-800 dark:bg-neutral-950">
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
           <div className="flex items-center gap-6">
             <Link href="/">
-              <span className="font-bold text-neutral-50">kidow/archive</span>
+              <span className="font-bold dark:text-neutral-50">
+                kidow/archive
+              </span>
             </Link>
             <nav className="flex items-center gap-6 text-sm font-medium">
               {HEADER_NAV.map((item, key) => (
                 <Link href={item.href} key={key}>
                   <span
-                    className={classnames(
+                    className={cn(
                       'duration-150',
                       pathname.startsWith(item.href)
-                        ? 'font-medium text-neutral-50'
-                        : 'text-neutral-400 hover:text-neutral-300'
+                        ? 'font-medium text-neutral-900 dark:text-neutral-50'
+                        : 'text-neutral-400 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300'
                     )}
                   >
                     {item.title}

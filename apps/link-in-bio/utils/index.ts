@@ -3,7 +3,7 @@ import type {
   GetBlockResponse,
   RichTextItemResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import classnames from 'classnames'
+import { cn } from 'utils'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
@@ -86,7 +86,7 @@ export const getRichTextClassName = ({
   annotations: { bold, italic, strikethrough, underline, code, color },
   href
 }: RichTextItemResponse) =>
-  classnames({
+  cn({
     'font-semibold': bold,
     italic: italic,
     'line-through': strikethrough,

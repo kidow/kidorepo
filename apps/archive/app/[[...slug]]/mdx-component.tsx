@@ -1,9 +1,9 @@
 'use client'
 
 import type { HTMLAttributes, ImgHTMLAttributes } from 'react'
-import classnames from 'classnames'
 import { CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import { cn } from 'utils'
 
 interface Props {
   code: string
@@ -121,7 +121,7 @@ const components = {
   },
   code: (props: HTMLAttributes<HTMLElement>) => (
     <code
-      className={classnames(
+      className={cn(
         'hljs relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm dark:bg-neutral-800',
         props.className
       )}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import classnames from 'classnames'
+import { cn } from 'utils'
 
 interface Props {
   toc: { items?: Item[] }
@@ -80,17 +80,17 @@ function Tree({
   activeItem?: string
 }) {
   return tree?.items?.length && level < 3 ? (
-    <ul className={classnames('m-0 list-none', { 'pl-4': level !== 1 })}>
+    <ul className={cn('m-0 list-none', { 'pl-4': level !== 1 })}>
       {tree.items.map((item, index) => {
         return (
           <li key={index} className="mt-0 pt-2">
             <a
               href={item.url}
-              className={classnames(
-                'inline-block no-underline transition-colors hover:text-neutral-200',
+              className={cn(
+                'inline-block no-underline transition-colors dark:hover:text-neutral-200',
                 item.url === `#${activeItem}`
-                  ? 'font-medium text-neutral-50'
-                  : 'text-neutral-300'
+                  ? 'font-medium dark:text-neutral-50'
+                  : 'dark:text-neutral-300'
               )}
             >
               {item.title}

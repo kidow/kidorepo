@@ -3,7 +3,6 @@
 import { KeyboardEvent, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Script from 'next/script'
-import classnames from 'classnames'
 import {
   ArrowDownIcon,
   ArrowDownLeftIcon,
@@ -18,6 +17,7 @@ import {
 } from 'lucide-react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
 import { toast } from 'sonner'
+import { cn } from 'utils'
 
 const Board: string[][] = [
   [
@@ -225,7 +225,7 @@ export default function Page() {
                     setSearchQuery(menu)
                     get(menu)
                   }}
-                  className={classnames(
+                  className={cn(
                     'relative border-b border-r p-1',
                     i % 2 === 0
                       ? 'hover:bg-neutral-200'
@@ -285,9 +285,7 @@ export default function Page() {
           </div>
           <p className="flex h-10 items-center px-2 text-sm">
             총
-            <span
-              className={classnames('ml-1', { 'font-semibold': total > 0 })}
-            >
+            <span className={cn('ml-1', { 'font-semibold': total > 0 })}>
               {total}
             </span>
             개의 결과를 가져왔습니다.

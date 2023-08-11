@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import classnames from 'classnames'
 import { JAVASCRIPT_LINKS } from 'services'
+import { cn } from 'utils'
 
 export default function Sidebar() {
   const pathname = usePathname()
@@ -23,11 +23,11 @@ export default function Sidebar() {
                       href={item.href}
                       target={item.external ? '_blank' : undefined}
                       rel={item.external ? 'noreferrer' : undefined}
-                      className={classnames(
+                      className={cn(
                         'group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline',
                         pathname === item.href
-                          ? 'font-medium text-neutral-50'
-                          : 'text-neutral-400'
+                          ? 'font-medium text-neutral-900 dark:text-neutral-50'
+                          : 'text-neutral-500 dark:text-neutral-400'
                       )}
                     >
                       {item.title}

@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.7",
-    "classnames": "^2.3.2",
     "contentlayer": "^0.3.4",
     "date-fns": "^2.30.0",
     "highlight.js": "^11.8.0",
@@ -30,7 +29,8 @@
     "remark-code-import": "^1.2.0",
     "remark-gfm": "^3.0.1",
     "ui": "workspace:*",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "utils": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

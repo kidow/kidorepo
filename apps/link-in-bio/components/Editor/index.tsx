@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { EditorContent, useEditor } from '@tiptap/react'
-import classnames from 'classnames'
 import { useDebouncedCallback } from 'use-debounce'
+import { cn } from 'utils'
 
 import { EditorBubbleMenu } from './bubble-menu'
 import { TiptapExtensions } from './extensions'
@@ -57,7 +57,7 @@ export default function Editor() {
   }, [editor, content, hydrated])
   return (
     <div
-      className={classnames(
+      className={cn(
         'prose relative min-h-[500px] pb-80',
         cal.variable,
         inter.variable

@@ -17,8 +17,8 @@ import type {
   ToggleBlockObjectResponse,
   VideoBlockObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import classnames from 'classnames'
 import { TriangleIcon } from 'lucide-react'
+import { cn } from 'utils'
 
 import Code from './Code'
 
@@ -236,7 +236,7 @@ function Table(block: TableBlockObjectResponse) {
 function Todo(block: ToDoBlockObjectResponse) {
   return (
     <div
-      className={classnames('flex items-center gap-2', {
+      className={cn('flex items-center gap-2', {
         'text-red-500': block.to_do.color === 'red',
         'text-orange-500': block.to_do.color === 'orange',
         'text-yellow-500': block.to_do.color === 'yellow',
@@ -259,7 +259,7 @@ function Todo(block: ToDoBlockObjectResponse) {
         type="checkbox"
         checked={block.to_do.checked}
         readOnly
-        className={classnames(
+        className={cn(
           'relative h-5 w-5 appearance-none rounded border bg-white checked:before:absolute checked:before:left-1.5 checked:before:top-[3px] checked:before:h-2.5 checked:before:w-1.5 checked:before:rotate-45 checked:before:border-b-2 checked:before:border-r-2 checked:before:border-white',
           {
             'border-slate-500 checked:border-blue-500 checked:bg-blue-500':

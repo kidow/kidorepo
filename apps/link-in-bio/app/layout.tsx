@@ -1,7 +1,6 @@
 'use client'
 
 import { Analytics } from '@vercel/analytics/react'
-import classnames from 'classnames'
 import { Toaster } from 'sonner'
 
 import Footer from '@/components/Footer'
@@ -11,6 +10,7 @@ import './globals.css'
 
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
+import { cn } from 'utils'
 
 const inter = Inter({
   subsets: ['latin']
@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div className="relative flex min-h-screen w-full flex-1 flex-col items-center">
               <Header />
               <div
-                className={classnames(
+                className={cn(
                   'flex h-full w-full max-w-prose flex-1 flex-col p-6 pt-0 xl:max-w-[1728px] xl:flex-row xl:p-16'
                 )}
               >

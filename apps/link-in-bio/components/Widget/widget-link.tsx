@@ -3,7 +3,7 @@
 import type { HTMLAttributeAnchorTarget } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import classnames from 'classnames'
+import { cn } from 'utils'
 
 interface Props extends WidgetProps {
   href: string
@@ -24,10 +24,7 @@ export default function WidgetLink({
   const { push } = useRouter()
   return (
     <li
-      className={classnames(
-        'overflow-hidden transition-all duration-150',
-        className
-      )}
+      className={cn('overflow-hidden transition-all duration-150', className)}
     >
       <Link
         href={href}
@@ -46,7 +43,7 @@ export default function WidgetLink({
         }}
         rel="noopener noreferrer"
         draggable={false}
-        className={classnames(
+        className={cn(
           'flex rounded-3xl border border-neutral-200 p-5 shadow-sm transition-all duration-150 xl:p-6',
           size
         )}

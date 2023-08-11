@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import classnames from 'classnames'
+import { cn } from 'utils'
 
 import * as Icon from '@/components/icons'
 
@@ -98,25 +98,25 @@ export default function SpotifyClient({ tracks, totalSongs }: Props) {
             <div className="relative">
               <div className="absolute inset-0 z-0">
                 <span
-                  className={classnames(
+                  className={cn(
                     'absolute inset-0 z-30 h-full w-full rounded-full bg-[#1ed760]/[0.08] transition-transform',
                     { 'animate-playing': isPlayed }
                   )}
                 />
                 <Icon.Note
-                  className={classnames(
+                  className={cn(
                     'absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2',
                     { 'animate-note-1': isPlayed }
                   )}
                 />
                 <Icon.Note
-                  className={classnames(
+                  className={cn(
                     'absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2',
                     { 'animate-note-2': isPlayed }
                   )}
                 />
                 <Icon.Note
-                  className={classnames(
+                  className={cn(
                     'absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2',
                     { 'animate-note-3': isPlayed }
                   )}
@@ -151,7 +151,7 @@ export default function SpotifyClient({ tracks, totalSongs }: Props) {
                 <div className="flex flex-row items-center">
                   <div className="relative h-[40px] w-[40px] flex-none transition-all group-hover:rounded-full">
                     <div
-                      className={classnames(
+                      className={cn(
                         'absolute inset-0 z-20 h-full w-full items-center justify-center rounded-full bg-[#1ED760] transition-all duration-150 ease-in active:bg-[#07BB47]',
                         isPlayed && audio?.src === item.audioSnippet
                           ? 'flex opacity-100'
@@ -166,7 +166,7 @@ export default function SpotifyClient({ tracks, totalSongs }: Props) {
                         loading="lazy"
                         height={40}
                         width={40}
-                        className={classnames(
+                        className={cn(
                           'pointer-events-auto z-10 h-full w-full rounded-[inherit] border-black/[0.08] object-cover transition-all ease-in group-hover:hidden',
                           {
                             hidden: isPlayed && audio?.src === item.audioSnippet

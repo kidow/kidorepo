@@ -4,13 +4,13 @@ import { memo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import classnames from 'classnames'
+import { cn } from 'utils'
 
 function Header() {
   const pathname = usePathname()
   return (
     <header
-      className={classnames(
+      className={cn(
         'flex h-full w-full max-w-[428px] items-center justify-center p-6 pb-0 pt-12 [view-transition-name:header] xl:absolute xl:top-0 xl:max-w-[min(100vw,1728px)] xl:items-stretch xl:justify-start xl:p-16',
         { 'hidden xl:block': pathname?.startsWith('/blog/') }
       )}

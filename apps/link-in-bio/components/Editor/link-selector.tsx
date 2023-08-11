@@ -8,8 +8,8 @@ import {
   type SetStateAction
 } from 'react'
 import { Editor } from '@tiptap/core'
-import classnames from 'classnames'
 import { Check, Trash } from 'lucide-react'
+import { cn } from 'utils'
 
 interface LinkSelectorProps {
   editor: Editor
@@ -39,12 +39,9 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
       >
         <p className="text-base">↗</p>
         <p
-          className={classnames(
-            'underline decoration-stone-400 underline-offset-4',
-            {
-              'text-blue-500': editor.isActive('link')
-            }
-          )}
+          className={cn('underline decoration-stone-400 underline-offset-4', {
+            'text-blue-500': editor.isActive('link')
+          })}
         >
           Link
         </p>
