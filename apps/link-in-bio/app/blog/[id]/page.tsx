@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 
 import 'dayjs/locale/ko'
 
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
@@ -369,11 +370,13 @@ export default async function Page({ params }: { params: { id: string } }) {
         {/* @ts-ignore */}
         <Share url={data?.public_url} />
         <hr className="my-12" />
-        <ul className="mt-5 space-y-4">
-          {comments.map((comment) => (
-            <Comment key={comment.id} {...comment} />
-          ))}
-        </ul>
+        <Suspense fallback={null}>
+          <ul className="mt-5 space-y-4">
+            {comments.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
+          </ul>
+        </Suspense>
       </article>
       <BackTop.v1 />
     </main>
