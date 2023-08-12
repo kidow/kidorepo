@@ -19,14 +19,19 @@ export interface Props {
 
 function Dropdown({ position, trigger, list, onClick, className }: Props) {
   return (
-    <div className="relative inline-block [&>ul]:focus-within:visible [&>ul]:focus-within:scale-100 [&>ul]:focus-within:opacity-100">
+    <div
+      className={cn(
+        'relative inline-block [&>ul]:focus-within:visible [&>ul]:focus-within:scale-100 [&>ul]:focus-within:opacity-100',
+        className
+      )}
+    >
       <label tabIndex={0} className="cursor-pointer">
         {trigger}
       </label>
       <ul
         tabIndex={0}
         className={cn(
-          'invisible absolute z-50 w-52 scale-95 rounded-md bg-white p-2 opacity-0 shadow transition duration-200 ease-in-out',
+          'invisible absolute z-50 w-36 scale-95 rounded-md bg-white p-2 opacity-0 shadow transition duration-200 ease-in-out dark:border dark:border-neutral-800 dark:bg-neutral-950',
           {
             'bottom-full right-0': position === 'top-start',
             'bottom-full left-0': position === 'top-end',
@@ -36,14 +41,13 @@ function Dropdown({ position, trigger, list, onClick, className }: Props) {
             'left-0 top-full': position === 'bottom-end',
             'bottom-0 right-full': position === 'left-start',
             'right-full top-0': position === 'left-end'
-          },
-          className
+          }
         )}
       >
         {list.map((item, key) => (
           <li
             key={key}
-            className="cursor-pointer rounded px-4 py-3 hover:bg-neutral-100"
+            className="cursor-pointer rounded px-2 py-1 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
             onClick={() => onClick(key)}
           >
             {item}

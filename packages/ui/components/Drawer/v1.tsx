@@ -8,7 +8,7 @@ export interface Props extends ReactProps {
   position?: 'left' | 'top' | 'right' | 'bottom'
 }
 
-function Drawer({ position }: Props) {
+function Drawer({ position = 'left' }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const onEscape = useCallback((e: KeyboardEvent) => {

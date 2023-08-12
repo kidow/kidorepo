@@ -1,12 +1,7 @@
 'use client'
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  type ButtonHTMLAttributes,
-  type DetailedHTMLProps
-} from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+import type { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 import { cn } from 'utils'
 
 import { Spinner } from '../..'

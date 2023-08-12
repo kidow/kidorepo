@@ -25,7 +25,7 @@ export const Default: Story = {
     content: 'CONTENT'
   },
   render: (props) => (
-    <ul>
+    <ul className="space-y-4">
       {Array.from({ length: 3 }).map((_, key) => (
         <Accordion.v1 key={key} {...props} />
       ))}

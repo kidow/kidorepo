@@ -2,4 +2,149 @@
 title: Checkbox
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-checkbox-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn
+
+<Step>Copy Code</Step>
+
+```tsx
+import { cn } from 'utils'
+
+export interface Props {
+  label?: string
+  indeterminate?: boolean
+  checked?: boolean
+  onChange?: (checked: boolean) => void
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  disabled?: boolean
+}
+
+function Checkbox({
+  label,
+  indeterminate = false,
+  checked = false,
+  onChange,
+  size = 'md',
+  disabled = false
+}: Props) {
+  return (
+    <label
+      className={cn(disabled ? 'cursor-not-allowed' : 'cursor-pointer', {
+        'inline-flex items-center': !!label,
+        'gap-1': !!label && size === 'sm',
+        'gap-1.5': !!label && size === 'md',
+        'gap-2': !!label && size === 'lg',
+        'gap-2.5': !!label && size === 'xl'
+      })}
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        ref={(input) => {
+          if (!input || indeterminate === undefined) return
+          input.indeterminate = indeterminate
+        }}
+        className={cn(
+          'relative cursor-pointer appearance-none border duration-150 disabled:cursor-not-allowed',
+          size === 'sm' ? 'rounded' : 'rounded-lg',
+          {
+            'h-4 w-4': size === 'sm',
+            'h-5 w-5': size === 'md',
+            'h-6 w-6': size === 'lg',
+            'h-7 w-7': size === 'xl',
+            'before:rotate-45': checked,
+            'before:left-[5px] before:top-0.5 before:h-2 before:w-1 before:border-b before:border-r':
+              checked && size === 'sm',
+            'before:left-1.5 before:top-[3px] before:h-2.5 before:w-1.5':
+              checked && size === 'md',
+            'before:left-[7px] before:top-1 before:h-3 before:w-2':
+              checked && size === 'lg',
+            'before:left-[9px] before:top-1 before:h-3.5 before:w-2':
+              checked && size === 'xl',
+            'before:border-b-2 before:border-r-2':
+              checked && (size === 'md' || size === 'lg' || size === 'xl'),
+            'before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-white':
+              !checked && indeterminate,
+            'before:h-px before:w-2':
+              !checked && indeterminate && size === 'sm',
+            'before:h-0.5 before:w-2.5':
+              !checked && indeterminate && size === 'md',
+            'before:h-[3px] before:w-3':
+              !checked && indeterminate && size === 'lg',
+            'before:h-1 before:w-3.5':
+              !checked && indeterminate && size === 'xl',
+            'before:absolute before:border-white': checked || indeterminate,
+            'border-blue-500 bg-blue-500':
+              !disabled && (checked || indeterminate),
+            'bg-white dark:border-neutral-600 dark:bg-neutral-700':
+              !checked && !indeterminate,
+            'bg-neutral-400': disabled && checked
+          }
+        )}
+        onChange={(e) => {
+          if (onChange) onChange(e.target.checked)
+        }}
+        disabled={disabled}
+      />
+      {!!label && (
+        <span
+          className={cn(
+            'flex-1 select-none',
+            disabled
+              ? 'text-neutral-400'
+              : 'text-neutral-600 dark:text-neutral-200',
+            {
+              'text-sm': size === 'sm',
+              'text-lg': size === 'lg',
+              'text-xl': size === 'xl'
+            }
+          )}
+        >
+          {label}
+        </span>
+      )}
+    </label>
+  )
+}
+
+export default Checkbox
+```
+
+<Step>Usage</Step>
+
+```tsx
+<Checkbox
+  checked={false}
+  onChange={(checked) => setValue(checkbed)}
+  size="lg"
+  disabled={false}
+  label="Label"
+  indeterminate
+/>
+```
+
+</Steps>
+
+### Props
+
+| Name              |            Type            | Default |
+| :---------------- | :------------------------: | :-----: |
+| **label**         |           string           |         |
+| **indeterminate** |          boolean           |  false  |
+| **chekced**       |          boolean           |  false  |
+| **onChange**      | (checked: boolean) => void |         |
+| **size**          |    `sm` `md` `lg` `xl`     |  `md`   |
+| **disabled**      |          boolean           |  false  |

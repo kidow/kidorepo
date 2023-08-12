@@ -4,11 +4,19 @@ title: Accordion
 
 ## Example
 
-aaa
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-accordion-v1--docs"
+  width="800"
+  height="440"
+></iframe>
 
 ## Steps
 
 <Steps>
+
+<Step>Prerequisite</Step>
+
+cn
 
 <Step>Install Pacakge</Step>
 
@@ -19,22 +27,22 @@ npm install lucide-react classnames
 <Step>Copy Code</Step>
 
 ```tsx title="components/Accordion/index.tsx"
+'use client'
+
 import { memo, useState } from 'react'
-import type { FC } from 'react'
-import classnames from 'classnames'
 import { ChevronUpIcon } from 'lucide-react'
+import { cn } from 'utils'
 
 export interface Props {
   title: string
   content: string
 }
-interface State {}
 
-const Accordion: FC<Props> = ({ title, content }) => {
+function Accordion({ title, content }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [height, setHeight] = useState<number>(0)
   return (
-    <li className="select-none rounded-2xl border border-neutral-200 bg-neutral-100 px-6 dark:border-neutral-800 dark:bg-neutral-900">
+    <li className="select-none rounded-2xl border border-neutral-200 bg-neutral-50 px-6 dark:border-neutral-800 dark:bg-neutral-900">
       <div
         onClick={() => setIsOpen(() => !isOpen)}
         className="flex cursor-pointer items-center justify-between py-6"
@@ -44,7 +52,7 @@ const Accordion: FC<Props> = ({ title, content }) => {
         </h3>
         <button className="text-neutral-400">
           <ChevronUpIcon
-            className={classnames('h-6 w-6 duration-150', {
+            className={cn('h-6 w-6 duration-150', {
               '-rotate-180': isOpen
             })}
           />
@@ -52,7 +60,7 @@ const Accordion: FC<Props> = ({ title, content }) => {
       </div>
       <section
         style={{ maxHeight: isOpen ? height : 0 }}
-        className={classnames(
+        className={cn(
           'overflow-hidden transition-[max-height] duration-150',
           isOpen ? 'ease-in' : 'ease-in-out'
         )}
@@ -74,7 +82,7 @@ const Accordion: FC<Props> = ({ title, content }) => {
 export default memo(Accordion)
 ```
 
-### Usage
+<Step>Usage</Step>
 
 ```tsx
 <ul className="space-y-4">

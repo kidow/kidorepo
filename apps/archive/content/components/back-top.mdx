@@ -2,4 +2,50 @@
 title: BackTop
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-backtop-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Install Package</Step>
+
+```bash
+npm install
+```
+
+<Step>Copy Code</Step>
+
+```tsx title="components/BackTop/index.tsx"
+'use client'
+
+import { memo } from 'react'
+import { ArrowUpIcon } from 'lucide-react'
+
+function BackTop() {
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-[10px] border"
+    >
+      <ArrowUpIcon className="h-5 w-5" />
+    </button>
+  )
+}
+
+export default memo(BackTop)
+```
+
+<Step>Usage</Step>
+
+```tsx
+<BackTop />
+```
+
+</Steps>

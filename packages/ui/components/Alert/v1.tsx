@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 import { AlertCircleIcon, XIcon } from 'lucide-react'
 import { cn } from 'utils'
 
-export interface Props extends ReactProps {
+export interface Props {
   type: 'success' | 'info' | 'warn' | 'error'
   message: string
   close?: boolean
 }
 
-function Alert({ type, message, close, children }: Props) {
+function Alert({ type, message, close }: Props) {
   const [isClosed, setIsClosed] = useState<boolean>(false)
   const [isDisplay, setIsDisplay] = useState<boolean>(true)
 
@@ -46,10 +46,7 @@ function Alert({ type, message, close, children }: Props) {
           })}
         />
 
-        <div className="text-sm">
-          {message}
-          {children}
-        </div>
+        <div className="text-sm">{message}</div>
       </div>
       {close && !isClosed && (
         <XIcon

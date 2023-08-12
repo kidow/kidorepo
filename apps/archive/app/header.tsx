@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { GithubIcon, HomeIcon, MoonStarIcon } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { createPortal } from 'react-dom'
 import { HEADER_NAV } from 'services'
+import { Dropdown } from 'ui'
 import { cn } from 'utils'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const pathname = usePathname()
+  const { setTheme } = useTheme()
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -50,12 +54,12 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <button className="inline-flex items-center justify-between gap-4 rounded-md border border-neutral-800 px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-800 hover:text-neutral-300">
+            <button className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300">
               <span className="hidden lg:inline-block">
                 Search Documentation...
               </span>
               <span className="lg:hidden">Search...</span>
-              <kbd className="select-none rounded-md bg-neutral-800 px-1.5 py-0.5 text-[10px]">
+              <kbd className="select-none rounded-md bg-neutral-200 px-1.5 py-0.5 text-[10px] dark:bg-neutral-800">
                 <span className="mr-1 text-xs">⌘</span>K
               </kbd>
             </button>
@@ -63,7 +67,7 @@ export default function Header() {
               <Link href="https://kidow.me" target="_blank">
                 <HomeIcon
                   size={24}
-                  className="text-neutral-400 duration-150 hover:text-neutral-50"
+                  className="text-neutral-500 duration-150 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-50"
                 />
               </Link>
               <Link
@@ -72,19 +76,39 @@ export default function Header() {
               >
                 <GithubIcon
                   size={24}
-                  className="text-neutral-400 duration-150 hover:text-neutral-50"
+                  className="text-neutral-500 duration-150 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-50"
                 />
               </Link>
-              <button>
-                <MoonStarIcon
-                  size={24}
-                  className="text-neutral-400 duration-150 hover:text-neutral-50"
-                />
-              </button>
+              <Dropdown.v2
+                position="bottom-start"
+                className="h-6"
+                onClick={(index) => {
+                  if (index === 0) setTheme('light')
+                  else if (index === 1) setTheme('dark')
+                  else if (index === 2) setTheme('system')
+                }}
+                list={['Light', 'Dark', 'System']}
+                trigger={
+                  <button>
+                    <MoonStarIcon
+                      size={24}
+                      className="text-neutral-500 duration-150 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-50"
+                    />
+                  </button>
+                }
+              />
             </div>
           </div>
         </div>
       </header>
+      {isOpen && (
+        <>
+          {createPortal(
+            <div className="fixed inset-0 z-30">asd</div>,
+            document.body
+          )}
+        </>
+      )}
     </>
   )
 }

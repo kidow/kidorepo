@@ -1,4 +1,4 @@
-export const JAVASCRIPT_LINKS: SidebarItem[] = [
+export const COMPONENTS_LINKS: SidebarItem[] = [
   {
     title: 'Components',
     items: [
@@ -13,6 +13,7 @@ export const JAVASCRIPT_LINKS: SidebarItem[] = [
       { title: 'Button', href: '/components/button' },
       { title: 'ButtonGroup', href: '/components/button-group' },
       { title: 'Calendar', href: '/components/calendar' },
+      { title: 'Callout', href: '/components/callout' },
       { title: 'Card', href: '/components/card' },
       { title: 'Carousel', href: '/components/carousel' },
       { title: 'Cascader', href: '/components/cascader' },
@@ -89,6 +90,7 @@ export const JAVASCRIPT_LINKS: SidebarItem[] = [
     items: [
       { title: 'backdrop', href: '/utils/backdrop' },
       { title: 'base64ToFile', href: '/utils/base64-to-file' },
+      { title: 'cn', href: '/utils/cn' },
       { title: 'copyText', href: '/utils/copy-text' },
       { title: 'debounce', href: '/utils/debounce' },
       { title: 'enumToOptions', href: '/utils/enum-to-options' },
@@ -117,6 +119,20 @@ export const JAVASCRIPT_LINKS: SidebarItem[] = [
       { title: 'Type Definitions', href: '/settings/type-definitions' },
       { title: 'VSCode Extensions', href: '/settings/vscode-extensions' }
     ]
+  }
+]
+
+export const WIKI_LINKS: SidebarItem[] = [
+  {
+    title: 'Wiki',
+    items: []
+  }
+]
+
+export const ALGORITHM_LINKS: SidebarItem[] = [
+  {
+    title: 'Algorithms',
+    items: []
   }
 ]
 

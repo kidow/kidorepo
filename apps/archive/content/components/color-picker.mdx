@@ -2,4 +2,489 @@
 title: ColorPicker
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-colorpicker-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn, hexToRgb, rgbToHex, useOnClickOutside
+
+<Step>Reset CSS</Step>
+
+```css
+.color-picker input::-webkit-outer-spin-button,
+.color-picker input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+```
+
+<Step>Add `Hue`, `RGB`, `Spectrum` Components</Step>
+
+```tsx title="components/ColorPicker/Hue/index.tsx"
+'use client'
+
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { useCombinedRefs } from 'hooks'
+
+export interface Props {
+  onChange: (red: number, green: number, blue: number) => void
+}
+
+const Hue = forwardRef<HTMLCanvasElement, Props>(({ onChange }, ref) => {
+  const [y, setY] = useState<number>(0)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  canvasRef.current
+  const combinedRef = useCombinedRefs<HTMLCanvasElement>(ref, canvasRef)
+
+  const onMouseMove = useCallback(
+    (e: MouseEvent) => {
+      setY(e.offsetY - 2)
+      const imageData = combinedRef.current
+        ?.getContext('2d')
+        ?.getImageData(0, e.offsetY - 2, 1, 1).data
+      const red = imageData?.at(0) || 0
+      const green = imageData?.at(1) || 0
+      const blue = imageData?.at(2) || 0
+      onChange(red, green, blue)
+    },
+    [combinedRef, onChange]
+  )
+
+  const onMouseDown = useCallback(
+    (e: MouseEvent) => {
+      setY(e.offsetY - 2)
+      const imageData = combinedRef.current
+        ?.getContext('2d')
+        ?.getImageData(0, e.offsetY - 2, 1, 1).data
+      const red = imageData?.at(0) || 0
+      const green = imageData?.at(1) || 0
+      const blue = imageData?.at(2) || 0
+      onChange(red, green, blue)
+      combinedRef.current?.addEventListener('mousemove', onMouseMove)
+    },
+    [combinedRef, onChange, onMouseMove]
+  )
+
+  const onMouseUp = useCallback(
+    () => combinedRef.current?.removeEventListener('mousemove', onMouseMove),
+    [combinedRef, onMouseMove]
+  )
+
+  const onMouseLeave = useCallback(
+    () => combinedRef.current?.removeEventListener('mousemove', onMouseMove),
+    [combinedRef, onMouseMove]
+  )
+
+  useEffect(() => {
+    const ctx = combinedRef.current
+      ? combinedRef.current.getContext('2d')
+      : null
+
+    if (ctx) {
+      const gradient = ctx.createLinearGradient(0, 0, 16, 176)
+      for (let i = 0; i <= 360; i += 30) {
+        gradient.addColorStop(i / 360, `hsl(${i}, 100%, 50%)`)
+      }
+      ctx.fillStyle = gradient
+      ctx.fillRect(0, 0, 16, 176)
+    }
+    let refValue: HTMLCanvasElement | null = null
+    if (combinedRef.current) {
+      combinedRef.current.addEventListener('mousedown', onMouseDown, false)
+      combinedRef.current.addEventListener('mouseup', onMouseUp, false)
+      combinedRef.current.addEventListener('mouseleave', onMouseLeave, false)
+      refValue = combinedRef.current
+    }
+
+    return () => {
+      if (refValue) {
+        refValue.removeEventListener('mousedown', onMouseDown)
+        refValue.removeEventListener('mouseup', onMouseUp)
+        refValue.removeEventListener('mouseleave', onMouseLeave)
+      }
+    }
+  }, [combinedRef, onMouseDown, onMouseLeave, onMouseUp])
+  return (
+    <div className="relative w-4 cursor-pointer">
+      <canvas width={16} height={176} ref={combinedRef} />
+      <div
+        style={{ top: y }}
+        className="pointer-events-none absolute left-0 h-1 w-full bg-white"
+      />
+    </div>
+  )
+})
+
+export default Hue
+```
+
+#### RGB
+
+```tsx titie="components/ColorPicker/RGB/index.tsx"
+'use client'
+
+export interface Props {
+  value: number
+  onChange: (value: number) => void
+}
+
+function RGB({ value, onChange }: Props) {
+  return (
+    <input
+      className="w-6 bg-slate-50 text-right text-slate-600 focus:outline-none"
+      value={value}
+      type="number"
+      onChange={(e) => {
+        if (Number(e.target.value) < 0 || Number(e.target.value) > 255) return
+        onChange(Number(e.target.value))
+      }}
+    />
+  )
+}
+
+export default RGB
+```
+
+#### Spectrum
+
+```tsx title="components/ColorPicker/Spectrum/index.tsx"
+'use client'
+
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { useCombinedRefs } from 'hooks'
+
+export interface Props {
+  onChange: (red: number, green: number, blue: number) => void
+}
+
+const Spectrum = forwardRef<HTMLCanvasElement, Props>(({ onChange }, ref) => {
+  const [x, setX] = useState<number>(0)
+  const [y, setY] = useState<number>(0)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  canvasRef.current
+  const combinedRef = useCombinedRefs<HTMLCanvasElement>(ref, canvasRef)
+
+  const onMouseMove = useCallback(
+    (e: MouseEvent) => {
+      setX(e.offsetX - 6)
+      setY(e.offsetY - 6)
+      const imageData = combinedRef.current
+        ?.getContext('2d')
+        ?.getImageData(e.offsetX - 6, e.offsetY - 6, 1, 1).data
+      onChange(
+        imageData?.at(0) || 0,
+        imageData?.at(1) || 0,
+        imageData?.at(2) || 0
+      )
+    },
+    [combinedRef, onChange]
+  )
+
+  const onMouseDown = useCallback(
+    (e: MouseEvent) => {
+      setX(e.offsetX - 6)
+      setY(e.offsetY - 6)
+      const imageData = combinedRef.current
+        ?.getContext('2d')
+        ?.getImageData(e.offsetX - 6, e.offsetY - 6, 1, 1).data
+      onChange(
+        imageData?.at(0) || 0,
+        imageData?.at(1) || 0,
+        imageData?.at(2) || 0
+      )
+      combinedRef.current?.addEventListener('mousemove', onMouseMove)
+    },
+    [combinedRef, onMouseMove, onChange]
+  )
+
+  const onMouseUp = useCallback(
+    () => combinedRef.current?.removeEventListener('mousemove', onMouseMove),
+    [combinedRef, onMouseMove]
+  )
+
+  const onMouseLeave = useCallback(
+    () => combinedRef.current?.removeEventListener('mousemove', onMouseMove),
+    [combinedRef, onMouseMove]
+  )
+
+  useEffect(() => {
+    let refValue: HTMLCanvasElement | null = null
+    if (combinedRef.current) {
+      combinedRef.current.addEventListener('mousedown', onMouseDown, false)
+      combinedRef.current.addEventListener('mouseup', onMouseUp, false)
+      combinedRef.current.addEventListener('mouseleave', onMouseLeave, false)
+      refValue = combinedRef.current
+    }
+
+    return () => {
+      if (refValue) {
+        refValue.removeEventListener('mousedown', onMouseDown)
+        refValue.removeEventListener('mouseup', onMouseUp)
+        refValue.removeEventListener('mouseleave', onMouseLeave)
+      }
+    }
+  }, [combinedRef, onMouseDown, onMouseLeave, onMouseUp])
+  return (
+    <div className="relative cursor-pointer">
+      <canvas width={176} height={176} ref={combinedRef} />
+      <div
+        style={{ left: x, top: y }}
+        className="pointer-events-none absolute h-3 w-3 rounded-full border border-white"
+      />
+    </div>
+  )
+})
+
+export default Spectrum
+```
+
+<Step>Copy Code</Step>
+
+```tsx title="components/ColorPicker/index.tsx"
+'use client'
+
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useOnClickOutside } from 'hooks'
+import { ChevronDownIcon } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { cn, hexToRgb, rgbToHex } from 'utils'
+
+import Hue from './v1/Hue'
+import RGB from './v1/RGB'
+import Spectrum from './v1/Spectrum'
+
+export interface Props {
+  value: string
+  onChange: (hex: string) => void
+}
+
+function ColorPicker({ value, onChange }: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [red, setRed] = useState(hexToRgb(value)?.red || 0)
+  const [green, setGreen] = useState(hexToRgb(value)?.green || 0)
+  const [blue, setBlue] = useState(hexToRgb(value)?.blue || 0)
+
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const targetRef = useRef<HTMLDivElement>(null)
+  const spectrumRef = useRef<HTMLCanvasElement>(null)
+  const hueRef = useRef<HTMLCanvasElement>(null)
+  const id = useId()
+  const onSyncSpectrumHue = (red: number, green: number, blue: number) => {
+    const spectrumContext = spectrumRef.current
+      ? spectrumRef.current.getContext('2d')
+      : null
+    const hueContext = hueRef.current ? hueRef.current.getContext('2d') : null
+
+    if (spectrumContext && hueContext) {
+      spectrumContext.rect(0, 0, 176, 176)
+      spectrumContext.fillStyle = `rgb(${red}, ${green}, ${blue})`
+      spectrumContext.fillRect(0, 0, 176, 176)
+
+      const white = hueContext.createLinearGradient(0, 0, 176, 0)
+      white.addColorStop(0, 'rgba(255, 255, 255, 1)')
+      white.addColorStop(1, 'rgba(255, 255, 255, 0)')
+      spectrumContext.fillStyle = white
+      spectrumContext.fillRect(0, 0, 176, 176)
+
+      const black = hueContext.createLinearGradient(0, 0, 0, 176)
+      black.addColorStop(0, 'rgba(0, 0, 0, 0)')
+      black.addColorStop(1, 'rgba(0 ,0, 0, 1)')
+      spectrumContext.fillStyle = black
+      spectrumContext.fillRect(0, 0, 176, 176)
+    }
+  }
+
+  const COLOR_TYPES: Array<{ hex: string; className: string }> = useMemo(
+    () => [
+      { hex: '#ef4444', className: 'bg-red-500' },
+      { hex: '#f97316', className: 'bg-orange-500' },
+      { hex: '#eab308', className: 'bg-yellow-500' },
+      { hex: '#22c55e', className: 'bg-green-500' },
+      { hex: '#3b82f6', className: 'bg-blue-500' },
+      { hex: '#6366f1', className: 'bg-indigo-500' },
+      { hex: '#6b7280', className: 'bg-gray-500' },
+      { hex: '#1f2937', className: 'bg-gray-800' }
+    ],
+    []
+  )
+
+  useEffect(() => {
+    if (isOpen) onSyncSpectrumHue(red, green, blue)
+  }, [isOpen, red, green, blue])
+
+  useOnClickOutside(targetRef, () => setIsOpen(false), id)
+  return (
+    <>
+      <button
+        id={id}
+        ref={buttonRef}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-3 rounded border border-neutral-300 p-2 dark:border-neutral-700 dark:bg-neutral-900"
+      >
+        <div className="h-6 w-6" style={{ backgroundColor: value }} />
+        <div className="w-16 text-sm font-semibold text-neutral-700 dark:text-neutral-50">
+          {value}
+        </div>
+        <ChevronDownIcon
+          className={cn('h-4 w-4 text-neutral-400 duration-150', {
+            'rotate-180': isOpen
+          })}
+        />
+      </button>
+      {isOpen &&
+        createPortal(
+          <div
+            ref={targetRef}
+            className="color-picker fixed z-[9999] w-56 rounded border bg-white p-2.5 shadow-xl dark:bg-slate-200"
+            style={{
+              top:
+                buttonRef.current!.getBoundingClientRect().top +
+                buttonRef.current!.clientHeight,
+              left: buttonRef.current!.getBoundingClientRect().left
+            }}
+          >
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <Spectrum
+                  ref={spectrumRef}
+                  onChange={(red, green, blue) => {
+                    setRed(red)
+                    setGreen(green)
+                    setBlue(blue)
+                    onChange(rgbToHex(red, green, blue))
+                  }}
+                />
+                <Hue
+                  ref={hueRef}
+                  onChange={(red, green, blue) => {
+                    setRed(red)
+                    setGreen(green)
+                    setBlue(blue)
+                    onChange(rgbToHex(red, green, blue))
+                    onSyncSpectrumHue(red, green, blue)
+                  }}
+                />
+              </div>
+              <div className="h-7.5 flex text-xs">
+                <span className="w-15 flex select-none items-center justify-center bg-neutral-100 text-neutral-400">
+                  HEX
+                </span>
+                <input
+                  className="w-full flex-1 bg-neutral-50 px-3 text-neutral-600"
+                  spellCheck={false}
+                  value={value}
+                  name="hex"
+                  onChange={(e) => {
+                    if (e.target.value.length > 7) return
+                    onChange(e.target.value)
+                  }}
+                />
+              </div>
+              <div className="h-7.5 flex text-xs">
+                <span className="w-15 flex select-none items-center justify-center bg-neutral-100 text-neutral-400">
+                  RGB
+                </span>
+                <div className="flex flex-1 gap-1 bg-neutral-50 px-3">
+                  <RGB
+                    value={red}
+                    onChange={(red) => {
+                      setRed(red)
+                      onChange(rgbToHex(red, green, blue))
+                      onSyncSpectrumHue(red, green, blue)
+                    }}
+                  />
+                  <RGB
+                    value={green}
+                    onChange={(green) => {
+                      setGreen(green)
+                      onChange(rgbToHex(red, green, blue))
+                      onSyncSpectrumHue(red, green, blue)
+                    }}
+                  />
+                  <RGB
+                    value={blue}
+                    onChange={(blue) => {
+                      setBlue(blue)
+                      onChange(rgbToHex(red, green, blue))
+                      onSyncSpectrumHue(red, green, blue)
+                    }}
+                  />
+                </div>
+              </div>
+              <ul className="flex gap-2.5">
+                {COLOR_TYPES.map((item, key) => (
+                  <li
+                    onClick={() => {
+                      onChange(item.hex)
+                      const rgb = hexToRgb(item.hex)
+                      if (rgb) {
+                        setRed(rgb.red)
+                        setGreen(rgb.green)
+                        setBlue(rgb.blue)
+                        onSyncSpectrumHue(rgb.red, rgb.green, rgb.blue)
+                      }
+                    }}
+                    className={cn(
+                      'h-4 w-4 cursor-pointer rounded duration-150 hover:scale-125',
+                      item.className
+                    )}
+                    key={key}
+                  />
+                ))}
+              </ul>
+            </div>
+          </div>,
+          document.body
+        )}
+    </>
+  )
+}
+
+export default ColorPicker
+```
+
+<Step>Usage</Step>
+
+```tsx
+<ColorPicker value="#dffc03" onChange={(value) => setValue(value)} />
+```
+
+</Steps>
+
+### Props
+
+#### ColorPicker
+
+| Name                     |         Type          | Default |
+| :----------------------- | :-------------------: | :-----: |
+| **value**<Required />    |        string         |         |
+| **onChange**<Required /> | (hex: string) => void |         |
+
+#### Hue
+
+| Name                     |                        Type                        | Default |
+| :----------------------- | :------------------------------------------------: | :-----: |
+| **onChange**<Required /> | (red: number, green: number, blue: number) => void |         |
+
+#### RGB
+
+| Name                     |          Type           | Default |
+| :----------------------- | :---------------------: | :-----: |
+| **value**<Required />    |         number          |         |
+| **onChange**<Required /> | (value: number) => void |         |
+
+#### Spectrum
+
+| Name                     |                        Type                        | Default |
+| :----------------------- | :------------------------------------------------: | :-----: |
+| **onChange**<Required /> | (red: number, green: number, blue: number) => void |         |

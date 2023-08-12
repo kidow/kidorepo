@@ -1,7 +1,8 @@
 'use client'
 
 import type { HTMLAttributes, ImgHTMLAttributes } from 'react'
-import { CopyIcon } from 'lucide-react'
+import Link from 'next/link'
+import { Box, BoxIcon, CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { cn } from 'utils'
 
@@ -87,42 +88,44 @@ const components = {
       {...props}
     />
   ),
-  pre: (props: HTMLAttributes<HTMLPreElement>) => {
+  pre: (props: HTMLAttributes<HTMLPreElement> & { __rawString__: string }) => {
     return (
       <div className="group relative">
         <pre
-          className="mb-4 overflow-x-auto rounded-b-lg border border-neutral-800 p-4 text-sm text-[#e2e8f0] dark:bg-[#1e293b]"
+          className="mb-4 overflow-x-auto rounded-b-lg border border-neutral-800 bg-[#1e293b] p-4 text-sm text-[#e2e8f0]"
           {...props}
         />
-        <button
-          onClick={() => {
-            if (
-              typeof window === 'undefined' ||
-              typeof window.navigator === 'undefined'
-            ) {
-              alert('호환되지 않는 브라우저입니다.')
-              return
-            }
+        {props.__rawString__ && (
+          <button
+            onClick={() => {
+              if (
+                typeof window === 'undefined' ||
+                typeof window.navigator === 'undefined'
+              ) {
+                alert('호환되지 않는 브라우저입니다.')
+                return
+              }
 
-            window.navigator.clipboard
-              .writeText(props.children as string)
-              .then(() => alert('복사되었습니다.'))
-              .catch(() => alert('실패했습니다.'))
-          }}
-          className="absolute right-3 top-3 hidden h-[30px] w-[30px] items-center justify-center rounded-md border bg-neutral-800 transition-all duration-150 group-hover:inline-flex dark:border-neutral-600"
-          title="Copy code"
-          tabIndex={0}
-        >
-          <span className="sr-only">Copy code</span>
-          <CopyIcon size={16} />
-        </button>
+              window.navigator.clipboard
+                .writeText(props.__rawString__)
+                .then(() => alert('복사되었습니다.'))
+                .catch(() => alert('실패했습니다.'))
+            }}
+            className="group absolute right-3 top-3 hidden h-[30px] w-[30px] items-center justify-center rounded-md border border-neutral-600 bg-neutral-800 transition-all duration-150 group-hover:inline-flex"
+            title="Copy code"
+            tabIndex={0}
+          >
+            <span className="sr-only">Copy code</span>
+            <CopyIcon size={16} className="text-neutral-400" />
+          </button>
+        )}
       </div>
     )
   },
   code: (props: HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        'hljs relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm dark:bg-neutral-800',
+        'hljs relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm first:ml-[-5px]',
         props.className
       )}
       {...props}
@@ -145,7 +148,14 @@ const components = {
   Tab: (props: ReactProps) => <div className="relative mt-6 w-full"></div>,
   TabContent: (props: ReactProps) => <div></div>,
   TabButton: (props: ReactProps) => <div></div>,
-  Required: () => <span className="after:text-red-500 after:content-['*']" />
+  Required: () => <span className="after:text-red-500 after:content-['*']" />,
+  LinkBlock: (props: { href: string }) => <Link href={props.href}>asd</Link>,
+  IframeBlock: ({ icon, name }: { icon: 'box'; name: string }) => (
+    <button className="group flex">
+      {icon === 'box' && <BoxIcon />}
+      <span className="font-semibold">{name}</span>
+    </button>
+  )
 }
 
 export default function MDXComponent({ code }: Props) {

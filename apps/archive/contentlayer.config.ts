@@ -2,6 +2,7 @@ import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
+import rehypeStringify from 'rehype-stringify'
 import { codeImport } from 'remark-code-import'
 import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
@@ -52,6 +53,7 @@ export default makeSource({
           }
         })
       },
+      rehypeStringify,
       [
         rehypePrettyCode,
         {
@@ -83,6 +85,53 @@ export default makeSource({
             if (node.__event__) {
               pre.properties['__event__'] = node.__event__
             }
+          }
+        })
+      },
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node.type !== 'element' || node?.tagName !== 'pre') return
+
+          // npm install.
+          if (node.properties?.['__rawString__']?.startsWith('npm install')) {
+            const npmCommand = node.properties?.['__rawString__']
+            node.properties['__npmCommand__'] = npmCommand
+            node.properties['__yarnCommand__'] = npmCommand.replace(
+              'npm install',
+              'yarn add'
+            )
+            node.properties['__pnpmCommand__'] = npmCommand.replace(
+              'npm install',
+              'pnpm add'
+            )
+          }
+
+          // npx create.
+          if (node.properties?.['__rawString__']?.startsWith('npx create-')) {
+            const npmCommand = node.properties?.['__rawString__']
+            node.properties['__npmCommand__'] = npmCommand
+            node.properties['__yarnCommand__'] = npmCommand.replace(
+              'npx create-',
+              'yarn create '
+            )
+            node.properties['__pnpmCommand__'] = npmCommand.replace(
+              'npx create-',
+              'pnpm create '
+            )
+          }
+
+          // npx.
+          if (
+            node.properties?.['__rawString__']?.startsWith('npx') &&
+            !node.properties?.['__rawString__']?.startsWith('npx create-')
+          ) {
+            const npmCommand = node.properties?.['__rawString__']
+            node.properties['__npmCommand__'] = npmCommand
+            node.properties['__yarnCommand__'] = npmCommand
+            node.properties['__pnpmCommand__'] = npmCommand.replace(
+              'npx',
+              'pnpm dlx'
+            )
           }
         })
       },

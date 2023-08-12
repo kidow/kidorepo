@@ -1,16 +1,22 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { JAVASCRIPT_LINKS } from 'services'
+import { ALGORITHM_LINKS, COMPONENTS_LINKS, WIKI_LINKS } from 'services'
 import { cn } from 'utils'
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const links: SidebarItem[] = useMemo(() => {
+    if (pathname.startsWith('/wiki')) return WIKI_LINKS
+    else if (pathname.startsWith('/algorithm')) return ALGORITHM_LINKS
+    return COMPONENTS_LINKS
+  }, [pathname])
   return (
     <aside className="fixed top-14 z-30 hidden h-[calc(100vh-4rem-1px)] w-full shrink-0 overflow-y-auto py-6 pr-2 md:sticky md:block lg:py-10">
       <nav className="w-full">
-        {JAVASCRIPT_LINKS.map(({ items, title }, key) => (
+        {links.map(({ items, title }, key) => (
           <div className="pb-4" key={key}>
             <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
               {title}

@@ -23,7 +23,7 @@ export default function Toc({ toc }: Props) {
 
   return (
     <div className="hidden text-sm xl:block">
-      <div className="sticky top-20 -mt-10 max-h-[calc(100vh-4rem)] overflow-y-auto pt-10">
+      <div className="sticky top-20 -mt-10 max-h-[calc(100vh-4rem)] overflow-y-auto pt-7">
         <div className="space-y-2">
           <p className="font-medium">On This Page</p>
           <Tree tree={toc} activeItem={activeHeading} />
@@ -87,10 +87,10 @@ function Tree({
             <a
               href={item.url}
               className={cn(
-                'inline-block no-underline transition-colors dark:hover:text-neutral-200',
+                'inline-block no-underline transition-colors',
                 item.url === `#${activeItem}`
-                  ? 'font-medium dark:text-neutral-50'
-                  : 'dark:text-neutral-300'
+                  ? 'font-medium text-neutral-900 dark:text-neutral-50'
+                  : 'text-neutral-400 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-200'
               )}
             >
               {item.title}

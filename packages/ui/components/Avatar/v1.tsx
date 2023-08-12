@@ -9,7 +9,7 @@ export interface Props {
   border?: boolean
 }
 
-function Avatar({ src, alt, shape, size, border }: Props) {
+function Avatar({ src, alt, shape = 'circle', size = 'md', border }: Props) {
   return (
     <span>
       <img

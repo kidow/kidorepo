@@ -2,4 +2,139 @@
 title: Card
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-card-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn
+
+<Step>Copy Code</Step>
+
+```tsx title="components/Card/index.tsx"
+import { cn } from 'utils'
+
+export interface Props extends ReactProps {
+  title?: string
+  caption?: string
+  footer?: string
+  border?: boolean
+  padding?: boolean
+  className?: string
+}
+
+function Card({
+  title,
+  caption,
+  footer,
+  border,
+  padding,
+  className,
+  children
+}: Props) {
+  return (
+    <section
+      className={cn('bg-white shadow-md dark:bg-neutral-800', {
+        'border dark:border-neutral-700': border
+      })}
+    >
+      {!!title && (
+        <div className="flex items-center justify-between p-6">
+          <div className="font-bold">{title}</div>
+          {!!caption && (
+            <div className="text-xs dark:text-neutral-400">{caption}</div>
+          )}
+        </div>
+      )}
+      {!!children && (
+        <div
+          className={cn(
+            'relative dark:border-neutral-700',
+            footer ? 'border-y' : 'border-t',
+            { 'px-6 py-10': padding },
+            className
+          )}
+        >
+          {children}
+        </div>
+      )}
+      {!!footer && <div className="px-6 py-4">{footer}</div>}
+    </section>
+  )
+}
+
+export default Card
+```
+
+<Step>Add CardItem Component</Step>
+
+```tsx title="components/Card/Item/index.tsx"
+import { cn } from 'utils'
+
+export interface Props extends ReactProps {
+  label: string
+  required?: boolean
+  fullWidth?: boolean
+  plain?: boolean
+}
+
+function CardItem({ children, label, required, fullWidth, plain }: Props) {
+  return (
+    <div className="flex gap-10">
+      <div
+        className={cn('min-w-[9rem] text-neutral-400', {
+          "whitespace-nowrap after:text-red-500 after:content-['*']": required
+        })}
+      >
+        <div className="inline-flex h-[42px] items-center gap-0.5">{label}</div>
+      </div>
+      <div className={cn({ 'flex-1': fullWidth, 'mt-2.5': plain })}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default CardItem
+```
+
+<Step>Usage</Step>
+
+```tsx
+<Card title="Title" caption="Caption" footer="Footer" border padding>
+  children
+</Card>
+```
+
+</Steps>
+
+### Props
+
+#### Card
+
+| Name          |  Type   | Default |
+| :------------ | :-----: | :-----: |
+| **title**     | string  |         |
+| **caption**   | string  |         |
+| **footer**    | string  |         |
+| **boorder**   | boolean |         |
+| **padding**   | boolean |         |
+| **className** | string  |         |
+
+#### CardItem
+
+| Name                  |  Type   | Default |
+| :-------------------- | :-----: | :-----: |
+| **label**<Required /> | string  |         |
+| **required**          | boolean |         |
+| **fullWidth**         | boolean |         |
+| **plain**             | boolean |         |
