@@ -2,4 +2,60 @@
 title: EventListeners
 ---
 
-asd
+Web API 중 하나인 `CustomEvent`에 대한 함수입니다.
+
+<Steps>
+
+<Step>Copy Code</Step>
+
+```ts title="utils/event-listener.ts"
+class EventListenerGenerator {
+  add(type: string, listener: EventListenerOrEventListenerObject) {
+    window.addEventListener(type, listener)
+  }
+  remove(type: string, listener: EventListenerOrEventListenerObject) {
+    window.removeEventListener(type, listener)
+  }
+  once(type: string, listener: any) {
+    const emitOnce = (event: any) => {
+      listener(event)
+      remove(type, emitOnce)
+    }
+
+    this.add(type, emitOnce)
+  }
+  emit<T>(type: string, detail?: T) {
+    const event = new CustomEvent<T>(type, { detail })
+    window.dispatchEvent(event)
+  }
+}
+
+export const EventListener = new EventListenerGenerator()
+```
+
+<Step>Usage</Step>
+
+```tsx
+const onBackdrop = useCallback(
+  ({ detail }: any) => {
+    setIsOpen(detail)
+    if (detail) document.body.style.overflow = 'hidden'
+    else document.body.removeAttribute('style')
+  },
+  [isOpen]
+)
+
+useEffect(() => {
+  EventListener.add('backdrop', onBackdrop)
+  return () => EventListener.remove('backdrop', onBackdrop)
+}, [])
+
+<button onClick={() => EventListener.emit('backdrop', true)}>Backdrop</button>
+```
+
+</Steps>
+
+### References
+
+- [https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
+- [https://www.falldowngoboone.com/blog/talk-to-your-react-components-with-custom-events/](https://www.falldowngoboone.com/blog/talk-to-your-react-components-with-custom-events/)

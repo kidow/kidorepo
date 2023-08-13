@@ -2,4 +2,8 @@
 title: priceFormat
 ---
 
-asd
+```ts title="utils/price-format.ts"
+export function priceFormat(price: number) {
+  return Intl.NumberFormat('us').format(price).toString()
+}
+```

@@ -2,4 +2,26 @@
 title: getBrightness
 ---
 
-asd
+RGB color의 밝기 값을 구하는 함수
+
+### Code
+
+```ts title="utils/get-brightness.ts"
+export function getBrightness(red: number, green: number, blue: number) {
+  return (red * 299 + green * 587 + blue * 114) / 1000
+}
+
+// Optional
+export function isDark(red: number, green: number, blue: number) {
+  return getBrightness(red, green, blue) < 128
+}
+
+export function isLight(red: number, green: number, blue: number) {
+  return getBrightness(red, green, blue) >= 128
+}
+```
+
+### References
+
+- [https://www.w3.org/TR/AERT/#color-contrast](https://www.w3.org/TR/AERT/#color-contrast)
+- [https://github.com/bgrins/TinyColor](https://github.com/bgrins/TinyColor)

@@ -2,4 +2,18 @@
 title: debounce
 ---
 
-asd
+`lodash`의 `debounce`를 직접 구현한 함수입니다.
+
+```ts title="utils/debounce.ts"
+export function debounce(func: Function, wait: number) {
+  let timeout: string | number | NodeJS.Timeout | undefined
+  return function (...args: any) {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      func.apply(this, args)
+    }, wait)
+  }
+}
+```
+
+this에서 에러가 난다면, tsconfig.json에서 `"noImplicitThis": false`를 설정하세요.

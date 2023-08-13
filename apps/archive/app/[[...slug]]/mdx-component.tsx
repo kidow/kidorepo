@@ -45,7 +45,11 @@ const components = {
     />
   ),
   a: (props: HTMLAttributes<HTMLAnchorElement>) => (
-    <a className="font-medium underline underline-offset-4" {...props} />
+    <a
+      className="font-medium underline underline-offset-4"
+      target="_blank"
+      {...props}
+    />
   ),
   p: (props: HTMLAttributes<HTMLParagraphElement>) => (
     <p className="mt-6 leading-7" {...props} />
