@@ -1,12 +1,3 @@
----
-title: useLocalStorage
----
-
-<Steps>
-
-<Step>Copy Code</Step>
-
-```tsx title="hooks/use-localstorage.tsx"
 'use client'
 
 function useLocalStorage(key: 'item1' | 'item2') {
@@ -17,12 +8,3 @@ function useLocalStorage(key: 'item1' | 'item2') {
 }
 
 export default useLocalStorage
-```
-
-<Step>Usage</Step>
-
-```tsx
-const [item, setItem] = useLocalStorage('item1')
-```
-
-</Steps>

@@ -1,14 +1,3 @@
----
-title: useObjectState
----
-
-한 컴포넌트에서 쓰는 State들을 하나의 hooks로 관리할 수 있도록 만든 훅스. `react-hook-form`의 도입으로 잘 사용하지는 않습니다.
-
-<Steps>
-
-<Step>Copy Code</Step>
-
-```tsx title="hooks/use-object-state.tsx"
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -68,24 +57,3 @@ function useObjectState<T>(
 }
 
 export default useObjectState
-```
-
-<Step>Usage</Step>
-
-```tsx
-interface State {
-  id: string
-  password: string
-}
-
-const [{ id, password }, setState, onChange, resetState] =
-  useObjectState<State>({ id: '', password: '' })
-
-<form>
-    <input value={id} name='id' onChange={onChange} />
-    <input value={password} name='password' type='password' onChange={onChange} />
-    <button type="button" onClick={() => resetState(['id'])}>Reset ID</button>
-</form>
-```
-
-</Steps>

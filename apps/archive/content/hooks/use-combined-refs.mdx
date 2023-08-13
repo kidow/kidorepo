@@ -2,4 +2,46 @@
 title: useCombinedRefs
 ---
 
-asd
+forwardRef를 이용해 컴포넌트를 생성했을 때, 부모의 ref와 자식의 ref를 묶어주는 훅스
+
+<Steps>
+
+<Step>Copy Code</Step>
+
+```tsx title="hooks/use-combined-refs.tsx"
+'use client'
+
+import { useEffect, useRef } from 'react'
+import type { ForwardedRef, RefObject } from 'react'
+
+function useCombinedRefs<T>(
+  ...refs: (RefObject<T> | ForwardedRef<T>)[]
+): RefObject<T> {
+  const targetRef = useRef<T>(null)
+
+  useEffect(() => {
+    refs.forEach((ref) => {
+      if (!ref) return
+
+      if (typeof ref === 'function') ref(targetRef.current)
+      // @ts-ignore
+      else ref.current = targetRef.current
+    })
+  }, [refs])
+
+  return targetRef
+}
+
+export default useCombinedRefs
+```
+
+<Step>Usage</Step>
+
+```tsx
+const Dialog = forwardRef<HTMLDialogElement, Props>((props, ref) => {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const combinedRef = useCombinedRefs<HTMLDialogElement>(ref, dialogRef)
+})
+```
+
+</Steps>

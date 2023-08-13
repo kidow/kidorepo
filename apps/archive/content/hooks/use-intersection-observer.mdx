@@ -2,4 +2,51 @@
 title: useIntersectionObserver
 ---
 
-asd
+<Steps>
+
+<Step>Copy Code</Step>
+
+```tsx
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import type { RefObject } from 'react'
+
+function useIntersectionObserver<T extends HTMLElement>(
+  options?: IntersectionObserverInit
+): [RefObject<T>, boolean] {
+  const ref = useRef<T>(null)
+  const [entry, setEntry] = useState<IntersectionObserverEntry>()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setEntry(entry),
+      options
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [ref, options])
+
+  return [ref, entry?.isIntersecting || false]
+}
+
+export default useIntersectionObserver
+```
+
+<Step>Usage</Step>
+
+```tsx
+const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>()
+
+useEffect(() => {
+    console.log(isIntersecting)
+}, [isIntersecting])
+
+<div ref={ref} />
+```
+
+<Steps>
+
+### References
+
+- [https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API](https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API)

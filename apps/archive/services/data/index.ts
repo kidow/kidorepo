@@ -79,7 +79,6 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
         href: '/hooks/use-intersection-observer'
       },
       { title: 'useLocalStorage', href: '/hooks/use-local-storage' },
-      { title: 'useMediaQuery', href: '/hooks/use-media-query' },
       { title: 'useObjectState', href: '/hooks/use-object-state' },
       { title: 'useOnClickOutside', href: '/hooks/use-onclick-outside' },
       { title: 'usePagination', href: '/hooks/use-pagination' }

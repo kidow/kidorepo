@@ -2,4 +2,59 @@
 title: useOnClickOutside
 ---
 
-asd
+지정한 영역의 바깥 영역을 클릭할 시 함수를 실행할 수 있도록 하는 훅스
+
+<Steps>
+
+<Step>Copy Code</Step>
+
+```tsx title="hooks/use-onclick-outside.tsx"
+'use client'
+
+import { useCallback, useEffect } from 'react'
+import type { RefObject } from 'react'
+
+function useOnClickOutside<T extends HTMLElement>(
+  ref: RefObject<T>,
+  handler: (event: MouseEvent | TouchEvent) => void,
+  id?: string
+): void {
+  const listener = useCallback(
+    (event: MouseEvent | TouchEvent) => {
+      const el = ref?.current
+      if (
+        !el ||
+        el.contains(event.target as Node) ||
+        id === (event.target as HTMLElement).id
+      )
+        return
+      handler(event)
+    },
+    [handler, ref, id]
+  )
+  useEffect(() => {
+    document.addEventListener('mouseup', listener)
+    return () => {
+      document.removeEventListener('mouseup', listener)
+    }
+  }, [listener])
+}
+
+export default useOnClickOutside
+```
+
+<Step>Usage</Step>
+
+```tsx
+const [isOpen, setIsOpen] = useState(false)
+const id = useId()
+const ref = useRef<HTMLDivElement>(null)
+
+useOnClickOutside(ref, () => setIsOpen(false), id)
+
+return (
+    <div ref={ref} id={id}></div>
+)
+```
+
+</Steps>

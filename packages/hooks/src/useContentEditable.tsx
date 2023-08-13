@@ -1,14 +1,3 @@
----
-title: useContentEditable
----
-
-`contentEditable을` 사용할 때 React에서 상태 관리를 위해 사용합니다.
-
-<Steps>
-
-<Step>Copy Code</Step>
-
-```tsx title="hooks/use-content-editable.tsx"
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -35,21 +24,3 @@ function useContentEditable(initialValue: string = '') {
 }
 
 export default useContentEditable
-```
-
-<Step>Usage</Step>
-
-```tsx
-const Page = () => {
-  const { content, setContent, onInput, ref } =
-    useContentEditable('[initial Value]')
-
-  return <div contentEditable onInput={onInput} ref={ref}></div>
-}
-```
-
-</Steps>
-
-### References
-
-- [https://yung-developer.tistory.com/109](https://yung-developer.tistory.com/109)
