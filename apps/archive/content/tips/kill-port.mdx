@@ -1,0 +1,20 @@
+---
+title: 사용 중인 포트 종료하기
+---
+
+```bash
+lsof -i:[포트번호]
+```
+
+```bash
+COMMAND     PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Google     2094 user   93u  IPv6 0xa30f52ce67ee1f01      0t0  TCP localhost:60840->localhost:hbci (ESTABLISHED)
+node      62995 user   23u  IPv6 0xa30f52ce67ee5001      0t0  TCP *:hbci (LISTEN)
+node      62995 user   36u  IPv6 0xa30f52ce67eec201      0t0  TCP localhost:hbci->localhost:58241 (CLOSED)
+node      62995 user   38u  IPv6 0xa30f52ce67eec901      0t0  TCP localhost:hbci->localhost:60839 (CLOSED)
+node      62995 user   39u  IPv6 0xa30f52ce67ee2601      0t0  TCP localhost:hbci->localhost:60840 (ESTABLISHED)
+```
+
+```bash
+kill -9 [PID]
+```

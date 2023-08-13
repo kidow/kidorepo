@@ -118,6 +118,13 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
       { title: 'Type Definitions', href: '/settings/type-definitions' },
       { title: 'VSCode Extensions', href: '/settings/vscode-extensions' }
     ]
+  },
+  {
+    title: 'Tips',
+    items: [
+      { title: '모바일에서 localhost 보는 법', href: '/tips/localhost' },
+      { title: '사용 중인 포트 종료하기', href: '/tips/kill-port' }
+    ]
   }
 ]
 
