@@ -14,6 +14,14 @@ title: Badge
 
 <Steps>
 
+<Step>Add type</Step>
+
+```ts title="types/index.d.ts"
+interface ReactProps {
+  children?: ReactNode
+}
+```
+
 <Step>Copy Code</Step>
 
 ```tsx title="components/Badge/index.tsx"
@@ -49,3 +57,7 @@ export default Badge
 | Name         |   Type    | Default |
 | :----------- | :-------: | :-----: |
 | **children** | ReactNode |         |
+
+### References
+
+- [https://tailwindcss.com/docs/animation#ping](https://tailwindcss.com/docs/animation#ping)

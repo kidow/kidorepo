@@ -16,7 +16,7 @@ title: ColorPicker
 
 <Step>Prerequisite</Step>
 
-cn, hexToRgb, rgbToHex, useOnClickOutside
+cn, hexToRgb, rgbToHex, useOnClickOutside, useCombinedRefs
 
 <Step>Reset CSS</Step>
 
@@ -26,6 +26,12 @@ cn, hexToRgb, rgbToHex, useOnClickOutside
   -webkit-appearance: none;
   margin: 0;
 }
+```
+
+<Step>Install Package</Step>
+
+```bash
+npm install lucide-react
 ```
 
 <Step>Add `Hue`, `RGB`, `Spectrum` Components</Step>
@@ -488,3 +494,9 @@ export default ColorPicker
 | Name                     |                        Type                        | Default |
 | :----------------------- | :------------------------------------------------: | :-----: |
 | **onChange**<Required /> | (red: number, green: number, blue: number) => void |         |
+
+### References
+
+- [https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb](https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb)
+- [https://github.com/ScottSavarie/react-canvas-color-picker](https://github.com/ScottSavarie/react-canvas-color-picker)
+- [https://codepen.io/pizza3/pen/BVzYNP?editors=0110](https://codepen.io/pizza3/pen/BVzYNP?editors=0110)

@@ -21,11 +21,16 @@ export default {
 type Story = StoryObj<typeof Timeline.v1>
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    date: '2023-08-13',
+    title: 'Title',
+    content: 'Content'
+  },
+  render: (props) => (
     <ul>
-      <Timeline.v1 date="2023-02-03" title="Title 1" content="Content 1" />
-      <Timeline.v1 date="2023-02-02" title="Title 2" content="Content 2" />
-      <Timeline.v1 date="2023-02-01" title="Title 3" content="Content 3" />
+      <Timeline.v1 {...props} />
+      <Timeline.v1 {...props} />
+      <Timeline.v1 {...props} />
     </ul>
   )
 }

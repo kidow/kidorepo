@@ -25,11 +25,11 @@ export interface Props {
 
 const Input: FC<Props> = ({
   required,
-  type,
+  type = 'text',
   suffix,
   placeholder,
   fullWidth,
-  float,
+  float = true,
   className,
   value,
   onChange,
@@ -68,11 +68,6 @@ const Input: FC<Props> = ({
       </div>
     </div>
   )
-}
-
-Input.defaultProps = {
-  type: 'text',
-  float: true
 }
 
 export default Input

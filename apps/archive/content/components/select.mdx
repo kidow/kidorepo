@@ -2,4 +2,111 @@
 title: Select
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-select-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn
+
+<Step>Install Package</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy Code</Step>
+
+```tsx title="components/Select/index.tsx"
+import type { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
+import { ChevronDownIcon } from 'lucide-react'
+import { cn } from 'utils'
+
+export interface Props
+  extends Omit<
+    DetailedHTMLProps<
+      SelectHTMLAttributes<HTMLSelectElement>,
+      HTMLSelectElement
+    >,
+    'size'
+  > {
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+  error?: string
+}
+
+function Select({ size = 'md', error, children, className, ...props }: Props) {
+  return (
+    <>
+      <div className={cn('relative inline-block', className)}>
+        <select
+          {...props}
+          className={cn(
+            'w-full cursor-pointer select-none appearance-none rounded border bg-white pr-8 ring-blue-500 focus:outline-none focus:ring-4 disabled:cursor-not-allowed disabled:bg-neutral-200  dark:bg-neutral-800',
+            error
+              ? 'border-red-500'
+              : 'border-neutral-300 dark:border-neutral-700',
+            props.value ? 'text-neutral-700' : 'text-neutral-400',
+            {
+              'py-1 pl-2 text-xs': size === 'xs',
+              'py-2 pl-3 text-sm': size === 'sm',
+              'py-2 pl-3 text-base': size === 'md',
+              'py-2 pl-3 text-lg': size === 'lg'
+            }
+          )}
+        >
+          {children}
+        </select>
+        <ChevronDownIcon
+          className={cn(
+            'absolute right-2 z-[5] h-5 w-5 text-neutral-400 dark:text-neutral-500',
+            {
+              'top-1': size === 'xs',
+              'top-2': size === 'sm',
+              'top-3': size === 'md' || size === 'lg'
+            }
+          )}
+        />
+      </div>
+      {!!error && <div className="mt-1 text-xs text-red-500">{error}</div>}
+    </>
+  )
+}
+
+export default Select
+```
+
+<Step>Usage</Step>
+
+```tsx
+<Select
+  value=""
+  onChange={(e) => setValue(e.target.value)}
+  size="md"
+  error={<p>Error!</p>}
+>
+  <option>Select</option>
+  <option value="google">Google</option>
+  <option value="amazon">Amazon</option>
+  <option value="apple">Apple</option>
+  <option value="tesla">Tesla</option>
+</Select>
+```
+
+</Steps>
+
+### Props
+
+| Name         |        Type         | Default |
+| :----------- | :-----------------: | :-----: |
+| **size**     | `xs` `sm` `md` `lg` |  `md`   |
+| **error**    |       string        |         |
+| **...props** |  HTMLSelectElement  |         |

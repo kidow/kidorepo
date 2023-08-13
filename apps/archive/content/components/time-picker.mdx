@@ -2,4 +2,132 @@
 title: TimePicker
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-timepicker-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn, twoDigitsNumber, useOnClickOutside
+
+<Step>Install Package</Step>
+
+```bash
+npm install dayjs lucide-react
+```
+
+<Step>Copy Code</Step>
+
+```tsx title="components/TimePicker/index.tsx"
+'use client'
+
+import { useRef, useState } from 'react'
+import dayjs from 'dayjs'
+import type { Dayjs } from 'dayjs'
+import { useOnClickOutside } from 'hooks'
+import { ClockIcon } from 'lucide-react'
+import { cn, twoDigitsNumber } from 'utils'
+
+export interface Props {
+  value: Dayjs
+  onChange: (day: Dayjs) => void
+}
+
+function TimePicker({ value, onChange }: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useOnClickOutside(ref, () => setIsOpen(false))
+  return (
+    <div
+      className={cn(
+        'relative inline-flex cursor-pointer items-center justify-between rounded-md border border-neutral-300 px-3 py-2',
+        isOpen ? 'dark:border-neutral-700' : 'dark:border-neutral-800'
+      )}
+      onClick={() => setIsOpen(true)}
+      ref={ref}
+    >
+      <input
+        className={cn('cursor-pointer border-0 bg-inherit focus:outline-none')}
+        readOnly
+        value={dayjs(value).format('HH:mm:ss')}
+      />
+      <ClockIcon className="h-4 w-4 text-neutral-400" />
+      {isOpen && (
+        <div className="absolute left-0 top-12 z-10 w-full bg-white shadow-xl dark:bg-neutral-800">
+          <div className="flex h-56 py-1">
+            <ul className="flex-1 overflow-y-scroll overscroll-contain">
+              {Array.from({ length: 24 }).map((_, key) => (
+                <li
+                  key={key}
+                  className="cursor-pointer px-2 py-1 text-neutral-600 hover:bg-neutral-100 dark:text-neutral-100 dark:hover:bg-neutral-700"
+                  onClick={() => onChange(dayjs(value).set('hour', key))}
+                >
+                  {twoDigitsNumber(key)}
+                </li>
+              ))}
+            </ul>
+            <ul className="flex-1 overflow-y-scroll overscroll-contain">
+              {Array.from({ length: 60 }).map((_, key) => (
+                <li
+                  key={key}
+                  className="cursor-pointer px-2 py-1 text-neutral-600 hover:bg-neutral-100 dark:text-neutral-100 dark:hover:bg-neutral-700"
+                  onClick={() => onChange(dayjs(value).set('minute', key))}
+                >
+                  {twoDigitsNumber(key)}
+                </li>
+              ))}
+            </ul>
+            <ul className="flex-1 overflow-y-scroll overscroll-contain">
+              {Array.from({ length: 60 }).map((_, key) => (
+                <li
+                  key={key}
+                  className="cursor-pointer px-2 py-1 text-neutral-600 hover:bg-neutral-100 dark:text-neutral-100 dark:hover:bg-neutral-700"
+                  onClick={() => onChange(dayjs(value).set('second', key))}
+                >
+                  {twoDigitsNumber(key)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="border-t p-2 text-sm text-blue-500 dark:border-neutral-700">
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                onChange(dayjs())
+                setIsOpen(false)
+              }}
+            >
+              현재
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default TimePicker
+```
+
+<Step>Usage</Step>
+
+```tsx
+<TimePicker value={dayjs()} onChange={(day) => setDate(day)} />
+```
+
+</Steps>
+
+### Props
+
+| Name                     |         Type         | Default |
+| :----------------------- | :------------------: | :-----: |
+| **value**<Required />    |        Dayjs         |         |
+| **onChange**<Required /> | (day: Dayjs) => void |         |

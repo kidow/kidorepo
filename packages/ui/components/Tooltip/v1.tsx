@@ -1,6 +1,5 @@
 'use client'
 
-import { memo } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from 'utils'
 
@@ -80,4 +79,4 @@ function Tooltip({
   )
 }
 
-export default memo(Tooltip)
+export default Tooltip

@@ -2,4 +2,61 @@
 title: Masonry
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-masonry-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Add type</Step>
+
+```ts title="types/index.d.ts"
+interface Props {
+  children?: ReactNode
+}
+```
+
+<Step>Copy Code</Step>
+
+```tsx title="containers/Masonry/index.tsx"
+export interface Props extends ReactProps {}
+
+function Masonry({ children }: Props) {
+  return (
+    <ul className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 [&>li]:mb-4 [&>li]:break-inside-avoid">
+      {children}
+    </ul>
+  )
+}
+
+export default Masonry
+```
+
+<Step>Usage</Step>
+
+```tsx
+<Masonry>
+  {Array.from({ length: 12 }).map((_, key) => (
+    <li key={key}>
+      <img
+        src={`https://picsum.photos/200/${Math.ceil(Math.random() * 5) * 100}`}
+        alt=""
+      />
+    </li>
+  ))}
+</Masonry>
+```
+
+</Steps>
+
+### Props
+
+| Name         |   Type    | Default |
+| :----------- | :-------: | :-----: |
+| **children** | ReactNode |         |

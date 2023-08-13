@@ -2,4 +2,142 @@
 title: Table
 ---
 
-asd
+## Example
+
+<iframe
+  src="https://workshop.kidow.me/?path=/docs/components-table-v1--docs"
+  width="800"
+  height="440"
+></iframe>
+
+## Steps
+
+<Steps>
+
+<Step>Prerequisite</Step>
+
+cn, Spinner
+
+<Step>Copy Code</Step>
+
+```tsx title="components/Table/index.tsx"
+import type { ReactNode } from 'react'
+import { Spinner } from 'components'
+import { cn } from 'utils'
+
+export interface Props<T> {
+  list: T[]
+  columns: ReactNode
+  renderItem: (item: T, index: number) => ReactNode
+  summary?: string
+  title?: string
+  loading?: boolean
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+}
+
+function Table<T>({
+  columns,
+  list,
+  renderItem,
+  loading,
+  size = 'lg',
+  summary,
+  title
+}: Props<T>) {
+  return (
+    <div
+      className={cn(
+        'relative',
+        loading ? 'cursor-progress overflow-hidden' : 'overflow-auto'
+      )}
+    >
+      {loading && (
+        <Spinner.v1 className="absolute left-1/2 top-1/2 z-[12] h-6 w-6 text-neutral-200" />
+      )}
+      <table
+        className={cn(
+          'tw-table w-full border-collapse whitespace-nowrap text-center text-xs text-neutral-500 dark:text-neutral-50',
+          {
+            'pointer-events-none select-none opacity-60': loading,
+            'tw-table-lg': size === 'lg',
+            'tw-table-md': size === 'md',
+            'tw-table-sm': size === 'sm',
+            'tw-table-xs': size === 'xs'
+          }
+        )}
+      >
+        {(!!summary || !!title) && (
+          <caption>
+            {!!title && <strong>{title}</strong>}
+            {!!summary && <span>{summary}</span>}
+          </caption>
+        )}
+        <thead className="sticky top-0 bg-neutral-100 tracking-wider dark:bg-neutral-700">
+          {columns}
+        </thead>
+        <tbody>
+          {list.length ? (
+            list.map((item: T, key) => renderItem(item, key))
+          ) : (
+            <tr>
+              <td
+                colSpan={99}
+                className="text-neutral-400 dark:text-neutral-500"
+              >
+                데이터가 없습니다.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+export default Table
+```
+
+<Step>Usage</Step>
+
+```tsx
+<Table
+  list={[
+    { company: 'Apple', country: 'US', ceo: 'Tim Cook' },
+    { company: 'Tesla', country: 'US', ceo: 'Elon Musk' },
+    { company: 'Facebook', country: 'US', ceo: 'Mark Zuckerburg' },
+    { company: 'Microsoft', country: 'US', ceo: 'Satya Nadella' }
+  ]}
+  columns={
+    <tr>
+      <th scope="col">Company</th>
+      <th scope="col">Country</th>
+      <th scope="col">CEO</th>
+    </tr>
+  }
+  renderItem={(item, key) => (
+    <tr key={key}>
+      <td>{item.company}</td>
+      <td>{item.country}</td>
+      <td>{item.ceo}</td>
+    </tr>
+  )}
+  title="CEO"
+  summary="Company CEOs"
+  loading
+  size="md"
+/>
+```
+
+</Steps>
+
+### Props
+
+| Name                       |                    Type                     | Default |
+| :------------------------- | :-----------------------------------------: | :-----: |
+| **list**<Required />       |              Array of Generic               |         |
+| **columns**<Required />    |                  ReactNode                  |         |
+| **renderItem**<Required /> | (item: Generic, index: number) => ReactNode |         |
+| **summary**                |                   string                    |         |
+| **title**                  |                   string                    |         |
+| **loading**                |                   boolean                   |         |
+| **size**                   |             `xs` `sm` `md` `lg`             |  `lg`   |

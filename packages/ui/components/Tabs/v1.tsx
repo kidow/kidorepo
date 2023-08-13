@@ -1,26 +1,3 @@
----
-title: Tabs
----
-
-## Example
-
-<iframe
-  src="https://workshop.kidow.me/?path=/docs/components-tabs-v1--docs"
-  width="800"
-  height="440"
-></iframe>
-
-## Steps
-
-<Steps>
-
-<Step>Prerequisite</Step>
-
-cn
-
-<Step>Copy Code</Step>
-
-```tsx title="components/Tabs/index.tsx"
 import { cn } from 'utils'
 
 export interface Props {
@@ -58,26 +35,3 @@ function Tabs({ list, value, onChange, size = 'md' }: Props) {
 }
 
 export default Tabs
-```
-
-<Step>Usage</Step>
-
-```tsx
-<Tabs
-  value={0}
-  list={['Components', 'Hooks', 'Utils', 'Settings']}
-  onChange={(value) => setState({ value })}
-  size="md"
-/>
-```
-
-</Steps>
-
-### Props
-
-| Name                     |         Type          | Default |
-| :----------------------- | :-------------------: | :-----: |
-| **list**<Required />     |       string[]        |         |
-| **value**<Required />    |        number         |         |
-| **onChange**<Required /> | (tab: number) => void |         |
-| **size**                 |    `xs` `sm` `md`     |  `md`   |
