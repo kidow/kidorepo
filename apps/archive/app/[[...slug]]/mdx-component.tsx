@@ -1,9 +1,19 @@
 'use client'
 
-import type { HTMLAttributes, ImgHTMLAttributes } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type HTMLAttributes,
+  type ImgHTMLAttributes
+} from 'react'
 import Link from 'next/link'
-import { Box, BoxIcon, CopyIcon } from 'lucide-react'
+import { allContents } from '@/.contentlayer/generated'
+import { Icon } from '@/components'
+import { BoxIcon, CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import { createPortal } from 'react-dom'
+import { Modal } from 'ui'
 import { cn } from 'utils'
 
 interface Props {
@@ -153,13 +163,60 @@ const components = {
   TabContent: (props: ReactProps) => <div></div>,
   TabButton: (props: ReactProps) => <div></div>,
   Required: () => <span className="after:text-red-500 after:content-['*']" />,
-  LinkBlock: (props: { href: string }) => <Link href={props.href}>asd</Link>,
-  IframeBlock: ({ icon, name }: { icon: 'box'; name: string }) => (
-    <button className="group flex">
-      {icon === 'box' && <BoxIcon />}
-      <span className="font-semibold">{name}</span>
-    </button>
-  )
+  Blocks: ({ children }: ReactProps) => (
+    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {children}
+    </div>
+  ),
+  ModalBlock: ({
+    icon,
+    name,
+    slug
+  }: {
+    icon: 'components' | 'hooks' | 'utils'
+    name: string
+    slug: string
+  }) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const doc = useMemo(
+      () => allContents.find((doc) => doc.slug === slug),
+      [slug]
+    )
+    useEffect(() => {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden'
+      } else if (document.body.style.overflow === 'hidden') {
+        document.body.style.removeProperty('overflow')
+      }
+    }, [isOpen])
+    return (
+      <>
+        <button
+          className="group flex items-center justify-start gap-2 rounded-lg border border-gray-200 bg-transparent p-4 text-gray-700 shadow-sm shadow-gray-100 transition-all duration-200 hover:border-gray-300 hover:bg-slate-50 hover:text-gray-900 hover:shadow-md hover:shadow-gray-100 active:shadow-sm active:shadow-gray-200 dark:border-neutral-800 dark:text-neutral-200 dark:shadow-none dark:hover:border-neutral-700 dark:hover:bg-neutral-900 dark:hover:text-neutral-50 dark:hover:shadow-none"
+          onClick={() => setIsOpen(true)}
+        >
+          {icon === 'components' && (
+            <BoxIcon className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50" />
+          )}
+          {icon === 'hooks' && <Icon.Hook />}
+          {icon === 'utils' && <Icon.Wrench />}
+          <span className="font-semibold">{name}</span>
+        </button>
+        <Modal.v1
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          maxWidth="max-w-4xl"
+        >
+          {doc && (
+            <article>
+              <h1 className="text-4xl font-bold tracking-tight">{doc.title}</h1>
+              <MDXComponent code={doc.body.code} />
+            </article>
+          )}
+        </Modal.v1>
+      </>
+    )
+  }
 }
 
 export default function MDXComponent({ code }: Props) {

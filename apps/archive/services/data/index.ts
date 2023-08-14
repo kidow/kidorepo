@@ -93,7 +93,7 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
       { title: 'copyText', href: '/utils/copy-text' },
       { title: 'debounce', href: '/utils/debounce' },
       { title: 'enumToOptions', href: '/utils/enum-to-options' },
-      { title: 'EventListeners', href: '/utils/event-listeners' },
+      { title: 'EventListeners', href: '/utils/event-listener' },
       { title: 'fileToBase64', href: '/utils/file-to-base64' },
       { title: 'getBrightness', href: '/utils/get-brightness' },
       { title: 'hexToRgb', href: '/utils/hex-to-rgb' },

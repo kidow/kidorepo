@@ -1,1 +1,1 @@
-export { default as Modal } from './Modal'
+export * as Icon from './Icon'
