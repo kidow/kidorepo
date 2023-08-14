@@ -12,7 +12,6 @@ import { allContents } from '@/.contentlayer/generated'
 import { Icon } from '@/components'
 import { BoxIcon, CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { createPortal } from 'react-dom'
 import { Modal } from 'ui'
 import { cn } from 'utils'
 

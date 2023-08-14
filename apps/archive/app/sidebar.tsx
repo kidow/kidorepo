@@ -14,7 +14,7 @@ export default function Sidebar() {
     return COMPONENTS_LINKS
   }, [pathname])
   return (
-    <aside className="fixed top-14 z-30 hidden h-[calc(100vh-4rem-1px)] w-full shrink-0 overflow-y-auto py-6 pr-2 md:sticky md:block lg:py-10">
+    <aside className="fixed top-14 z-10 hidden h-[calc(100vh-4rem-1px)] w-full shrink-0 overflow-y-auto py-6 pr-2 md:sticky md:block lg:py-10">
       <nav className="w-full">
         {links.map(({ items, title }, key) => (
           <div className="pb-4" key={key}>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { allContents } from 'contentlayer/generated'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { getToc } from 'services'
 
 import Comment from './comment'
@@ -15,6 +17,11 @@ interface Props {
 
 function getDocFromParams({ params }: Props) {
   const slug = params.slug?.join('/') || ''
+
+  const index = allContents.findIndex((doc) => {
+    if (!slug) return doc.slug === '/'
+    return doc.slug === `/${slug}`
+  })
   const doc = allContents.find((doc) => {
     if (!slug) return doc.slug === '/'
     return doc.slug === `/${slug}`
@@ -22,7 +29,11 @@ function getDocFromParams({ params }: Props) {
 
   if (!doc) notFound()
 
-  return doc
+  return {
+    doc: allContents[index],
+    prev: index === 0 ? null : allContents[index - 1],
+    next: index === allContents.length - 1 ? null : allContents[index + 1]
+  }
 }
 
 export async function generateStaticParams(): Promise<Props['params'][]> {
@@ -32,7 +43,7 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const doc = getDocFromParams({ params })
+  const { doc } = getDocFromParams({ params })
 
   if (!doc) notFound()
 
@@ -55,7 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const doc = getDocFromParams({ params })
+  const { doc, prev, next } = getDocFromParams({ params })
 
   if (!doc) notFound()
 
@@ -67,6 +78,26 @@ export default async function Page({ params }: Props) {
         {doc.description && <p className="text-lg">{doc.description}</p>}
         <MDXComponent code={doc.body.code} />
         <Comment />
+        <div className="mt-8 flex items-center justify-between text-sm">
+          {prev && (
+            <Link
+              href={prev.slug}
+              className="inline-flex items-center gap-2 rounded-md border px-3 py-2 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800"
+            >
+              <ChevronLeftIcon size={20} />
+              <span>{prev.title}</span>
+            </Link>
+          )}
+          {next && (
+            <Link
+              href={next.slug}
+              className="inline-flex items-center gap-2 rounded-md border px-3 py-2 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800"
+            >
+              <span>{next.title}</span>
+              <ChevronRightIcon size={20} />
+            </Link>
+          )}
+        </div>
       </article>
       {doc.toc && <Toc toc={toc} />}
     </main>
