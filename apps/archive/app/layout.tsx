@@ -34,6 +34,12 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION
   },
+  verification: {
+    google: 'dpMF3-oHfMYFVkjgJpIJSGM_W_aL_gSFFnmWHM90NHU',
+    other: {
+      'naver-site-verification': 'a1d88c86801e2d91cdbdbcd4f784d39897cd2c2b'
+    }
+  },
   metadataBase: new URL(BASE_URL)
 }
 
