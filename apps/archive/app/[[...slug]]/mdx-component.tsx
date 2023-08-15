@@ -101,14 +101,14 @@ const components = {
       {...props}
     />
   ),
-  pre: (props: HTMLAttributes<HTMLPreElement> & { __rawString__: string }) => {
+  pre: (props: HTMLAttributes<HTMLPreElement> & { __rawstring__: string }) => {
     return (
       <div className="group relative">
         <pre
           className="mb-4 overflow-x-auto rounded-b-lg border border-neutral-800 bg-[#1e293b] p-4 text-sm text-[#e2e8f0]"
           {...props}
         />
-        {props.__rawString__ && (
+        {props.__rawstring__ && (
           <button
             onClick={() => {
               if (
@@ -120,7 +120,7 @@ const components = {
               }
 
               window.navigator.clipboard
-                .writeText(props.__rawString__)
+                .writeText(props.__rawstring__)
                 .then(() => alert('복사되었습니다.'))
                 .catch(() => alert('실패했습니다.'))
             }}
@@ -202,8 +202,12 @@ const components = {
           {icon === 'components' && (
             <BoxIcon className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50" />
           )}
-          {icon === 'hooks' && <Icon.Hook />}
-          {icon === 'utils' && <Icon.Wrench />}
+          {icon === 'hooks' && (
+            <Icon.Hook className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50" />
+          )}
+          {icon === 'utils' && (
+            <Icon.Wrench className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50" />
+          )}
           <span className="font-semibold">{name}</span>
         </button>
         <Modal.v1

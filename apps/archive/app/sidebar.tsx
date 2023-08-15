@@ -18,7 +18,7 @@ export default function Sidebar() {
       <nav className="w-full">
         {links.map(({ items, title }, key) => (
           <div className="pb-4" key={key}>
-            <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
+            <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold capitalize">
               {title}
             </h4>
             {!!items && !!items.length && (

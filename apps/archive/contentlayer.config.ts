@@ -49,7 +49,7 @@ export default makeSource({
                 codeEl.data.meta = codeEl.data.meta.replace(regex, '')
               }
             }
-            node.__rawString__ = codeEl.children?.[0].value
+            node.__rawstring__ = codeEl.children?.[0].value
           }
         })
       },
@@ -78,9 +78,9 @@ export default makeSource({
             const pre = node.children?.at(-1)
             if (pre.tagName !== 'pre') return
 
-            pre.properties['__withMeta__'] =
+            pre.properties['__withmeta__'] =
               node.children.at(0).tagName === 'div'
-            pre.properties['__rawString__'] = node.__rawString__
+            pre.properties['__rawstring__'] = node.__rawstring__
 
             if (node.__event__) {
               pre.properties['__event__'] = node.__event__
@@ -93,28 +93,28 @@ export default makeSource({
           if (node.type !== 'element' || node?.tagName !== 'pre') return
 
           // npm install.
-          if (node.properties?.['__rawString__']?.startsWith('npm install')) {
-            const npmCommand = node.properties?.['__rawString__']
-            node.properties['__npmCommand__'] = npmCommand
-            node.properties['__yarnCommand__'] = npmCommand.replace(
+          if (node.properties?.['__rawstring__']?.startsWith('npm install')) {
+            const npmCommand = node.properties?.['__rawstring__']
+            node.properties['__npmcommand__'] = npmCommand
+            node.properties['__yarncommand__'] = npmCommand.replace(
               'npm install',
               'yarn add'
             )
-            node.properties['__pnpmCommand__'] = npmCommand.replace(
+            node.properties['__pnpmcommand__'] = npmCommand.replace(
               'npm install',
               'pnpm add'
             )
           }
 
           // npx create.
-          if (node.properties?.['__rawString__']?.startsWith('npx create-')) {
-            const npmCommand = node.properties?.['__rawString__']
-            node.properties['__npmCommand__'] = npmCommand
-            node.properties['__yarnCommand__'] = npmCommand.replace(
+          if (node.properties?.['__rawstring__']?.startsWith('npx create-')) {
+            const npmCommand = node.properties?.['__rawstring__']
+            node.properties['__npmcommand__'] = npmCommand
+            node.properties['__yarncommand__'] = npmCommand.replace(
               'npx create-',
               'yarn create '
             )
-            node.properties['__pnpmCommand__'] = npmCommand.replace(
+            node.properties['__pnpmcommand__'] = npmCommand.replace(
               'npx create-',
               'pnpm create '
             )
@@ -122,13 +122,13 @@ export default makeSource({
 
           // npx.
           if (
-            node.properties?.['__rawString__']?.startsWith('npx') &&
-            !node.properties?.['__rawString__']?.startsWith('npx create-')
+            node.properties?.['__rawstring__']?.startsWith('npx') &&
+            !node.properties?.['__rawstring__']?.startsWith('npx create-')
           ) {
-            const npmCommand = node.properties?.['__rawString__']
-            node.properties['__npmCommand__'] = npmCommand
-            node.properties['__yarnCommand__'] = npmCommand
-            node.properties['__pnpmCommand__'] = npmCommand.replace(
+            const npmCommand = node.properties?.['__rawstring__']
+            node.properties['__npmcommand__'] = npmCommand
+            node.properties['__yarncommand__'] = npmCommand
+            node.properties['__pnpmcommand__'] = npmCommand.replace(
               'npx',
               'pnpm dlx'
             )

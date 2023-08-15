@@ -52,7 +52,7 @@ function Modal({
     >
       <div className="flex min-h-screen items-center justify-center p-0 text-center md:block">
         <div
-          className="fixed inset-0 bg-black/30 transition-opacity"
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity"
           aria-hidden="true"
           onClick={onClose}
         />

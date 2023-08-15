@@ -1,7 +1,11 @@
-export function Hook() {
+interface Props {
+  className?: string
+}
+
+export function Hook({ className }: Props) {
   return (
     <svg
-      className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50"
+      className={className}
       fill="currentColor"
       version="1.1"
       id="Layer_1"
@@ -26,7 +30,7 @@ export function Hook() {
   )
 }
 
-export function Wrench() {
+export function Wrench({ className }: Props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +38,7 @@ export function Wrench() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="h-6 w-6 text-neutral-400 duration-200 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-50"
+      className={className}
     >
       <path
         strokeLinecap="round"

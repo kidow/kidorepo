@@ -1,6 +1,6 @@
 export const COMPONENTS_LINKS: SidebarItem[] = [
   {
-    title: 'Components',
+    title: 'components',
     items: [
       { title: 'Accordion', href: '/components/accordion' },
       { title: 'Alert', href: '/components/alert' },
@@ -64,7 +64,7 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
     ]
   },
   {
-    title: 'Hooks',
+    title: 'hooks',
     items: [
       { title: 'useCombinedRefs', href: '/hooks/use-combined-refs' },
       {
@@ -85,7 +85,7 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
     ]
   },
   {
-    title: 'Utils',
+    title: 'utils',
     items: [
       { title: 'backdrop', href: '/utils/backdrop' },
       { title: 'base64ToFile', href: '/utils/base64-to-file' },
@@ -106,7 +106,7 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
     ]
   },
   {
-    title: 'Settings',
+    title: 'settings',
     items: [
       { title: 'Chrome Extensions', href: '/settings/chrome-extensions' },
       { title: 'Code Snippets', href: '/settings/code-snippets' },
@@ -120,7 +120,7 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
     ]
   },
   {
-    title: 'Tips',
+    title: 'tips',
     items: [
       { title: '모바일에서 localhost 보는 법', href: '/tips/localhost' },
       { title: '사용 중인 포트 종료하기', href: '/tips/kill-port' }
@@ -130,20 +130,20 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
 
 export const WIKI_LINKS: SidebarItem[] = [
   {
-    title: 'Wiki',
+    title: 'wiki',
     items: [
       { title: 'Commitlint 컨벤션 모음', href: '/wiki/commitlint-convention' }
     ]
   },
   {
-    title: 'Error',
+    title: 'error',
     items: []
   }
 ]
 
 export const ALGORITHM_LINKS: SidebarItem[] = [
   {
-    title: 'Algorithms',
+    title: 'algorithms',
     items: []
   }
 ]

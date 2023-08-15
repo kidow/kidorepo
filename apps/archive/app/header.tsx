@@ -15,22 +15,12 @@ import { HEADER_NAV } from 'services'
 import { Drawer, Dropdown } from 'ui'
 import { cn } from 'utils'
 
+import CommandMenu from './command-menu'
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const pathname = usePathname()
   const { setTheme } = useTheme()
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setIsOpen(true)
-      }
-    }
-
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [])
   return (
     <>
       <header className="sticky top-0 z-20 w-full border-b bg-white dark:border-neutral-800 dark:bg-neutral-950">
@@ -59,15 +49,7 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <button className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300">
-              <span className="hidden lg:inline-block">
-                Search Documentation...
-              </span>
-              <span className="lg:hidden">Search...</span>
-              <kbd className="select-none rounded-md bg-neutral-200 px-1.5 py-0.5 text-[10px] dark:bg-neutral-800">
-                <span className="mr-1 text-xs">⌘</span>K
-              </kbd>
-            </button>
+            <CommandMenu />
             <div className="flex items-center gap-4">
               <button className="md:hidden" onClick={() => setIsOpen(true)}>
                 <AlignJustifyIcon
