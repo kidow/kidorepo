@@ -41,11 +41,11 @@ function Toast() {
             onClick={() =>
               setList((list) => [...list.slice(0, key), ...list.slice(key + 1)])
             }
-            className="animate-toast-open relative w-80 cursor-pointer select-none rounded-lg border border-neutral-200 bg-white p-4"
+            className="animate-toast-open relative w-80 cursor-pointer select-none rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900"
             role="alert"
           >
             <button className="absolute right-2 top-2">
-              <XIcon className="h-5 w-5" />
+              <XIcon className="h-5 w-5 dark:text-neutral-500" />
             </button>
             <div className="flex items-start gap-3">
               {item.type === 'success' && (
@@ -60,7 +60,7 @@ function Toast() {
               {item.type === 'error' && (
                 <BanIcon className="h-6 w-6 text-red-500" />
               )}
-              <p className="flex-1 break-keep pr-4 text-neutral-900">
+              <p className="flex-1 break-keep pr-4 text-neutral-900 dark:text-neutral-200">
                 {item.message}
               </p>
             </div>

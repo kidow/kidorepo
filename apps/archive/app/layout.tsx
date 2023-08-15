@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toast } from 'ui'
 
 import Header from './header'
 import Sidebar from './sidebar'
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: ReactProps) {
               </div>
             </footer>
           </div>
+          <Toast.v2 />
         </ThemeProvider>
       </body>
     </html>

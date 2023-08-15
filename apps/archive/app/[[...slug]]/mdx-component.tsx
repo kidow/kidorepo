@@ -12,7 +12,7 @@ import { Icon } from '@/components'
 import { BoxIcon, CopyIcon } from 'lucide-react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { Modal } from 'ui'
-import { cn } from 'utils'
+import { cn, toast } from 'utils'
 
 interface Props {
   code: string
@@ -114,14 +114,14 @@ const components = {
                 typeof window === 'undefined' ||
                 typeof window.navigator === 'undefined'
               ) {
-                alert('호환되지 않는 브라우저입니다.')
+                toast.info('호환되지 않는 브라우저입니다.')
                 return
               }
 
               window.navigator.clipboard
                 .writeText(props.__rawstring__)
-                .then(() => alert('복사되었습니다.'))
-                .catch(() => alert('실패했습니다.'))
+                .then(() => toast.success('복사되었습니다.'))
+                .catch(() => toast.error('실패했습니다.'))
             }}
             className="group absolute right-3 top-3 hidden h-[30px] w-[30px] items-center justify-center rounded-md border border-neutral-600 bg-neutral-800 transition-all duration-150 group-hover:inline-flex"
             title="Copy code"
