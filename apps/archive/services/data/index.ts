@@ -134,6 +134,10 @@ export const WIKI_LINKS: SidebarItem[] = [
     items: [
       { title: 'Commitlint 컨벤션 모음', href: '/wiki/commitlint-convention' }
     ]
+  },
+  {
+    title: 'Error',
+    items: []
   }
 ]
 
@@ -146,6 +150,6 @@ export const ALGORITHM_LINKS: SidebarItem[] = [
 
 export const HEADER_NAV: Array<{ title: string; href: string }> = [
   { title: 'Components', href: '/components/accordion' },
-  { title: 'Wiki', href: '/wiki' },
+  { title: 'Wiki', href: '/wiki/commitlint-convention' },
   { title: 'Algorithm', href: '/algorithm' }
 ]

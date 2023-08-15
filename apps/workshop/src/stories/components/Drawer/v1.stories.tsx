@@ -1,12 +1,18 @@
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Drawer } from 'ui'
-import { EventListener } from 'utils'
 
 export default {
   title: 'components/Drawer/v1',
   tags: ['autodocs'],
   component: Drawer.v1,
   argTypes: {
+    isOpen: {
+      type: 'boolean'
+    },
+    onClose: {
+      type: 'function'
+    },
     position: {
       type: {
         name: 'enum',
@@ -18,14 +24,28 @@ export default {
 
 type Story = StoryObj<typeof Drawer.v1>
 
-export const Default: Story = {
-  args: {
-    position: 'top'
-  },
-  render: (props) => (
+function Example(props: {
+  isOpen: boolean
+  position?: 'top' | 'right' | 'bottom' | 'left'
+}) {
+  const [isOpen, setIsOpen] = useState<boolean>(props.isOpen)
+  return (
     <>
-      <button onClick={() => EventListener.emit('drawer', true)}>Open</button>
-      <Drawer.v1 {...props} />
+      <button onClick={() => setIsOpen(true)}>Open</button>
+      <Drawer.v1
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        position={props.position || 'left'}
+      >
+        <div>Drawer</div>
+      </Drawer.v1>
     </>
   )
+}
+
+export const Default: Story = {
+  args: {
+    position: 'left'
+  },
+  render: (props) => <Example isOpen={props.isOpen} position={props.position} />
 }

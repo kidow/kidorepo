@@ -12,7 +12,7 @@ import {
 import { useTheme } from 'next-themes'
 import { createPortal } from 'react-dom'
 import { HEADER_NAV } from 'services'
-import { Dropdown } from 'ui'
+import { Drawer, Dropdown } from 'ui'
 import { cn } from 'utils'
 
 export default function Header() {
@@ -69,7 +69,7 @@ export default function Header() {
               </kbd>
             </button>
             <div className="flex items-center gap-4">
-              <button className="md:hidden">
+              <button className="md:hidden" onClick={() => setIsOpen(true)}>
                 <AlignJustifyIcon
                   size={24}
                   className="text-neutral-500 dark:text-neutral-400"
@@ -118,12 +118,13 @@ export default function Header() {
         </div>
       </header>
       {isOpen && (
-        <>
-          {createPortal(
-            <div className="fixed inset-0 z-30">asd</div>,
-            document.body
-          )}
-        </>
+        <Drawer.v1
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          position="left"
+        >
+          <div>asddfq</div>
+        </Drawer.v1>
       )}
     </>
   )

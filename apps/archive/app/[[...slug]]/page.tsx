@@ -75,7 +75,11 @@ export default async function Page({ params }: Props) {
     <main className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_216px]">
       <article className="mx-auto w-full min-w-0">
         <h1 className="text-4xl font-bold tracking-tight">{doc.title}</h1>
-        {doc.description && <p className="text-lg">{doc.description}</p>}
+        {doc.description && (
+          <p className="mt-2 text-lg text-neutral-400 dark:text-neutral-500">
+            {doc.description}
+          </p>
+        )}
         <MDXComponent code={doc.body.code} />
         <Comment />
         <div className="mt-8 flex items-center justify-between text-sm">
