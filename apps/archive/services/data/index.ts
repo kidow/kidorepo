@@ -131,7 +131,9 @@ export const COMPONENTS_LINKS: SidebarItem[] = [
 export const WIKI_LINKS: SidebarItem[] = [
   {
     title: 'Wiki',
-    items: []
+    items: [
+      { title: 'Commitlint 컨벤션 모음', href: '/wiki/commitlint-convention' }
+    ]
   }
 ]
 

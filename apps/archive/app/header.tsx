@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GithubIcon, HomeIcon, MoonStarIcon } from 'lucide-react'
+import {
+  AlignJustifyIcon,
+  GithubIcon,
+  HomeIcon,
+  MoonStarIcon
+} from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { createPortal } from 'react-dom'
 import { HEADER_NAV } from 'services'
@@ -29,14 +34,14 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-20 w-full border-b bg-white dark:border-neutral-800 dark:bg-neutral-950">
-        <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+        <div className="container flex h-16 items-center justify-between space-x-4 sm:space-x-0">
           <div className="flex items-center gap-6">
             <Link href="/">
               <span className="font-bold dark:text-neutral-50">
                 kidow/archive
               </span>
             </Link>
-            <nav className="flex items-center gap-6 text-sm font-medium">
+            <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
               {HEADER_NAV.map((item, key) => (
                 <Link href={item.href} key={key}>
                   <span
@@ -64,7 +69,17 @@ export default function Header() {
               </kbd>
             </button>
             <div className="flex items-center gap-4">
-              <Link href="https://kidow.me" target="_blank">
+              <button className="md:hidden">
+                <AlignJustifyIcon
+                  size={24}
+                  className="text-neutral-500 dark:text-neutral-400"
+                />
+              </button>
+              <Link
+                href="https://kidow.me"
+                target="_blank"
+                className="hidden md:inline-block"
+              >
                 <HomeIcon
                   size={24}
                   className="text-neutral-500 duration-150 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-50"
@@ -73,6 +88,7 @@ export default function Header() {
               <Link
                 href="https://github.com/kidow/kidorepo/tree/main/apps/archive"
                 target="_blank"
+                className="hidden md:inline-block"
               >
                 <GithubIcon
                   size={24}
@@ -81,7 +97,7 @@ export default function Header() {
               </Link>
               <Dropdown.v2
                 position="bottom-start"
-                className="h-6"
+                className="hidden h-6 md:inline-block"
                 onClick={(index) => {
                   if (index === 0) setTheme('light')
                   else if (index === 1) setTheme('dark')

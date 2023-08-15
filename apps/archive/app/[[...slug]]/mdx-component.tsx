@@ -144,7 +144,12 @@ const components = {
       {...props}
     />
   ),
-  Callout: (props: ReactProps) => <div></div>,
+  Callout: ({ children }: ReactProps) => (
+    <div className="mt-6 flex items-center gap-2 rounded border bg-neutral-50 py-4 pl-3 pr-4 dark:border-neutral-800 dark:bg-neutral-900">
+      <img src="/light-bulb.png" alt="bulb" className="h-6 w-6" />
+      <div className="flex-1 [&>p]:!mt-0">{children}</div>
+    </div>
+  ),
   Steps: (props: ReactProps) => (
     <div
       className="[&>h3]:step steps mb-12 ml-4 border-l pl-8 [counter-reset:step] dark:border-neutral-800"
