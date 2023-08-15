@@ -29,7 +29,7 @@ function CommandMenu() {
     }
 
     const fuse = (list: readonly SidebarItem[]) =>
-      new Fuse(list, { keys: ['title'], includeScore: true })
+      new Fuse(list, { keys: ['title', 'href'], includeScore: true })
         .search(searchValue)
         .map(({ item }) => item)
 
@@ -93,7 +93,7 @@ function CommandMenu() {
         }
       }
     },
-    [selectedSlug, push, items]
+    [selectedSlug, push, allLinks]
   )
 
   useEffect(() => {

@@ -1,9 +1,16 @@
+'use client'
+
 import { Fragment, memo, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { ALGORITHM_LINKS, COMPONENTS_LINKS, WIKI_LINKS } from '@/services'
 import { AlignJustifyIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { Drawer as DrawerComponent } from 'ui'
+
+const DrawerComponent = dynamic(
+  () => import('ui').then((components) => components.Drawer.v1),
+  { ssr: false }
+)
 
 function Drawer() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -16,7 +23,8 @@ function Drawer() {
           className="text-neutral-500 dark:text-neutral-400"
         />
       </button>
-      <DrawerComponent.v1
+      {/* @ts-ignore */}
+      <DrawerComponent
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         position="left"
@@ -87,7 +95,7 @@ function Drawer() {
             </div>
           </li>
         </ul>
-      </DrawerComponent.v1>
+      </DrawerComponent>
     </>
   )
 }
