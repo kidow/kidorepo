@@ -7,7 +7,6 @@ import {
   type HTMLAttributes,
   type ImgHTMLAttributes
 } from 'react'
-import Link from 'next/link'
 import { allContents } from '@/.contentlayer/generated'
 import { Icon } from '@/components'
 import { BoxIcon, CopyIcon } from 'lucide-react'
@@ -226,14 +225,22 @@ const components = {
     )
   },
   Storybook: ({ url }: { url: string }) => (
-    <iframe src={url} className="mt-6" width="800" height="440" />
+    <>
+      <iframe
+        src={url}
+        className="mt-6 hidden md:block"
+        width="800"
+        height="440"
+      />
+      <p className="mt-2 md:hidden">It can only be viewed in a mobile.</p>
+    </>
   )
 }
 
 export default function MDXComponent({ code }: Props) {
   const MDXContent = useMDXComponent(code)
   return (
-    <div className="mdx">
+    <div className="mdx mt-6">
       <MDXContent components={components} />
     </div>
   )

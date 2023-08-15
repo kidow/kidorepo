@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-neutral-950 duration-150 dark:bg-neutral-950 dark:text-neutral-100;
+    @apply bg-white text-neutral-950 duration-150 dark:bg-neutral-950 dark:text-neutral-200;
   }
 }
 

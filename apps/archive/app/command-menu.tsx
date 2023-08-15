@@ -44,11 +44,15 @@ function CommandMenu() {
     ]
   }, [searchValue])
 
+  const allLinks: SidebarItem[] = useMemo(
+    () => items.map((item) => item.items).flat(1),
+    [items]
+  )
+
   const handleArrowKeys = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault()
-        const allLinks = items.map((item) => item.items).flat(1)
         const index = allLinks.findIndex((item) => item.href === selectedSlug)
 
         if (e.key === 'ArrowUp') {
@@ -159,65 +163,75 @@ function CommandMenu() {
             </button>
           </div>
           <div className="h-80 overflow-auto">
-            {items.map((item) => {
-              if (!item.items.length) return null
-              return (
-                <div key={item.title} className="px-2 py-1" role="presentation">
+            {allLinks.length ? (
+              items.map((item) => {
+                if (!item.items.length) return null
+                return (
                   <div
-                    className="px-2 py-1.5 text-xs capitalize dark:text-neutral-400"
-                    aria-hidden="true"
+                    key={item.title}
+                    className="px-2 py-1"
+                    role="presentation"
                   >
-                    {item.title}
-                  </div>
-                  <ul role="group" className="text-sm">
-                    {item.items.map((subItem, key) => (
-                      <li
-                        key={key}
-                        role="option"
-                        aria-selected={subItem.href === selectedSlug}
-                        onClick={() => {
-                          push(subItem.href)
-                          setIsOpen(false)
-                        }}
-                        className="search-item flex cursor-pointer items-center gap-2 rounded-md px-2 py-3 aria-selected:bg-neutral-800"
-                        onMouseEnter={() => setSelectedSlug(subItem.href)}
-                      >
-                        {item.title === 'components' && (
-                          <BoxIcon className="h-5 w-5 dark:text-neutral-300" />
-                        )}
-                        {item.title === 'hooks' && (
-                          <Icon.Hook className="h-5 w-5 dark:text-neutral-300" />
-                        )}
-                        {item.title === 'utils' && (
-                          <Icon.Wrench className="h-5 w-5 dark:text-neutral-300" />
-                        )}
-                        {item.title === 'settings' && (
-                          <SettingsIcon className="h-5 w-5 dark:text-neutral-300" />
-                        )}
-                        {item.title === 'tips' && (
-                          <LightbulbIcon className="h-5 w-5 dark:text-neutral-200" />
-                        )}
-                        {item.title === 'wiki' && (
-                          <BookOpenIcon className="h-5 w-5 dark:text-neutral-200" />
-                        )}
-                        {item.title === 'error' && (
-                          <BanIcon className="h-5 w-5 dark:text-neutral-200" />
-                        )}
-                        {item.title === 'algorithms' && (
-                          <Code2Icon className="h-5 w-5 dark:text-neutral-200" />
-                        )}
-                        <div
-                          data-slug={subItem.href}
-                          className="flex-1 dark:text-neutral-300"
+                    <div
+                      className="px-2 py-1.5 text-xs capitalize dark:text-neutral-400"
+                      aria-hidden="true"
+                    >
+                      {item.title}
+                    </div>
+                    <ul role="group" className="text-sm">
+                      {item.items.map((subItem, key) => (
+                        <li
+                          key={key}
+                          role="option"
+                          aria-selected={subItem.href === selectedSlug}
+                          onClick={() => {
+                            push(subItem.href)
+                            setIsOpen(false)
+                          }}
+                          className="search-item flex cursor-pointer items-center gap-2 rounded-md px-2 py-3 aria-selected:bg-neutral-800"
+                          onMouseEnter={() => setSelectedSlug(subItem.href)}
                         >
-                          {subItem.title}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            })}
+                          {item.title === 'components' && (
+                            <BoxIcon className="h-5 w-5 dark:text-neutral-300" />
+                          )}
+                          {item.title === 'hooks' && (
+                            <Icon.Hook className="h-5 w-5 dark:text-neutral-300" />
+                          )}
+                          {item.title === 'utils' && (
+                            <Icon.Wrench className="h-5 w-5 dark:text-neutral-300" />
+                          )}
+                          {item.title === 'settings' && (
+                            <SettingsIcon className="h-5 w-5 dark:text-neutral-300" />
+                          )}
+                          {item.title === 'tips' && (
+                            <LightbulbIcon className="h-5 w-5 dark:text-neutral-200" />
+                          )}
+                          {item.title === 'wiki' && (
+                            <BookOpenIcon className="h-5 w-5 dark:text-neutral-200" />
+                          )}
+                          {item.title === 'error' && (
+                            <BanIcon className="h-5 w-5 dark:text-neutral-200" />
+                          )}
+                          {item.title === 'algorithms' && (
+                            <Code2Icon className="h-5 w-5 dark:text-neutral-200" />
+                          )}
+                          <div
+                            data-slug={subItem.href}
+                            className="flex-1 dark:text-neutral-300"
+                          >
+                            {subItem.title}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              })
+            ) : (
+              <div className="flex h-full items-center justify-center text-sm">
+                No results found.
+              </div>
+            )}
           </div>
         </div>
       </Modal.v1>

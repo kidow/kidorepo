@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -10,8 +10,12 @@ import {
   MoonStarIcon
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { createPortal } from 'react-dom'
-import { HEADER_NAV } from 'services'
+import {
+  ALGORITHM_LINKS,
+  COMPONENTS_LINKS,
+  HEADER_NAV,
+  WIKI_LINKS
+} from 'services'
 import { Drawer, Dropdown } from 'ui'
 import { cn } from 'utils'
 
@@ -99,15 +103,78 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {isOpen && (
-        <Drawer.v1
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          position="left"
-        >
-          <div>asddfq</div>
-        </Drawer.v1>
-      )}
+      <Drawer.v1
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        position="left"
+      >
+        <div>
+          <span className="font-bold dark:text-neutral-50">kidow/archive</span>
+        </div>
+        <ul className="mt-4 h-[calc(100vh-8rem)] space-y-2 overflow-auto">
+          <li>
+            <Link href="/components/accordion">Components</Link>
+          </li>
+          <li>
+            <Link href="/wiki/commitlint-convention">Wiki</Link>
+          </li>
+          <li>
+            <Link href="/wiki/commitlint-convention">Algorithm</Link>
+          </li>
+          <li>
+            <Link href="https://kidow.me" target="_blank">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/kidow" target="_blank">
+              Github
+            </Link>
+          </li>
+          {[...COMPONENTS_LINKS, ...WIKI_LINKS, ...ALGORITHM_LINKS].map(
+            (item, key) => (
+              <Fragment key={key}>
+                <li className="pt-2 font-medium">{item.title}</li>
+                {item.items.map((subItem, i) => (
+                  <li
+                    key={i}
+                    className="text-neutral-400 dark:text-neutral-500"
+                  >
+                    <Link href={subItem.href}>{subItem.title}</Link>
+                  </li>
+                ))}
+              </Fragment>
+            )
+          )}
+          <li className="pt-4 text-sm">
+            <div className="relative rounded-md border p-2 dark:border-neutral-700">
+              <div className="absolute -top-3 left-4 bg-white px-2 dark:bg-neutral-900">
+                <span>Themes</span>
+              </div>
+              <ul className="py-2">
+                <li
+                  className="rounded px-2 py-1"
+                  onClick={() => setTheme('light')}
+                >
+                  Light
+                </li>
+                <li
+                  className="rounded px-2 py-1"
+                  onClick={() => setTheme('dark')}
+                >
+                  Dark
+                </li>
+                <li
+                  className="rounded px-2 py-1"
+                  onClick={() => setTheme('system')}
+                >
+                  System
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </Drawer.v1>
     </>
   )
 }

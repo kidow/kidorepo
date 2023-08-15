@@ -78,8 +78,9 @@ export default makeSource({
             const pre = node.children?.at(-1)
             if (pre.tagName !== 'pre') return
 
-            pre.properties['__withmeta__'] =
+            pre.properties['__withmeta__'] = String(
               node.children.at(0).tagName === 'div'
+            )
             pre.properties['__rawstring__'] = node.__rawstring__
 
             if (node.__event__) {

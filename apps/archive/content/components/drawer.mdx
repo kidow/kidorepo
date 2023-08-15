@@ -73,6 +73,14 @@ function Drawer({ isOpen, onClose, position = 'left', children }: Props) {
       window.removeEventListener('keydown', onEscape)
     }
   }, [isOpen, onEscape])
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else if (document.body.style.overflow === 'hidden') {
+      document.body.style.removeProperty('overflow')
+    }
+  }, [isOpen])
   return (
     <>
       {createPortal(
@@ -114,7 +122,7 @@ function Drawer({ isOpen, onClose, position = 'left', children }: Props) {
                 '-translate-x-full': position === 'left' && !isOpen
               }
             )}
-            date-state={isOpen ? 'open' : 'closed'}
+            data-state={isOpen ? 'open' : 'closed'}
           >
             <div
               className={cn(
