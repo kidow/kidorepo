@@ -220,7 +220,10 @@ const components = {
         </Modal.v1>
       </>
     )
-  }
+  },
+  Storybook: ({ url }: { url: string }) => (
+    <iframe src={url} className="mt-6" width="800" height="440" />
+  )
 }
 
 export default function MDXComponent({ code }: Props) {
