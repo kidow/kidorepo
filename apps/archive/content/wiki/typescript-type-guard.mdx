@@ -1,0 +1,102 @@
+---
+title: 타입스크립트 타입 가드
+description: 타입 가드의 정의와 사용 이유, 종류 모음
+keywords: Typescript
+---
+
+### 정의
+
+- 변수의 타입을 좁혀나가는 기법
+- 런타임 시점에 변수의 타입을 체크하여 해당 타입으로 안전하게 사용할 수 있도록 도와줌
+- 주로 유니온 타입(Union Type)을 다룰 때 유용하게 사용
+
+### 사용하는 이유
+
+- 런타임 에러 방지
+- 코드 가독성 향상
+
+## 종류
+
+### 1. `typeof` 타입 가드
+
+주로 기본형(primitive) 타입인지 체크할 때 사용
+
+```ts
+function printNumberOrString(value: number | string) {
+  if (typeof value === 'number') {
+    console.log('Number:', value)
+  } else if (typeof value === 'string') {
+    console.log('String:', value)
+  }
+}
+
+printNumberOrString(42) // Number: 42
+printNumberOrString('Hello') // String: Hello
+```
+
+### 2. `instanceof` 타입 가드
+
+일반 객체의 타입이나 클래스 또는 생성자 함수로 생성된 객체의 타입을 체크할 때 사용
+
+```ts
+class Dog {
+  bark() {
+    console.log('Woof!')
+  }
+}
+
+class Cat {
+  meow() {
+    console.log('Meow!')
+  }
+}
+
+function playSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    animal.bark()
+  } else if (animal instanceof Cat) {
+    animal.meow()
+  }
+}
+
+const dog = new Dog()
+const cat = new Cat()
+
+playSound(dog) // Woof!
+playSound(cat) // Meow!
+```
+
+### 3. 사용자 정의 타입 가드
+
+`is` 를 사용해서 직접 검증할 수 있다.
+
+```ts
+interface Car {
+  make: string
+  model: string
+}
+
+interface Truck {
+  make: string
+  model: string
+  capacity: number
+}
+
+// 사용자 정의 타입 가드 함수
+function isTruck(vehicle: Car | Truck): vehicle is Truck {
+  return 'capacity' in vehicle
+}
+
+function printVehicleInfo(vehicle: Car | Truck) {
+  console.log(`Make: ${vehicle.make}, Model: ${vehicle.model}`)
+  if (isTruck(vehicle)) {
+    console.log(`Capacity: ${vehicle.capacity}`)
+  }
+}
+
+const sedan: Car = { make: 'Toyota', model: 'Corolla' }
+const pickupTruck: Truck = { make: 'Ford', model: 'F-150', capacity: 1000 }
+
+printVehicleInfo(sedan) // Make: Toyota, Model: Corolla
+printVehicleInfo(pickupTruck) // Make: Ford, Model: F-150, Capacity: 1000
+```

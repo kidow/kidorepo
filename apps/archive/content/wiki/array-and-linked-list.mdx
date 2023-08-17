@@ -1,0 +1,89 @@
+---
+title: 배열과 연결 리스트의 차이
+description: 배열(Array)와 연결 리스트(Linked List)는 둘 다 데이터 요소들을 저장하고 관리하는 자료 구조이지만 각각의 특징과 동작 방식은 다르다.
+keywords: array, linked list
+---
+
+## 배열 (Array):
+
+- 일련의 연속적인 메모리 공간에 데이터를 저장하는 자료 구조
+- 원소들은 인덱스(0부터 시작)를 사용하여 접근
+- O(1) 시간에 특정 인덱스의 원소에 접근 가능
+- 크기가 고정되어 있으며, 원소를 추가하거나 삭제할 때 배열의 크기를 변경해야 할 수 있다. 이로 인해 삽입과 삭제 연산이 시간이 더 걸릴 수 있다.
+- 메모리 상에 연속적으로 배치되어 있기 때문에 접근 속도가 빠르며 캐시 효율이 좋다.
+- 빠른 접근 속도와 인덱스 기반의 접근이 필요한 경우에 유용
+- 데이터의 크기가 고정이거나 크기 변화가 적을 때 적합
+
+## 연결 리스트 (Linked List):
+
+- 노드라 불리는 개별적인 객체들로 이루어진 구조로, 각 노드는 데이터와 다음 노드를 가리키는 포인터를 포함한다.
+- 각 노드는 메모리 상에 연속되지 않아도 되므로, 동적으로 크기를 조절할 수 있다. 원소를 추가하거나 삭제할 때 다른 노드들과의 연결만 수정하면 된다.
+- 순차적으로 모든 노드를 탐색해야 하므로, 특정 위치에 접근하는 데 O(n) 시간이 소요
+- 포인터를 사용하기 때문에 추가 메모리 사용이 필요
+- 삽입과 삭제가 빈번한 경우에 유용
+- 데이터의 크기가 동적으로 변할 때 적합합니다. 메모리 공간이 연속적으로 필요하지 않으므로 크기에 제한이 없다.
+
+### 만드는 법
+
+기본적으로 노드(Node)라 불리는 객체를 정의하고, 이 노드들을 연결하여 연결 리스트를 구성한다. 각 노드는 데이터와 다음 노드를 가리키는 포인터를 포함하게 된다.
+
+### 1. 노드(Node) 정의
+
+```js
+class Node {
+  constructor(data) {
+    this.data = data // 현재 노드의 데이터
+    this.next = null // 다음 노드를 가리키는 포인터
+  }
+}
+```
+
+### 2. 연결 리스트 생성과 노드 추가
+
+```js
+class LinkedList {
+  constructor() {
+    this.head = null // 연결 리스트의 첫 번째 노드를 가리키는 포인터
+  }
+
+  append(data) {
+    const newNode = new Node(data)
+
+    if (!this.head) {
+      this.head = newNode
+      return
+    }
+
+    let current = this.head
+    while (current.next) {
+      current = current.next
+    }
+    current.next = newNode
+  }
+}
+```
+
+위에서 정의한 Node 클래스와 LinkedList 클래스를 사용하여 연결 리스트를 만들고 노드를 추가할 수 있다.
+
+### 3. 연결 리스트 사용 예시
+
+```js
+const linkedList = new LinkedList()
+
+linkedList.append(10)
+linkedList.append(20)
+linkedList.append(30)
+
+// 연결 리스트 출력
+function printLinkedList(list) {
+  let current = list.head
+  while (current) {
+    console.log(current.data)
+    current = current.next
+  }
+}
+
+printLinkedList(linkedList) // 출력: 10, 20, 30
+```
+
+이 예시에서 LinkedList 클래스는 노드를 추가하고, printLinkedList 함수는 연결 리스트의 내용을 출력한다. 노드 추가시에는 기존의 마지막 노드의 next 포인터를 새로운 노드로 설정하여 연결하게 된다.

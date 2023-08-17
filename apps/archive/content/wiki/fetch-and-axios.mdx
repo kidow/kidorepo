@@ -1,0 +1,39 @@
+---
+title: fetch와 axios의 차이
+description: 모두 JavaScript에서 네트워크 요청을 처리하기 위한 도구로 사용되지만, 각각의 특징과 사용 방법에 차이가 있다.
+keywords: fetch, axios
+---
+
+## fetch:
+
+- JavaScript의 내장 함수로, 웹 브라우저와 Node.js 모두에서 사용할 수 있다.
+- 브라우저의 window.fetch 메서드 또는 Node.js의 node-fetch 패키지를 사용하여 사용 가능
+- 기본적으로 JSON 데이터를 다루며, 추가적인 설정 없이는 헤더 등을 처리하기 번거로울 수 있다.
+
+### 예시
+
+```js
+fetch('https://api.example.com/data')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error('Error:', error))
+```
+
+## axios:
+
+- 브라우저 및 Node.js 환경에서 사용 가능한 HTTP 클라이언트 라이브러리로서, 외부 패키지로 설치해야 한다.
+- 요청과 응답에 대한 다양한 설정(헤더, 인터셉터 등)을 쉽게 구성할 수 있다.
+- JSON 데이터 뿐만 아니라 다른 형식의 데이터도 처리 가능
+- 브라우저와 Node.js 환경 모두에서 동작하며, 두 환경 간에 더 일관된 동작을 보장한다.
+- fetch보다 더 많은 편의 기능을 제공하므로 더 많은 설정이 필요한 경우에 유용
+
+### 예시
+
+```js
+const axios = require('axios') // Node.js에서는 패키지 설치가 필요
+
+axios
+  .get('https://api.example.com/data')
+  .then((response) => console.log(response.data))
+  .catch((error) => console.error('Error:', error))
+```

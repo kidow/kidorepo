@@ -1,0 +1,29 @@
+---
+title: 타입스크립트 타입 호환성
+description: 두 개의 타입이 서로 어떤 상호작용을 하는지를 결정하는 규칙
+keywords: Typescript
+---
+
+```ts
+interface Animal {
+  name: string
+}
+
+interface Dog {
+  name: string
+  breed: string
+}
+
+let animal: Animal
+let dog: Dog
+
+dog = { name: 'Buddy', breed: 'Golden Retriever' }
+animal = dog // Dog 타입은 Animal 타입에 할당 가능
+
+animal = { name: 'Lucky' }
+dog = animal // Animal 타입은 Dog 타입에 할당 불가능 (breed 속성이 없음)
+```
+
+위의 예시에서 `Dog` 인터페이스는 `Animal` 인터페이스보다 더 구체적이므로, `Dog`는 `Animal`의 서브타입이라고 볼 수 있다. 따라서 `Dog` 타입은 `Animal` 타입으로 할당할 수 있지만, `Animal` 타입은 `Dog` 타입으로 할당할 수 없다.
+
+타입 호환성은 코드의 유연성과 타입 안정성을 동시에 제공하며, TypeScript는 이러한 규칙을 통해 타입 체크를 수행하여 코드의 안정성을 유지할 수 있다.

@@ -33,6 +33,7 @@
 
 td > code,
 h3 > code,
-p > code {
+p > code,
+li > code {
   @apply !mx-1 border border-neutral-700 bg-neutral-800 text-neutral-200;
 }

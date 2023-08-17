@@ -142,7 +142,7 @@ function Feedback() {
         rows={4}
       />
       <div className="mt-1 flex justify-end">
-        <button className="rounded border px-2 py-1 text-sm dark:border-neutral-800 dark:text-neutral-400">
+        <button className="rounded border px-2 py-1 text-sm text-neutral-400 duration-150 hover:text-neutral-500 dark:border-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-400">
           전달
         </button>
       </div>

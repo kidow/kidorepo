@@ -1,0 +1,76 @@
+---
+title: 리액트에서 map이 아닌 반복문으로 랜딩하기
+description: 보통은 리스트를 렌더링할 때 map 메소드로 나열하는 것이 일반적이지만, 간혹 필요에 따라 반복문으로 렌더링하게 되는 경우도 있다.
+keywords: React.js
+---
+
+```tsx
+import { Client } from '@notionhq/client'
+
+// 노션 API 활성화
+const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
+
+// 피드 목록 가져오기
+async function getList() {
+  const data = (await notion.databases.query({
+    database_id: '498cea7e5c4b44ba8b2b13c6a7f9e3d1',
+    sorts: [{ property: '생성일', direction: 'descending' }],
+    page_size: 5
+  })) as unknown as FeedList
+  return data
+}
+
+// 한 페이지의 모든 블록 가져오기
+async function getData(id: string) {
+  let isFirst = true
+  let nextCursor: string
+  let data: BlockObjectResponse[] = []
+
+  while (isFirst || nextCursor) {
+    const { results, next_cursor } = await notion.blocks.children.list({
+      block_id: id,
+      start_cursor: nextCursor
+    })
+    nextCursor = next_cursor
+    if (isFirst) isFirst = false
+
+    data.push(...(results as BlockObjectResponse[]))
+  }
+
+  return data
+}
+
+export default async function Page() {
+  const { results, next_cursor } = getList()
+  return (
+    <ul className="grid gap-6 xl:gap-10">
+      {results.map(async (page) => {
+        const render = async () => {
+          let items = []
+          let orderedList = []
+          const list = await getData(page.id)
+          for (const block of list) {
+            if (block.type === 'numbered_list_item') {
+              orderedList.push(<li>블록</li>)
+            } else if (orderedList.length) {
+              items.push(<ol key={'ol' + block.id}>{orderedList}</ol>)
+              orderedList = []
+            }
+          }
+          return <>{items}</>
+        }
+        return <>{await render()}</>
+      })}
+    </ul>
+  )
+}
+```
+
+### 설명
+
+- 노션 페이지 콘텐츠에서 한 줄 한 줄을 Block이라고 부른다.
+- List Item 태그들은 ol, ul 태그에 감싸져야 하는데 map 메소드로 돌리면 이것들을 하나의 list 태그 안에 넣을 수가 없다.
+- 따라서 임의의 배열 orderedList를 만든 후 반복문을 돌려서 list item들을 집어넣고 list item 블록이 아닌 다른 블록이 오게 되었을 때 list 태그를 items에 집어넣는다.
+- items에 넣은 후 다시 orderedList를 비운다.
+
+물론 map으로 하는 방식보다 성능은 좋지 않겠지만 별다른 방법이 없는 것 같다.

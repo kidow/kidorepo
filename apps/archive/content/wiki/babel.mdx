@@ -1,0 +1,51 @@
+---
+title: Babel
+description: JavaScript 코드의 트랜스파일러(transpiler)로, 최신의 ECMAScript 표준을 준수하지 않는 구형 브라우저에서도 최신 JavaScript 문법과 기능을 사용할 수 있도록 변환해주는 역할을 한다.
+keywords: Javascript, Babel
+---
+
+## 목적
+
+- ECMAScript 표준의 새로운 기능을 지원하지 않는 구형 브라우저를 위해 현대적인 JavaScript 코드를 예전 버전의 코드로 변환하여 호환성을 확보하는 데 사용
+- 다양한 JavaScript 환경에서 코드를 작성할 수 있도록 도와주며, 새로운 문법이나 플러그인을 통한 기능 확장을 지원
+
+## 할 수 있는 것
+
+- ES6+ 코드를 ES5 코드로 변환
+- 플러그인과 프리셋 사용: 플러그인과 프리셋을 통해 사용자 정의 변환 규칙을 추가. 이를 통해 특정 기능이나 문법을 확장하거나 사용
+
+## 구성과 예시:
+
+### 패키지 설치
+
+```bash
+npm install @babel/core @babel/preset-env --save-dev
+```
+
+### 설정 파일 생성
+
+`.babelrc` 또는 `babel.config.js` 파일을 사용하여 설정을 관리
+
+```json title=".babelrc"
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+
+```js title="babel.config.js"
+module.exports = {
+  presets: ['@babel/preset-env']
+}
+```
+
+Babel CLI를 사용하여 구성도 가능
+
+```bash
+npx babel src --out-dir dist
+```
+
+위의 예시에서 src 폴더의 내용을 dist 폴더로 변환한다.
+
+### Webpack과 함께 사용 (선택 사항)
+
+Babel은 주로 웹팩과 함께 사용되어 모듈 번들링과 코드 변환을 같이 처리하는 것이 일반적이다.

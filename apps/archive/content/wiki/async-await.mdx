@@ -1,0 +1,35 @@
+---
+title: async/await
+description: JavaScript에서 비동기적인 작업을 처리하기 위한 문법적인 패턴. 비동기 코드를 동기식처럼 작성하고 관리할 수 있어서 코드를 더 직관적으로 작성할 수 있다.
+keywords: javascript
+---
+
+### async 함수:
+
+async 키워드를 사용하여 함수를 선언하면 해당 함수는 항상 프로미스를 반환한다. 내부에서 await 키워드를 사용하여 프로미스가 처리될 때까지 기다리게 되며, 처리된 결과를 반환한다.
+
+```js
+async function fetchData() {
+  const response = await fetch('https://api.example.com/data')
+  const data = await response.json()
+  return data
+}
+```
+
+위의 예시에서 fetchData 함수는 비동기적으로 데이터를 가져오는데, await 키워드를 사용하여 fetch 함수와 response.json() 메서드의 처리가 완료될 때까지 기다린 후 데이터를 반환한다.
+
+### await 키워드:
+
+await 키워드는 async 함수 내에서만 사용할 수 있다.
+
+```js
+async function example() {
+  const result1 = await someAsyncFunction()
+  const result2 = await anotherAsyncFunction()
+  return result1 + result2
+}
+```
+
+위의 예시에서 await 키워드를 사용하여 각각의 비동기 함수의 결과를 받아와 계산한다.
+
+async/await를 사용하면 콜백 함수나 .then() 체인을 사용하는 것보다 코드가 더 읽기 쉽고 관리하기 편해진다. 하지만 async/await 역시 프로미스의 처리 메커니즘을 기반으로 하므로, 비동기적인 코드의 실행 흐름을 이해해야 한다.

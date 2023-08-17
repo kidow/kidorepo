@@ -1,0 +1,36 @@
+---
+title: Attribute와 Property
+description: 둘 다 요소의 상태나 특성을 나타내지만, 다음과 같은 차이점이 있다.
+keywords: html
+---
+
+## Attribute:
+
+- HTML 태그 내에 작성되는 것으로, 태그에 대한 추가 정보나 설정을 제공
+- 보통 문자열 형태로 작성된다. 예: `<img src="image.jpg" alt="Image">`
+- HTML 문서를 파싱할 때 DOM에 반영되며, JavaScript에서도 해당 Attribute 값을 가져올 수 있다.
+- JavaScript를 통해 Attribute 값을 수정해도 렌더링된 페이지에 반영되지 않을 수 있다. (DOM과의 일관성이 유지되지 않을 수 있음)
+- getAttribute() 함수를 사용하여 HTML 요소의 Attribute 값을 가져올 수 있다.
+
+## Property:
+
+- DOM(Document Object Model)을 통해 JavaScript로 접근 가능한 객체의 속성
+- HTML 요소에 대한 현재 상태를 나타낸다. 예: `element.src`, `element.className` 등
+- 해당 요소의 상태를 반영하므로 JavaScript를 통해 수정하면 화면에 반영된다.
+- Attribute와 일치하지 않을 수 있다. 예를 들어, `<input>` 요소의 value Property는 초기 HTML에 지정된 value Attribute와는 독립적으로 동작한다.
+
+```html
+<input id="myInput" type="text" value="Initial Value" />
+```
+
+```js
+const inputElement = document.getElementById('myInput')
+console.log(inputElement.getAttribute('value')) // "Initial Value"
+console.log(inputElement.value) // "Initial Value"
+
+inputElement.value = 'New Value' // Property를 수정하면 렌더링에 반영됨
+```
+
+## 요약
+
+Attribute는 HTML 문서를 정의하고 초기화하는 데 사용되며, Property는 DOM을 통해 JavaScript로 상호작용할 때 사용된다. Property를 수정하면 화면에 바로 반영되지만, Attribute는 JavaScript에서 수정해도 화면에 즉시 반영되지 않을 수 있다.

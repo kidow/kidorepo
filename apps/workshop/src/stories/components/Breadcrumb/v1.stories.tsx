@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Breadcrumb } from 'ui'
+import { Breadcrumbs } from 'ui'
 
 export default {
-  title: 'components/Breadcrumb/v1',
+  title: 'components/Breadcrumbs/v1',
   tags: ['autodocs'],
-  component: Breadcrumb.v1,
+  component: Breadcrumbs.v1,
   argTypes: {
     list: {
       type: {
@@ -23,9 +23,9 @@ export default {
       }
     }
   }
-} satisfies Meta<typeof Breadcrumb.v1>
+} satisfies Meta<typeof Breadcrumbs.v1>
 
-type Story = StoryObj<typeof Breadcrumb.v1>
+type Story = StoryObj<typeof Breadcrumbs.v1>
 
 export const Default: Story = {
   args: {
@@ -33,7 +33,10 @@ export const Default: Story = {
       { path: '/', name: 'Home' },
       { path: '/archive/intro', name: 'Archive' },
       { path: '/archive/javascript/navigation', name: 'Navigation' },
-      { path: '/archive/javascript/navigation/Breadcrumb', name: 'Breadcrumb' }
+      {
+        path: '/archive/javascript/navigation/Breadcrumbs',
+        name: 'Breadcrumbs'
+      }
     ]
   }
 }
