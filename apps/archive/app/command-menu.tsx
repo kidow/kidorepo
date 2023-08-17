@@ -1,9 +1,9 @@
 'use client'
 
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Icon } from '@/components'
-import { ALGORITHM_LINKS, COMPONENTS_LINKS, WIKI_LINKS } from '@/services'
+import { filterContents } from '@/services'
 import Fuse from 'fuse.js'
 import {
   BanIcon,
@@ -17,69 +17,87 @@ import {
 } from 'lucide-react'
 import { Modal } from 'ui'
 
-function CommandMenu() {
+interface Props {
+  allLinks: LinkItem['items']
+}
+
+function CommandMenu({ allLinks }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchValue, setSearchValue] = useState<string>('')
   const [selectedSlug, setSelectedSlug] = useState<string>('')
   const { push } = useRouter()
 
-  const items: SidebarItem[] = useMemo(() => {
+  const links: LinkItem[] = useMemo(() => {
     if (!searchValue) {
-      return [...COMPONENTS_LINKS, ...WIKI_LINKS, ...ALGORITHM_LINKS]
+      return [
+        { title: 'components', items: filterContents(allLinks, 'components') },
+        { title: 'hooks', items: filterContents(allLinks, 'hooks') },
+        { title: 'utils', items: filterContents(allLinks, 'utils') },
+        { title: 'settings', items: filterContents(allLinks, 'settings') },
+        { title: 'tips', items: filterContents(allLinks, 'tips') },
+        { title: 'wiki', items: filterContents(allLinks, 'wiki') },
+        { title: 'error', items: filterContents(allLinks, 'error') },
+        { title: 'algorithm', items: filterContents(allLinks, 'algorithm') }
+      ]
     }
 
-    const fuse = (list: readonly SidebarItem[]) =>
-      new Fuse(list, { keys: ['title', 'href'], includeScore: true })
+    const fuse = (list: LinkItem['items']) =>
+      new Fuse(list, { keys: ['title', 'slug'], includeScore: true })
         .search(searchValue)
+        .filter((item) => item.score <= 0.14)
         .map(({ item }) => item)
 
     return [
-      { title: 'components', items: fuse(COMPONENTS_LINKS[0].items) },
-      { title: 'hooks', items: fuse(COMPONENTS_LINKS[1].items) },
-      { title: 'utils', items: fuse(COMPONENTS_LINKS[2].items) },
-      { title: 'settings', items: fuse(COMPONENTS_LINKS[3].items) },
-      { title: 'wiki', items: fuse(WIKI_LINKS[0].items) },
-      { title: 'error', items: fuse(WIKI_LINKS[1].items) },
-      { title: 'algorithms', items: fuse(ALGORITHM_LINKS[0].items) }
+      {
+        title: 'components',
+        items: fuse(filterContents(allLinks, 'components'))
+      },
+      { title: 'hooks', items: fuse(filterContents(allLinks, 'hooks')) },
+      { title: 'utils', items: fuse(filterContents(allLinks, 'utils')) },
+      { title: 'settings', items: fuse(filterContents(allLinks, 'settings')) },
+      { title: 'tips', items: fuse(filterContents(allLinks, 'tips')) },
+      { title: 'wiki', items: fuse(filterContents(allLinks, 'wiki')) },
+      { title: 'error', items: fuse(filterContents(allLinks, 'error')) },
+      { title: 'algorithm', items: fuse(filterContents(allLinks, 'algorithm')) }
     ]
-  }, [searchValue])
+  }, [searchValue, allLinks])
 
-  const allLinks: SidebarItem[] = useMemo(
-    () => items.map((item) => item.items).flat(1),
-    [items]
+  const flatLink: LinkItem['items'] = useMemo(
+    () => links.map((item) => item.items).flat(1),
+    [links]
   )
 
   const handleArrowKeys = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault()
-        const index = allLinks.findIndex((item) => item.href === selectedSlug)
+        const index = flatLink.findIndex((item) => item.slug === selectedSlug)
 
         if (e.key === 'ArrowUp') {
           if (index === 0) {
-            setSelectedSlug(allLinks[allLinks.length - 1].href)
+            setSelectedSlug(flatLink[flatLink.length - 1].slug)
             document
               .querySelector(
-                `[data-slug="${allLinks[allLinks.length - 1].href}"]`
+                `[data-slug="${flatLink[flatLink.length - 1].slug}"]`
               )
               ?.scrollIntoView({ block: 'center' })
           } else {
-            setSelectedSlug(allLinks[index - 1].href)
+            setSelectedSlug(flatLink[index - 1].slug)
             document
-              .querySelector(`[data-slug="${allLinks[index - 1].href}"]`)
+              .querySelector(`[data-slug="${flatLink[index - 1].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
           }
         }
         if (e.key === 'ArrowDown') {
-          if (index === allLinks.length - 1) {
-            setSelectedSlug(allLinks[0].href)
+          if (index === flatLink.length - 1) {
+            setSelectedSlug(flatLink[0].slug)
             document
-              .querySelector(`[data-slug="${allLinks[0].href}"]`)
+              .querySelector(`[data-slug="${flatLink[0].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
           } else {
-            setSelectedSlug(allLinks[index + 1].href)
+            setSelectedSlug(flatLink[index + 1].slug)
             document
-              .querySelector(`[data-slug="${allLinks[index + 1].href}"]`)
+              .querySelector(`[data-slug="${flatLink[index + 1].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
           }
         }
@@ -90,10 +108,11 @@ function CommandMenu() {
         if (selectedSlug) {
           push(selectedSlug)
           setIsOpen(false)
+          setSelectedSlug('')
         }
       }
     },
-    [selectedSlug, push, allLinks]
+    [selectedSlug, push, flatLink]
   )
 
   useEffect(() => {
@@ -107,9 +126,9 @@ function CommandMenu() {
 
   useEffect(() => {
     if (isOpen) {
-      setSelectedSlug(COMPONENTS_LINKS[0].items[0].href)
+      setSelectedSlug(filterContents(allLinks, 'components')[0]?.slug || '')
     }
-  }, [isOpen])
+  }, [isOpen, allLinks])
 
   useEffect(() => {
     const handleOpen = (e: KeyboardEvent) => {
@@ -128,10 +147,10 @@ function CommandMenu() {
   useEffect(() => {
     if (!searchValue) {
       setSelectedSlug('')
-    } else if (items[0].items[0]?.href) {
-      setSelectedSlug(items[0].items[0].href)
+    } else if (links[0].items[0]?.slug) {
+      setSelectedSlug(links[0].items[0].slug)
     }
-  }, [searchValue, items])
+  }, [searchValue, links])
   return (
     <>
       <button className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300">
@@ -163,8 +182,8 @@ function CommandMenu() {
             </button>
           </div>
           <div className="h-80 overflow-auto">
-            {allLinks.length ? (
-              items.map((item) => {
+            {links.length ? (
+              links.map((item) => {
                 if (!item.items.length) return null
                 return (
                   <div
@@ -183,13 +202,14 @@ function CommandMenu() {
                         <li
                           key={key}
                           role="option"
-                          aria-selected={subItem.href === selectedSlug}
+                          aria-selected={subItem.slug === selectedSlug}
                           onClick={() => {
-                            push(subItem.href)
+                            push(subItem.slug)
                             setIsOpen(false)
+                            setSelectedSlug('')
                           }}
                           className="search-item flex cursor-pointer items-center gap-2 rounded-md px-2 py-3 aria-selected:bg-neutral-800"
-                          onMouseEnter={() => setSelectedSlug(subItem.href)}
+                          onMouseEnter={() => setSelectedSlug(subItem.slug)}
                         >
                           {item.title === 'components' && (
                             <BoxIcon className="h-5 w-5 dark:text-neutral-300" />
@@ -216,7 +236,7 @@ function CommandMenu() {
                             <Code2Icon className="h-5 w-5 dark:text-neutral-200" />
                           )}
                           <div
-                            data-slug={subItem.href}
+                            data-slug={subItem.slug}
                             className="flex-1 dark:text-neutral-300"
                           >
                             {subItem.title}
@@ -239,4 +259,4 @@ function CommandMenu() {
   )
 }
 
-export default memo(CommandMenu)
+export default CommandMenu

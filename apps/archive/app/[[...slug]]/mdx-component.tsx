@@ -68,7 +68,7 @@ const components = {
     <blockquote className="mt-6 border-l-2 pl-6 italic" {...props} />
   ),
   img: (props: ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className="rounded-md" {...props} />
+    <img className="rounded-md" alt={props.alt} {...props} />
   ),
   hr: (props: HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-4 md:my-8" {...props} />

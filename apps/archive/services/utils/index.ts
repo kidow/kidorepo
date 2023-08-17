@@ -1,3 +1,4 @@
+import { allContents } from 'contentlayer/generated'
 import { toc } from 'mdast-util-toc'
 import { remark } from 'remark'
 import { visit } from 'unist-util-visit'
@@ -58,4 +59,11 @@ export async function getToc(content: string) {
     .process(content)
 
   return result.data
+}
+
+export function filterContents(
+  allLinks: LinkItem['items'],
+  title: string
+): LinkItem['items'] {
+  return allLinks.filter((item) => item.slug?.startsWith(`/${title}`))
 }

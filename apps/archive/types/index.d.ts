@@ -8,13 +8,6 @@ interface Item {
   items?: Item[]
 }
 
-interface SidebarItem {
-  title: string
-  items?: SidebarItem[]
-  href?: string
-  external?: boolean
-}
-
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -56,4 +49,12 @@ namespace NToast {
     message: string
     type: NToast.Type
   }
+}
+
+interface LinkItem {
+  title: string
+  items: Array<{
+    title: string
+    slug: string
+  }>
 }
