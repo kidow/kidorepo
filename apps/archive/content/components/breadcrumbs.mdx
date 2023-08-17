@@ -1,5 +1,7 @@
 ---
-title: Breadcrumb
+title: Breadcrumbs
+description: 사이트의 계층 구조 내에서 페이지의 위치를 ​​시각화하는 데 도움이 되는 링크 목록입니다.
+keywords: Breadcrumbs, Reactjs, Nextjs, TailwindCSS, Typescript
 ---
 
 ## Example
@@ -18,14 +20,14 @@ title: Breadcrumb
 
 <Step>Copy Code</Step>
 
-```tsx title="components/Breadcrumb/index.tsx"
+```tsx title="components/Breadcrumbs/index.tsx"
 import { cn } from 'utils'
 
 export interface Props {
   list: Array<{ path: string; name: string }>
 }
 
-function Breadcrumb({ list }: Props) {
+function Breadcrumbs({ list }: Props) {
   return (
     <div className="max-w-full overflow-x-auto py-2 text-sm">
       <ul className="flex items-center">
@@ -58,18 +60,18 @@ function Breadcrumb({ list }: Props) {
   )
 }
 
-export default Breadcrumb
+export default Breadcrumbs
 ```
 
 <Step>Usage</Step>
 
 ```tsx
-<Breadcrumb
+<Breadcrumbs
   list={[
     { path: '/', name: 'Home' },
     { path: '/archive/intro', name: 'Archive' },
     { path: '/archive/javascript/navigation', name: 'Navigation' },
-    { path: '/archive/javascript/navigation/Breadcrumb', name: 'Breadcrumb' }
+    { path: '/archive/javascript/navigation/Breadcrumbs', name: 'Breadcrumbs' }
   ]}
 />
 ```

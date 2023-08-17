@@ -4,7 +4,7 @@ export interface Props {
   list: Array<{ path: string; name: string }>
 }
 
-function Breadcrumb({ list }: Props) {
+function Breadcrumbs({ list }: Props) {
   return (
     <div className="max-w-full overflow-x-auto py-2 text-sm">
       <ul className="flex items-center">
@@ -37,4 +37,4 @@ function Breadcrumb({ list }: Props) {
   )
 }
 
-export default Breadcrumb
+export default Breadcrumbs
