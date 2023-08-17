@@ -4,6 +4,6 @@ declare namespace NodeJS {
   }
   interface ProcessEnv {
     NODE_ENV: string
-    NOTION_SECRET_KEY: string
+    NEXT_PUBLIC_DISCORD_WEBHOOK_URL: string
   }
 }

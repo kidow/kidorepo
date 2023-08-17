@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import { allContents } from 'contentlayer/generated'
 import { GithubIcon, HomeIcon } from 'lucide-react'
-import { Toast } from 'ui'
+import { Backdrop, Toast } from 'ui'
 
 import CommandMenu from './command-menu'
 import Drawer from './drawer'
@@ -125,6 +125,7 @@ export default function RootLayout({ children }: ReactProps) {
             </footer>
           </div>
           <Toast.v2 />
+          <Backdrop.v1 />
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { cn } from 'utils'
+import { useForm } from 'react-hook-form'
+import { Divider } from 'ui'
+import { backdrop, cn, toast } from 'utils'
 
 interface Props {
   toc: { items?: Item[] }
@@ -27,6 +29,8 @@ export default function Toc({ toc }: Props) {
         <div className="space-y-2">
           <p className="font-medium">On This Page</p>
           <Tree tree={toc} activeItem={activeHeading} />
+          <Divider.v1 />
+          <Feedback />
         </div>
       </div>
     </div>
@@ -103,4 +107,41 @@ function Tree({
       })}
     </ul>
   ) : null
+}
+
+function Feedback() {
+  const { register, handleSubmit, reset } = useForm<{ content: string }>()
+
+  const onSubmit = async (data: { content: string }) => {
+    if (!data.content) return
+    if (!window.confirm('피드백을 전달하시겠습니까?')) return
+
+    backdrop(true)
+    await fetch(process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ content: data.content })
+    })
+    backdrop(false)
+    toast.success('감사합니다!')
+    reset()
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <textarea
+        {...register('content', { required: true })}
+        required
+        className="w-full rounded-md border bg-transparent p-2 text-sm outline-none dark:border-neutral-800 dark:placeholder:text-neutral-600"
+        autoComplete="off"
+        placeholder="오타나 잘못된 정보가 있나요?"
+        rows={4}
+      />
+      <div className="mt-1 flex justify-end">
+        <button className="rounded border px-2 py-1 text-sm dark:border-neutral-800 dark:text-neutral-400">
+          전달
+        </button>
+      </div>
+    </form>
+  )
 }
