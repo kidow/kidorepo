@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { Divider } from 'ui'
 import { backdrop, cn, toast } from 'utils'
@@ -111,6 +112,7 @@ function Tree({
 
 function Feedback() {
   const { register, handleSubmit, reset } = useForm<{ content: string }>()
+  const pathname = usePathname()
 
   const onSubmit = async (data: { content: string }) => {
     if (!data.content) return
@@ -120,7 +122,9 @@ function Feedback() {
     await fetch(process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ content: data.content })
+      body: JSON.stringify({
+        content: `[${data.content}](https://archive.kidow.me${pathname})`
+      })
     })
     backdrop(false)
     toast.success('감사합니다!')
