@@ -108,7 +108,7 @@ function CommandMenu({ allLinks }: Props) {
         if (selectedSlug) {
           push(selectedSlug)
           setIsOpen(false)
-          setSelectedSlug('')
+          setSearchValue('')
         }
       }
     },
@@ -206,7 +206,7 @@ function CommandMenu({ allLinks }: Props) {
                           onClick={() => {
                             push(subItem.slug)
                             setIsOpen(false)
-                            setSelectedSlug('')
+                            setSearchValue('')
                           }}
                           className="search-item flex cursor-pointer items-center gap-2 rounded-md px-2 py-3 aria-selected:bg-neutral-800"
                           onMouseEnter={() => setSelectedSlug(subItem.slug)}

@@ -1,5 +1,7 @@
 ---
 title: Backdrop
+description: 사용자의 초점을 화면의 특정 요소로 좁히도록 하는 요소입니다.
+keywords: Backdrop, Reactjs, Nextjs, TailwindCSS, Typescript
 ---
 
 ## Example
@@ -14,9 +16,14 @@ title: Backdrop
 
 <Blocks>
   <LinkBlock icon="components" name="Spinner" slug="/components/spinner" />
-  <LinkBlock icon="utils" name="backdrop" slug="/utils/backdrop" />
   <LinkBlock icon="utils" name="EventListener" slug="/utils/event-listener" />
 </Blocks>
+
+<Step>Add Util Function</Step>
+
+```ts title="utils/backdrop.ts"
+export const backdrop = (open: boolean) => EventListener.emit('backdrop', open)
+```
 
 <Step>Copy Code</Step>
 
