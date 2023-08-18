@@ -1,0 +1,24 @@
+---
+title: dependencies와 devDependencies 차이
+description: dependencies와 devDependencies는 둘 다 npm(Node Package Manager)에서 패키지를 관리할 때 사용되는 속성들이다. 다만 각각의 역할과 용도가 다르다.
+keywords: npm
+---
+
+## dependencies:
+
+- 프로덕션 환경에서 필요한 패키지들을 나타내는 프로퍼티
+- 실제 애플리케이션의 실행에 필요한 모듈이며, 최종 빌드에 포함
+
+## devDependencies:
+
+- 개발 환경에서만 필요한 패키지들을 나타내는 프로퍼티
+- 주로 개발자의 작업 흐름을 위해 필요한 도구, 테스트 프레임워크, 빌드 도구 등을 포함
+- 테스트 라이브러리 (Jest, Mocha), 빌드 도구 (Webpack, Babel), 코드 스타일 검사 도구 (ESLint, Prettier) 등
+
+### 실제 배포에 사용되도 상관없을까?
+
+devDependencies에 있는 패키지가 실제 배포에 사용되는 경우에는 일반적으로 문제가 생기지 않지만 몇 가지 주의할 점들이 있다.
+
+- `불필요한 용량 증가`: 실제 애플리케이션 배포에 사용되지 않지만 프로젝트의 용량을 증가시킬 수 있다.
+- `보안 취약성`: devDependencies에 있는 패키지가 최신 버전이 아니거나 보안 취약성을 가질 수 있다.
+- `의존성 충돌`: devDependencies에 있는 패키지와 실제 애플리케이션의 패키지 간의 의존성 충돌이 발생할 수 있다.

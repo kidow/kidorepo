@@ -1,0 +1,62 @@
+---
+title: IntersectionObserver
+description: IntersectionObserver는 브라우저의 뷰포트(Viewport)와 대상 요소(Element)의 교차 여부를 관찰하고 이를 감지하는 JavaScript API다. 이를 통해 뷰포트 안에 요소가 보이거나 보이지 않는지를 감지하거나, 뷰포트와 요소의 교차 정도를 관찰할 수 있다.
+keywords: javascript
+---
+
+## 활용
+
+- `Lazy Loading Images`: 뷰포트 내에 이미지가 진입하는 시점에 이미지를 로드하는 등의 성능 최적화를 할 수 있다.
+- `Infinite Scrolling`: 스크롤이 특정 요소와 교차하는 순간에 새로운 콘텐츠를 로드할 수 있다.
+- `Tracking Analytics`: 사용자가 특정 섹션에 스크롤하거나 요소와 교차할 때 애널리틱스 이벤트를 기록하는 등의 사용도 가능
+
+## 구성 및 예시
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+    <div class="box">Box 4</div>
+
+    <script>
+      const boxes = document.querySelectorAll('.box')
+      const options = {
+        root: null, // 뷰포트를 기준으로 교차 여부를 감지
+        rootMargin: '0px',
+        threshold: 0.5 // 대상 요소의 50% 이상이 교차하는 순간을 감지
+      }
+
+      function handleIntersection(entries, observer) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.backgroundColor = 'orange'
+          } else {
+            entry.target.style.backgroundColor = 'lightblue'
+          }
+        })
+      }
+
+      const observer = new IntersectionObserver(handleIntersection, options)
+
+      boxes.forEach((box) => {
+        observer.observe(box)
+      })
+    </script>
+  </body>
+</html>
+```
+
+위 예제에서는 각 div 요소(.box)가 뷰포트와 교차하는 순간에 배경색을 변경한다. IntersectionObserver를 사용하여 스크롤 이벤트를 감지하지 않고도 요소의 교차 여부를 효율적으로 관찰하게 된다.

@@ -1,0 +1,42 @@
+---
+title: List, Map, Set
+description: JavaScript에서 List, Map, 그리고 Set은 모두 다양한 데이터 구조를 나타내는 컬렉션이다. 각각의 특징과 용도는 다음과 같다.
+keywords: javascript
+---
+
+## List
+
+- 일련의 값들을 순차적으로 저장하는 자료 구조
+- JavaScript의 기본 배열(Array)
+- 인덱스(index)를 사용하여 요소에 접근하며, 중복 값이 포함될 수 있다.
+- 추가, 삭제, 수정 등의 작업이 쉽고, 순서를 중요시하는 데이터를 저장하는 데 사용
+
+```js
+const list = [1, 2, 3, 2, 4]
+console.log(list[0]) // 1
+```
+
+## Map
+
+- 키-값 쌍의 데이터를 저장하는 자료 구조입니다.
+- 키와 값의 관계를 기반으로 데이터를 저장하고, 키는 유일해야 한다.
+- 객체와 유사하지만, 키에 다양한 데이터 타입을 사용할 수 있다.
+- 순서가 보장되지 않으며, 데이터 검색 및 변경이 빠르고 효율적
+
+```js
+const map = new Map()
+map.set('name', 'John')
+map.set('age', 30)
+console.log(map.get('name')) // 'John'
+```
+
+## Set
+
+- 중복되지 않는 값을 저장하는 자료 구조입니다.
+- 배열과 유사하지만 Set은 중복을 허용하지 않는다.
+- 순서가 보장되지 않으며, 고유한 값들의 컬렉션을 저장하고 관리하는 데 사용
+
+```js
+const set = new Set([1, 2, 3, 2, 4])
+console.log(set.has(1)) // true
+```

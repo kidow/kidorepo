@@ -1,0 +1,76 @@
+---
+title: 일반 함수와 Arrow 함수의 차이
+description:
+keywords: javascript
+---
+
+## 1. 문법 구조
+
+### 일반 함수
+
+```js
+function regularFunction(x) {
+  return x * 2
+}
+```
+
+### 화살표 함수
+
+```js
+const arrowFunction = (x) => x * 2
+```
+
+## 2. this 바인딩
+
+화살표 함수는 자신만의 this를 생성하지 않고, 주변 범위의 this를 사용
+
+```js
+// 일반 함수
+function regularFunction() {
+  console.log(this) // 함수 호출 시의 this
+}
+
+// 화살표 함수
+const arrowFunction = () => {
+  console.log(this) // 주변 범위의 this
+}
+
+const obj = { method: regularFunction, arrowMethod: arrowFunction }
+
+obj.method() // obj
+obj.arrowMethod() // 주변 범위(this를 가진 함수나 객체)에 따라 달라짐
+```
+
+## 3. arguments 객체
+
+일반 함수는 arguments 객체를 사용하여 인자에 접근할 수 있지만, 화살표 함수는 arguments 객체를 사용할 수 없다.
+
+```js
+function regularFunction() {
+  console.log(arguments[0])
+}
+
+const arrowFunction = () => {
+  console.log(arguments[0]) // ReferenceError: arguments is not defined
+}
+
+regularFunction(5) // 5
+arrowFunction(5) // Error 4. 생성자 함수로 사용할 수 없음:
+```
+
+## 4. 생성자 함수
+
+화살표 함수는 생성자 함수로 사용할 수 없다.
+
+```js
+function RegularConstructor() {
+  this.prop = 'regular'
+}
+
+const ArrowConstructor = () => {
+  this.prop = 'arrow'
+}
+
+const regObj = new RegularConstructor() // 정상 동작
+const arrObj = new ArrowConstructor() // TypeError: ArrowConstructor is not a constructor 5. 메소드로 사용할 때의 this:
+```

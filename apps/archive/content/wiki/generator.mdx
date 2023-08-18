@@ -1,0 +1,55 @@
+---
+title: Generator
+description: JavaScript의 Generator는 함수의 실행을 일시적으로 중단하고 나중에 이어서 실행할 수 있는 특별한 종류의 함수이다. 이터레이터(iterator)를 생성하며, 여러 값을 생성하고 반복하는 데 유용하다.
+keywords: javascript
+---
+
+## 사용법
+
+함수 블록 내에서 `function*` 문법을 사용하여 정의하며, `yield` 키워드를 통해 값을 생성하거나 일시적으로 함수 실행을 멈출 수 있다.
+
+### 1. 무한 시퀀스 생성
+
+```js
+function* countGenerator() {
+  let count = 0
+  while (true) {
+    yield count++
+  }
+}
+
+const counter = countGenerator()
+
+console.log(counter.next().value) // 0
+console.log(counter.next().value) // 1
+console.log(counter.next().value) // 2
+// ...
+```
+
+### 2. 비동기 작업 관리
+
+```js
+function* fetchData() {
+  const data1 = yield fetch('https://api.example.com/data1')
+  const data2 = yield fetch('https://api.example.com/data2')
+  return { data1, data2 }
+}
+
+const generator = fetchData()
+generator
+  .next()
+  .value.then((result1) =>
+    generator.next(result1).value.then((result2) => console.log(result2))
+  )
+```
+
+## 장점
+
+- `비동기 코드 관리`: 비동기 코드를 동기적으로 작성하는 데 도움이 된다.
+- `메모리 효율`: 필요한 값만 생성하므로, 무한한 값의 시퀀스를 다룰 때 메모리를 절약할 수 있다.
+- `일시 중단 및 재개`: 함수 실행을 일시 중단하고 다시 시작할 수 있으므로, 실행 상태를 보존하면서 작업을 진행할 수 있다.
+
+## 단점
+
+- `복잡성`: 콜백 함수를 사용하는 것보다 더 복잡하고 이해하기 어려울 수 있다.
+- `브라우저 호환성`: ECMAScript 2015(ES6)부터 도입되었으며, 모든 브라우저에서 지원되지 않을 수 있다.

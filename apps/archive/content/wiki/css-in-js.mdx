@@ -1,0 +1,78 @@
+---
+title: CSS-in-JS
+description: CSS-in-JS는 JavaScript 코드 안에서 스타일을 작성하고 관리하는 방법을 의미한다. JavaScript 코드와 스타일을 결합하여 컴포넌트별로 스타일을 적용하는 방식으로 동작한다.
+keywords: CSS in JS
+---
+
+## 종류
+
+- **[Styled Components](https://styled-components.com/)**: 템플릿 리터럴 문법을 사용하여 스타일을 작성
+
+```jsx
+import styled, { css } from 'styled-components'
+
+const Button = styled.button<{ $primary?: boolean }>`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid #bf4f74;
+  color: #bf4f74;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+
+  ${(props) =>
+    props.$primary &&
+    css`
+      background: #bf4f74;
+      color: white;
+    `}
+`
+
+const Container = styled.div`
+  text-align: center;
+`
+
+render(
+  <Container>
+    <Button>Normal Button</Button>
+    <Button $primary>Primary Button</Button>
+  </Container>
+)
+```
+
+- **[Emotion](https://emotion.sh/docs/introduction)**: Styled Components와 유사한 방식으로 동작
+
+```jsx
+import { css } from '@emotion/react'
+
+const color = 'white'
+
+render(
+  <div
+    css={css`
+      padding: 32px;
+      background-color: hotpink;
+      font-size: 24px;
+      border-radius: 4px;
+      &:hover {
+        color: ${color};
+      }
+    `}
+  >
+    Hover to change color.
+  </div>
+)
+```
+
+## 장점
+
+- `캡슐화와 모듈성`: 컴포넌트별로 스타일을 작성하므로 스타일이 컴포넌트와 함께 캡슐화되며, 스타일 간의 간섭 최소화
+- `동적 스타일링`: 코드 내에서 조건부로 스타일을 적용할 수 있어 동적으로 스타일 변경
+- `유연성`: JavaScript의 기능을 활용하여 변수, 함수 등을 스타일에 적용
+- `성능 최적화`: 스타일을 컴포넌트 단위로 추적하여 필요한 스타일만 렌더링하므로 성능 최적화
+
+## 단점
+
+- `학습 곡선`: 기존의 CSS 작성 방식과 다르므로 익숙해지기까지 시간 필요
+- `서버 사이드 렌더링(SSR) 복잡성`: 서버 사이드 렌더링과 함께 사용할 때 설정이 복잡할 수 있다.
+- `성능 문제`: 런타임 시간에 스타일을 생성하므로 초기 로딩 시간이 길어질 수 있다.
+- `분리된 스타일`: 코드가 분리되지 않고 함께 작성되므로, 팀 내에서 스타일러와 개발자 간의 역할 분리가 어려울 수 있다.

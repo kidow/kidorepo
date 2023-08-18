@@ -1,0 +1,41 @@
+---
+title: event.target과 event.currentTarget의 차이
+description: event.target과 event.currentTarget은 JavaScript 이벤트 핸들러에서 사용되는 프로퍼티로, 이벤트가 발생한 요소와 현재 이벤트 핸들러가 연결된 요소를 나타낸다.
+keywords: javascript
+---
+
+## event.target
+
+- 실제로 이벤트가 발생한 요소
+- 이벤트 버블링(부모 요소로 이벤트 전파) 또는 이벤트 캡처링(자식 요소로 이벤트 전파)과 상관없이 해당 요소를 가리킨다.
+
+```html
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+<script>
+  document.getElementById('parent').addEventListener('click', function (event) {
+    console.log(event.target) // 클릭한 버튼 요소
+  })
+</script>
+```
+
+## event.currentTarget
+
+- 현재 이벤트 핸들러가 연결된 요소
+- 이벤트 캡처링 또는 이벤트 버블링 과정에서 이벤트 핸들러가 실제로 연결된 요소
+
+```html
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+<script>
+  document.getElementById('parent').addEventListener('click', function (event) {
+    console.log(event.currentTarget) // 클릭한 부모 요소
+  })
+</script>
+```
+
+주의할 점은 이벤트 버블링 과정에서 event.currentTarget는 이벤트 핸들러가 연결된 요소를 나타내지만, 이벤트 캡처링 과정에서는 이벤트 흐름의 순서에 따라 달라질 수 있다.

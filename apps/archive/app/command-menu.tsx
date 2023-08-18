@@ -75,14 +75,14 @@ function CommandMenu({ allLinks }: Props) {
 
         if (e.key === 'ArrowUp') {
           if (index === 0) {
-            setSelectedSlug(flatLink[flatLink.length - 1].slug)
+            setSelectedSlug(flatLink[flatLink.length - 1].slug || '')
             document
               .querySelector(
                 `[data-slug="${flatLink[flatLink.length - 1].slug}"]`
               )
               ?.scrollIntoView({ block: 'center' })
           } else {
-            setSelectedSlug(flatLink[index - 1].slug)
+            setSelectedSlug(flatLink[index - 1].slug || '')
             document
               .querySelector(`[data-slug="${flatLink[index - 1].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
@@ -90,12 +90,12 @@ function CommandMenu({ allLinks }: Props) {
         }
         if (e.key === 'ArrowDown') {
           if (index === flatLink.length - 1) {
-            setSelectedSlug(flatLink[0].slug)
+            setSelectedSlug(flatLink[0].slug || '')
             document
               .querySelector(`[data-slug="${flatLink[0].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
           } else {
-            setSelectedSlug(flatLink[index + 1].slug)
+            setSelectedSlug(flatLink[index + 1].slug || '')
             document
               .querySelector(`[data-slug="${flatLink[index + 1].slug}"]`)
               ?.scrollIntoView({ block: 'center' })
@@ -147,10 +147,10 @@ function CommandMenu({ allLinks }: Props) {
   useEffect(() => {
     if (!searchValue) {
       setSelectedSlug('')
-    } else if (links[0].items[0]?.slug) {
-      setSelectedSlug(links[0].items[0].slug)
+    } else if (flatLink[0]?.slug) {
+      setSelectedSlug(flatLink[0].slug)
     }
-  }, [searchValue, links])
+  }, [searchValue, flatLink])
   return (
     <>
       <button className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300">

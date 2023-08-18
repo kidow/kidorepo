@@ -1,0 +1,61 @@
+---
+title: Closure
+description: 내부함수가 외부함수의 맥락에 접근할 수 있는 것을 가리킨다.
+keywords: javascript
+---
+
+```js
+function outter() {
+  // 외부함수
+  var title = 'Kidow'
+  function inner() {
+    // 내부함수
+    alert(title)
+  }
+  inner()
+}
+outter()
+```
+
+inner라는 내부함수에서 외부함수인 outter에서 선언한 title에 접근할 수 있다. outter를 실행하면 잘 실행된다.
+
+```js
+function outter() {
+  var title = 'Kidow'
+  return function () {
+    alert(title)
+  }
+}
+var inner = outter()
+inner()
+```
+
+여기서 outter를 선언하여 inner를 생성하면 outter는 함수를 리턴했지만 지역번수로 선언한 title은 계속해서 남아있다.
+
+클로저(closure)란 **내부함수가 외부함수의 지역변수에 접근할 수 있고, 외부함수는 지역번수를 사용하는 내부함수가 소멸될 때까지 남아있는 특성**을 의미한다.
+
+### 그 외의 특징
+
+- 동일한 외부함수 내에서 만들어진 내부함수는 지역변수를 공유한다.
+- 클래스에서 private를 사용하는 것과 효과가 동일하다.
+
+## 사용하는 이유
+
+### 1. 정보 은닉
+
+외부에서 함수 내부에 있는 변수에 접근하는 것을 막을 수 있음
+
+### 2. 상태 유지
+
+내부 변수의 상태가 유지될 수 있기 때문에 안정성 보유
+
+## 장점
+
+- 유연한 데이터 보존
+- 정보 은닉과 보안
+- 메모리 관리
+
+## 단점
+
+- 메모리 누수
+- 성능 저하

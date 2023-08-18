@@ -1,0 +1,121 @@
+---
+title: React Suspense
+description: React Suspense는 비동기 렌더링을 위한 특수한 컴포넌트이다. 데이터 로딩과 같은 작업이 완료될 때까지 특정 UI의 렌더링을 대기시키는 데 사용한다.
+keywords: react
+---
+
+## Suspense
+
+Suspense는 React 16.6 버전부터 등장하였다. 공식 문서 페이지가 react.dev로 이전되면서 내용도 약간 수정되었다.
+
+기본적으로는 다음과 같이 사용한다.
+
+```jsx
+<Suspense fallback={<Loading />}>
+  <SomeComponent />
+</Suspense>
+```
+
+간단하게 2개의 구성요소가 존재한다.
+
+### children
+
+데이터를 가져올 때까지 렌더링을 대기시킬 UI
+
+### fallback
+
+서스펜스 하위 UI가 렌더링될 준비가 될 때까지 대신 보여줄 로딩 UI
+
+## 주요 특징
+
+- `비동기 데이터 렌더링`: 컴포넌트가 비동기적으로 데이터를 로딩할 때 로딩 중 상태를 처리하고, 데이터가 준비되면 해당 데이터를 렌더링
+- `자연스러운 에러 처리`: 데이터 로딩이나 코드 분할 중에 발생하는 에러를 처리하는 방식을 간소화하며, 자연스러운 에러 UI를 구현
+- `코드 분할 로딩`: React 라우트나 컴포넌트 내에서 코드를 분할하고, 필요할 때 비동기적으로 로딩
+
+## 사용법
+
+### 비동기 데이터 로딩
+
+```jsx
+import { Suspense } from 'react'
+
+import { fetchData } from './api'
+
+function DataComponent() {
+  const data = fetchData() // 비동기 데이터 로딩
+
+  return <div>{data}</div>
+}
+
+function App() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <DataComponent />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+### 코드 분할 로딩
+
+```jsx
+import { lazy, Suspense } from 'react'
+
+const LazyComponent = lazy(() => import('./LazyComponent'))
+
+function App() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+### 에러 처리
+
+```jsx
+import React, { Suspense } from 'react'
+
+// Error Boundary 컴포넌트
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>Error occurred.</div>
+    }
+
+    return this.props.children
+  }
+}
+
+// 비동기 데이터 로딩 컴포넌트
+const DataComponent = React.lazy(() => import('./DataComponent'))
+
+function App() {
+  return (
+    <div>
+      <h1>Async Data Loading with Error Boundary</h1>
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <DataComponent />
+        </Suspense>
+      </ErrorBoundary>
+    </div>
+  )
+}
+
+export default App
+```

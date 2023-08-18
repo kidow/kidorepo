@@ -1,0 +1,61 @@
+---
+title: CSS flex, grid
+description: CSS Flex와 CSS Grid는 둘 다 레이아웃을 만드는 데 사용되는 CSS 속성이다.
+keywords: css
+---
+
+## CSS Flex
+
+- 주로 1차원(단방향) 레이아웃을 만드는 데 사용
+- 행 또는 열의 형태로 요소들을 배치
+
+```html
+<div class="flex-container">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+</div>
+```
+
+```css
+.flex-container {
+  display: flex;
+  flex-direction: row; /* 가로 방향으로 배치 */
+  justify-content: space-between; /* 양 끝에 정렬 */
+}
+
+.item {
+  flex: 1; /* 동일한 너비를 갖도록 설정 */
+  padding: 10px;
+  border: 1px solid black;
+}
+```
+
+## CSS Grid
+
+- 2차원(양방향) 레이아웃을 만드는 데 사용
+- 행과 열을 동시에 제어하여 복잡한 레이아웃 구성
+
+```html
+<div class="grid-container">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+  <div class="item">Item 4</div>
+  <div class="item">Item 5</div>
+  <div class="item">Item 6</div>
+</div>
+```
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3개의 열을 생성 */
+  grid-gap: 10px; /* 각 아이템 간의 간격 */
+}
+
+.item {
+  padding: 10px;
+  border: 1px solid black;
+}
+```

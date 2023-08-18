@@ -1,0 +1,156 @@
+---
+title: 프로젝트 시작
+description: Nextjs 13 버전 기준입니다.
+keywords: nextjs, husky, commitlint, tailwindcss, eslint, prettier
+---
+
+## Husky 설치
+
+```bash
+pnpm dlx husky-init && pnpm install
+```
+
+## Commitlint 설치
+
+```bash
+pnpm add -D @commitlint/cli @commitlint/config-conventional
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+npx husky add .husky/commit-msg 'npx commitlint --edit $1'
+```
+
+package.json에 `"type": "module"`이 있다면 삭제한다.
+
+## Prettier 설치
+
+```bash
+pnpm add -D prettier@2.8.8 pretty-quick @trivago/prettier-plugin-sort-imports
+touch .prettierrc
+npx husky add .husky/pre-commit 'npx pretty-quick --staged'
+```
+
+```json title=".prettierrc"
+{
+  "singleQuote": true,
+  "semi": false,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "printWidth": 80,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^components/(.*)$",
+    "^services/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
+```
+
+package.json에 다음과 같은 스크립트를 추가
+
+```json title="package.json"
+{
+  "scripts": {
+    "format": "prettier --check . --write **/*.{js,cjs,ts,tsx,json}"
+  }
+}
+```
+
+## ESLint 설치
+
+```bash
+npx eslint --init
+pnpm add -D lint-staged @typescript-eslint/parser eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-hooks
+```
+
+.husky/pre-commit에 `npx lint-staged` 를 추가
+
+```json title="package.json"
+{
+  "lint-staged": {
+    "**/*.{ts,tsx,js,json}": ["eslint ."]
+  }
+}
+```
+
+## Jest 설치
+
+```bash
+pnpm add -D @testing-library/jest-dom @testing-library/react @testing-library/user-event @testing-library/dom @types/jest jest jest-environment-jsdom jest-svg-transformer @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript
+npx husky add .husky/pre-push 'pnpm test'
+```
+
+```js title="jest.config.js"
+module.exports = {
+  transform: {
+    '^.+\\.[jt]sx?$': ['babel-jest']
+  },
+  moduleDirectories: ['node_modules', 'src'],
+  setupFilesAfterEnv: ['./jest.setup.js'],
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.svg': 'jest-svg-transformer'
+  },
+  testEnvironment: 'jsdom',
+  testTimeout: 10000
+}
+```
+
+```js title="jest.setup.js"
+import '@testing-library/jest-dom'
+```
+
+```json title="package.json"
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+```
+
+```json title=".babelrc"
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ]
+}
+```
+
+## Tailwind 설치
+
+```bash
+pnpm add -D tailwindcss autoprefixer postcss postcss-nesting prettier-plugin-tailwindcss
+npx tailwindcss init -p
+```
+
+```js title="postcss.config.js"
+module.exports = {
+  plugins: {
+    'tailwindcss/nesting': {},
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+}
+```
+
+```js title="tailwind.config.js"
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {}
+  },
+  plugins: [require('prettier-plugin-tailwindcss')]
+}
+```
