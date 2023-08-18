@@ -1,0 +1,61 @@
+---
+title: Context API
+description: React의 Context API는 컴포넌트 간에 전역적으로 데이터를 공유하기 위한 기능을 제공한다. 이를 통해 프로퍼티를 여러 번 거치지 않고도 데이터를 공유하고 관리할 수 있게 된다.
+keywords: react, context api
+---
+
+`React.createContext()` 함수를 사용하여 컨텍스트를 생성하고, `Provider` 컴포넌트를 통해 해당 컨텍스트를 제공한다.
+
+```jsx
+import React, { createContext, useContext } from 'react'
+
+// 1. 컨텍스트 생성
+const UserContext = createContext()
+
+// 2. Provider 컴포넌트 생성
+function UserProvider({ children }) {
+  const user = { name: 'Alice', role: 'admin' }
+
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>
+}
+
+// 3. Consumer 컴포넌트 사용
+function UserProfile() {
+  const user = useContext(UserContext)
+
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>Name: {user.name}</p>
+      <p>Role: {user.role}</p>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <UserProvider>
+      <div>
+        <h1>React Context Example</h1>
+        <UserProfile />
+      </div>
+    </UserProvider>
+  )
+}
+
+export default App
+```
+
+위 예제에서는 UserContext를 생성하고, UserProvider를 통해 value prop에 데이터를 제공한다. UserProfile 컴포넌트에서 useContext 훅을 사용하여 UserContext의 값을 가져와 사용한다. 이렇게 하면 UserProfile 컴포넌트에서 별도의 프로퍼티 전달 없이도 데이터에 접근할 수 있게 된다.
+
+Context API를 사용하면 데이터의 전달이나 중간 컴포넌트를 거치지 않고도 컴포넌트 트리에서 어디서든 데이터에 접근할 수 있어 편리하다. 주로 글로벌한 상태나 설정, 사용자 정보 등을 다양한 컴포넌트 간에 공유하기 위해 사용된다.
+
+## 한계
+
+- **성능 문제**: Context의 값을 변경할 때마다 해당 Context를 사용하는 모든 하위 컴포넌트가 다시 렌더링될 수 있다.
+- **느슨한 결합 부족**: Context API를 남용하면 컴포넌트 간의 의존성이 암시적으로 생성될 수 있다. 이로 인해 유지보수가 어려워질 수 있다.
+- **디버깅과 추적 어려움**: 컨텍스트를 사용하는 모든 컴포넌트에 대한 정보가 전역으로 분산될 수 있어 디버깅과 추적이 어려울 수 있다.
+- **컴포넌트 재사용 어려움**: 컨텍스트를 사용하여 컴포넌트를 공유하려면 해당 컴포넌트가 컨텍스트에 의존해야 한다. 이로 인해 재사용하기 어려울 수 있다.
+- **Redux와의 차이**: Context API는 전역 상태 관리에도 사용되지만, 큰 규모의 프로젝트나 복잡한 상태 관리에는 Redux가 더 적합할 수 있다.
+- **테스트 어려움**: Context를 사용한 컴포넌트는 주로 컨텍스트의 값을 참조하는데, 테스트 시에 해당 컨텍스트를 제공하기 어려울 수 있다.
+- **변화되는 API**: React 버전에 따라 Context API의 동작 방식이 변경될 수 있으며, 새로운 기능이나 제한 사항이 추가될 수 있다.

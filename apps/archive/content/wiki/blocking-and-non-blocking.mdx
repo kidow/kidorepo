@@ -1,0 +1,49 @@
+---
+title: Blocking과 Non-Blocking
+description: 프로그래밍에서 블로킹(blocking)과 논블로킹(non-blocking)은 코드의 실행과정에서 발생하는 동작 방식을 나타내는 용어이다. 이 둘의 주요 차이점은 어떤 작업이 완료될 때까지 코드의 실행이 멈추느냐 아니냐에 있다.
+keywords: Blocking, Non-Blocking
+---
+
+## 블로킹 (Blocking):
+
+- 특정 작업이 완료될 때까지 코드의 실행이 중단되는 상황
+- 해당 작업이 끝날 때까지 다른 작업이나 코드 실행이 기다리는 상태
+- 대개 입출력(IO) 작업이나 다른 외부 리소스의 사용에 관련되며, 해당 작업이 완료되기 전까지는 다음 코드 실행이 멈춘다.
+
+## 논블로킹 (Non-blocking):
+
+- 코드의 실행이 특정 작업의 완료 여부와 관계없이 계속 진행되는 상황
+- 다른 작업들과 코드 실행이 중단되지 않고 계속된다.
+- 대개 비동기적인 작업이나 이벤트 처리와 관련되며, 해당 작업의 완료 여부와 상관없이 코드가 진행된다.
+
+## 비교 예시
+
+### 블로킹
+
+```js
+const fs = require('fs')
+
+// 파일 읽기 (블로킹)
+const data = fs.readFileSync('file.txt', 'utf-8')
+console.log(data) // 파일 읽기가 완료될 때까지 여기서 대기
+console.log('File read completed.')
+```
+
+위의 예시에서 readFileSync 함수는 파일을 읽는 작업을 블로킹하며, 파일을 읽을 때까지 코드 실행이 중단된다.
+
+### 논블로킹
+
+```js
+const fs = require('fs')
+
+// 파일 읽기 (논블로킹)
+fs.readFile('file.txt', 'utf-8', (err, data) => {
+  if (err) throw err
+  console.log(data) // 파일 읽기가 완료되었을 때만 실행
+})
+console.log('Reading file...')
+```
+
+위의 예시에서 readFile 함수는 파일을 읽는 작업을 논블로킹하며, 파일을 읽는 작업이 진행되는 동안에도 코드 실행이 계속된다. 파일 읽기가 완료되면 콜백 함수가 실행된다.
+
+논블로킹은 주로 비동기적인 작업과 이벤트 처리에 유용하며, 블로킹은 동기적인 작업과 입출력(IO) 작업에 사용된다.

@@ -1,0 +1,98 @@
+---
+title: CORS
+description: 웹 브라우저에서 실행되는 웹 애플리케이션에서 다른 도메인의 리소스에 접근할 때 발생하는 보안 정책
+---
+
+동일 출처 정책(Same-Origin Policy)에 따라 웹 페이지가 자신의 출처(origin)에서 로드한 리소스에만 접근이 허용되고, 다른 출처의 리소스에는 접근이 제한된다.
+
+하지만 일부 경우 다른 출처의 리소스에 접근해야 할 필요가 생기는데, 이때 CORS가 사용된다.
+
+CORS는 다른 도메인의 리소스에 대한 요청과 응답에 **특정 HTTP 헤더**를 추가함으로써 보안 정책을 우회하고, 클라이언트 측에서 안전하게 리소스를 요청할 수 있도록 한다.
+
+## 중요한 이유
+
+### 1. 다른 도메인에서의 데이터 접근 제어
+
+CORS는 악의적인 웹 사이트로부터 사용자의 개인 정보를 보호하기 위해 필요하다. 만약 CORS가 없다면, 악의적인 웹 사이트가 사용자의 브라우저를 통해 다른 도메인에 접근하여 중요한 데이터를 요청하거나 조작할 수 있다.
+
+### 2. CSRF(Cross-Site Request Forgery) 방지
+
+CSRF 공격은 인증된 사용자의 권한을 이용하여 악의적인 요청을 보내는 공격 기법이다. CORS를 사용하면 다른 도메인으로의 요청이 제한되므로 CSRF 공격을 방지할 수 있다.
+
+### 3. 데이터 무단 접근 방지
+
+CORS를 사용하여 다른 도메인으로부터의 데이터 접근을 제한함으로써 데이터의 무단 유출을 방지할 수 있다.
+
+## 예시 상황
+
+- 웹 서버: example.com
+- API 서버: [api.example.com](http://api.example.com) (CORS를 적용해야 하는 도메인)
+- 프레임워크: Node.js Express
+
+### 1. 웹 서버 설정
+
+웹 서버에서는 API 서버(api.example.com)으로의 요청에 대해 CORS를 허용하도록 헤더를 설정해야 한다.
+
+```js
+const express = require('express')
+const app = express()
+
+// CORS 미들웨어 설정
+app.use((req, res, next) => {
+  // 특정 도메인 (example.com)의 요청만 허용하도록 '*' 대신 도메인을 명시할 수도 있다.
+  res.header('Access-Control-Allow-Origin', '*')
+
+  // 허용하는 HTTP 메서드 지정
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+
+  // 허용하는 헤더 설정
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+
+  next()
+})
+```
+
+### 2. 클라이언트 설정
+
+클라이언트 측에서는 XMLHttpRequest를 사용하거나 Fetch API 등을 이용하여 다른 도메인([api.example.com](http://api.example.com/))으로 요청을 보낼 때, 특정 HTTP 헤더를 설정해야 한다.
+
+```js
+fetch('https://api.example.com/data', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error))
+```
+
+## 대처하는 방법
+
+### 1. 서버 측 설정
+
+위 예시처럼 웹 서버에서 적절한 CORS 헤더를 설정하여 클라이언트의 요청을 허용
+
+### 2. 프록시 서버 사용
+
+- 클라이언트가 요청하는 API 엔드포인트와 동일한 도메인에 존재하는 프록시 서버를 사용하여 요청을 중개
+- 프록시 서버는 클라이언트 요청을 받아 API 서버로 전달하고, API 서버에서 받은 응답을 클라이언트로 다시 전달
+- 이렇게 하면 CORS 정책을 우회할 수 있지만, 중간에 프록시 서버가 추가되므로 네트워크 지연이 발생
+
+## 우회하는 방법
+
+### 1. JSONP (JSON with Padding)
+
+- 동일 출처 정책에 따르지 않고 JSON 데이터를 가져올 수 있는 방법
+- **`<script>`** 태그를 사용하여 외부 스크립트를 불러오는 방식
+- 서버에서는 콜백 함수로 JSON 데이터를 감싸서 클라이언트에게 전달
+- 보안상 취약하며, XSS(Cross-Site Scripting) 공격에 취약할 수 있으므로 권장되지 않는다.
+
+### 2. 서버 프록시 설정 변경
+
+- CORS 정책을 적용하는 서버에서 특정 도메인에서의 요청을 허용하도록 설정을 변경
+- 웹 애플리케이션의 보안에 위험이 따르므로, 사용에 주의가 필요

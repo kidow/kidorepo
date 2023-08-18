@@ -1,0 +1,53 @@
+---
+title: CSRF나 XSS 공격을 막는 방법
+description: CSRF와 XSS가 무엇이고, 어떻게 공격을 막을 수 있는지 설명합니다.
+keywords: csrf, xss, network, security
+---
+
+## CSRF(Cross-Site Request Forgery)
+
+인증된 사용자가 의도하지 않은 요청을 악의적으로 실행시키는 공격
+
+### 1. CSRF 토큰 사용
+
+- 서버에서 발급한 CSRF 토큰을 웹 페이지의 폼에 삽입하여 사용자의 요청에 이 토큰을 포함시킨다.
+- 서버는 요청을 처리할 때 해당 토큰의 유효성을 검증하여 인증된 요청인지 확인한다.
+
+### 2. SameSite 쿠키 설정
+
+- 쿠키에 SameSite 속성을 설정하여 외부 사이트에서의 요청을 차단
+- SameSite=None; Secure로 설정하면 Cross-Site 요청을 허용할 수 있지만, HTTPS 연결에서만 쿠키가 전송
+
+### 3. Referrer Policy 설정
+
+- HTTP 헤더의 Referrer Policy를 설정하여 Referer 헤더를 제어
+- 최소한의 정보만 전송하도록 no-referrer나 strict-origin 등으로 설정할 수 있음
+
+## XSS(Cross-Site Scripting)
+
+악의적인 스크립트를 웹 페이지에 삽입하여 사용자의 브라우저에서 실행시키는 공격
+
+### 1. 입력값 필터링과 검증
+
+사용자 입력값을 적절히 필터링하고, 특수문자를 이스케이프하여 삽입된 스크립트를 무효화
+
+### 2. 출력 시 HTML 인코딩
+
+웹 페이지에 출력할 때, 사용자 입력값을 HTML 인코딩하여 스크립트가 실행되지 않도록 방지
+
+### 3. Content Security Policy (CSP)
+
+CSP를 사용하여 허용된 리소스만 실행되도록 정책을 설정
+
+### 4. HttpOnly와 Secure 쿠키 설정
+
+민감한 쿠키는 HttpOnly와 Secure 속성을 설정하여 JavaScript에서 접근하지 못하도록 보호
+
+### 5. 콘텐츠 형식 제한
+
+- 사용자가 삽입한 콘텐츠를 특정 형식으로 제한하여 실행되지 않도록 조치
+- ex) 사용자 입력을 HTML 태그가 없는 텍스트 형식으로 제한하거나, 사용자 입력을 허용하지 않고 사전 정의된 템플릿을 사용
+
+### 6. 세션 관리
+
+세션 ID를 안전하게 저장하고 전송하며, 세션의 만료 시간을 적절히 설정

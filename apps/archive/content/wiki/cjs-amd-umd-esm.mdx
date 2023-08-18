@@ -1,0 +1,103 @@
+---
+title: CJS, AMD, UMD, ESM
+description: CJS, AMD, UMD, ESM은 모두 JavaScript 모듈 시스템의 형식을 나타내며, 다양한 환경과 요구사항에 맞게 모듈을 정의하고 사용하는 방법을 제공한다.
+keywords: cjs, amd, umd, esm
+---
+
+## CJS (CommonJS):
+
+- 서버 측 JavaScript 환경을 위해 고안된 모듈 시스템
+- `require()`와 `module.exports`를 통해 모듈을 정의하고 가져온다.
+- 동기적으로 동작하며, 모듈이 로드되는 시점에 실행
+- 주로 Node.js에서 사용되며, 파일 I/O 등 서버 측 작업에 적합
+
+### 예시
+
+```js
+// 모듈 정의
+const _ = require('lodash')
+
+// 모듈 사용
+const result = _.map([1, 2, 3], (num) => num * 2)
+```
+
+## AMD (Asynchronous Module Definition):
+
+- 브라우저 환경을 위해 비동기적으로 모듈을 로드하기 위해 고안된 모듈 시스템
+- `define()` 함수를 사용하여 모듈을 정의하고, `require()` 함수를 사용하여 모듈을 가져온다.
+- 비동기적으로 모듈이 로드되므로 브라우저의 렌더링을 차단하지 않는다.
+- 주로 브라우저에서 사용되며, 클라이언트 측 웹 애플리케이션에 적합
+
+### 예시
+
+```js
+// 모듈 정의
+define(['lodash'], function (_) {
+  return {
+    double: function (arr) {
+      return _.map(arr, function (num) {
+        return num * 2
+      })
+    }
+  }
+})
+
+// 모듈 사용
+require(['myModule'], function (myModule) {
+  const result = myModule.double([1, 2, 3])
+})
+```
+
+## UMD (Universal Module Definition):
+
+- CJS와 AMD를 모두 지원하며, 환경에 따라 적절한 모듈 형식을 선택하는 유니버셜한 모듈 시스템
+- 서버 및 브라우저 환경 모두에서 사용 가능합니다.
+
+### 예시
+
+```js
+;(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD 환경
+    define(['lodash'], factory)
+  } else if (typeof exports === 'object') {
+    // CJS 환경
+    module.exports = factory(require('lodash'))
+  } else {
+    // 브라우저 환경
+    root.myModule = factory(root._)
+  }
+})(this, function (_) {
+  // 모듈 정의
+  return {
+    double: function (arr) {
+      return _.map(arr, function (num) {
+        return num * 2
+      })
+    }
+  }
+})
+```
+
+## ESM (ECMAScript Modules):
+
+- ECMAScript 6부터 JavaScript 표준으로 채택된 모듈 시스템
+- `import`와 `export` 문을 사용하여 모듈을 정의하고 가져온다.
+- 정적으로 동작하며, 브라우저와 Node.js에서 모두 지원
+- 다양한 모듈 형식을 간결하게 지원하며, 비동기적으로 로드되는 import()도 지원
+
+### 예시
+
+```js
+// 모듈 정의
+import _ from 'lodash'
+
+// 모듈 사용
+import { double } from './myModule'
+
+export function double(arr) {
+  return _.map(arr, (num) => num * 2)
+}
+
+const result = double([1, 2, 3])
+```
