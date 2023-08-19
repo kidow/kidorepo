@@ -94,7 +94,7 @@ function Tree({
               className={cn(
                 'inline-block no-underline transition-colors',
                 item.url === `#${activeItem}`
-                  ? 'font-medium text-neutral-900 dark:text-neutral-50'
+                  ? 'text-neutral-900 dark:text-neutral-50'
                   : 'text-neutral-400 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-200'
               )}
             >

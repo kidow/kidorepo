@@ -71,7 +71,7 @@ const components = {
     <img className="rounded-md" alt={props.alt} {...props} />
   ),
   hr: (props: HTMLAttributes<HTMLHRElement>) => (
-    <hr className="my-4 md:my-8" {...props} />
+    <hr className="my-4 dark:border-neutral-800 md:my-8" {...props} />
   ),
   table: (props: HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">

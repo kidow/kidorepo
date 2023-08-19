@@ -153,7 +153,10 @@ function CommandMenu({ allLinks }: Props) {
   }, [searchValue, flatLink])
   return (
     <>
-      <button className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300">
+      <button
+        onClick={() => setIsOpen(true)}
+        className="dark:hover:bg-neutral-00 inline-flex items-center justify-between gap-4 rounded-md border px-4 py-2 text-sm text-neutral-400 duration-150 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:bg-neutral-900 dark:hover:text-neutral-300"
+      >
         <span className="hidden lg:inline-block">Search Documentation...</span>
         <span className="lg:hidden">Search...</span>
         <kbd className="select-none rounded-md bg-neutral-200 px-1.5 py-0.5 text-[10px] dark:bg-neutral-800">

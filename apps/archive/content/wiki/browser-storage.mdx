@@ -1,0 +1,65 @@
+---
+title: 브라우저 저장소의 종류
+description: 웹 브라우저에서 데이터를 클라이언트 측에 저장하기 위해 사용되는 저장소는 크게 세 가지 종류로 나뉜다.
+keywords: cookie, local storage, session storage
+---
+
+## 쿠키 (Cookies)
+
+- 작은 텍스트 파일. 웹 서버가 클라이언트의 브라우저에 저장하는 데이터
+- 주로 세션 관리, 개인화 설정, 추적 등에 사용
+- 이름-값 쌍으로 구성
+- 유효 기간을 설정하여 영구적으로 저장하거나 세션 동안만 유지
+- 보안 및 용량 제한 등의 제약사항 존재
+
+```js
+// 쿠키 생성 및 설정
+document.cookie = 'username=John; expires=Thu, 18 Aug 2023 12:00:00 UTC; path=/'
+
+// 쿠키 읽기
+const cookies = document.cookie
+console.log(cookies) // "username=John; otherCookie=value; ..."
+
+// 쿠키 삭제 (만료일을 과거로 설정)
+document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+```
+
+## 로컬 스토리지 (Local Storage)
+
+- HTML5에서 제공하는 영구적인 클라이언트 측 저장소
+- 브라우저에 데이터를 키-값 쌍으로 저장
+- 서버에 전송하지 않고 로컬에 저장
+- 도메인당 최대 5MB까지 저장 가능
+- localStorage 객체를 통해 접근
+
+```js
+// 로컬 스토리지에 데이터 저장
+localStorage.setItem('username', 'John')
+
+// 로컬 스토리지에서 데이터 읽기
+const username = localStorage.getItem('username')
+console.log(username) // "John"
+
+// 로컬 스토리지에서 데이터 삭제
+localStorage.removeItem('username')
+```
+
+## 세션 스토리지 (Session Storage)
+
+- 로컬 스토리지와 유사하지만 데이터가 세션 동안만 유지
+- 브라우저 창이나 탭이 열려 있는 동안에만 데이터가 유지
+- 창이나 탭을 닫으면 데이터가 삭제
+- 도메인당 최대 5MB까지 저장 가능
+- sessionStorage 객체를 통해 접근
+
+```js
+// 세션 스토리지에 데이터 저장
+sessionStorage.setItem('token', 'mySecretToken')
+
+// 세션 스토리지에서 데이터 읽기
+const token = sessionStorage.getItem('token')
+console.log(token) // "mySecretToken"
+
+// 세션 스토리지에서 데이터 삭제
+sessionStorage.removeItem('token')
+```

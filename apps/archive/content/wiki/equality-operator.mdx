@@ -1,0 +1,25 @@
+---
+title: ==와 ===의 차이
+description: JavaScript에서 '=='와 '==='는 비교 연산자로, 두 값을 비교하는 데 사용되지만 비교하는 방식과 결과가 다르다.
+keywords: javascript
+---
+
+## '==' (동등 연산자 - Equality Operator)
+
+'==' 연산자는 값이 같은지만을 비교한다. 즉, 데이터 타입을 무시하고 타입 강제 변환을 시도하여 두 값이 같은지 여부를 판단한다.
+
+```js
+1 == '1' // true, 타입 변환 후 값이 같으므로
+0 == false // true, 타입 변환 후 값이 같으므로
+null == undefined // true, 두 값이 모두 falsy 값
+```
+
+## '===' (일치 연산자 - Strict Equality Operator)
+
+'===' 연산자는 값과 데이터 타입이 모두 같은지를 비교한다. 타입 변환을 하지 않고 엄격하게 비교합니다.
+
+```js
+1 === '1' // false, 데이터 타입이 다르기 때문에
+0 === false // false, 데이터 타입이 다르기 때문에
+null === undefined // false, 데이터 타입이 다르기 때문에
+```

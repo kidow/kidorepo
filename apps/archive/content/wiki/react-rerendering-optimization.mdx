@@ -1,0 +1,29 @@
+---
+title: React에서 리렌더링을 최적화하는 방법
+description: React에서 리렌더링을 최적화하는 방법은 성능 향상과 애플리케이션의 부드러운 작동을 보장하는 데 매우 중요하다. React에서 리렌더링을 최적화하는 방법은 다음과 같다.
+keywords: react
+---
+
+## 1. PureComponent 및 React.memo 사용
+
+`PureComponent` 클래스나 `React.memo` 함수를 사용하여 변경 사항이 없는 경우 리렌더링을 방지할 수 있다. 이들은 얕은 비교를 통해 props 또는 state가 변경되었는지 확인하고 변경이 없는 경우 리렌더링을 하지 않는다.
+
+## 2. 함수형 컴포넌트 사용
+
+함수형 컴포넌트는 자동으로 최적화된다. 하지만 상태와 같은 리액트 훅을 사용할 때는 적절한 방법으로 관리하는 노하우가 필요하다.
+
+## 3. 리스트 렌더링 최적화
+
+리스트 컴포넌트의 경우 각 아이템에 고유한 key 속성을 제공하여 효율적으로 업데이트될 수 있도록 한다.
+
+## 4. 컴포넌트 분할 (Code Splitting)
+
+`React.lazy`와 `Suspense`를 사용하여 컴포넌트를 분할하여 필요한 시점에 로드하도록 한다. 이는 초기 로딩 속도와 페이지 성능을 향상시킨다.
+
+## 5. 상태 관리 라이브러리 사용
+
+Redux, MobX, Recoil 등의 상태 관리 라이브러리를 사용하여 상태를 중앙에서 관리하고, 필요한 경우만 리렌더링할 수 있도록 설계한다.
+
+## 7. React DevTools 사용
+
+[React DevTools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)를 사용하여 컴포넌트의 리렌더링 및 성능을 모니터링하고 프로파일링하면서 성능을 측정하고 개선한다.

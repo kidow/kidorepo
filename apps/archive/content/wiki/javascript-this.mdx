@@ -1,0 +1,88 @@
+---
+title: JavaScript this
+description: JavaScript에서의 this는 실행 컨텍스트 내에서 참조하는 특별한 객체를 의미한다. 이것은 현재 실행 중인 코드의 주변 문맥에 따라 동적으로 결정된다. this의 값은 함수를 어떻게 호출하는지, 메소드를 어떻게 호출하는지, 어떤 컨텍스트에서 함수가 실행되는지에 따라 달라진다.
+keywords: javascript
+---
+
+## 글로벌 컨텍스트에서의 `this`
+
+전역 범위에서 실행되는 코드에서의 this는 전역 객체를 가리킨다.
+
+```js
+console.log(this) // 브라우저에서는 window 객체, Node.js에서는 global 객체
+```
+
+## 함수 호출에서의 `this`
+
+함수를 호출할 때 this는 호출하는 방법에 따라 다르게 결정된다. 일반 함수 호출에서는 this는 전역 객체(브라우저의 경우 window)를 가리킨다. 다만 'use strict' 모드에서는 전역 객체 대신 undefined가 할당된다.
+
+```js
+function showThis() {
+  console.log(this)
+}
+
+showThis() // 브라우저에서는 window 객체, 'use strict' 모드에서는 undefined
+```
+
+## 메소드 호출에서의 `this`
+
+객체의 메소드 내에서 this는 해당 메소드를 호출한 객체를 가리킨다. 즉, 메소드가 속한 객체에 묶인다.
+
+```js
+const person = {
+  name: 'Alice',
+  greet: function () {
+    console.log(`Hello, ${this.name}!`)
+  }
+}
+
+person.greet() // "Hello, Alice!"
+```
+
+## 생성자 함수에서의 `this`
+
+생성자 함수를 사용하여 객체를 생성할 때 this는 생성된 객체 자체를 가리킨다.
+
+```js
+function Person(name) {
+  this.name = name
+}
+
+const alice = new Person('Alice')
+console.log(alice.name) // "Alice"
+```
+
+## call, apply, bind 메소드를 사용한 호출에서의 `this`
+
+call, apply, bind 메소드를 사용하여 직접 this 값을 지정할 수 있다. 이들 메소드를 사용하면 함수의 this 값을 특정 객체로 설정할 수 있다.
+
+```js
+function greet(message) {
+  console.log(`${message}, ${this.name}!`)
+}
+
+const person = { name: 'Bob' }
+
+greet.call(person, 'Hello') // "Hello, Bob!"
+greet.apply(person, ['Hi']) // "Hi, Bob!"
+
+const boundGreet = greet.bind(person)
+boundGreet('Hey') // "Hey, Bob!"
+```
+
+## 화살표 함수에서의 `this`
+
+화살표 함수(=>)를 사용할 때 this가 일반 함수와 다르게 동작한다. 화살표 함수는 자신의 this를 가지지 않고, 외부 범위의 this를 사용한다.
+
+```js
+const person = {
+  name: 'Alice',
+  greet: function () {
+    setTimeout(() => {
+      console.log(`Hello, ${this.name}!`)
+    }, 100)
+  }
+}
+
+person.greet() // "Hello, Alice!"
+```

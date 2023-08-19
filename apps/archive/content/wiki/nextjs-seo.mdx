@@ -1,0 +1,74 @@
+---
+title: Nextjs SEO 설정
+description:
+keywords: nextjs, seo
+---
+
+### 1. 서버 사이드 렌더링(SSR)
+
+- 서버 측에서 페이지를 렌더링하여 HTML을 생성
+- 이를 통해 검색 엔진 크롤러가 페이지의 내용을 인식하고 색인
+
+### 2. `metadata`, `generateMetadata`
+
+각 페이지마다 메타데이터를 지정할 수 있는 변수와 함수를 제공한다.
+
+```tsx
+import type { Metadata } from 'next'
+
+// either Static metadata
+export const metadata: Metadata = {
+  title: '...'
+}
+
+// or Dynamic metadata
+export async function generateMetadata({ params }) {
+  return {
+    title: '...'
+  }
+}
+```
+
+### 3. Sitemap 생성
+
+`app/sitemap.(js|ts`)로 `/sitemap.xml` 경로를 임의 생성할 수 있다.
+
+```ts title="app/sitemap.ts"
+import type { MetadataRoute } from 'next'
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: 'https://acme.com',
+      lastModified: new Date()
+    },
+    {
+      url: 'https://acme.com/about',
+      lastModified: new Date()
+    },
+    {
+      url: 'https://acme.com/blog',
+      lastModified: new Date()
+    }
+  ]
+}
+```
+
+### 4. robots.txt 생성
+
+`app/robots.(js|ts)`로 `/robots.txt` 경로를 임의 생성할 수 있다.
+
+```ts title="app/robots.ts"
+import { MetadataRoute } from 'next'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: '/private/'
+    },
+    sitemap: 'https://acme.com/sitemap.xml'
+  }
+}
+```

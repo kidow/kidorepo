@@ -1,0 +1,64 @@
+---
+title: Nextjs 정적 증분 생성
+description: 정적 증분 생성(Incremental Static Regeneration, ISR)은 Next.js 프레임워크에서 제공하는 기능 중 하나로, 동적인 데이터를 미리 렌더링한 정적 페이지와 함께 사용하여 웹 사이트의 성능과 사용자 경험을 개선하는 방법이다. 미리 렌더링된 페이지를 지속적으로 업데이트하면서 정적으로 제공하는 기능이다.
+keywords: nextjs
+---
+
+## 탄생 배경
+
+기존의 정적 생성은 데이터가 변경되면 모든 페이지를 다시 빌드해야 했기 때문에, 동적인 데이터의 업데이트에는 제한적이었다. 이에 대한 대안으로 정적 증분 생성(ISR)이 도입되었으며, 동적 데이터를 가지고 있으면서도 정적 페이지를 생성하고 서비스할 수 있게 되었다.
+
+## 구성
+
+`getStaticProps` 함수를 정의하고 `revalidate` 옵션을 사용하여 얼마나 자주 페이지를 리프레시할 것인지를 설정한다.
+
+```jsx title="pages/post/[slug].js"
+export const getStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: {
+          name: 'next.js'
+        }
+      }
+    ],
+    fallback: true
+  }
+}
+
+export const getStaticProps = async () => {
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo = await res.json()
+  return { props: { repo } }
+}
+
+export default function Page({ repo }) {
+  return repo.stargazers_count
+}
+```
+
+### App Router
+
+13 버전에서 등장한 App Router에서는 다음과 같이 문법이 변경되었다.
+
+```jsx title="app/blog/[slug]/page.js"
+export async function generateStaticParams() {
+  const posts = await fetch('https://.../posts').then((res) => res.json())
+
+  return posts.map((post) => ({
+    slug: post.slug
+  }))
+}
+
+export default function Page({ params }) {
+  const { slug } = params
+  // ...
+}
+```
+
+## 장점
+
+- `성능 향상`: 정적 페이지를 미리 렌더링하여 사용자가 페이지를 더 빠르게 로드
+- `SEO 최적화`: 미리 렌더링된 페이지는 검색 엔진에 의해 더 잘 인식되며, SEO 성능을 향상
+- `서버 부하 감소`: 동적 데이터 업데이트를 서버에서 처리하므로 클라이언트 요청에 대한 서버 부하가 감소
+- `데이터 핸들링`: 동적 데이터를 처리할 수 있는 확장성 있는 방법을 제공

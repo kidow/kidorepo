@@ -1,0 +1,62 @@
+---
+title: 이벤트 버블링, 캡쳐링, 위임
+description: JavaScript의 이벤트 버블링, 이벤트 캡처링, 이벤트 위임은 브라우저의 이벤트 처리 메커니즘을 효율적으로 활용하기 위해 등장하게 되었다. 각각의 개념과 원리, 그리고 어떻게 활용할 수 있는지는 다음과 같다.
+keywords: javascript
+---
+
+## 이벤트 버블링 (Event Bubbling)
+
+- 요소에서 발생한 이벤트가 부모 요소들로 연속해서 전달되는 메커니즘
+- 이벤트가 발생한 요소부터 시작하여 부모 요소를 거슬러 올라가며 이벤트가 전파
+
+```html
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+```
+
+```js
+document.getElementById('child').addEventListener('click', function () {
+  console.log('Button clicked')
+})
+```
+
+## 이벤트 캡처링 (Event Capturing)
+
+- 이벤트 버블링과 반대로, 최상위 부모 요소에서 시작하여 이벤트가 발생한 요소까지 이벤트를 전파하는 메커니즘
+- `addEventListener` 함수의 세 번째 인자로 true를 전달하여 활용
+
+```js
+document.getElementById('parent').addEventListener(
+  'click',
+  function () {
+    console.log('Parent clicked')
+  },
+  true
+)
+```
+
+## 이벤트 위임 (Event Delegation)
+
+- 이벤트 버블링을 활용하여 부모 요소에서 이벤트를 처리하는 패턴
+- 여러 요소에 대한 이벤트 처리를 하나의 핸들러로 간결하게 처리 가능
+- 동적으로 생성되는 요소에 대해서도 효과적으로 적용
+- 하위 요소들이 많을 때 각각에 이벤트 핸들러를 할당하는 것보다 부모 요소에 하나의 핸들러를 할당하여 처리하는 것이 성능 및 유지보수 면에서 유리
+
+```html
+<ul id="parent-list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+```
+
+```js
+document
+  .getElementById('parent-list')
+  .addEventListener('click', function (event) {
+    if (event.target.tagName === 'LI') {
+      console.log('Item clicked:', event.target.textContent)
+    }
+  })
+```

@@ -1,0 +1,48 @@
+---
+title: Nextjs Dynamic Routing
+description: 동적으로 URL 경로를 생성하는 내장 기능. Nextjs는 기본적으로 파일 시스템 기반으로 경로를 구성한다.
+keywords: nextjs
+---
+
+### page.(jsx|tsx)
+
+기본적으로 app이라는 이름의 폴더에서 이 파일을 생성하면 해당 폴더가 위치한 곳을 기준으로 자동으로 라우팅된다.
+
+ex) app/posts/pages.tsx → /posts
+
+## 대괄호
+
+- 특정 경로에 매칭되는 URL을 동적으로 활용하고 싶다면 파일명을 대괄호([])로 감싸서 네이밍한다. 이 방식은 여러 케이스로 나뉜다.
+- 대괄호 안에 지정한 이름을 통해 해당 변수에 접근 가능하다.
+- 이는 page뿐만 아니라 `layout`, `route`, `generateMetadata` 함수도 접근 방식이 동일하다.
+
+### 1. 동적 세그먼트(Dynamic Segment)
+
+가장 기본적인 방식으로, 하나의 파라미터 변수만을 동적으로 구성한다.
+
+```tsx title="app/posts/[id]/page.tsx"
+export default function Page({ params }: { params: { id: string } }) {
+  return <h1>My Page id: {params.id}</h1>
+}
+```
+
+### 2. Catch-all Segment
+
+전개 연산자를 더해서 매칭되는 모든 서브 경로까지 다 포괄하는 방식이다.
+
+| Route                      | Example URL | params                      |
+| -------------------------- | ----------- | --------------------------- |
+| app/shop/[...slug]/page.js | /shop/a     | `{ slug: ['a'] }`           |
+| app/shop/[...slug]/page.js | /shop/a/b   | `{ slug: ['a', 'b'] }`      |
+| app/shop/[...slug]/page.js | /shop/a/b/c | `{ slug: ['a', 'b', 'c'] }` |
+
+### 3. Optional Catch-all Segments
+
+2번에서는 /shop을 매칭시킬 수 없었는데, 대괄호로 1번 더 감싸면서 최상위 경로까지 포괄하도록 구성할 수 있다.
+
+| Route                        | Example URL | params                      |
+| ---------------------------- | ----------- | --------------------------- |
+| app/shop/[[...slug]]/page.js | /shop       | `{}`                        |
+| app/shop/[[...slug]]/page.js | /shop/a     | `{ slug: ['a'] }`           |
+| app/shop/[[...slug]]/page.js | /shop/a/b   | `{ slug: ['a', 'b'] }`      |
+| app/shop/[[...slug]]/page.js | /shop/a/b/c | `{ slug: ['a', 'b', 'c'] }` |
