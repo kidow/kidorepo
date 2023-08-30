@@ -1,44 +1,39 @@
 import type { MetadataRoute } from 'next'
-import { Client } from '@notionhq/client'
+import { NotionAPI } from 'notion-client'
+import { getAllPagesInSpace, idToUuid } from 'notion-utils'
 
-const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
+const api = new NotionAPI()
 
-async function* getList() {
-  let isFirst = true
-  let nextCursor: string
-
-  while (isFirst || nextCursor) {
-    const { results, next_cursor } = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID,
-      start_cursor: nextCursor,
-      filter: { property: '배포', checkbox: { equals: true } }
-    })
-    nextCursor = next_cursor
-    if (isFirst) isFirst = false
-
-    yield results
-  }
-}
-
-async function getPostIds() {
-  const results = []
-  for await (const arr of getList()) {
-    results.push(...arr)
-  }
-  return results
+async function getList() {
+  const list = await getAllPagesInSpace(
+    'ac733b2c269c403f85925f83d5ea3c75',
+    null,
+    async (pageId) => api.getPage(pageId)
+  )
+  return list
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPostIds()
+  const list = await getList()
   return [
     { url: 'https://kidow.me', lastModified: new Date() },
     { url: 'https://kidow.me/memo', lastModified: new Date() },
     { url: 'https://kidow.me/resume', lastModified: new Date() },
     { url: 'https://kidow.me/lunch', lastModified: new Date() },
     { url: 'https://kidow.me/blog', lastModified: new Date() },
-    ...posts.map((item) => ({
-      url: `https://kidow.me/blog/${item.id}`,
-      lastModified: new Date()
-    }))
+    ...Object.entries(list)
+      .filter(([id, recordMap]) => {
+        if (id === idToUuid('ac733b2c269c403f85925f83d5ea3c75')) return false
+        const rawMetadata = recordMap.block[id].value
+        if (!rawMetadata.properties || !('Ucq>' in rawMetadata.properties))
+          return false || process.env.NODE_ENV === 'development'
+        const isPublished =
+          rawMetadata.properties['Ucq>']?.at(0)?.at(0) === 'Yes'
+        return isPublished || process.env.NODE_ENV === 'development'
+      })
+      .map(([id]) => ({
+        url: `https://kidow.me/blog/${id}`,
+        lastModified: new Date()
+      }))
   ]
 }

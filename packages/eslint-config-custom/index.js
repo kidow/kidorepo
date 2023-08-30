@@ -54,6 +54,7 @@ module.exports = {
 
     'import/no-unresolved': 'off',
     'no-undef': 'off',
+    'no-extra-semi': 'off',
 
     '@next/next/no-img-element': 'off'
   },

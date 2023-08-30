@@ -156,14 +156,14 @@ function Image(block: ImageBlockObjectResponse) {
       {block.image.type === 'external' && (
         <img
           src={block.image.external.url}
-          alt=""
+          alt={block.image.caption[0]?.plain_text || ''}
           className="mx-auto rounded shadow-md"
         />
       )}
       {block.image.type === 'file' && (
         <img
           src={block.image.file.url}
-          alt=""
+          alt={block.image.caption[0]?.plain_text || ''}
           className="mx-auto rounded shadow-md"
         />
       )}

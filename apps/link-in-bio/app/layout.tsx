@@ -1,7 +1,6 @@
 'use client'
 
 import { Analytics } from '@vercel/analytics/react'
-import { Toaster } from 'sonner'
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -10,6 +9,7 @@ import './globals.css'
 
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
+import { Toast } from 'ui'
 import { cn } from 'utils'
 
 const inter = Inter({
@@ -49,7 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <Footer />
         </main>
-        <Toaster position="top-center" richColors closeButton />
+        <Toast.v2 />
         <Analytics />
       </body>
     </html>

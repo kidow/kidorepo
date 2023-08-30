@@ -16,8 +16,7 @@ import {
   SearchIcon
 } from 'lucide-react'
 import { Map, MapMarker } from 'react-kakao-maps-sdk'
-import { toast } from 'sonner'
-import { cn } from 'utils'
+import { cn, toast } from 'utils'
 
 const Board: string[][] = [
   [
@@ -175,7 +174,7 @@ export default function Page() {
       typeof window.navigator === 'undefined' ||
       typeof window.navigator.geolocation === 'undefined'
     ) {
-      toast('호환되지 않는 브라우저입니다.')
+      toast.warn('호환되지 않는 브라우저입니다.')
       return
     }
 

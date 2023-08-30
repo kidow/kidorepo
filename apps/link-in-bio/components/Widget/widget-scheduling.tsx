@@ -5,9 +5,8 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { Spinner } from 'ui'
-import { cn } from 'utils'
+import { cn, toast } from 'utils'
 
 import Input from '@/components/Input'
 import Textarea from '@/components/Textarea'
@@ -76,9 +75,7 @@ export default function WidgetScheduling() {
     })
     const result = await res.json()
     if (result.success) {
-      toast.success('요청되었습니다. 곧 회신하겠습니다. 🤗', {
-        duration: 999999
-      })
+      toast.success('요청되었습니다. 곧 회신하겠습니다. 🤗')
       setSelectedDate(new Date())
       setSelectedTime('')
       setStep(1)

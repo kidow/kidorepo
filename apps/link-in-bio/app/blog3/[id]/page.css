@@ -1,0 +1,87 @@
+.notion {
+  @apply text-slate-700;
+}
+
+.notion-text {
+  @apply my-5;
+}
+
+.notion ul {
+  @apply my-5 list-disc pl-[26px];
+}
+
+.notion ul li {
+  @apply marker:text-slate-300;
+}
+
+.notion ol {
+  @apply my-5 list-decimal pl-[26px];
+}
+
+.notion li {
+  @apply my-2 pl-1.5;
+}
+
+.notion-callout {
+  @apply flex items-start gap-2 border py-4 pl-3 pr-4;
+}
+
+.notion-page-icon {
+  @apply text-xl;
+}
+
+.notion-callout-text {
+  @apply flex-1;
+}
+
+.notion-h2 {
+  @apply mb-6 mt-12 text-2xl font-bold text-slate-900;
+}
+
+.notion-h3 {
+  @apply mb-3 mt-8 text-xl font-semibold text-slate-900;
+}
+
+.notion-asset-caption {
+  @apply mt-2 text-center text-sm text-slate-500;
+}
+
+.notion-hash-link {
+  @apply hidden;
+}
+
+.notion-code {
+  @apply relative;
+}
+
+.notion-code-copy {
+  @apply absolute right-2 top-2 select-none opacity-0 duration-150;
+}
+
+.notion-code-copy-button {
+  @apply flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-stone-600 bg-stone-900/30;
+}
+
+.notion-code:hover .notion-code-copy {
+  @apply opacity-100;
+}
+
+.notion-code-copy-tooltip {
+  @apply pointer-events-none absolute right-12 top-1/2 z-10 flex w-full -translate-y-1/2 justify-center text-sm after:content-['!'];
+}
+
+.notion-link {
+  @apply font-medium text-slate-900 underline;
+}
+
+.notion-blank {
+  @apply hidden;
+}
+
+.notion-collection-page-properties {
+  @apply hidden;
+}
+
+.notion-inline-code {
+  @apply rounded-[3px] bg-slate-100 px-[5.44px] py-[2.72px] text-[85%] text-red-500;
+}
