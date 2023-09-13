@@ -58,7 +58,7 @@ export default async function Page() {
   const [info, list] = await getData()
 
   const render = async () => {
-    const items = []
+    const items: JSX.Element[] = []
     for (const block of list) {
       if (block.type === 'column_list' && block.has_children) {
         const { results: columnList } = await notion.blocks.children.list({

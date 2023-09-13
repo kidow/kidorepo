@@ -18,7 +18,7 @@ class EventListenerGenerator {
   once(type: string, listener: any) {
     const emitOnce = (event: any) => {
       listener(event)
-      remove(type, emitOnce)
+      this.remove(type, emitOnce)
     }
 
     this.add(type, emitOnce)
