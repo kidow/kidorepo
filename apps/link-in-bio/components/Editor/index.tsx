@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useEditor, type Content } from '@tiptap/react'
 import { useDebouncedCallback } from 'use-debounce'
-import { cn } from 'utils'
+import { cn, toast } from 'utils'
 
 import { EditorBubbleMenu } from './bubble-menu'
 import { TiptapExtensions } from './extensions'
@@ -23,7 +23,7 @@ const inter = Inter({
 })
 
 export default function Editor() {
-  const [content, setContent] = useLocalStorage('content', {
+  const [content, setContent] = useLocalStorage<Content>('content', {
     type: 'doc',
     content: [{ type: 'paragraph' }]
   })
@@ -49,6 +49,16 @@ export default function Editor() {
     autofocus: 'end'
   })
 
+  const onShareLink = async () => {
+    const param = btoa(encodeURIComponent(JSON.stringify(content)))
+    if (typeof window.navigator !== 'undefined') {
+      await window.navigator.clipboard.writeText(
+        `https://kidow.me/memo?c=${param}`
+      )
+      toast.success('복사되었습니다.')
+    }
+  }
+
   useEffect(() => {
     if (editor && content && !hydrated) {
       editor.commands.setContent(content)
@@ -70,6 +80,12 @@ export default function Editor() {
         <span className="rounded-lg bg-stone-100 px-2 py-1 text-stone-400">
           {saveStatus}
         </span>
+        <button
+          onClick={onShareLink}
+          className="rounded-lg border px-2 py-1 text-stone-500"
+        >
+          링크 공유
+        </button>
         <button
           onClick={() => editor.commands.clearContent()}
           className="rounded-lg border px-2 py-1 text-stone-500"
