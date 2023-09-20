@@ -102,7 +102,7 @@ export default async function Page() {
                       }).format(rawMetadata.created_time)}
                     </time>
                   </div>
-                  <Link href={`/blog3/${id}`} className="absolute inset-0">
+                  <Link href={`/blog/${id}`} className="absolute inset-0">
                     <span className="sr-only">View Article</span>
                   </Link>
                 </article>
