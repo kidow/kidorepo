@@ -12,6 +12,7 @@ import {
 
 import * as Icon from '@/components/icons'
 import Skills from '@/components/Skills'
+import Tools from '@/components/Tools'
 import {
   WidgetAnalytics,
   WidgetGithub,
@@ -272,6 +273,12 @@ export default async function Page() {
       </li>
       <li className="col-span-2 xl:col-span-4">
         <Skills />
+      </li>
+      <li className="col-space-2 p-4 xl:col-span-2">
+        <h3 className="px-2 font-semibold uppercase">Favorite Tools 🎉</h3>
+      </li>
+      <li className="col-span-2 xl:col-span-4">
+        <Tools />
       </li>
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Side Projects 👨🏻‍💻</h3>

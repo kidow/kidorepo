@@ -36,13 +36,13 @@ function getDocFromParams({ params }: Props) {
   }
 }
 
-export async function generateStaticParams(): Promise<Props['params'][]> {
+export function generateStaticParams(): Props['params'][] {
   return allContents.map((doc) => ({
     slug: doc.slugAsParams.split('/')
   }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export function generateMetadata({ params }: Props): Metadata {
   const { doc } = getDocFromParams({ params })
 
   if (!doc) notFound()
