@@ -1,6 +1,6 @@
 'use client'
 
-import { Quote } from 'lucide-react'
+import { QuoteIcon } from 'lucide-react'
 
 export default function WidgetQuote() {
   return (
@@ -8,7 +8,7 @@ export default function WidgetQuote() {
       <div className="h-[175px] w-full rounded-3xl border border-neutral-200 p-5 shadow-sm xl:p-6">
         <div>
           <span className="flex h-10 w-10 items-center justify-center rounded-md border">
-            <Quote />
+            <QuoteIcon className="scale-[-1]" />
           </span>
         </div>
         <div className="mt-3 text-xl font-normal italic text-neutral-600">
