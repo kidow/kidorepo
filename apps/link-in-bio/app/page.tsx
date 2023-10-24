@@ -302,6 +302,23 @@ export default async function Page() {
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+        href="https://voat.in"
+        icon={
+          <Image
+            src="/voat.png"
+            alt="voat"
+            height={40}
+            width={40}
+            className="rounded-[10px] border"
+          />
+        }
+        target="_blank"
+        title="Voat"
+        description="온라인 익명 투표"
+      />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
         href="/memo"
         icon={
           <span className="flex h-10 w-10 items-center justify-center rounded-[10px] border bg-white">
