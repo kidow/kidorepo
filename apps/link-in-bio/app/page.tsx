@@ -123,7 +123,7 @@ export default async function Page() {
           </span>
         }
         title="Résumé"
-        description="/resume"
+        description="Hire me"
       />
       <WidgetLink
         className="xl:hover:rotate-2"
