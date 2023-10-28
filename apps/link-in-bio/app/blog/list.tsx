@@ -5,6 +5,7 @@ interface Props {
   nextCursor: string
 }
 
+//
 export default function List({ hasMore, nextCursor }: Props): JSX.Element {
   return <></>
 }

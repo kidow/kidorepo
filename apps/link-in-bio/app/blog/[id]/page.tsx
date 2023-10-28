@@ -12,12 +12,7 @@ import { notFound } from 'next/navigation'
 import { isUUID } from '@/utils'
 import { Client } from '@notionhq/client'
 import type { CommentObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import {
-  getAllPagesInSpace,
-  getPageProperty,
-  getPageTitle,
-  idToUuid
-} from 'notion-utils'
+import { getPageProperty, getPageTitle } from 'notion-utils'
 import { BackTop } from 'ui'
 
 import BackButton from '@/components/BackButton'
@@ -26,6 +21,7 @@ import Comments from './comments'
 import Share from './share'
 
 const api = new NotionAPI()
+const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
 export const revalidate = 60 * 60 * 24
 
@@ -78,18 +74,33 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
-  const rootPageId = 'ac733b2c269c403f85925f83d5ea3c75'
-  const list = await getAllPagesInSpace(rootPageId, null, async (pageId) =>
-    api.getPage(pageId)
-  )
-  return Object.keys(list)
-    .filter((id) => id !== idToUuid(rootPageId))
-    .map((id) => ({ id }))
+  async function* getList() {
+    let isFirst = true
+    let nextCursor: string
+
+    while (isFirst || nextCursor) {
+      const { results, next_cursor } = await notion.databases.query({
+        database_id: process.env.NOTION_DATABASE_ID,
+        start_cursor: nextCursor,
+        ...(process.env.NODE_ENV === 'production'
+          ? { filter: { property: '배포', checkbox: { equals: true } } }
+          : {})
+      })
+      nextCursor = next_cursor
+      if (isFirst) isFirst = false
+
+      yield results
+    }
+  }
+
+  const results: any[] = []
+  for await (const arr of getList()) {
+    results.push(...arr)
+  }
+  return results.map((item) => ({ id: item.id }))
 }
 
 async function getComments(id: string) {
-  const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
-
   let isFirst: boolean = true
   let nextCursor: string
   const data: CommentObjectResponse[] = []
