@@ -1,5 +1,5 @@
 .notion {
-  @apply text-slate-700;
+  @apply mt-5 text-slate-700;
 }
 
 .notion-text {
@@ -84,4 +84,8 @@
 
 .notion-inline-code {
   @apply rounded-[3px] bg-slate-100 px-[5.44px] py-[2.72px] text-[85%] text-red-500;
+}
+
+.notion-quote {
+  @apply my-5 border-l-4 border-slate-200 bg-slate-50 px-5 py-3;
 }

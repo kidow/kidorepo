@@ -166,12 +166,11 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="text-xs text-slate-400">@kidow</div>
         </div>
       </div>
-      <Image
+      <img
         src={metadata.format?.page_cover}
         alt={metadata.properties.title[0]}
         width={820}
         height={450}
-        priority
         draggable={false}
         className="mt-8 h-[280px] select-none rounded-md border xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}

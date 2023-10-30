@@ -8,6 +8,8 @@ import List from './list'
 
 const notion = new Client({ auth: process.env.NOTION_SECRET_KEY })
 
+export const dynamic = 'force-dynamic'
+
 export function generateMetadata(): Metadata {
   const TITLE = '블로그 | Kidow'
   const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
