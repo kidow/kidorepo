@@ -140,12 +140,12 @@ export default async function Page() {
       <WidgetMap />
       <li className="row-span-2 h-[178px] w-[178px] overflow-hidden rounded-3xl border border-neutral-200 shadow-sm xl:col-span-2 xl:h-[390px] xl:w-[390px]">
         <iframe
-          src="https://giphy.com/embed/elKDA2lfOXixJG68cJ"
+          src="https://giphy.com/embed/fWrDTtdw9nDVWmWrlq"
           className="giphy-embed h-full w-full"
           allowFullScreen
         />
         <p>
-          <a href="https://giphy.com/gifs/BoschGlobal-coding-home-office-remote-working-elKDA2lfOXixJG68cJ">
+          <a href="https://giphy.com/gifs/BoschGlobal-coding-home-office-remote-working-fWrDTtdw9nDVWmWrlq">
             via GIPHY
           </a>
         </p>
