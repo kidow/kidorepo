@@ -35,7 +35,7 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function Page() {
-  const { results, has_more, next_cursor } = await notion.databases.query({
+  const { results, next_cursor } = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     sorts: [{ property: '생성일', direction: 'descending' }],
     page_size: 20,
@@ -60,7 +60,7 @@ export default async function Page() {
         {results.map((page: any, key) => (
           <Post key={key} {...page} />
         ))}
-        <List nextCursor={next_cursor} hasMore={has_more} />
+        <List nextCursor={next_cursor} />
       </ul>
     </>
   )

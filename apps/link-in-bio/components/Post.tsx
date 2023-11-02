@@ -28,7 +28,7 @@ export default function Post(page: Props) {
           <p className="line-clamp-2 text-slate-500">
             {page.properties?.설명?.rich_text[0]?.plain_text}
           </p>
-          <time className="text-sm text-slate-400">
+          <time dateTime={page.created_time} className="text-sm text-slate-400">
             {dayjs(page.created_time).locale('ko').format('YYYY년 M월 D일')}
           </time>
         </div>

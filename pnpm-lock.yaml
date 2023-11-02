@@ -302,9 +302,6 @@ importers:
       notion-client:
         specifier: ^6.16.0
         version: 6.16.0
-      notion-types:
-        specifier: ^6.16.0
-        version: 6.16.0
       notion-utils:
         specifier: ^6.16.0
         version: 6.16.0
@@ -20996,7 +20993,7 @@ packages:
     engines: { node: '>=16.8.0' }
     hasBin: true
     peerDependencies:
-      '@opentelemetry/api': ^1.1.0
+      '@opentelemetry/api': 1.4.1
       fibers: '>= 3.1.0'
       node-sass: ^6.0.0 || ^7.0.0
       react: ^18.2.0

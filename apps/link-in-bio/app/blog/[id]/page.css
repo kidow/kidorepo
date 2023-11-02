@@ -23,7 +23,7 @@
 }
 
 .notion-callout {
-  @apply flex items-start gap-2 border py-4 pl-3 pr-4;
+  @apply flex items-start gap-2 border bg-slate-100 py-4 pl-3 pr-4;
 }
 
 .notion-page-icon {
@@ -88,4 +88,8 @@
 
 .notion-quote {
   @apply my-5 border-l-4 border-slate-200 bg-slate-50 px-5 py-3;
+}
+
+.notion-asset-wrapper > div {
+  @apply !h-auto !w-auto;
 }
