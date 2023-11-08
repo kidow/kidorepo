@@ -10,7 +10,6 @@ interface Props {
   nextCursor: string
 }
 
-//
 export default function List({ ...props }: Props): JSX.Element {
   const [list, setList] = useState<BlogItem[]>([])
   const [nextCursor, setNextCursor] = useState<string>(props.nextCursor || '')

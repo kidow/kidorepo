@@ -34,12 +34,18 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export default async function Page() {
+interface Props {
+  searchParams: {
+    dev: string
+  }
+}
+
+export default async function Page({ searchParams }: Props) {
   const { results, next_cursor } = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     sorts: [{ property: '생성일', direction: 'descending' }],
     page_size: 20,
-    ...(process.env.NODE_ENV === 'production'
+    ...(process.env.NODE_ENV === 'production' || searchParams.dev === 'true'
       ? { filter: { property: '배포', checkbox: { equals: true } } }
       : {})
   })
