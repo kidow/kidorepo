@@ -207,11 +207,11 @@ export default async function Page() {
       />
       <WidgetLink
         className="xl:hover:rotate-2"
-        size="h-[178px] w-full xl:h-[175px] xl:w-[175px] bg-[#FFFEF5] hover:bg-[#F6F4E2]"
-        href="https://www.buymeacoffee.com/kidow"
-        icon={<Icon.Buymeacoffee />}
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px] hover:bg-neutral-50"
+        href="https://dev.to/kidow"
+        icon={<Icon.DevTo />}
         target="_blank"
-        title="Buy me a coffee"
+        title="Dev.to"
         description="/kidow"
       />
       <WidgetQuote />
