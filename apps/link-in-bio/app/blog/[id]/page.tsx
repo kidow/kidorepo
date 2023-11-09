@@ -172,7 +172,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         width={820}
         height={450}
         draggable={false}
-        className="mt-8 h-[280px] select-none rounded-md border xl:h-[450px]"
+        className="mt-8 h-[280px] select-none rounded-md border object-contain xl:h-[450px]"
         style={{ viewTransitionName: `blog-cover-${params.id}` }}
       />
       <Renderer recordMap={recordMap} />
