@@ -11,7 +11,7 @@ export default function Post(page: Props) {
       <article className="group relative overflow-hidden rounded-[10px] border">
         <div className="overflow-hidden">
           <img
-            src={page.cover?.external?.url}
+            src={page.cover?.external?.url || page.cover?.file?.url}
             alt="Title"
             width={390}
             height={260}

@@ -28,7 +28,7 @@ interface Track {
 interface BlogItem {
   id: string
   created_time: string
-  cover: { external: { url: string } }
+  cover: { external?: { url: string }; file?: { url: string } }
   properties: {
     제목: {
       title: Array<{ plain_text: string }>
