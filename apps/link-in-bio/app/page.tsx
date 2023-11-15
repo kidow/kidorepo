@@ -366,6 +366,23 @@ export default async function Page() {
         title="WORKSHOP"
         description="(작업중)"
       />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+        href="https://kidow.notion.site/0fc89df5906e4b918bd25b059b0f56a6?pvs=4"
+        target="_blank"
+        icon={
+          <Image
+            src="/free-web-services.png"
+            alt="Free web services"
+            height={40}
+            width={40}
+            className="rounded-[10px] border"
+          />
+        }
+        title="비즈니스를 위한"
+        description="무료 웹 서비스 모음"
+      />
     </ul>
   )
 }
