@@ -15,6 +15,7 @@ import Skills from '@/components/Skills'
 import Tools from '@/components/Tools'
 import {
   WidgetAnalytics,
+  WidgetDM,
   WidgetGithub,
   WidgetLink,
   WidgetMap,
@@ -268,6 +269,7 @@ export default async function Page() {
         {/* @ts-expect-error Server Component */}
         <WidgetAnalytics promise={analyticsPromise} />
       </Suspense>
+      <WidgetDM />
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>
