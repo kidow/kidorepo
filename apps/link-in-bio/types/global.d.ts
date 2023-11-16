@@ -24,5 +24,7 @@ declare namespace NodeJS {
     NOTION_DATABASE_ID: string
 
     GITHUB_TOKEN: string
+
+    NEXT_PUBLIC_DISCORD_WEBHOOK_URL: string
   }
 }
