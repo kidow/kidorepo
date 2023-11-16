@@ -27,9 +27,10 @@ export default function WidgetDM() {
   return (
     <li className="col-span-2" id="dm">
       <Card
-        className={cn('flex h-60 flex-col space-y-6 shadow-none', {
-          'ring ring-blue-200 ring-offset-2': window.location.hash === '#dm'
-        })}
+        className={cn(
+          'flex h-60 flex-col space-y-6 shadow-none ring-neutral-200',
+          { 'ring ring-blue-200 ring-offset-2': window.location.hash === '#dm' }
+        )}
       >
         <Textarea
           className="flex-1 resize-none"
