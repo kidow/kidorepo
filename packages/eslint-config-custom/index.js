@@ -56,7 +56,8 @@ module.exports = {
     'no-undef': 'off',
     'no-extra-semi': 'off',
 
-    '@next/next/no-img-element': 'off'
+    '@next/next/no-img-element': 'off',
+    '@next/next/no-before-interactive-script-outside-document': 'off'
   },
   ignorePatterns: ['dist', 'build', 'public']
 }

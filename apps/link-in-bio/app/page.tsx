@@ -269,7 +269,9 @@ export default async function Page() {
         {/* @ts-expect-error Server Component */}
         <WidgetAnalytics promise={analyticsPromise} />
       </Suspense>
-      <WidgetDM />
+      <Suspense fallback={<li className="col-span-2" />}>
+        <WidgetDM />
+      </Suspense>
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>
