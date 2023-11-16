@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import { Button, Card, Textarea } from '@tremor/react'
 import { useObjectState } from 'hooks'
 import { cn } from 'utils'
@@ -26,12 +27,17 @@ export default function WidgetDM() {
     setState({ isLoading: false, value: '' })
   }
 
+  const isHashDM: boolean = useMemo(() => {
+    if (typeof window === 'undefined') return false
+    return window.location.hash === '#dm'
+  }, [])
+
   return (
     <li className="col-span-2" id="dm">
       <Card
         className={cn(
           'flex h-60 flex-col space-y-6 shadow-none ring-neutral-200',
-          { 'ring ring-blue-200 ring-offset-2': window.location.hash === '#dm' }
+          { 'ring ring-blue-200 ring-offset-2': isHashDM }
         )}
       >
         <Textarea
@@ -39,7 +45,7 @@ export default function WidgetDM() {
           placeholder="제게 할 말이 있다면 DM을 보내보세요. 익명이 보장됩니다."
           value={value}
           name="value"
-          autoFocus={window.location.hash === '#dm'}
+          autoFocus={isHashDM}
           onChange={onChange}
         />
         <div className="flex justify-end">
