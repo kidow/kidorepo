@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Card, Textarea } from '@tremor/react'
 import { useObjectState } from 'hooks'
 import { cn } from 'utils'
