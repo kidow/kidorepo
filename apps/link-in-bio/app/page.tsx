@@ -385,6 +385,23 @@ export default async function Page() {
         title="비즈니스를 위한"
         description="무료 웹 서비스 모음"
       />
+      <WidgetLink
+        className="xl:hover:rotate-2"
+        size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
+        href="https://pricing.kidow.me"
+        target="_blank"
+        icon={
+          <Image
+            src="/pricing-of-tools.png"
+            alt="Pricing of Tools"
+            height={40}
+            width={40}
+            className="rounded-[10px] border"
+          />
+        }
+        title="Pricing of Tools"
+        description="가격 정책 디렉토리"
+      />
     </ul>
   )
 }
