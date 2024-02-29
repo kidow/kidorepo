@@ -53,7 +53,7 @@ export default function Editor() {
     const param = btoa(encodeURIComponent(JSON.stringify(content)))
     if (typeof window.navigator !== 'undefined') {
       await window.navigator.clipboard.writeText(
-        `https://kidow.me/memo?c=${param}`
+        `https://dongwook.kim/memo?c=${param}`
       )
       toast.success('복사되었습니다.')
     }

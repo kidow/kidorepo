@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 export function generateMetadata(): Metadata {
   const TITLE = '블로그 | Kidow'
   const DESCRIPTION = '웹 개발자의 이야기들을 다룹니다.'
-  const BASE_URL = 'https://kidow.me/blog'
+  const BASE_URL = 'https://dongwook.kim/blog'
   return {
     title: TITLE,
     description: DESCRIPTION,
@@ -55,7 +55,7 @@ export default async function Page({ searchParams }: Props) {
         <h1 className="text-4xl font-bold tracking-tight xl:text-5xl">
           블로그
         </h1>
-        <Link href="https://legacy.kidow.me" target="_blank">
+        <Link href="https://legacy.dongwook.kim" target="_blank">
           <span className="text-lg font-medium text-slate-500 hover:underline">
             이전 블로그
           </span>

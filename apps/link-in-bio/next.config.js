@@ -29,12 +29,12 @@ module.exports = {
     return [
       {
         source: '/archive',
-        destination: 'https://archive.kidow.me',
+        destination: 'https://archive.dongwook.kim',
         permanent: true
       },
       {
         source: '/workshop',
-        destination: 'https://workshop.kidow.me',
+        destination: 'https://workshop.dongwook.kim',
         permanent: true
       }
     ]

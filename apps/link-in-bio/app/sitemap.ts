@@ -16,11 +16,11 @@ async function getList() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const list = await getList()
   return [
-    { url: 'https://kidow.me', lastModified: new Date() },
-    { url: 'https://kidow.me/memo', lastModified: new Date() },
-    { url: 'https://kidow.me/resume', lastModified: new Date() },
-    { url: 'https://kidow.me/lunch', lastModified: new Date() },
-    { url: 'https://kidow.me/blog', lastModified: new Date() },
+    { url: 'https://dongwook.kim', lastModified: new Date() },
+    { url: 'https://dongwook.kim/memo', lastModified: new Date() },
+    { url: 'https://dongwook.kim/resume', lastModified: new Date() },
+    { url: 'https://dongwook.kim/lunch', lastModified: new Date() },
+    { url: 'https://dongwook.kim/blog', lastModified: new Date() },
     ...Object.entries(list)
       .filter(([id, recordMap]) => {
         if (id === idToUuid('ac733b2c269c403f85925f83d5ea3c75')) return false
@@ -32,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         return isPublished || process.env.NODE_ENV === 'development'
       })
       .map(([id]) => ({
-        url: `https://kidow.me/blog/${id}`,
+        url: `https://dongwook.kim/blog/${id}`,
         lastModified: new Date()
       }))
   ]

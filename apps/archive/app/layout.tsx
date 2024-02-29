@@ -20,7 +20,7 @@ const inter = Inter({
 
 const TITLE = '아카이브 | Kidow'
 const DESCRIPTION = '웹 프론트엔드 개발자의 노하우를 담은 코드 저장소입니다.'
-const BASE_URL = 'https://archive.kidow.me'
+const BASE_URL = 'https://archive.dongwook.kim'
 
 export const metadata: Metadata = {
   title: {
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     description: DESCRIPTION
   },
   verification: {
-    google: 'dpMF3-oHfMYFVkjgJpIJSGM_W_aL_gSFFnmWHM90NHU',
+    google: 'iOZSvTkUwxiTVHLqRigAXocT03NlO-xG1ZbAzbVwYC4',
     other: {
-      'naver-site-verification': 'a1d88c86801e2d91cdbdbcd4f784d39897cd2c2b'
+      'naver-site-verification': '6988bbde1b7649b60d5489d2a0154d5ff5d2fc3f'
     }
   },
   metadataBase: new URL(BASE_URL)
@@ -76,7 +76,7 @@ export default function RootLayout({ children }: ReactProps) {
                   <div className="flex items-center gap-4">
                     <Drawer allLinks={allLinks} />
                     <Link
-                      href="https://kidow.me"
+                      href="https://dongwook.kim"
                       target="_blank"
                       className="hidden md:inline-block"
                     >

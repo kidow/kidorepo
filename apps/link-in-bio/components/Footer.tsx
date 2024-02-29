@@ -7,7 +7,7 @@ function Footer() {
       <p>
         This project inspired by{' '}
         <Link
-          href="https://bento.me/?ref=kidow.me"
+          href="https://bento.me/?ref=dongwook.kim"
           target="_blank"
           className="hover:underline"
         >

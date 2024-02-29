@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/'
     },
-    sitemap: 'https://archive.kidow.me/sitemap.xml'
+    sitemap: 'https://archive.dongwook.kim/sitemap.xml'
   }
 }

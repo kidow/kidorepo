@@ -11,7 +11,7 @@ export default function Skills() {
       'nextjs',
       'typescript',
       'tailwindcss',
-      'recoil',
+      'zustand',
       'nodejs',
       'postgresql',
       'chrome extension',

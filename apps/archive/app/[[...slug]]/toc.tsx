@@ -123,7 +123,7 @@ function Feedback() {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({
-        content: `[${data.content}](https://archive.kidow.me${pathname})`
+        content: `[${data.content}](https://archive.dongwook.kim${pathname})`
       })
     })
     backdrop(false)

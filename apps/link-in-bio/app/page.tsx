@@ -15,7 +15,6 @@ import Skills from '@/components/Skills'
 import Tools from '@/components/Tools'
 import {
   WidgetAnalytics,
-  WidgetDM,
   WidgetGithub,
   WidgetLink,
   WidgetMap,
@@ -28,7 +27,7 @@ import { getAnalytics, getGithub, getSpotify } from './api'
 
 const TITLE = 'Kidow'
 const DESCRIPTION = '비즈니스에 관심이 많은 웹 개발자'
-const BASE_URL = 'https://kidow.me'
+const BASE_URL = 'https://dongwook.kim'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -81,9 +80,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image'
   },
   verification: {
-    google: 'dpMF3-oHfMYFVkjgJpIJSGM_W_aL_gSFFnmWHM90NHU',
+    google: 'iOZSvTkUwxiTVHLqRigAXocT03NlO-xG1ZbAzbVwYC4',
     other: {
-      'naver-site-verification': '6aad57e80bc0cb85f4d497fde9a243497dfa5a3d'
+      'naver-site-verification': '04670d59c9a502545c33c7e6a56aa9fedf70c454'
     }
   },
   category: 'Link-in-Bio',
@@ -124,7 +123,7 @@ export default async function Page() {
           </span>
         }
         title="Résumé"
-        description="Hire me"
+        description="/resume"
       />
       <WidgetLink
         className="xl:hover:rotate-2"
@@ -269,7 +268,6 @@ export default async function Page() {
         {/* @ts-expect-error Server Component */}
         <WidgetAnalytics promise={analyticsPromise} />
       </Suspense>
-      <WidgetDM />
       <li className="col-span-2 p-4 xl:col-span-4">
         <h3 className="px-2 font-semibold uppercase">Favorite Skills 🚀</h3>
       </li>
@@ -288,7 +286,7 @@ export default async function Page() {
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
-        href="https://daily-producthunt.kidow.me"
+        href="https://daily-producthunt.dongwook.kim"
         icon={
           <Image
             src="/daily-producthunt.png"
@@ -388,7 +386,7 @@ export default async function Page() {
       <WidgetLink
         className="xl:hover:rotate-2"
         size="h-[178px] w-full xl:h-[175px] xl:w-[175px]"
-        href="https://pricing.kidow.me"
+        href="https://pricing.dongwook.kim"
         target="_blank"
         icon={
           <Image

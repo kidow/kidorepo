@@ -46,7 +46,7 @@ export async function generateMetadata({
       keywords = metadata.properties[id][0][0]
     }
   })
-  const url = `https://kidow.me/blog/${params.id}`
+  const url = `https://dongwook.kim/blog/${params.id}`
   return {
     title,
     description,

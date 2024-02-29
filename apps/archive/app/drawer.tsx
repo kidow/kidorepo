@@ -61,7 +61,7 @@ export default function Drawer({ allLinks }: Props) {
             <Link href="/wiki/commitlint-convention">Algorithm</Link>
           </li>
           <li>
-            <Link href="https://kidow.me" target="_blank">
+            <Link href="https://dongwook.kim" target="_blank">
               Home
             </Link>
           </li>

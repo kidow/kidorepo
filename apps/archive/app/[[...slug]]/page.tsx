@@ -55,7 +55,7 @@ export function generateMetadata({ params }: Props): Metadata {
       title: doc.title,
       description: doc.description,
       type: 'article',
-      url: `https://archive.kidow.me${doc.slug}`
+      url: `https://archive.dongwook.kim${doc.slug}`
     },
     twitter: {
       card: 'summary_large_image',

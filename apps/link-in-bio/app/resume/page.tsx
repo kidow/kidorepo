@@ -21,7 +21,7 @@ import {
 } from '@/components/Block'
 
 const TITLE = '이력서 | Kidow'
-const BASE_URL = 'https://kidow.me/resume'
+const BASE_URL = 'https://dongwook.kim/resume'
 
 export const metadata: Metadata = {
   title: TITLE,
